@@ -1,0 +1,87 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+}
+
+.headerSection {
+  padding: $spacing-xxxl 0 $spacing-xl;
+}
+
+.pageTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: $spacing-md;
+  
+  @media (max-width: 768px) {
+    font-size: 2.25rem;
+  }
+}
+
+.gradientText {
+  @include text-gradient;
+}
+
+.pageSubtitle {
+  font-size: 1.25rem;
+  color: $color-text-secondary;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* Filters */
+.portfolioSection {
+  padding: 0 0 $spacing-xxxl;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xxl;
+  border-bottom: 1px solid rgba($color-border, 0.4);
+  padding-bottom: $spacing-lg;
+}
+
+.filterBtn {
+  background: transparent;
+  color: $color-text-secondary;
+  border: 1px solid rgba($color-border, 0.8);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &:hover {
+    border-color: $color-border-focus;
+    color: $color-text-primary;
+  }
+  
+  &.active {
+    background: $color-text-primary;
+    color: $color-background;
+    border-color: $color-text-primary;
+  }
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: $spacing-xl;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}

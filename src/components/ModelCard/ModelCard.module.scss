@@ -1,0 +1,51 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.card {
+  @include card-base;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.statusBadge {
+  @include badge;
+  align-self: flex-start;
+  margin-bottom: $spacing-md;
+}
+
+.modelName {
+  font-size: 1.5rem;
+  margin-bottom: $spacing-sm;
+}
+
+.description {
+  color: $color-text-secondary;
+  font-size: 1rem;
+  margin-bottom: $spacing-xl;
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $color-accent;
+  font-weight: 500;
+  transition: color $transition-fast;
+}
+
+.icon {
+  transition: transform $transition-fast;
+}
+
+.card:hover {
+  .footer {
+    color: $color-accent-hover;
+  }
+  .icon {
+    transform: translateX(4px);
+  }
+}

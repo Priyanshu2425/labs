@@ -1,0 +1,80 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.snippetContainer {
+  background: #0d0d0f; /* Even darker than surface for code feeling */
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-surface, 0.4);
+  border-bottom: 1px solid $color-border;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.language {
+  color: $color-text-secondary;
+  font-size: 0.8rem;
+  font-family: monospace;
+  text-transform: lowercase;
+}
+
+.copyBtn {
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+    background: rgba($color-text-primary, 0.1);
+  }
+}
+
+.codeBody {
+  padding: $spacing-md $spacing-sm;
+  overflow-x: auto;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.line {
+  display: flex;
+}
+
+.lineNumber {
+  color: $color-text-muted;
+  min-width: 2.5rem;
+  text-align: right;
+  padding-right: $spacing-md;
+  user-select: none;
+}
+
+.lineContent {
+  color: #e2e8f0; // a light bluish-white tailored for code
+  white-space: pre;
+}

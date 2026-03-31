@@ -1,0 +1,107 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+}
+
+.headerSection {
+  padding: $spacing-xxxl 0 $spacing-xxl;
+  border-bottom: 1px solid rgba($color-border, 0.4);
+}
+
+.pageTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: $spacing-md;
+  color: $color-text-primary;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.pageSubtitle {
+  font-size: 1.25rem;
+  color: $color-text-secondary;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.faqSection {
+  padding: $spacing-xxxl 0;
+}
+
+.faqWrapper {
+  max-width: 900px; // Limit width for readability
+}
+
+.categoryBlock {
+  margin-bottom: $spacing-xxxl;
+}
+
+.categoryTitle {
+  font-size: 2rem;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.accordionGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contact block at end */
+.contactSection {
+  padding: 0 0 $spacing-xxxl;
+}
+
+.contactBox {
+  background: rgba($color-border, 0.3);
+  border: 1px solid rgba($color-border, 0.8);
+  border-radius: $border-radius-lg;
+  padding: $spacing-xxl;
+  text-align: center;
+  max-width: 900px;
+}
+
+.contactTitle {
+  font-size: 1.75rem;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.contactSub {
+  color: $color-text-secondary;
+  font-size: 1.125rem;
+  margin-bottom: $spacing-xl;
+}
+
+.contactBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  background-color: $color-text-primary;
+  color: $color-background;
+  padding: 12px 28px;
+  border-radius: $border-radius-md;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background-color: #e4e4e7;
+    transform: translateY(-2px);
+  }
+}

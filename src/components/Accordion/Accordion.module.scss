@@ -1,0 +1,64 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.accordionContainer {
+  border-bottom: 1px solid rgba($color-border, 0.4);
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-xl 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-fast;
+  
+  &:hover {
+    .question {
+      color: $color-accent;
+    }
+  }
+
+  &.open {
+    .question {
+      color: $color-text-primary;
+    }
+    .iconContainer {
+      color: $color-text-primary;
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.question {
+  flex: 1;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: $color-text-primary;
+  margin: 0;
+  padding-right: $spacing-xl;
+  transition: color $transition-fast;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-secondary;
+  transition: all 0.3s ease;
+}
+
+.accordionContent {
+  padding-bottom: $spacing-xl;
+}
+
+.answer {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: $color-text-secondary;
+  max-width: 800px;
+}

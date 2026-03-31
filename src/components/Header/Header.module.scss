@@ -1,0 +1,144 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  // Use a targeted variable from global CSS to support dynamic switching
+  background: var(--color-header-bg, rgba(9, 9, 11, 0.85));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: $spacing-md 0;
+}
+
+.headerContainer {
+  @include flex-between;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  letter-spacing: -0.02em;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+}
+
+.navDesktop {
+  display: flex;
+  gap: $spacing-xl;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.navLink {
+  color: $color-text-secondary;
+  font-weight: 500;
+  font-size: 0.95rem;
+  
+  &:hover {
+    color: $color-text-primary;
+  }
+  
+  &.active {
+    color: $color-text-primary;
+  }
+}
+
+.scrollProgressBlock {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.themeToggleBtn {
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all $transition-fast;
+  
+  &:hover {
+    color: $color-text-primary;
+    background: $color-surface-hover;
+  }
+}
+
+.scrollProgress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: $color-text-secondary;
+  
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.scrollText {
+  color: $color-text-secondary;
+}
+
+.progressText {
+  color: $color-text-secondary;
+}
+
+.progressValue {
+  color: $color-accent; 
+  min-width: 3ch;
+  display: inline-block;
+  text-align: right;
+}
+
+.mobileMenuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: $color-text-primary;
+  cursor: pointer;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $color-surface;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $color-border;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.mobileNavLink {
+  color: $color-text-secondary;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: $spacing-sm 0;
+  display: block;
+  
+  &:hover, &.active {
+    color: $color-text-primary;
+  }
+}

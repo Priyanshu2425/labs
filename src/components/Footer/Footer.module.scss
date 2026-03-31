@@ -1,0 +1,77 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.footer {
+  background-color: $color-background;
+  border-top: 1px solid $color-border;
+  padding: $spacing-xxxl 0 $spacing-xl;
+  margin-top: auto;
+}
+
+.footerContainer {
+  @include flex-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: $spacing-xxl;
+}
+
+.brand {
+  max-width: 320px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  letter-spacing: -0.02em;
+  margin-bottom: $spacing-sm;
+}
+
+.tagline {
+  color: $color-text-secondary;
+  font-size: 0.95rem;
+}
+
+.linksBlock {
+  display: flex;
+  gap: $spacing-xxxl;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.groupTitle {
+  color: $color-text-primary;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: $spacing-xs;
+}
+
+.link {
+  color: $color-text-secondary;
+  font-size: 0.95rem;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.footerBottom {
+  border-top: 1px solid $color-border;
+  margin-top: $spacing-xxl;
+  padding-top: $spacing-xl;
+  text-align: center;
+  color: $color-text-secondary;
+  font-size: 0.9rem;
+}

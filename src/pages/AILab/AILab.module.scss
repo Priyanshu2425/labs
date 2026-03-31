@@ -1,0 +1,93 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+}
+
+.heroSection {
+  padding: $spacing-xxxl 0;
+  margin-top: $spacing-xl;
+  
+  @media (max-width: 768px) {
+    padding: $spacing-xxl 0;
+  }
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  max-width: 900px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.gradientText {
+  @include text-gradient;
+}
+
+.sectionHeader {
+  margin-bottom: $spacing-xxl;
+  max-width: 700px;
+  
+  h2 {
+    color: $color-text-primary;
+    font-weight: 400; // Typically sub-headers in this style are slightly lighter
+    line-height: 1.4;
+  }
+}
+
+.modelsSection {
+  padding: $spacing-xxxl 0;
+  border-top: 1px solid rgba($color-border, 0.4);
+}
+
+.modelsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: $spacing-xl;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.researchSection {
+  padding: $spacing-xxxl 0;
+  border-top: 1px solid rgba($color-border, 0.4);
+}
+
+.researchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: $spacing-xl;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blogSection {
+  padding: $spacing-xxxl 0;
+  border-top: 1px solid rgba($color-border, 0.4);
+}
+
+.codeSection {
+  padding: $spacing-xxxl 0;
+  border-top: 1px solid rgba($color-border, 0.4);
+  margin-bottom: $spacing-xxxl;
+}
+
+.apiPreview {
+  max-width: 700px;
+}

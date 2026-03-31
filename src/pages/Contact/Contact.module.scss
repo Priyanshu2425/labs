@@ -1,0 +1,264 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+}
+
+.contactSection {
+  padding: $spacing-xxxl 0;
+  flex-grow: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xxxl;
+  
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xxl;
+  }
+}
+
+.pageTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: $spacing-md;
+  color: $color-text-primary;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.gradientText {
+  @include text-gradient;
+}
+
+.pageSubtitle {
+  font-size: 1.25rem;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  margin-bottom: $spacing-xxl;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.detailCard {
+  @include card-base;
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  text-decoration: none;
+  cursor: pointer;
+  padding: $spacing-lg;
+  
+  &:hover {
+    .detailIcon {
+      color: $color-accent;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.detailIcon {
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+}
+
+.detailTitle {
+  font-size: 0.9rem;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.detailText {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+/* Form Styling */
+.formCol {
+  background: rgba($color-surface, 0.4);
+  border: 1px solid rgba($color-border, 0.5);
+  border-radius: $border-radius-lg;
+  padding: $spacing-xxl;
+  
+  @media (max-width: 768px) {
+    padding: $spacing-xl;
+  }
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  
+  label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $color-text-secondary;
+  }
+  
+  input, select, textarea {
+    background: rgba($color-background, 0.7);
+    border: 1px solid rgba($color-border, 0.8);
+    border-radius: $border-radius-md;
+    padding: 14px 16px;
+    color: $color-text-primary;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all $transition-fast;
+    outline: none;
+    
+    &:focus {
+      border-color: $color-accent;
+      background: $color-background;
+      box-shadow: 0 0 0 1px $color-accent;
+    }
+    
+    &::placeholder {
+      color: rgba($color-text-muted, 0.5);
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.selectWrapper {
+  position: relative;
+  
+  select {
+    width: 100%;
+    appearance: none;
+  }
+  
+  &::after {
+    content: "▼";
+    font-size: 0.7rem;
+    color: $color-text-secondary;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  background-color: $color-text-primary;
+  color: $color-background;
+  padding: 16px 24px;
+  border-radius: $border-radius-md;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-fast;
+  margin-top: $spacing-sm;
+  
+  &:hover:not(:disabled) {
+    background-color: #e4e4e7;
+    transform: translateY(-2px);
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  &.loading {
+    background-color: rgba($color-text-primary, 0.7);
+  }
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $spacing-md;
+}
+
+.modalContent {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xxxl $spacing-xxl;
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.successIcon {
+  color: #27c93f;
+  margin-bottom: $spacing-lg;
+}
+
+.modalTitle {
+  font-size: 2rem;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.modalText {
+  color: $color-text-secondary;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: $spacing-xxl;
+}
+
+.modalBtn {
+  background: rgba($color-text-primary, 0.1);
+  color: $color-text-primary;
+  border: 1px solid rgba($color-border, 0.8);
+  padding: 10px 24px;
+  border-radius: $border-radius-md;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background: $color-text-primary;
+    color: $color-background;
+  }
+}
