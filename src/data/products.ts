@@ -27,7 +27,7 @@ export const productsData: Record<string, Product> = {
       "Package management integration with BOSS software repositories",
       "Lightweight footprint for deployment on government-standard hardware"
     ],
-    techStack: ["Linux", "C/C++", "GTK+", "WebKit"],
+    techStack: ["Linux", "C/C++", "GTK+", "WebKit", "Python"],
     metrics: [
       { label: "Deployments", value: "6M+" },
       { label: "Languages", value: "18+" }
