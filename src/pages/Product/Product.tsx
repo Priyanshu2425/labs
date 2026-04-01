@@ -1,4 +1,6 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users } from 'lucide-react';
 import Header from '../../components/Header';
@@ -6,14 +8,16 @@ import Footer from '../../components/Footer';
 import styles from './Product.module.scss';
 import { productsData } from '../../data/products';
 
-export default function Product() {
-  const { id } = useParams<{ id: string }>();
+interface ProductProps {
+  productId: string;
+}
 
-  if (!id || !productsData[id]) {
-    return <Navigate to="/portfolio" replace />;
+export default function Product({ productId }: ProductProps) {
+  const product = productsData[productId];
+
+  if (!product) {
+    return null;
   }
-
-  const product = productsData[id];
 
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -43,7 +47,7 @@ export default function Product() {
             >
               {/* Back link */}
               <motion.div variants={fadeUp}>
-                <Link to="/portfolio" className={styles.backLink}>
+                <Link href="/portfolio" className={styles.backLink}>
                   <ArrowLeft size={15} />
                   Back to Portfolio
                 </Link>
@@ -172,15 +176,15 @@ export default function Product() {
           >
             <div className={styles.ctaGlow} />
             <p className={styles.ctaEyebrow}>Interested?</p>
-            <h2 className={styles.ctaTitle}>Let's deploy {product.title} for you.</h2>
+            <h2 className={styles.ctaTitle}>Let&apos;s deploy {product.title} for you.</h2>
             <p className={styles.ctaSubtitle}>
               Production-ready. We can have it live in your stack within 72 hours.
             </p>
             <div className={styles.ctaActions}>
-              <Link to="/contact-us" className={styles.ctaLink}>
+              <Link href="/contact-us" className={styles.ctaLink}>
                 Get in Touch <ArrowUpRight size={16} />
               </Link>
-              <Link to="/portfolio" className={styles.ctaSecondary}>
+              <Link href="/portfolio" className={styles.ctaSecondary}>
                 View More Projects <ArrowUpRight size={16} />
               </Link>
             </div>

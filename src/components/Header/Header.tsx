@@ -1,4 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.scss';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -8,7 +11,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [theme, setTheme] = useState<'dark'|'light'>('dark');
-  const location = useLocation();
+  const pathname = usePathname();
 
   const navLinks = [
     { name: 'Services', path: '/our-services' },
@@ -53,7 +56,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
-        <Link to="/" className={styles.logoLink} aria-label="Home">
+        <Link href="/" className={styles.logoLink} aria-label="Home">
           <Logo />
         </Link>
 
@@ -63,8 +66,8 @@ export default function Header() {
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
-                to={link.path}
-                className={`${styles.navLink} ${location.pathname === link.path ? styles.active : ''}`}
+                href={link.path}
+                className={`${styles.navLink} ${pathname === link.path ? styles.active : ''}`}
               >
                 {link.name}
               </Link>
@@ -107,8 +110,8 @@ export default function Header() {
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
-              to={link.path}
-              className={`${styles.mobileNavLink} ${location.pathname === link.path ? styles.active : ''}`}
+              href={link.path}
+              className={`${styles.mobileNavLink} ${pathname === link.path ? styles.active : ''}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}

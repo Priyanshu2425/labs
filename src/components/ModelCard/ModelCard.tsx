@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from './ModelCard.module.scss';
 import { ArrowRight } from 'lucide-react';
 
@@ -11,7 +11,7 @@ interface ModelCardProps {
 
 export default function ModelCard({ status, name, description, link }: ModelCardProps) {
   return (
-    <Link to={link} className={styles.card}>
+    <Link href={link} className={styles.card}>
       <div className={styles.statusBadge}>{status}</div>
       <h3 className={styles.modelName}>{name}</h3>
       <p className={styles.description}>{description}</p>

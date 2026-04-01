@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowUpRight, Activity } from 'lucide-react';
 import styles from './PortfolioCard.module.scss';
 
@@ -25,7 +25,7 @@ export default function PortfolioCard({
   link
 }: PortfolioCardProps) {
   return (
-    <Link to={link} className={styles.card}>
+    <Link href={link} className={styles.card}>
       <div className={styles.categoryBadgeRow}>
         <span className={styles.categoriesText}>
           {categories.join(' / ')}

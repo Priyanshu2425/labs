@@ -1,6 +1,8 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Activity, ExternalLink } from 'lucide-react';
 import styles from './Portfolio.module.scss';
 import Header from '../../components/Header';
@@ -200,7 +202,7 @@ export default function Portfolio() {
                   transition={{ duration: 0.3 }}
                 >
                   <Link
-                    to={project.link}
+                    href={project.link}
                     className={styles.card}
                     style={{ '--card-accent': project.accent } as React.CSSProperties}
                   >

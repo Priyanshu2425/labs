@@ -1,6 +1,8 @@
+'use client';
+
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRight, MessageSquare, Code2, Cpu, Rocket, Users, Landmark, Shield, Truck, Building2, HeartPulse, Microchip } from 'lucide-react';
 import styles from './Home.module.scss';
 import Header from '../../components/Header';
@@ -82,7 +84,7 @@ const HorizontalScrollCarousel = () => {
       <div className={styles.stickyContent}>
         <div className={styles.carouselHeader}>
           <span className={styles.carouselEyebrow}>Our Expertise</span>
-          <h2 className={styles.carouselSectionTitle}>Industries we've <br /><em>transformed</em></h2>
+          <h2 className={styles.carouselSectionTitle}>Industries we&apos;ve <br /><em>transformed</em></h2>
           <div className={styles.scrollProgressTrack}>
             <motion.div className={styles.scrollProgressBar} style={{ width: progressWidth }} />
           </div>
@@ -183,7 +185,7 @@ export default function Home() {
             className={styles.heroContent}
           >
             <h1 className={styles.heroQuote}>
-              "The people who are crazy enough to think they can change the world <span className={styles.gradientText}>are the ones who do.</span>"
+              &ldquo;The people who are crazy enough to think they can change the world <span className={styles.gradientText}>are the ones who do.</span>&rdquo;
             </h1>
             <p className={styles.quoteAuthor}>— Steve Jobs</p>
           </motion.div>
@@ -201,9 +203,9 @@ export default function Home() {
             transition={{ duration: 1, ease: "easeOut" }}
             className={styles.introContent}
           >
-            <h2 className={styles.introHeading}>India's first AI-native Product Studio & Engineering Lab.</h2>
+            <h2 className={styles.introHeading}>India&apos;s first AI-native Product Studio &amp; Engineering Lab.</h2>
             <p className={styles.introSubtext}>
-              DIMSSU Labs is redefining how complex technical products are built. We combine deep AI expertise with rapid product development, delivering production-ready, world-class software that you can be proud of. We're not just a vendor; we're your technical co-founders.
+              DIMSSU Labs is redefining how complex technical products are built. We combine deep AI expertise with rapid product development, delivering production-ready, world-class software that you can be proud of. We&apos;re not just a vendor; we&apos;re your technical co-founders.
             </p>
           </motion.div>
         </section>
@@ -278,18 +280,18 @@ export default function Home() {
               <div className={styles.ctaBody}>
                 <p className={styles.ctaPrompt}>{'>'} Ready to build?</p>
                 <h2 className={styles.ctaHeading}>
-                  Let's make something<br />
+                  Let&apos;s make something<br />
                   <span className={styles.gradientText}>the world actually uses.</span>
                 </h2>
                 <p className={styles.ctaText}>
-                  If you want the cheapest option, we're probably not it. But if you want world-class software architected for infinite scale — software you're actually proud of — we're exactly it.
+                  If you want the cheapest option, we&apos;re probably not it. But if you want world-class software architected for infinite scale — software you&apos;re actually proud of — we&apos;re exactly it.
                 </p>
                 <div className={styles.ctaButtons}>
-                  <Link to="/contact-us" className={styles.primaryBtn}>
+                  <Link href="/contact-us" className={styles.primaryBtn}>
                     <MessageSquare size={18} />
                     Start a Project
                   </Link>
-                  <Link to="/portfolio" className={styles.secondaryBtn}>
+                  <Link href="/portfolio" className={styles.secondaryBtn}>
                     See Our Work <ArrowRight size={18} />
                   </Link>
                 </div>

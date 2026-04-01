@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from './ProductCard.module.scss';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ title, description, category, link }: ProductCardProps) {
   return (
-    <Link to={link} className={styles.card}>
+    <Link href={link} className={styles.card}>
       <h3 className={styles.title}>{title}</h3>
       <p className={styles.description}>{description}</p>
       

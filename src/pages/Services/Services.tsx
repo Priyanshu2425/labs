@@ -1,6 +1,8 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   ArrowUpRight, ChevronDown, ChevronUp,
   Code2, Package2, Users2,
@@ -162,7 +164,7 @@ export default function Services() {
 
                 {/* CTA / toggle row */}
                 <div className={styles.buttonGroup}>
-                  <Link to={svc.cta} className={styles.ctaLink}>
+                  <Link href={svc.cta} className={styles.ctaLink}>
                     Get in Touch <ArrowUpRight size={16} />
                   </Link>
                   {svc.hasGrid && (

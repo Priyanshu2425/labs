@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from './ResearchPaperCard.module.scss';
 import { ArrowRight } from 'lucide-react';
 
@@ -28,7 +28,7 @@ export default function ResearchPaperCard({ type, year, title, description, tags
           ))}
         </div>
         
-        <Link to={link} className={styles.readPaper}>
+        <Link href={link} className={styles.readPaper}>
           Read Paper <ArrowRight size={16} />
         </Link>
       </div>
