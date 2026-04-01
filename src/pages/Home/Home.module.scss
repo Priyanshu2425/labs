@@ -401,162 +401,301 @@
 }
 
 /* =============================================
-   Value Props Grid
+   Value Props — Why Us
    ============================================= */
 .valuePropsSection {
-  padding: 10rem 2rem;
+  padding: 10rem 0;
   background-color: $color-background;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.valuePropsHeader {
-  text-align: center;
-  margin-bottom: 5rem;
+.valuePropsSplit {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 8rem;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 0 2rem;
+  }
+}
+
+.valuePropsStickyLeft {
+  position: sticky;
+  top: 30vh;
+
+  @media (max-width: 1024px) {
+    position: static;
+  }
+}
+
+.valueSectionEyebrow {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
 }
 
 .valuePropsTitle {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 3.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: $color-text-primary;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+
+  em {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(135deg, #ba9eff 0%, #53ddfc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
-.valuePropsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  max-width: 1100px;
-  width: 100%;
+.valueSectionSubtext {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: $color-text-secondary;
+  line-height: 1.7;
+  max-width: 340px;
+}
 
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
+.valuePropsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .valueCard {
   background: $color-surface;
-  border-radius: 20px;
-  padding: 3.5rem;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
   border: 1px solid $color-border;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  align-items: start;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 
   &::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 50% -20%, rgba(132, 85, 239, 0.08), transparent 70%);
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--color-accent), transparent);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease;
   }
 
   &:hover {
-    transform: translateY(-8px);
     border-color: $color-border-focus;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    transform: translateX(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
 
-    &::before {
-      opacity: 1;
-    }
+    &::before { opacity: 1; }
+    .valueNumber { opacity: 0.25; }
   }
 }
 
-.valueIcon {
+.valueCardLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.valueNumber {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  opacity: 0.1;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  transition: opacity 0.35s ease;
+}
+
+.valueIconSmall {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-badge-bg);
   color: var(--color-accent);
-  margin-bottom: 2.5rem;
-  position: relative;
-  z-index: 2;
-  width: 56px;
-  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-badge-bg);
-  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+.valueCardRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .valueTitle {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: $color-text-primary;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
+  letter-spacing: -0.02em;
 }
 
 .valueDesc {
   font-family: 'Inter', sans-serif;
   color: $color-text-secondary;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  position: relative;
-  z-index: 2;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.valueStat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid $color-border;
+}
+
+.valueStatNumber {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: -0.03em;
+}
+
+.valueStatLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
 }
 
 /* =============================================
-   CTA Section
+   CTA Section — Terminal Panel
    ============================================= */
 .ctaSection {
-  padding: 12rem 2rem;
+  padding: 10rem 2rem;
   background-color: $color-surface;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
 }
 
-.ctaSection::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.ctaBox {
-  text-align: center;
-  max-width: 800px;
+.ctaInner {
+  max-width: 900px;
+  width: 100%;
   z-index: 1;
+}
+
+.ctaGlassBox {
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.1);
+}
+
+.ctaTerminalBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid $color-border;
+  background: $color-surface;
+}
+
+.ctaDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.ctaTerminalLabel {
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  margin-left: auto;
+  letter-spacing: 0.02em;
+}
+
+.ctaBody {
+  padding: 3.5rem 4rem;
+
+  @media (max-width: 768px) {
+    padding: 2.5rem 2rem;
+  }
+}
+
+.ctaPrompt {
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 1rem;
+  color: var(--color-accent);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
 }
 
 .ctaHeading {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 4.5rem;
+  font-size: 3.75rem;
   font-weight: 700;
   color: $color-text-primary;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 
   @media (max-width: 768px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
 .ctaText {
   font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: $color-text-secondary;
-  margin-bottom: 4rem;
-  line-height: 1.6;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+  max-width: 640px;
 }
 
 .ctaButtons {
   display: flex;
-  gap: 1.5rem;
-  justify-content: center;
+  gap: 1rem;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -567,17 +706,17 @@
   gap: 0.75rem;
   background-color: var(--color-accent);
   color: #ffffff;
-  padding: 18px 36px;
-  border-radius: 12px;
+  padding: 16px 32px;
+  border-radius: 10px;
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   transition: all 0.3s ease;
   font-family: 'Manrope', sans-serif;
 
   &:hover {
     background-color: var(--color-accent-hover);
     box-shadow: 0 0 25px rgba(59, 130, 246, 0.35);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     color: #ffffff;
   }
 }
@@ -589,10 +728,10 @@
   background-color: transparent;
   color: $color-text-secondary;
   border: 1px solid $color-border;
-  padding: 18px 36px;
-  border-radius: 12px;
+  padding: 16px 32px;
+  border-radius: 10px;
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   transition: all 0.3s ease;
   font-family: 'Manrope', sans-serif;
 
@@ -600,6 +739,6 @@
     border-color: $color-border-focus;
     background-color: $color-surface-hover;
     color: $color-text-primary;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 }

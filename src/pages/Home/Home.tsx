@@ -128,22 +128,34 @@ const HorizontalScrollCarousel = () => {
 export default function Home() {
   const valueProps = [
     {
-      icon: <Cpu size={32} />,
+      icon: <Cpu size={26} />,
+      number: "01",
+      stat: "Day 1",
+      statLabel: "AI from the start",
       title: "AI-Native Engineering",
-      desc: "We grew up building with LLMs and generative AI. We don't retrofit AI; we architect around it directly from day one."
+      desc: "We grew up building with LLMs and generative AI. We don't retrofit AI — we architect around it directly from day one."
     },
     {
-      icon: <Code2 size={32} />,
+      icon: <Code2 size={26} />,
+      number: "02",
+      stat: "100%",
+      statLabel: "Direct access",
       title: "Technical Partners",
       desc: "Most agencies take your money and disappear for months. We act as your technical co-founder and long-term partner."
     },
     {
-      icon: <Users size={32} />,
+      icon: <Users size={26} />,
+      number: "03",
+      stat: "10+",
+      statLabel: "Years avg. experience",
       title: "Senior Talent Only",
       desc: "Direct access to senior AI engineers and product builders. No layers of project managers or junior developers involved."
     },
     {
-      icon: <Rocket size={32} />,
+      icon: <Rocket size={26} />,
+      number: "04",
+      stat: "24h",
+      statLabel: "To working prototype",
       title: "Rapid Execution",
       desc: "Working prototypes in 24 hours. Production systems shipped in weeks, not months. We believe in high-velocity momentum."
     }
@@ -199,56 +211,89 @@ export default function Home() {
         {/* Horizontal Scrolling Industries Array */}
         <HorizontalScrollCarousel />
 
-        {/* Floating Value Props / Why Us Feature */}
+        {/* Value Props — Why Us */}
         <section className={styles.valuePropsSection}>
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className={styles.valuePropsHeader}
-          >
-            <h2 className={styles.valuePropsTitle}>Why choose DIMSSU Labs?</h2>
-          </motion.div>
-          <div className={styles.valuePropsGrid}>
-            {valueProps.map((prop, idx) => (
-              <motion.div 
-                key={idx} 
-                className={styles.valueCard}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className={styles.valueIcon}>{prop.icon}</div>
-                <h3 className={styles.valueTitle}>{prop.title}</h3>
-                <p className={styles.valueDesc}>{prop.desc}</p>
-              </motion.div>
-            ))}
+          <div className={styles.valuePropsSplit}>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className={styles.valuePropsStickyLeft}
+            >
+              <span className={styles.valueSectionEyebrow}>Why us</span>
+              <h2 className={styles.valuePropsTitle}>
+                Built different.<br />
+                <em>By design.</em>
+              </h2>
+              <p className={styles.valueSectionSubtext}>
+                Four principles that separate DIMSSU Labs from every other AI agency on the planet.
+              </p>
+            </motion.div>
+
+            <div className={styles.valuePropsStack}>
+              {valueProps.map((prop, idx) => (
+                <motion.div
+                  key={idx}
+                  className={styles.valueCard}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                >
+                  <div className={styles.valueCardLeft}>
+                    <span className={styles.valueNumber}>{prop.number}</span>
+                    <div className={styles.valueIconSmall}>{prop.icon}</div>
+                  </div>
+                  <div className={styles.valueCardRight}>
+                    <h3 className={styles.valueTitle}>{prop.title}</h3>
+                    <p className={styles.valueDesc}>{prop.desc}</p>
+                    <div className={styles.valueStat}>
+                      <span className={styles.valueStatNumber}>{prop.stat}</span>
+                      <span className={styles.valueStatLabel}>{prop.statLabel}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Cinematic CTA / Contact Teaser */}
+        {/* CTA Section */}
         <section className={styles.ctaSection}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 30 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className={styles.ctaBox}
+            transition={{ duration: 0.9 }}
+            className={styles.ctaInner}
           >
-            <h2 className={styles.ctaHeading}>Ready to build something exceptional?</h2>
-            <p className={styles.ctaText}>
-              The ones worth building. If you want the cheapest option, we're probably not it. But if you want world-class software you're actually proud of, architected for infinite scale...
-            </p>
-            <div className={styles.ctaButtons}>
-              <Link to="/contact-us" className={styles.primaryBtn}>
-                <MessageSquare size={20} />
-                Let's Talk
-              </Link>
-              <Link to="/portfolio" className={styles.secondaryBtn}>
-                View Portfolio <ArrowRight size={20} />
-              </Link>
+            <div className={styles.ctaGlassBox}>
+              <div className={styles.ctaTerminalBar}>
+                <span className={styles.ctaDot} style={{ background: '#ff5f57' }} />
+                <span className={styles.ctaDot} style={{ background: '#ffbd2e' }} />
+                <span className={styles.ctaDot} style={{ background: '#28c840' }} />
+                <span className={styles.ctaTerminalLabel}>dimssu-labs ~ project-brief.md</span>
+              </div>
+              <div className={styles.ctaBody}>
+                <p className={styles.ctaPrompt}>{'>'} Ready to build?</p>
+                <h2 className={styles.ctaHeading}>
+                  Let's make something<br />
+                  <span className={styles.gradientText}>the world actually uses.</span>
+                </h2>
+                <p className={styles.ctaText}>
+                  If you want the cheapest option, we're probably not it. But if you want world-class software architected for infinite scale — software you're actually proud of — we're exactly it.
+                </p>
+                <div className={styles.ctaButtons}>
+                  <Link to="/contact-us" className={styles.primaryBtn}>
+                    <MessageSquare size={18} />
+                    Start a Project
+                  </Link>
+                  <Link to="/portfolio" className={styles.secondaryBtn}>
+                    See Our Work <ArrowRight size={18} />
+                  </Link>
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>
