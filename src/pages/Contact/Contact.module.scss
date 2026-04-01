@@ -5,77 +5,136 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 .mainContent {
   flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Atmospheric Glow */
+.glowBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  background: radial-gradient(circle at 80% 0%, rgba($color-accent, 0.15), transparent 45%),
+              radial-gradient(circle at 20% 40%, rgba(6, 182, 212, 0.1), transparent 40%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .contactSection {
-  padding: $spacing-xxxl 0;
+  padding: 10rem 0 8rem;
   flex-grow: 1;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: $spacing-xxxl;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
   
   @media (max-width: 992px) {
     grid-template-columns: 1fr;
-    gap: $spacing-xxl;
+    gap: 4rem;
   }
 }
 
+.infoCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background-color: rgba($color-accent, 0.1);
+  color: $color-accent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: $spacing-xl;
+  border: 1px solid rgba($color-accent, 0.2);
+  align-self: flex-start;
+}
+
 .pageTitle {
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
   margin-bottom: $spacing-md;
   color: $color-text-primary;
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
 }
 
 .gradientText {
-  @include text-gradient;
+  background: linear-gradient(135deg, $color-text-primary 0%, $color-accent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .pageSubtitle {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   color: $color-text-secondary;
   line-height: 1.6;
-  margin-bottom: $spacing-xxl;
+  margin-bottom: $spacing-xxxl;
+  max-width: 450px;
 }
 
 .contactDetails {
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-lg;
 }
 
 .detailCard {
-  @include card-base;
   display: flex;
   align-items: center;
-  gap: $spacing-lg;
+  gap: $spacing-xl;
   text-decoration: none;
   cursor: pointer;
-  padding: $spacing-lg;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Ghost border */
+  border-radius: $border-radius-lg;
+  transition: all $transition-default;
   
   &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba($color-accent, 0.3);
+    transform: translateX(10px);
+    
     .detailIcon {
       color: $color-accent;
-      transform: scale(1.1);
+      background: rgba($color-accent, 0.1);
     }
   }
 }
 
 .detailIcon {
   color: $color-text-secondary;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all $transition-fast;
 }
 
@@ -83,33 +142,36 @@
   font-size: 0.9rem;
   color: $color-text-muted;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .detailText {
-  font-size: 1.125rem;
+  font-size: 1.15rem;
   font-weight: 500;
   color: $color-text-primary;
   margin: 0;
 }
 
-/* Form Styling */
+/* Form Styling - Glassmorphic */
 .formCol {
-  background: rgba($color-surface, 0.4);
-  border: 1px solid rgba($color-border, 0.5);
-  border-radius: $border-radius-lg;
-  padding: $spacing-xxl;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 3rem 3.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   
   @media (max-width: 768px) {
-    padding: $spacing-xl;
+    padding: 2.5rem 2rem;
   }
 }
 
 .contactForm {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xl;
+  gap: 1.5rem;
 }
 
 .formGroup {
@@ -121,33 +183,34 @@
     font-size: 0.95rem;
     font-weight: 500;
     color: $color-text-secondary;
+    letter-spacing: 0.02em;
   }
   
   input, select, textarea {
-    background: rgba($color-background, 0.7);
-    border: 1px solid rgba($color-border, 0.8);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-md;
-    padding: 14px 16px;
+    padding: 16px 20px;
     color: $color-text-primary;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-family: inherit;
     transition: all $transition-fast;
     outline: none;
     
     &:focus {
+      background: rgba(255, 255, 255, 0.05);
       border-color: $color-accent;
-      background: $color-background;
       box-shadow: 0 0 0 1px $color-accent;
     }
     
     &::placeholder {
-      color: rgba($color-text-muted, 0.5);
+      color: rgba($color-text-secondary, 0.4);
     }
   }
   
   textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 140px;
   }
 }
 
@@ -157,6 +220,7 @@
   select {
     width: 100%;
     appearance: none;
+    cursor: pointer;
   }
   
   &::after {
@@ -164,7 +228,7 @@
     font-size: 0.7rem;
     color: $color-text-secondary;
     position: absolute;
-    right: 16px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
@@ -175,30 +239,32 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: $spacing-sm;
-  background-color: $color-text-primary;
-  color: $color-background;
-  padding: 16px 24px;
-  border-radius: $border-radius-md;
+  gap: 12px;
+  background-color: rgba($color-accent, 0.15);
+  color: $color-text-primary;
+  padding: 18px 32px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 1.1rem;
-  border: none;
+  border: 1px solid rgba($color-accent, 0.3);
+  transition: all $transition-default;
+  margin-top: $spacing-md;
   cursor: pointer;
-  transition: all $transition-fast;
-  margin-top: $spacing-sm;
   
   &:hover:not(:disabled) {
-    background-color: #e4e4e7;
+    background-color: rgba($color-accent, 0.25);
+    box-shadow: 0 0 25px rgba($color-accent, 0.2);
     transform: translateY(-2px);
   }
   
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.5;
     cursor: not-allowed;
   }
   
   &.loading {
-    background-color: rgba($color-text-primary, 0.7);
+    background-color: rgba($color-accent, 0.1);
+    border-color: rgba($color-accent, 0.1);
   }
 }
 
@@ -209,8 +275,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,46 +285,69 @@
 }
 
 .modalContent {
-  background: $color-surface;
-  border: 1px solid $color-border;
-  border-radius: $border-radius-lg;
-  padding: $spacing-xxxl $spacing-xxl;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 4rem 3rem;
   text-align: center;
-  max-width: 450px;
+  max-width: 480px;
   width: 100%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(39, 201, 63, 0.15) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .successIcon {
   color: #27c93f;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  filter: drop-shadow(0 0 10px rgba(39, 201, 63, 0.4));
 }
 
 .modalTitle {
-  font-size: 2rem;
+  font-size: 2.25rem;
   color: $color-text-primary;
   margin-bottom: $spacing-sm;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .modalText {
   color: $color-text-secondary;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.6;
-  margin-bottom: $spacing-xxl;
+  margin-bottom: 2.5rem;
 }
 
 .modalBtn {
-  background: rgba($color-text-primary, 0.1);
+  background: transparent;
   color: $color-text-primary;
-  border: 1px solid rgba($color-border, 0.8);
-  padding: 10px 24px;
-  border-radius: $border-radius-md;
-  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.05rem;
   cursor: pointer;
   transition: all $transition-fast;
   
   &:hover {
-    background: $color-text-primary;
-    color: $color-background;
+    background: rgba(255, 255, 255, 0.1);
   }
 }

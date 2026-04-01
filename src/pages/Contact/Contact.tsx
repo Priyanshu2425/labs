@@ -38,21 +38,22 @@ export default function Contact() {
   };
 
   const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { staggerChildren: 0.15 }
     }
   };
 
   return (
     <div className={styles.pageWrapper}>
       <Header />
+      <div className={styles.glowBackground} />
 
       <main className={styles.mainContent}>
         <section className={`container ${styles.contactSection}`}>
@@ -65,16 +66,21 @@ export default function Contact() {
               animate="visible"
               variants={staggerContainer}
             >
+              <motion.div variants={fadeIn} className={styles.badge}>
+                Contact Us
+              </motion.div>
               <motion.h1 variants={fadeIn} className={styles.pageTitle}>
-                Let's <span className={styles.gradientText}>talk</span>
+                Let's <span className={styles.gradientText}>build</span>
               </motion.h1>
               <motion.p variants={fadeIn} className={styles.pageSubtitle}>
-                Get in touch with our founder directly for any questions, or fill out the form to start a project.
+                Get in touch with our engineering team directly for any questions, or fill out the form to start a project.
               </motion.p>
               
               <motion.div variants={fadeIn} className={styles.contactDetails}>
                 <a href="mailto:pra@labs.dimssu.com" className={styles.detailCard}>
-                  <Mail className={styles.detailIcon} />
+                  <div className={styles.detailIcon}>
+                    <Mail size={24} />
+                  </div>
                   <div>
                     <h3 className={styles.detailTitle}>Email</h3>
                     <p className={styles.detailText}>labs@dimssu.com</p>
@@ -82,7 +88,9 @@ export default function Contact() {
                 </a>
                 
                 <a href="https://wa.me/918340711366" target="_blank" rel="noopener noreferrer" className={styles.detailCard}>
-                  <Phone className={styles.detailIcon} />
+                  <div className={styles.detailIcon}>
+                    <Phone size={24} />
+                  </div>
                   <div>
                     <h3 className={styles.detailTitle}>WhatsApp</h3>
                     <p className={styles.detailText}>+91 834 071 1366</p>
@@ -90,7 +98,9 @@ export default function Contact() {
                 </a>
 
                 <div className={styles.detailCard}>
-                  <MapPin className={styles.detailIcon} />
+                  <div className={styles.detailIcon}>
+                    <MapPin size={24} />
+                  </div>
                   <div>
                     <h3 className={styles.detailTitle}>Location</h3>
                     <p className={styles.detailText}>Global (Remote-First, India HQ)</p>
@@ -104,7 +114,7 @@ export default function Contact() {
               className={styles.formCol}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
             >
               <form className={styles.contactForm} onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
