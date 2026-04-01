@@ -2,7 +2,23 @@
 @import '../../styles/mixins';
 
 .accordionContainer {
-  border-bottom: 1px solid rgba($color-border, 0.4);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Ghost border */
+  border-radius: $border-radius-lg;
+  margin-bottom: $spacing-md;
+  overflow: hidden;
+  transition: all $transition-default;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.open {
+    background: rgba(20, 20, 20, 0.8);
+    border-color: rgba($color-accent, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .accordionHeader {
@@ -10,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: $spacing-xl 0;
+  padding: $spacing-lg $spacing-xl;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -21,6 +37,9 @@
     .question {
       color: $color-accent;
     }
+    .iconContainer {
+      color: $color-accent;
+    }
   }
 
   &.open {
@@ -28,20 +47,23 @@
       color: $color-text-primary;
     }
     .iconContainer {
-      color: $color-text-primary;
+      color: $color-accent;
       transform: rotate(180deg);
+      background: rgba($color-accent, 0.1);
+      border-color: rgba($color-accent, 0.2);
     }
   }
 }
 
 .question {
   flex: 1;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 500;
   color: $color-text-primary;
   margin: 0;
   padding-right: $spacing-xl;
   transition: color $transition-fast;
+  line-height: 1.4;
 }
 
 .iconContainer {
@@ -49,16 +71,21 @@
   align-items: center;
   justify-content: center;
   color: $color-text-secondary;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
 }
 
 .accordionContent {
-  padding-bottom: $spacing-xl;
+  padding: 0 $spacing-xl $spacing-lg;
 }
 
 .answer {
   font-size: 1.05rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: $color-text-secondary;
-  max-width: 800px;
+  margin: 0;
 }

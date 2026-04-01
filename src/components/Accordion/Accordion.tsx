@@ -12,7 +12,7 @@ export default function Accordion({ question, answer }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.accordionContainer}>
+    <div className={`${styles.accordionContainer} ${isOpen ? styles.open : ''}`}>
       <button 
         className={`${styles.accordionHeader} ${isOpen ? styles.open : ''}`}
         onClick={() => setIsOpen(!isOpen)}
