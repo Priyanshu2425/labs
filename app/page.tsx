@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HomeClient from '../src/pages/Home/Home';
+import HomeClient from '@/pages/Home/Home';
 
 export const metadata: Metadata = {
   title: 'DIMSSU Labs — India\'s First AI-Native Product Studio',

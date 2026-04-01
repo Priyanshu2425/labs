@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ContactClient from '../../src/pages/Contact/Contact';
+import ContactClient from '@/pages/Contact/Contact';
 
 export const metadata: Metadata = {
   title: 'Contact Us — Start a Project with DIMSSU Labs',

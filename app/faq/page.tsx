@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import FAQClient from '../../src/pages/FAQ/FAQ';
+import FAQClient from '@/pages/FAQ/FAQ';
 
 export const metadata: Metadata = {
   title: 'FAQ — Frequently Asked Questions',

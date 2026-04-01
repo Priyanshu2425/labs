@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PortfolioClient from '../../src/pages/Portfolio/Portfolio';
+import PortfolioClient from '@/pages/Portfolio/Portfolio';
 
 export const metadata: Metadata = {
   title: 'Portfolio — Production AI & Software Projects',

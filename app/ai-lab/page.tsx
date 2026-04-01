@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import AILabClient from '../../src/pages/AILab/AILab';
+import AILabClient from '@/pages/AILab/AILab';
 
 export const metadata: Metadata = {
   title: 'AI Lab — Research, Models & Technical Papers',

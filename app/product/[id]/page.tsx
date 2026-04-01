@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { productsData } from '../../../src/data/products';
-import ProductClient from '../../../src/pages/Product/Product';
+import { productsData } from '@/data/products';
+import ProductClient from '@/pages/Product/Product';
 
 interface Props {
   params: Promise<{ id: string }>;
