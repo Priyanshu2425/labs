@@ -170,7 +170,7 @@ export default function FAQ() {
           >
             <MessageSquare size={48} className={styles.contactIcon} color="rgba(186,158,255,0.8)" style={{ marginBottom: '1.5rem' }} />
             <h3 className={styles.contactTitle}>Still have questions?</h3>
-            <p className={styles.contactSub}>Can't find the answer you're looking for? Reach out to our engineering team directly.</p>
+            <p className={styles.contactSub}>Can&apos;t find the answer you&apos;re looking for? Reach out to our engineering team directly.</p>
             <a href="mailto:pra@labs.dimssu.com" className={styles.contactBtn}>
               <Mail size={20} />
               Contact our team

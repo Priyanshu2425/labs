@@ -100,7 +100,7 @@ export default function Services() {
               transition={{ duration: 0.9 }}
               className={styles.heroContent}
             >
-              <span className={styles.monoLabel}>// services</span>
+              <span className={styles.monoLabel}>{'// services'}</span>
               <h1 className={styles.pageTitle}>
                 What we <span className={styles.gradientText}>build</span><br />
                 for you.

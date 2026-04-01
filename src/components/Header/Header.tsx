@@ -86,7 +86,7 @@ export default function Header() {
           {/* Scroll Progress Indicator */}
           <div className={styles.scrollProgressBlock}>
             <div className={styles.scrollProgress}>
-              <span className={styles.scrollText}>// scroll to explore</span>
+              <span className={styles.scrollText}>{'// scroll to explore'}</span>
               <span className={styles.progressText}>
                 progress: <span className={styles.progressValue}>{scrollProgress}%</span>
               </span>

@@ -67,7 +67,7 @@ export default function Product({ productId }: ProductProps) {
                 ))}
               </motion.div>
 
-              <motion.span variants={fadeUp} className={styles.monoLabel}>// product</motion.span>
+              <motion.span variants={fadeUp} className={styles.monoLabel}>{'// product'}</motion.span>
               <motion.h1 variants={fadeUp} className={styles.pageTitle}>{product.title}</motion.h1>
               <motion.p variants={fadeUp} className={styles.pageSubtitle}>{product.subtitle}</motion.p>
 

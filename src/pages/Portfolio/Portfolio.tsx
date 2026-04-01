@@ -139,7 +139,7 @@ export default function Portfolio() {
               transition={{ duration: 0.9 }}
               className={styles.heroContent}
             >
-              <span className={styles.monoLabel}>// portfolio</span>
+              <span className={styles.monoLabel}>{'// portfolio'}</span>
               <h1 className={styles.pageTitle}>
                 Built with purpose.<br />
                 <span className={styles.gradientText}>Deployed in production.</span>

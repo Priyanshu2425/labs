@@ -72,7 +72,7 @@ export default function Contact() {
                 Contact Us
               </motion.div>
               <motion.h1 variants={fadeIn} className={styles.pageTitle}>
-                Let's <span className={styles.gradientText}>build</span>
+                Let&apos;s <span className={styles.gradientText}>build</span>
               </motion.h1>
               <motion.p variants={fadeIn} className={styles.pageSubtitle}>
                 Get in touch with our engineering team directly for any questions, or fill out the form to start a project.
