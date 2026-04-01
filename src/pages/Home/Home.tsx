@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MessageSquare, Code2, Cpu, Rocket, Users } from 'lucide-react';
+import { ArrowRight, MessageSquare, Code2, Cpu, Rocket, Users, Landmark, Shield, Truck, Building2, HeartPulse, Microchip } from 'lucide-react';
 import styles from './Home.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -26,40 +26,97 @@ const HorizontalScrollCarousel = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({ 
     target: targetRef,
-    // Add offset context so the transform relates smoothly
     offset: ["start start", "end end"]
   });
 
-  // Moves the cards sideways as the user scrolls down the height of the container
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const industries = [
-    { title: "Government", projects: ["Boss OS", "Weather Prediction", "AI-Native Digital Tutor"] },
-    { title: "Defence", projects: ["VAJRA", "KAVACH", "SAGAR"] },
-    { title: "Logistics", projects: ["Fleet Management", "Charge Pulse", "Supply Chain Ops"] },
-    { title: "Real Estate", projects: ["Lease Management", "Real Estate Fund", "Real Estate MIS"] },
-    { title: "Healthcare", projects: ["Clinical Notes", "Focuscare", "Patient Analytics"] },
-    { title: "Hardware & IoT", projects: ["PCB Design", "Embedded Firmware", "Sensor Networks"] }
+    {
+      title: "Government",
+      icon: <Landmark size={22} />,
+      accent: "#ba9eff",
+      tag: "Public Sector",
+      projects: ["Boss OS", "Weather Prediction", "AI-Native Digital Tutor"]
+    },
+    {
+      title: "Defence",
+      icon: <Shield size={22} />,
+      accent: "#ff6b6b",
+      tag: "Mission Critical",
+      projects: ["VAJRA", "KAVACH", "SAGAR"]
+    },
+    {
+      title: "Logistics",
+      icon: <Truck size={22} />,
+      accent: "#ffd93d",
+      tag: "Operations",
+      projects: ["Fleet Management", "Charge Pulse", "Supply Chain Ops"]
+    },
+    {
+      title: "Real Estate",
+      icon: <Building2 size={22} />,
+      accent: "#6bcb77",
+      tag: "PropTech",
+      projects: ["Lease Management", "Real Estate Fund", "Real Estate MIS"]
+    },
+    {
+      title: "Healthcare",
+      icon: <HeartPulse size={22} />,
+      accent: "#53ddfc",
+      tag: "MedTech",
+      projects: ["Clinical Notes", "Focuscare", "Patient Analytics"]
+    },
+    {
+      title: "Hardware & IoT",
+      icon: <Microchip size={22} />,
+      accent: "#ff9f43",
+      tag: "Embedded Systems",
+      projects: ["PCB Design", "Embedded Firmware", "Sensor Networks"]
+    }
   ];
 
   return (
     <section ref={targetRef} className={styles.scrollCarouselContainer}>
       <div className={styles.stickyContent}>
         <div className={styles.carouselHeader}>
-          <h2 className={styles.carouselSectionTitle}>What industries have we worked in?</h2>
+          <span className={styles.carouselEyebrow}>Our Expertise</span>
+          <h2 className={styles.carouselSectionTitle}>Industries we've <br /><em>transformed</em></h2>
+          <div className={styles.scrollProgressTrack}>
+            <motion.div className={styles.scrollProgressBar} style={{ width: progressWidth }} />
+          </div>
         </div>
         
         <motion.div style={{ x }} className={styles.horizontalScroll}>
-          {industries.map((ind) => (
-            <div key={ind.title} className={styles.industryCard}>
+          {/* Spacer so card 01 starts fully visible */}
+          <div style={{ minWidth: '5rem', flexShrink: 0 }} />
+          {industries.map((ind, idx) => (
+            <div
+              key={ind.title}
+              className={styles.industryCard}
+              style={{ '--card-accent': ind.accent } as React.CSSProperties}
+            >
+              <div className={styles.cardIndex}>{String(idx + 1).padStart(2, '0')}</div>
+              <div className={styles.cardTop}>
+                <div className={styles.cardIconWrap} style={{ background: `${ind.accent}18`, color: ind.accent }}>
+                  {ind.icon}
+                </div>
+                <span className={styles.cardTag}>{ind.tag}</span>
+              </div>
               <h3 className={styles.industryTitle}>{ind.title}</h3>
+              <div className={styles.cardDivider} style={{ background: ind.accent }} />
               <ul className={styles.projectList}>
                 {ind.projects.map((proj) => (
                   <li key={proj} className={styles.projectItem}>
-                    <span className={styles.bullet}></span> {proj}
+                    <ArrowRight size={14} className={styles.projectArrow} style={{ color: ind.accent }} />
+                    {proj}
                   </li>
                 ))}
               </ul>
+              <div className={styles.cardFooter}>
+                <span className={styles.projectCount}>{ind.projects.length} projects</span>
+              </div>
             </div>
           ))}
         </motion.div>

@@ -1,17 +1,19 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
+/* =============================================
+   Base Page Shell
+   ============================================= */
 .pageWrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #0e0e0e; /* Obsidian Base */
-  color: #ffffff;
+  background-color: $color-background;
+  color: $color-text-primary;
 }
 
 .mainContent {
   flex-grow: 1;
-  /* Add smooth scroll property */
   scroll-behavior: smooth;
 }
 
@@ -22,14 +24,17 @@
   background-image: linear-gradient(90deg, #ba9eff 0%, #53ddfc 100%);
 }
 
-/* -- Hero Section -- */
+/* =============================================
+   Hero Section
+   ============================================= */
 .heroSection {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: radial-gradient(circle at center, rgba(132, 85, 239, 0.15), transparent 70%);
+  background: radial-gradient(circle at center, rgba(132, 85, 239, 0.12), transparent 70%);
+  background-color: $color-background;
 }
 
 .heroContent {
@@ -46,7 +51,8 @@
   line-height: 1.1;
   letter-spacing: -0.04em;
   margin-bottom: 2rem;
-  
+  color: $color-text-primary;
+
   @media (max-width: 768px) {
     font-size: 2.5rem;
   }
@@ -54,21 +60,23 @@
 
 .quoteAuthor {
   font-size: 1.2rem;
-  color: #adaaaa; /* on_surface_variant */
+  color: $color-text-muted;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-family: 'Manrope', sans-serif;
 }
 
-/* -- Marquee Section -- */
+/* =============================================
+   Marquee Section
+   ============================================= */
 .marqueeContainer {
   width: 100%;
   overflow: hidden;
   padding: 2.5rem 0;
-  border-top: 1px solid rgba(73, 72, 71, 0.15); /* Ghost Border */
-  border-bottom: 1px solid rgba(73, 72, 71, 0.15);
-  background-color: #000000; /* surface_container_lowest */
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
+  background-color: $color-surface;
   display: flex;
   white-space: nowrap;
 }
@@ -81,20 +89,22 @@
     font-family: 'Space Grotesk', sans-serif;
     font-size: 2rem;
     font-weight: 600;
-    color: #494847;
+    color: $color-text-muted;
     text-transform: uppercase;
     letter-spacing: -0.02em;
     padding-right: 3rem;
   }
 }
 
-/* -- Intro Highlight -- */
+/* =============================================
+   Intro Highlight
+   ============================================= */
 .introSection {
   padding: 12rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0e0e0e;
+  background-color: $color-background;
 }
 
 .introContent {
@@ -108,10 +118,10 @@
   font-size: 4rem;
   font-weight: 600;
   line-height: 1.1;
-  color: #ffffff;
+  color: $color-text-primary;
   margin-bottom: 2rem;
   letter-spacing: -0.03em;
-  
+
   @media (max-width: 768px) {
     font-size: 2.5rem;
   }
@@ -120,16 +130,18 @@
 .introSubtext {
   font-family: 'Inter', sans-serif;
   font-size: 1.25rem;
-  color: #adaaaa;
+  color: $color-text-secondary;
   line-height: 1.8;
   max-width: 700px;
 }
 
-/* -- Horizontal Scroll Carousel -- */
+/* =============================================
+   Horizontal Scroll Carousel
+   ============================================= */
 .scrollCarouselContainer {
-  height: 300vh; /* Keeps the container scrolling vertically to allow horizontal motion */
+  height: 300vh;
   position: relative;
-  background-color: #131313; /* surface_container_low */
+  background-color: $color-surface;
 }
 
 .stickyContent {
@@ -137,75 +149,208 @@
   top: 0;
   height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
-  padding-left: 5rem;
-  padding-top: 6rem;
-  
-  @media (max-width: 768px) {
-    padding-left: 2rem;
-  }
 }
 
 .carouselHeader {
-  position: absolute;
-  top: 6rem;
-  left: 5rem;
-  z-index: 10;
-  
+  padding: 0 5rem;
+  margin-bottom: 3rem;
+  width: 100%;
+
   @media (max-width: 768px) {
-    left: 2rem;
+    padding: 0 2rem;
   }
+}
+
+.carouselEyebrow {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  opacity: 0.9;
 }
 
 .carouselSectionTitle {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: -0.03em;
+  font-size: 3.75rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+
+  em {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(90deg, #ba9eff 0%, #53ddfc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.scrollProgressTrack {
+  width: 120px;
+  height: 2px;
+  background: $color-border;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.scrollProgressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #ba9eff, #53ddfc);
+  border-radius: 2px;
 }
 
 .horizontalScroll {
   display: flex;
-  gap: 4rem;
-  padding-right: 5rem;
-  margin-top: 5rem; /* give space under title */
+  gap: 2rem;
+  /* Leading spacer so first card is not behind the header */
+  padding: 0 5rem;
 }
 
+/* Leading spacer element rendered first in the flex row */
+.carouselSpacer {
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+/* =============================================
+   Industry Card (theme-aware)
+   ============================================= */
 .industryCard {
-  width: 420px;
-  min-width: 420px;
-  height: 500px;
-  background: rgba(38, 38, 38, 0.4); /* surface_variant at 40% */
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 3rem;
+  width: 360px;
+  min-width: 360px;
+  height: 460px;
+  background: $color-background;
+  backdrop-filter: blur(24px);
+  border-radius: 20px;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s ease;
-  border: 1px solid rgba(73, 72, 71, 0.15); /* Ghost Border */
-  
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid $color-border;
+  position: relative;
+  overflow: hidden;
+
+  /* Top accent line */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--card-accent, #ba9eff) 50%, transparent);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  /* Corner glow */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--card-accent, #ba9eff), transparent 70%);
+    opacity: 0.03;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
   @media (max-width: 768px) {
-    width: 320px;
-    min-width: 320px;
+    width: 300px;
+    min-width: 300px;
     padding: 2rem;
   }
 
   &:hover {
-    background: rgba(38, 38, 38, 0.8);
-    border-color: rgba(186, 158, 255, 0.3);
-    box-shadow: 0 0 40px rgba(186, 158, 255, 0.1); /* subtle glow */
-    transform: translateY(-5px);
+    border-color: $color-border-focus;
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+
+    &::before { opacity: 1; }
+    &::after  { opacity: 0.1; }
+    .cardIndex { opacity: 0.1; }
   }
+}
+
+.cardIndex {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  opacity: 0.04;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  transition: opacity 0.4s ease;
+  user-select: none;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.cardIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardTag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  border: 1px solid $color-border;
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
 .industryTitle {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 2rem;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  position: relative;
+  z-index: 2;
+}
+
+.cardDivider {
+  height: 1px;
+  width: 40px;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  opacity: 0.6;
+  position: relative;
+  z-index: 2;
 }
 
 .projectList {
@@ -213,33 +358,54 @@
   padding: 0;
   margin: 0;
   flex-grow: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .projectItem {
   font-family: 'Inter', sans-serif;
   display: flex;
-  align-items: flex-start;
-  color: #adaaaa;
-  font-size: 1.15rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  
-  .bullet {
-    width: 8px;
-    height: 8px;
-    background-color: #53ddfc; /* secondary */
-    border-radius: 50%;
-    margin-right: 1.2rem;
-    margin-top: 0.55rem;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px rgba(83, 221, 252, 0.5);
+  align-items: center;
+  gap: 0.75rem;
+  color: $color-text-secondary;
+  font-size: 1rem;
+  margin-bottom: 0.9rem;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-text-primary;
   }
 }
 
-/* -- Floating Value Props -- */
+.projectArrow {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.cardFooter {
+  padding-top: 1.5rem;
+  border-top: 1px solid $color-border;
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.projectCount {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* =============================================
+   Value Props Grid
+   ============================================= */
 .valuePropsSection {
   padding: 10rem 2rem;
-  background-color: #0e0e0e;
+  background-color: $color-background;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -254,7 +420,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 3.5rem;
   font-weight: 600;
-  color: #ffffff;
+  color: $color-text-primary;
   letter-spacing: -0.03em;
 }
 
@@ -271,10 +437,10 @@
 }
 
 .valueCard {
-  background: #131313; /* surface_container_low */
+  background: $color-surface;
   border-radius: 20px;
   padding: 3.5rem;
-  border: 1px solid rgba(73, 72, 71, 0.15); /* Ghost Border */
+  border: 1px solid $color-border;
   display: flex;
   flex-direction: column;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -285,15 +451,16 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 50% -20%, rgba(186, 158, 255, 0.1), transparent 70%);
+    background: radial-gradient(circle at 50% -20%, rgba(132, 85, 239, 0.08), transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
   }
 
   &:hover {
     transform: translateY(-8px);
-    border-color: rgba(186, 158, 255, 0.3); /* primary color border hint */
-    
+    border-color: $color-border-focus;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+
     &::before {
       opacity: 1;
     }
@@ -301,7 +468,7 @@
 }
 
 .valueIcon {
-  color: #ba9eff;
+  color: var(--color-accent);
   margin-bottom: 2.5rem;
   position: relative;
   z-index: 2;
@@ -310,7 +477,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(186, 158, 255, 0.1);
+  background: var(--color-badge-bg);
   border-radius: 16px;
 }
 
@@ -318,7 +485,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.8rem;
   font-weight: 600;
-  color: #ffffff;
+  color: $color-text-primary;
   margin-bottom: 1rem;
   position: relative;
   z-index: 2;
@@ -326,18 +493,19 @@
 
 .valueDesc {
   font-family: 'Inter', sans-serif;
-  color: #adaaaa;
-  font-size: 1.15rem;
-  line-height: 1.6;
+  color: $color-text-secondary;
+  font-size: 1.1rem;
+  line-height: 1.7;
   position: relative;
   z-index: 2;
 }
 
-
-/* -- CTA Section -- */
+/* =============================================
+   CTA Section
+   ============================================= */
 .ctaSection {
   padding: 12rem 2rem;
-  background-color: #000000;
+  background-color: $color-surface;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -345,7 +513,6 @@
   overflow: hidden;
 }
 
-/* Ambient glow in CTA */
 .ctaSection::after {
   content: '';
   position: absolute;
@@ -354,7 +521,7 @@
   transform: translate(-50%, -50%);
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(83, 221, 252, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -369,7 +536,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 4.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: $color-text-primary;
   margin-bottom: 1.5rem;
   letter-spacing: -0.03em;
 
@@ -381,7 +548,7 @@
 .ctaText {
   font-family: 'Inter', sans-serif;
   font-size: 1.25rem;
-  color: #adaaaa;
+  color: $color-text-secondary;
   margin-bottom: 4rem;
   line-height: 1.6;
 }
@@ -398,19 +565,20 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background-color: #ae8dff; /* primary_container */
-  color: #2b006e; /* on_primary_container */
+  background-color: var(--color-accent);
+  color: #ffffff;
   padding: 18px 36px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 1.15rem;
   transition: all 0.3s ease;
   font-family: 'Manrope', sans-serif;
-  
+
   &:hover {
-    background-color: #ba9eff;
-    box-shadow: 0 0 25px rgba(186, 158, 255, 0.4);
+    background-color: var(--color-accent-hover);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.35);
     transform: translateY(-3px);
+    color: #ffffff;
   }
 }
 
@@ -419,18 +587,19 @@
   align-items: center;
   gap: 0.75rem;
   background-color: transparent;
-  color: #53ddfc; /* secondary */
-  border: 1px solid rgba(73, 72, 71, 0.3); /* Ghost Border variant */
+  color: $color-text-secondary;
+  border: 1px solid $color-border;
   padding: 18px 36px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 1.15rem;
   transition: all 0.3s ease;
   font-family: 'Manrope', sans-serif;
-  
+
   &:hover {
-    border-color: rgba(83, 221, 252, 0.6);
-    background-color: rgba(83, 221, 252, 0.1);
+    border-color: $color-border-focus;
+    background-color: $color-surface-hover;
+    color: $color-text-primary;
     transform: translateY(-3px);
   }
 }
