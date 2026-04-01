@@ -4,39 +4,60 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: $color-surface;
-  padding: $spacing-xl;
-  border-radius: 16px;
+  background-color: $color-background;
+  padding: 1.75rem;
+  border-radius: 14px;
   border: 1px solid $color-border;
   text-decoration: none;
   cursor: pointer;
   height: 100%;
   transition: all $transition-default;
-  
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $color-accent 50%, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
   &:hover {
     border-color: $color-border-focus;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: $color-surface-hover;
-    
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    background-color: $color-surface;
+    transform: translateY(-3px);
+
+    &::before { opacity: 0.5; }
+
     .icon {
       color: $color-accent;
-      transform: translate(2px, -2px);
+      transform: translate(3px, -3px);
+    }
+
+    .title {
+      color: $color-accent;
     }
   }
 }
 
 .title {
-  font-size: 1.25rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
   color: $color-text-primary;
   margin-bottom: $spacing-sm;
   font-weight: 700;
   letter-spacing: -0.02em;
+  transition: color $transition-fast;
 }
 
 .description {
   color: $color-text-secondary;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin-bottom: $spacing-xl;
   flex-grow: 1;
 }
@@ -45,22 +66,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto; /* Push to bottom */
+  margin-top: auto;
 }
 
 .category {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: $color-badge-text;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: 'Inter', sans-serif;
   background-color: $color-badge-bg;
-  padding: 4px 8px;
-  border-radius: 4px;
-  letter-spacing: 0em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
 }
 
 .icon {
-  color: $color-text-secondary;
+  color: $color-text-muted;
   transition: all $transition-fast;
 }

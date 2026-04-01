@@ -1,100 +1,229 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
+/* =============================================
+   Base
+   ============================================= */
 .pageWrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: $color-background;
 }
 
 .mainContent {
   flex-grow: 1;
 }
 
-.headerSection {
-  padding: 8rem 0 3rem;
-  /* Removed border bottom */
+/* =============================================
+   Hero
+   ============================================= */
+.heroSection {
+  padding: 10rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+  background-color: $color-background;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 30% 30%, rgba(132, 85, 239, 0.12), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroContent {
+  max-width: 780px;
+  position: relative;
+  z-index: 1;
 }
 
 .monoLabel {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  color: $color-text-secondary;
+  color: $color-accent;
   font-size: 0.9rem;
   display: block;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-lg;
+  opacity: 0.8;
+  letter-spacing: 0.04em;
 }
 
 .pageTitle {
-  font-size: 4rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 5rem;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.05;
   letter-spacing: -0.04em;
   color: $color-text-primary;
-  margin-bottom: $spacing-lg;
-  
+  margin-bottom: $spacing-xl;
+
   @media (max-width: 768px) {
-    font-size: 2.75rem;
+    font-size: 3rem;
   }
+}
+
+.gradientText {
+  background: linear-gradient(135deg, #ba9eff 0%, #53ddfc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .pageSubtitle {
   font-size: 1.25rem;
   color: $color-text-secondary;
-  max-width: 600px;
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* =============================================
+   Sticky Cards Stack
+   ============================================= */
+.cardsStack {
+  padding-bottom: 0;
 }
 
 .serviceBlock {
-  padding: 0 0 $spacing-xxxl; /* Reduced padding since cards have their own spacing */
+  padding: 0 0 $spacing-xl;
 }
 
 .cardContainer {
   background: $color-surface;
   border: 1px solid $color-border;
-  border-radius: 20px;
-  padding: 3rem 4rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  padding: 3rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+
+  /* Top accent glow line */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--svc-accent, #ba9eff) 50%,
+      transparent
+    );
+    opacity: 0.6;
+  }
 
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
+    border-radius: 16px;
   }
 }
 
+/* ── Card head row ── */
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.cardIconBadge {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardTag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  border: 1px solid $color-border;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.cardIndex {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  color: $color-text-primary;
+  opacity: 0.05;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── Content ── */
 .blockTitle {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2.5rem;
   color: $color-text-primary;
-  margin-bottom: $spacing-xl;
   font-weight: 700;
   letter-spacing: -0.03em;
-  
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+
   @media (max-width: 768px) {
     font-size: 1.75rem;
   }
 }
 
+.blockTagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: $color-text-muted;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.cardDivider {
+  height: 1px;
+  width: 48px;
+  border-radius: 2px;
+  opacity: 0.6;
+  margin-bottom: 2rem;
+}
+
+/* ── Bullet List ── */
 .bulletList {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   margin-bottom: 2.5rem;
-  
+
   li {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: $spacing-md;
     color: $color-text-secondary;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.5;
   }
 }
 
 .bulletIcon {
-  color: $color-text-primary;
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.8;
 }
 
+/* ── Buttons ── */
 .buttonGroup {
   display: flex;
   align-items: center;
@@ -105,38 +234,41 @@
 .ctaLink {
   display: inline-flex;
   align-items: center;
-  gap: $spacing-sm;
-  color: $color-text-primary;
-  background-color: $color-accent;
-  padding: 10px 24px;
+  gap: 0.5rem;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  padding: 11px 24px;
   border-radius: $border-radius-md;
-  border: 1px solid transparent;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   transition: all $transition-fast;
-  
+  text-decoration: none;
+
   &:hover {
-    background-color: $color-accent-hover;
+    background-color: var(--color-accent-hover);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    color: #ffffff;
   }
 }
 
 .toggleBtn {
   display: inline-flex;
   align-items: center;
-  gap: $spacing-sm;
+  gap: 0.5rem;
   color: $color-text-secondary;
   background-color: transparent;
-  padding: 10px 24px;
+  padding: 11px 24px;
   border-radius: $border-radius-md;
   border: 1px solid $color-border;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   transition: all $transition-fast;
   cursor: pointer;
-  
+
   &:hover {
     background-color: $color-surface-hover;
     color: $color-text-primary;
@@ -145,22 +277,42 @@
   }
 }
 
-/* Products Grid Setup inside the card */
+/* =============================================
+   Products Grid
+   ============================================= */
 .productsGridWrapper {
   overflow: hidden;
   border-top: 1px solid $color-border;
-  padding-top: $spacing-xxl;
+  padding-top: $spacing-xl;
+}
+
+.productsGridHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: $spacing-xl;
+}
+
+.productsGridArrow {
+  color: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .productsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: $spacing-lg;
-  
+
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
+
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
   }
