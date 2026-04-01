@@ -77,15 +77,15 @@ export default function Contact() {
                   <Mail className={styles.detailIcon} />
                   <div>
                     <h3 className={styles.detailTitle}>Email</h3>
-                    <p className={styles.detailText}>pra@labs.dimssu.com</p>
+                    <p className={styles.detailText}>labs@dimssu.com</p>
                   </div>
                 </a>
                 
-                <a href="https://wa.me/919911114178" target="_blank" rel="noopener noreferrer" className={styles.detailCard}>
+                <a href="https://wa.me/918340711366" target="_blank" rel="noopener noreferrer" className={styles.detailCard}>
                   <Phone className={styles.detailIcon} />
                   <div>
                     <h3 className={styles.detailTitle}>WhatsApp</h3>
-                    <p className={styles.detailText}>+91 991 111 4178</p>
+                    <p className={styles.detailText}>+91 834 071 1366</p>
                   </div>
                 </a>
 
