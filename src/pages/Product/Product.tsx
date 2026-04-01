@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Check, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from './Product.module.scss';
@@ -10,22 +10,19 @@ export default function Product() {
   const { id } = useParams<{ id: string }>();
 
   if (!id || !productsData[id]) {
-    return <Navigate to="/our-services" replace />;
+    return <Navigate to="/portfolio" replace />;
   }
 
   const product = productsData[id];
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.65 } }
   };
 
-  const staggerContainer = {
+  const stagger = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   return (
@@ -33,80 +30,163 @@ export default function Product() {
       <Header />
 
       <main className={styles.mainContent}>
-        {/* Breadcrumb / Back Link */}
-        <section className={`container ${styles.navSection}`}>
-           <Link to="/our-services" className={styles.backLink}>
-              <ArrowLeft size={16} />
-              <span>Back to Services</span>
-           </Link>
+
+        {/* ── Hero ─────────────────────────────── */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroGlow} />
+          <div className="container">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+              className={styles.heroInner}
+            >
+              {/* Back link */}
+              <motion.div variants={fadeUp}>
+                <Link to="/portfolio" className={styles.backLink}>
+                  <ArrowLeft size={15} />
+                  Back to Portfolio
+                </Link>
+              </motion.div>
+
+              {/* Status + categories */}
+              <motion.div variants={fadeUp} className={styles.heroBadges}>
+                <span className={`${styles.statusBadge} ${product.status === 'live' ? styles.live : styles.prototype}`}>
+                  {product.status === 'live' && <Activity size={11} className={styles.blink} />}
+                  {product.status}
+                </span>
+                {product.categories.map(c => (
+                  <span key={c} className={styles.categoryBadge}>
+                    <Tag size={11} />
+                    {c}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.span variants={fadeUp} className={styles.monoLabel}>// product</motion.span>
+              <motion.h1 variants={fadeUp} className={styles.pageTitle}>{product.title}</motion.h1>
+              <motion.p variants={fadeUp} className={styles.pageSubtitle}>{product.subtitle}</motion.p>
+
+              {/* Client */}
+              <motion.div variants={fadeUp} className={styles.clientRow}>
+                <Users size={14} className={styles.clientIcon} />
+                <span className={styles.clientLabel}>Client:</span>
+                <span className={styles.clientName}>{product.client}</span>
+              </motion.div>
+            </motion.div>
+          </div>
         </section>
 
-        {/* Hero Section */}
-        <section className={`container ${styles.heroSection}`}>
+        {/* ── Metrics Bar ──────────────────────── */}
+        {product.metrics && product.metrics.length > 0 && (
+          <div className={styles.metricsBar}>
+            <div className="container">
+              <div className={styles.metricsGrid}>
+                {product.metrics.map((m, i) => (
+                  <div key={i} className={styles.metricItem}>
+                    <span className={styles.metricValue}>{m.value}</span>
+                    <span className={styles.metricLabel}>{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Overview ─────────────────────────── */}
+        <section className={`container ${styles.contentSection}`}>
           <motion.div
             initial="hidden"
-            animate="visible"
-            variants={fadeIn}
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+            className={styles.twoCol}
           >
-            <span className={styles.monoLabel}>// product</span>
-            <h1 className={styles.pageTitle}>{product.title}</h1>
-            <p className={styles.pageSubtitle}>{product.subtitle}</p>
+            <div className={styles.stickyLabel}>
+              <span className={styles.sectionNumber}>01</span>
+              <h2 className={styles.sectionTitle}>Overview</h2>
+            </div>
+            <div>
+              <p className={styles.bodyText}>{product.overview}</p>
+            </div>
           </motion.div>
         </section>
 
-        {/* Overview Section */}
-        <section className={`container ${styles.overviewSection}`}>
-           <motion.div
-             initial="hidden"
-             whileInView="visible"
-             viewport={{ once: true }}
-             variants={fadeIn}
-             className={styles.contentBlock}
-           >
-              <h2 className={styles.sectionTitle}>Overview</h2>
-              <p className={styles.bodyText}>{product.overview}</p>
-           </motion.div>
-        </section>
-
-        {/* Features Section */}
-        <section className={`container ${styles.featuresSection}`}>
-           <motion.div
-             initial="hidden"
-             whileInView="visible"
-             viewport={{ once: true }}
-             variants={staggerContainer}
-             className={styles.contentBlock}
-           >
-              <h2 className={styles.sectionTitle}>Features</h2>
-              <ul className={styles.featuresList}>
-                {product.features.map((feature, i) => (
-                  <motion.li key={i} variants={fadeIn} className={styles.featureItem}>
-                    <div className={styles.checkIcon}>
-                       <Check size={16} />
-                    </div>
-                    <span>{feature}</span>
-                  </motion.li>
+        {/* ── Tech Stack ───────────────────────── */}
+        {product.techStack && product.techStack.length > 0 && (
+          <section className={`container ${styles.contentSection}`}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={fadeUp}
+              className={styles.twoCol}
+            >
+              <div className={styles.stickyLabel}>
+                <span className={styles.sectionNumber}>02</span>
+                <h2 className={styles.sectionTitle}>Tech Stack</h2>
+              </div>
+              <div className={styles.techGrid}>
+                {product.techStack.map((tech, i) => (
+                  <span key={i} className={styles.techChip}>{tech}</span>
                 ))}
-              </ul>
-           </motion.div>
+              </div>
+            </motion.div>
+          </section>
+        )}
+
+        {/* ── Features ─────────────────────────── */}
+        <section className={`container ${styles.contentSection}`}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+            className={styles.twoCol}
+          >
+            <div className={styles.stickyLabel}>
+              <span className={styles.sectionNumber}>03</span>
+              <h2 className={styles.sectionTitle}>Features</h2>
+            </div>
+            <ul className={styles.featuresList}>
+              {product.features.map((f, i) => (
+                <motion.li key={i} variants={fadeUp} className={styles.featureItem}>
+                  <div className={styles.checkIcon}>
+                    <Check size={14} />
+                  </div>
+                  <span>{f}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
         </section>
 
-        {/* CTA Section */}
+        {/* ── CTA ──────────────────────────────── */}
         <section className={`container ${styles.ctaSection}`}>
-           <motion.div
-             initial="hidden"
-             whileInView="visible"
-             viewport={{ once: true }}
-             variants={fadeIn}
-             className={styles.ctaBox}
-           >
-              <h2 className={styles.ctaTitle}>Interested in {product.title}?</h2>
-              <p className={styles.ctaSubtitle}>Let's discuss how this can work for you.</p>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+            className={styles.ctaBox}
+          >
+            <div className={styles.ctaGlow} />
+            <p className={styles.ctaEyebrow}>Interested?</p>
+            <h2 className={styles.ctaTitle}>Let's deploy {product.title} for you.</h2>
+            <p className={styles.ctaSubtitle}>
+              Production-ready. We can have it live in your stack within 72 hours.
+            </p>
+            <div className={styles.ctaActions}>
               <Link to="/contact-us" className={styles.ctaLink}>
-                 GET IN TOUCH <ArrowUpRight size={18} />
+                Get in Touch <ArrowUpRight size={16} />
               </Link>
-           </motion.div>
+              <Link to="/portfolio" className={styles.ctaSecondary}>
+                View More Projects <ArrowUpRight size={16} />
+              </Link>
+            </div>
+          </motion.div>
         </section>
+
       </main>
 
       <Footer />
