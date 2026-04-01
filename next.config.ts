@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     // separate clean-up step that's safe to do incrementally.
     silenceDeprecations: ['import', 'legacy-js-api'],
   },
+  // Fix root inference issues on local machines with parent lockfiles
+  outputFileTracingRoot: __dirname,
 };
 
 export default nextConfig;
