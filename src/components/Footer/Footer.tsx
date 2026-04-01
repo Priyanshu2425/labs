@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss';
+import Logo from '../Logo';
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.footerContainer}`}>
         <div className={styles.brand}>
-          <div className={styles.logo}>labs.dimssu.com</div>
+          <div className={styles.logoWrapper}>
+            <Logo />
+          </div>
           <p className={styles.tagline}>AI Engineering Lab – Open models built for Indic languages and Indian healthcare.</p>
         </div>
         

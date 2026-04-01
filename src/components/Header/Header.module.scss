@@ -17,11 +17,10 @@
   @include flex-between;
 }
 
-.logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: $color-text-primary;
-  letter-spacing: -0.02em;
+.logoLink {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .rightSection {

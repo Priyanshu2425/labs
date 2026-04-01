@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Logo from '../Logo';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -52,8 +53,8 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
-        <Link to="/" className={styles.logo}>
-          labs.dimssu.com
+        <Link to="/" className={styles.logoLink} aria-label="Home">
+          <Logo />
         </Link>
 
         {/* Navigation & Utilities */}
