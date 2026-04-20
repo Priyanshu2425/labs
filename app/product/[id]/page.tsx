@@ -1,7 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { productsData } from '@/data/products';
-import ProductClient from '@/pages/Product/Product';
+import ProductClient from '@/views/Product/Product';
+import {
+  JsonLd,
+  productSchema,
+  breadcrumbSchema,
+  SITE_URL,
+} from '@/lib/seo/jsonLd';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -20,19 +26,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) {
     return {
       title: 'Product Not Found',
+      robots: { index: false, follow: false },
     };
   }
 
   const techStackStr = product.techStack.join(', ');
   const categoriesStr = product.categories.join(', ');
+  const url = `${SITE_URL}/product/${id}`;
 
   return {
     title: `${product.title} — ${categoriesStr}`,
     description: `${product.subtitle} Tech stack: ${techStackStr}. Built by DIMSSU Labs for ${product.client}.`,
+    alternates: { canonical: `/product/${id}` },
     openGraph: {
       title: `${product.title} | DIMSSU Labs`,
       description: product.subtitle,
-      url: `https://labs.dimssu.ai/product/${id}`,
+      url,
+      type: 'article',
+      locale: 'en_IN',
+      siteName: 'DIMSSU Labs',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.title} | DIMSSU Labs`,
+      description: product.subtitle,
     },
     keywords: [
       product.title,
@@ -53,5 +70,17 @@ export default async function ProductPage({ params }: Props) {
     notFound();
   }
 
-  return <ProductClient productId={id} />;
+  return (
+    <>
+      <JsonLd data={productSchema(product)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', url: SITE_URL },
+          { name: 'Portfolio', url: `${SITE_URL}/portfolio` },
+          { name: product.title, url: `${SITE_URL}/product/${id}` },
+        ])}
+      />
+      <ProductClient productId={id} />
+    </>
+  );
 }
