@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users } from 'lucide-react';
 import Header from '../../components/Header';
@@ -36,7 +37,20 @@ export default function Product({ productId }: ProductProps) {
       <main className={styles.mainContent}>
 
         {/* ── Hero ─────────────────────────────── */}
-        <section className={styles.heroSection}>
+        <section className={`${styles.heroSection} ${product.coverImage ? styles.heroWithImage : ''}`}>
+          {product.coverImage && (
+            <div className={styles.heroBackdrop} aria-hidden="true">
+              <Image
+                src={product.coverImage.src}
+                alt=""
+                fill
+                sizes="100vw"
+                className={styles.heroBackdropImage}
+                priority
+              />
+              <div className={styles.heroBackdropFade} />
+            </div>
+          )}
           <div className={styles.heroGlow} />
           <div className="container">
             <motion.div
@@ -77,6 +91,12 @@ export default function Product({ productId }: ProductProps) {
                 <span className={styles.clientLabel}>Client:</span>
                 <span className={styles.clientName}>{product.client}</span>
               </motion.div>
+
+              {product.coverImage?.caption && (
+                <motion.p variants={fadeUp} className={styles.heroCaption}>
+                  <span className={styles.captionMark}>{'//'}</span> {product.coverImage.caption}
+                </motion.p>
+              )}
             </motion.div>
           </div>
         </section>

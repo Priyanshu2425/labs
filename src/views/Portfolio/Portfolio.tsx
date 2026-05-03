@@ -3,12 +3,30 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Activity, ExternalLink } from 'lucide-react';
 import styles from './Portfolio.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-const projects = [
+interface PortfolioProject {
+  id: string;
+  title: string;
+  client: string;
+  description: string;
+  categories: string[];
+  status: 'live' | 'prototype';
+  metrics: { label: string; value: string }[];
+  tags: string[];
+  link: string;
+  filterCategory: string;
+  accent: string;
+  coverImage?: string;
+  coverAlt?: string;
+  coverCaption?: string;
+}
+
+const projects: PortfolioProject[] = [
   {
     id: "boss-os",
     title: "Boss OS",
@@ -46,7 +64,10 @@ const projects = [
     tags: ["Python", "Next.js", "OpenAI Whisper"],
     link: "/product/sanad",
     filterCategory: "AI Builds",
-    accent: "#6bcb77"
+    accent: "#6bcb77",
+    coverImage: "/projects/sanad/dashboard.png",
+    coverAlt: "Clinical Notes dashboard — Welcome back, Mara",
+    coverCaption: "Today view — encounters, drafts, schedule"
   },
   {
     id: "charge-pulse",
@@ -59,7 +80,10 @@ const projects = [
     tags: ["Next.js", "React", "Flutter"],
     link: "/product/charge-pulse",
     filterCategory: "Mobile",
-    accent: "#ffd93d"
+    accent: "#ffd93d",
+    coverImage: "/projects/charge-pulse/dashboard.png",
+    coverAlt: "ChargePulse trip planner with charging stops along the route",
+    coverCaption: "Trip planner — charge stops, ETA, and pre-conditioning"
   },
   {
     id: "grospace",
@@ -72,7 +96,10 @@ const projects = [
     tags: ["Next.js", "FastAPI", "Gemini 2.5 Pro"],
     link: "/product/grospace",
     filterCategory: "Web",
-    accent: "#ff9f43"
+    accent: "#ff9f43",
+    coverImage: "/projects/grospace/dashboard.png",
+    coverAlt: "Grospace deal Kanban board with 14 deals across 4 stages",
+    coverCaption: "Pipeline view — $182M across 14 deals in 4 stages"
   },
   {
     id: "crawl360",
@@ -112,6 +139,54 @@ const projects = [
     link: "/product/switchos",
     filterCategory: "Hardware",
     accent: "#6bcb77"
+  },
+  {
+    id: "investor-update-drafter",
+    title: "Investor Update Drafter",
+    client: "Public — labs prototype",
+    description: "AI-drafted monthly investor updates from your live metrics. Toggle tone, pick sections, hit send — all in under two minutes.",
+    categories: ["Founder Tools"],
+    status: "prototype" as const,
+    metrics: [{ label: "Drafted in", value: "<2 min" }, { label: "LPs", value: "12+" }],
+    tags: ["Next.js", "Tailwind", "Framer Motion"],
+    link: "/product/investor-update-drafter",
+    filterCategory: "AI Builds",
+    accent: "#f59e0b",
+    coverImage: "/projects/investor-update-drafter/dashboard.png",
+    coverAlt: "Drafted update with tone toggles in the right rail",
+    coverCaption: "Concise, detailed, punchy, vulnerable — pick a tone"
+  },
+  {
+    id: "sales-call-coach",
+    title: "Sales Call Coach",
+    client: "Public — labs prototype",
+    description: "Gong-style call review with AI-flagged moments, full transcripts, and 12-week rep scorecards.",
+    categories: ["Sales AI"],
+    status: "prototype" as const,
+    metrics: [{ label: "Annotations / call", value: "11" }, { label: "Calls", value: "16" }],
+    tags: ["Next.js", "Tailwind", "Framer Motion"],
+    link: "/product/sales-call-coach",
+    filterCategory: "AI Builds",
+    accent: "#ec4899",
+    coverImage: "/projects/sales-call-coach/dashboard.png",
+    coverAlt: "Rep scorecard with 12-week trend lines for talk ratio and discovery questions",
+    coverCaption: "Scorecards with 12-week trends per rep"
+  },
+  {
+    id: "inbox-zero",
+    title: "Inbox Zero",
+    client: "Public — labs prototype",
+    description: "AI email triage with smart lanes, one-click drafted replies, and a daily debrief that closes your inbox by lunch.",
+    categories: ["Productivity AI"],
+    status: "prototype" as const,
+    metrics: [{ label: "Load", value: "~22 min" }, { label: "Auto", value: "6/day" }],
+    tags: ["Next.js", "Tailwind", "Framer Motion"],
+    link: "/product/inbox-zero",
+    filterCategory: "AI Builds",
+    accent: "#10b981",
+    coverImage: "/projects/inbox-zero/dashboard.png",
+    coverAlt: "Daily debrief with sent/received/drafted trends and auto-handled list",
+    coverCaption: "Daily debrief — what got handled, what needs your eye"
   }
 ];
 
@@ -206,6 +281,22 @@ export default function Portfolio() {
                     className={styles.card}
                     style={{ '--card-accent': project.accent } as React.CSSProperties}
                   >
+                    {project.coverImage && (
+                      <div className={styles.cardCover}>
+                        <Image
+                          src={project.coverImage}
+                          alt={project.coverAlt ?? project.title}
+                          width={680}
+                          height={382}
+                          sizes="(max-width: 768px) 100vw, 360px"
+                          className={styles.cardCoverImage}
+                        />
+                        {project.coverCaption && (
+                          <span className={styles.cardCoverCaption}>{project.coverCaption}</span>
+                        )}
+                      </div>
+                    )}
+
                     {/* Card top */}
                     <div className={styles.cardTop}>
                       <div className={styles.categoryRow}>

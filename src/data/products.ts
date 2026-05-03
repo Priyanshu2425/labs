@@ -9,6 +9,7 @@ export interface Product {
   features: string[];
   techStack: string[];
   metrics: { label: string; value: string }[];
+  coverImage?: { src: string; alt: string; caption: string };
 }
 
 export const productsData: Record<string, Product> = {
@@ -73,7 +74,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Doc Time Saved", value: "80%" },
       { label: "Notes", value: "Instant" }
-    ]
+    ],
+    coverImage: {
+      src: "/projects/sanad/landing.png",
+      alt: "Clinical Notes — landing page with citation-linked SOAP draft preview",
+      caption: "Clinical documentation that writes itself — every sentence cited to the conversation"
+    }
   },
   "focuscare": {
     id: "focuscare",
@@ -136,7 +142,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Availability", value: "Real-Time" },
       { label: "Support Tickets", value: "-60%" }
-    ]
+    ],
+    coverImage: {
+      src: "/projects/charge-pulse/hero.png",
+      alt: "ChargePulse map view with pulsing station markers across the SF Bay Area",
+      caption: "Live availability across 13 Bay Area stations — pulsing markers show active charging"
+    }
   },
   "food-ordering-platform": {
     id: "food-ordering-platform",
@@ -222,7 +233,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Extracted Fields", value: "60+" },
       { label: "API Endpoints", value: "48" }
-    ]
+    ],
+    coverImage: {
+      src: "/projects/grospace/hero.png",
+      alt: "Grospace lease extraction split-pane with confidence-scored clause extraction",
+      caption: "Every clause cited to its source — 16 extracted fields with confidence scores"
+    }
   },
   "ai-native-real-estate-fund": {
     id: "ai-native-real-estate-fund",
@@ -333,5 +349,83 @@ export const productsData: Record<string, Product> = {
       { label: "Channels", value: "4" },
       { label: "Controller", value: "Arduino" }
     ]
+  },
+  "investor-update-drafter": {
+    id: "investor-update-drafter",
+    title: "Investor Update Drafter",
+    subtitle: "AI-drafted monthly investor updates that write themselves from your live metrics — tone toggles, send history, one-click delivery.",
+    client: "Public — labs prototype",
+    categories: ["Founder Tools"],
+    status: "prototype",
+    overview: "Pulls live metrics from your stack and drafts a ready-to-send investor update every month. Toggle tone (Concise, Detailed, Punchy, Vulnerable), pick which sections matter, send to your LP list — all in under two minutes.",
+    features: [
+      "Auto-drafted monthly updates from live metrics",
+      "Tone presets: Concise, Detailed, Punchy, Vulnerable",
+      "Section toggles: Highlights, Lowlights, Asks, Hiring",
+      "Send history with open rates and reply tracking",
+      "Recipient management with avatar pile and segments"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Drafted in", value: "<2 min" },
+      { label: "LPs reached", value: "12+" }
+    ],
+    coverImage: {
+      src: "/projects/investor-update-drafter/hero.png",
+      alt: "Metrics dashboard with sparklines and a draft this month's update CTA",
+      caption: "Six metrics, six sparklines, one button — draft starts from the dashboard"
+    }
+  },
+  "sales-call-coach": {
+    id: "sales-call-coach",
+    title: "Sales Call Coach",
+    subtitle: "Gong-style call review with AI-flagged moments, transcripts, and rep scorecards — coaching at the speed of sales.",
+    client: "Public — labs prototype",
+    categories: ["Sales AI"],
+    status: "prototype",
+    overview: "Records every sales call, transcribes it, and flags key moments — discovery questions that landed, objections raised, talk-ratio drift. Reps get scorecards and 5 coaching clips per week so they actually improve.",
+    features: [
+      "Auto-transcribed calls with speaker diarization",
+      "AI annotations: discovery hits, objections, filler words, talkovers",
+      "Rep scorecards with 12-week trends",
+      "Coaching clips queue per rep",
+      "Talk ratio, sentiment, and call score on every call"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Annotations / call", value: "11" },
+      { label: "Calls reviewed", value: "16" }
+    ],
+    coverImage: {
+      src: "/projects/sales-call-coach/hero.png",
+      alt: "Sales call queue with talk ratios, sentiment chips, and AI scores across 16 calls",
+      caption: "Every call scored, sorted, and ready for review"
+    }
+  },
+  "inbox-zero": {
+    id: "inbox-zero",
+    title: "Inbox Zero",
+    subtitle: "AI email triage that gets you to inbox zero by lunch — smart lanes, drafted replies, and a daily debrief.",
+    client: "Public — labs prototype",
+    categories: ["Productivity AI"],
+    status: "prototype",
+    overview: "Classifies every incoming email into AI lanes (To-do, Awaiting reply, FYI, Newsletter, Promotional), drafts replies in your tone, and gives you a one-screen debrief at the end of the day. Pause anytime.",
+    features: [
+      "AI lanes: To-do, Awaiting reply, FYI, Newsletter, Promotional",
+      "One-click drafted replies with tone presets",
+      "Inline citations: why each draft says what it says",
+      "Daily debrief with sent/received/drafted trends",
+      "Auto-archive with full audit trail"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Inbox load", value: "~22 min" },
+      { label: "Auto-handled", value: "6/day" }
+    ],
+    coverImage: {
+      src: "/projects/inbox-zero/hero.png",
+      alt: "Smart inbox three-pane layout with AI-classified lanes and suggested actions",
+      caption: "Five lanes, one-click drafts, inbox zero by lunch"
+    }
   }
 };

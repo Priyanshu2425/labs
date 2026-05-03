@@ -340,3 +340,42 @@
   border-radius: 999px;
   font-weight: 500;
 }
+
+/* ── Card cover image ─────────────────────── */
+.cardCover {
+  position: relative;
+  margin: -2rem -2rem 1.5rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid $color-border;
+  background: $color-surface-hover;
+}
+
+.cardCoverImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .card:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.cardCoverCaption {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.65rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 4px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
