@@ -128,19 +128,6 @@ const projects: PortfolioProject[] = [
     accent: "#53ddfc"
   },
   {
-    id: "switchos",
-    title: "SwitchOS",
-    client: "Home Automation",
-    description: "Arduino-based 4-channel relay smart switching system replacing traditional wall switches with embedded state control.",
-    categories: ["Home Automation", "Hardware & IoT"],
-    status: "prototype" as const,
-    metrics: [{ label: "Channels", value: "4" }, { label: "Controller", value: "Arduino" }],
-    tags: ["Arduino Uno", "ATmega328P", "C++"],
-    link: "/product/switchos",
-    filterCategory: "Hardware",
-    accent: "#6bcb77"
-  },
-  {
     id: "investor-update-drafter",
     title: "Investor Update Drafter",
     client: "Public — labs prototype",
@@ -190,7 +177,7 @@ const projects: PortfolioProject[] = [
   }
 ];
 
-const filters = ['All', 'AI Builds', 'Web', 'Mobile', 'Hardware'];
+const filters = ['All', 'AI Builds', 'Web', 'Mobile'];
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('All');

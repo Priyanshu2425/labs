@@ -328,28 +328,6 @@ export const productsData: Record<string, Product> = {
       { label: "Footprint", value: "50MB" }
     ]
   },
-  "switchos": {
-    id: "switchos",
-    title: "SwitchOS",
-    subtitle: "Custom Arduino-based home automation system replacing traditional wall switches with relay-controlled smart switching.",
-    client: "Home Automation",
-    categories: ["Home Automation", "Hardware & IoT"],
-    status: "prototype",
-    overview: "Custom embedded system replacing traditional wall switches with a 4-channel relay-controlled smart switching board driven by an Arduino Uno. Supports manual override, state persistence, and future wireless control integration.",
-    features: [
-      "4-channel relay control via ATmega328P",
-      "Manual override with tactile switch inputs",
-      "State persistence across power cycles via EEPROM",
-      "UART serial interface for configuration",
-      "Designed for standard 230V wall switch form factor",
-      "Future-ready for ESP8266/ESP32 wireless module integration"
-    ],
-    techStack: ["Arduino Uno", "ATmega328P", "C++", "4-Ch Relay Module"],
-    metrics: [
-      { label: "Channels", value: "4" },
-      { label: "Controller", value: "Arduino" }
-    ]
-  },
   "investor-update-drafter": {
     id: "investor-update-drafter",
     title: "Investor Update Drafter",
