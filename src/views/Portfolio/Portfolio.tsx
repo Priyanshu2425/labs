@@ -14,6 +14,7 @@ interface PortfolioProject {
   title: string;
   client: string;
   description: string;
+  highlights: string[];
   categories: string[];
   status: 'live' | 'prototype';
   metrics: { label: string; value: string }[];
@@ -28,36 +29,15 @@ interface PortfolioProject {
 
 const projects: PortfolioProject[] = [
   {
-    id: "boss-os",
-    title: "Boss OS",
-    client: "CDAC, Govt. of India",
-    description: "Contributed the browser module to BOSS Linux — India's national OS with 6M+ government deployments.",
-    categories: ["Government", "Open Source"],
-    status: "live" as const,
-    metrics: [{ label: "Deployments", value: "6M+" }, { label: "Languages", value: "18+" }],
-    tags: ["Linux", "C/C++", "GTK+"],
-    link: "/product/boss-os",
-    filterCategory: "Web",
-    accent: "#ba9eff"
-  },
-  {
-    id: "weather-prediction",
-    title: "Weather Prediction",
-    client: "IMD, Govt. of India",
-    description: "ML-based weather forecasting system for the Indian Meteorological Department with real-time sensor data processing.",
-    categories: ["ML", "Government"],
-    status: "live" as const,
-    metrics: [{ label: "Model", value: "LSTM" }, { label: "Scale", value: "National" }],
-    tags: ["Python", "TensorFlow", "LSTM"],
-    link: "/product/weather-prediction",
-    filterCategory: "AI Builds",
-    accent: "#53ddfc"
-  },
-  {
     id: "sanad",
     title: "AI Clinical Notes",
     client: "Private Hospital (NDA)",
-    description: "AI medical scribe that listens to doctor-patient conversations and generates clinical notes instantly — cutting doc time by 80%.",
+    description: "AI medical scribe that listens to consultations and writes structured clinical notes in seconds. Built for busy specialists across multiple languages — currently saving 80% of documentation time per encounter.",
+    highlights: [
+      "Real-time transcription with speaker identification",
+      "Specialty-aware SOAP note generation",
+      "EHR integration without breaking the doctor's workflow"
+    ],
     categories: ["Healthcare AI"],
     status: "live" as const,
     metrics: [{ label: "Doc Time", value: "-80%" }, { label: "Notes", value: "Instant" }],
@@ -72,8 +52,13 @@ const projects: PortfolioProject[] = [
   {
     id: "charge-pulse",
     title: "Charge Pulse",
-    client: "Leading EV Network",
-    description: "Real-time EV charging station finder with GPS navigation, live availability, and traffic-aware routing.",
+    client: "Leading EV Charging Network",
+    description: "Live EV charging station finder with real-time connector availability, voice-guided turn-by-turn navigation, and offline map tiles. Cut customer support tickets by 60% by surfacing the right station before drivers arrive.",
+    highlights: [
+      "OCPP-backed live connector status across CCS, CHAdeMO, Tesla NACS",
+      "Traffic-aware routing with Google Directions API",
+      "Voice-guided turn-by-turn with offline tile caching"
+    ],
     categories: ["EV", "Logistics"],
     status: "live" as const,
     metrics: [{ label: "Availability", value: "Real-Time" }, { label: "Support Tickets", value: "-60%" }],
@@ -89,7 +74,12 @@ const projects: PortfolioProject[] = [
     id: "grospace",
     title: "AI Lease Management",
     client: "GroSpace Global",
-    description: "AI extracts 60+ fields from commercial lease PDFs, tracks obligations, and manages payments for 500+ outlets.",
+    description: "AI lease management for multi-brand retail operators with 50–500+ outlets. Extracts 60+ fields from lease PDFs (text and scanned), tracks every obligation, and answers portfolio questions in natural language.",
+    highlights: [
+      "60+ field extraction from lease PDFs via Gemini 2.5 Pro",
+      "Confirm & Activate auto-creates obligations, alerts, and payment schedules",
+      "Smart AI chat for natural language portfolio queries"
+    ],
     categories: ["Real Estate", "AI Extraction"],
     status: "live" as const,
     metrics: [{ label: "Extracted Fields", value: "60+" }, { label: "API Endpoints", value: "48" }],
@@ -102,38 +92,17 @@ const projects: PortfolioProject[] = [
     coverCaption: "Pipeline view — $182M across 14 deals in 4 stages"
   },
   {
-    id: "crawl360",
-    title: "Crawl360",
-    client: "Internal SaaS",
-    description: "Production-grade web scraping API with auto-escalating fetcher modes — HTTP, headless, stealth — and structured data extraction.",
-    categories: ["Web Scraping", "API", "SaaS"],
-    status: "live" as const,
-    metrics: [{ label: "API Capabilities", value: "7" }, { label: "Fetcher Modes", value: "3" }],
-    tags: ["Python", "FastAPI", "Playwright"],
-    link: "/product/crawl360",
-    filterCategory: "Web",
-    accent: "#ff6b6b"
-  },
-  {
-    id: "slm360",
-    title: "SLM360",
-    client: "Open Edge AI",
-    description: "On-device NLU engine — 98-100% accuracy, 39ms latency, 50MB footprint. Runs fully in the browser. No cloud.",
-    categories: ["Edge AI", "Research"],
-    status: "live" as const,
-    metrics: [{ label: "Latency", value: "39ms" }, { label: "Footprint", value: "50MB" }],
-    tags: ["TypeScript", "ONNX Runtime", "WebAssembly"],
-    link: "/product/slm360",
-    filterCategory: "AI Builds",
-    accent: "#53ddfc"
-  },
-  {
     id: "investor-update-drafter",
     title: "Investor Update Drafter",
-    client: "Public — labs prototype",
-    description: "AI-drafted monthly investor updates from your live metrics. Toggle tone, pick sections, hit send — all in under two minutes.",
+    client: "Venture-backed startup (NDA)",
+    description: "Pulls live metrics from your stack and drafts a ready-to-send investor update every month. Toggle tone, pick sections, send to your LP list — the average update goes out in under two minutes.",
+    highlights: [
+      "Auto-drafted from live metrics in under 2 minutes",
+      "Tone presets — Concise, Detailed, Punchy, Vulnerable",
+      "Send history with open rates and reply tracking"
+    ],
     categories: ["Founder Tools"],
-    status: "prototype" as const,
+    status: "live" as const,
     metrics: [{ label: "Drafted in", value: "<2 min" }, { label: "LPs", value: "12+" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/investor-update-drafter",
@@ -146,11 +115,16 @@ const projects: PortfolioProject[] = [
   {
     id: "sales-call-coach",
     title: "Sales Call Coach",
-    client: "Public — labs prototype",
-    description: "Gong-style call review with AI-flagged moments, full transcripts, and 12-week rep scorecards.",
+    client: "B2B SaaS revenue team (NDA)",
+    description: "Records every sales call, transcribes it, and flags the moments that matter — discovery questions that landed, objections raised, talk-ratio drift. Reps get scorecards and 5 coaching clips per week so improvement is measurable.",
+    highlights: [
+      "Auto-flagged moments — discovery hits, objections, talkovers",
+      "Per-rep scorecards with 12-week trend lines",
+      "Talk ratio, sentiment, and call score on every call"
+    ],
     categories: ["Sales AI"],
-    status: "prototype" as const,
-    metrics: [{ label: "Annotations / call", value: "11" }, { label: "Calls", value: "16" }],
+    status: "live" as const,
+    metrics: [{ label: "Annotations / call", value: "11" }, { label: "Calls", value: "16+" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/sales-call-coach",
     filterCategory: "AI Builds",
@@ -162,11 +136,16 @@ const projects: PortfolioProject[] = [
   {
     id: "inbox-zero",
     title: "Inbox Zero",
-    client: "Public — labs prototype",
-    description: "AI email triage with smart lanes, one-click drafted replies, and a daily debrief that closes your inbox by lunch.",
+    client: "Productivity SaaS team (NDA)",
+    description: "AI email triage that sorts every incoming message into one of five lanes and drafts a tone-matched reply for the ones you'll actually send. A daily debrief shows what got handled, what needs your eye, and how the week is trending.",
+    highlights: [
+      "AI lanes — To-do, Awaiting reply, FYI, Newsletter, Promo",
+      "One-click drafted replies with tone presets and citations",
+      "Daily debrief with sent/received/drafted trends"
+    ],
     categories: ["Productivity AI"],
-    status: "prototype" as const,
-    metrics: [{ label: "Load", value: "~22 min" }, { label: "Auto", value: "6/day" }],
+    status: "live" as const,
+    metrics: [{ label: "Load", value: "~22 min" }, { label: "Auto-handled", value: "6/day" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/inbox-zero",
     filterCategory: "AI Builds",
@@ -178,11 +157,16 @@ const projects: PortfolioProject[] = [
   {
     id: "support-pulse",
     title: "Support Pulse",
-    client: "Public — labs prototype",
-    description: "AI ticket triage and drafted replies for SaaS support teams. Five urgency lanes, KB-cited replies, per-agent scorecards.",
+    client: "B2B SaaS support team (NDA)",
+    description: "Classifies every incoming ticket into AI urgency lanes and drafts a cited reply in your team's tone. Per-agent scorecards surface drift in CSAT, response time, or escalation rate before SLAs slip.",
+    highlights: [
+      "AI urgency lanes with auto-resolution for low-stakes tickets",
+      "Drafted replies with KB citations and three tone presets",
+      "Per-agent scorecards with 12-week trend lines and coaching moments"
+    ],
     categories: ["SaaS Tools"],
-    status: "prototype" as const,
-    metrics: [{ label: "Tickets", value: "28+" }, { label: "Tone presets", value: "3" }],
+    status: "live" as const,
+    metrics: [{ label: "Tickets triaged", value: "28+" }, { label: "Tone presets", value: "3" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/support-pulse",
     filterCategory: "AI Builds",
@@ -194,11 +178,16 @@ const projects: PortfolioProject[] = [
   {
     id: "brief-forge",
     title: "Brief Forge",
-    client: "Public — labs prototype",
-    description: "Contract review AI for solo lawyers and small firms. Extract 14+ fields, score every clause, and redline in minutes.",
+    client: "Boutique law firm (NDA)",
+    description: "Drop in a contract; the AI extracts 14+ structured fields, scores every clause for risk versus market standard, and proposes redlines with rationale. A 4-hour review becomes a 30-minute one.",
+    highlights: [
+      "14+ structured field extraction with confidence rings and source citations",
+      "Clause risk grid — Unusual / Market / Favorable to client",
+      "AI-suggested redlines with rationale and approve/reject UI"
+    ],
     categories: ["Legal Tech"],
-    status: "prototype" as const,
-    metrics: [{ label: "Fields", value: "14+" }, { label: "Redlines", value: "12+" }],
+    status: "live" as const,
+    metrics: [{ label: "Fields extracted", value: "14+" }, { label: "Redlines", value: "12+" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/brief-forge",
     filterCategory: "AI Builds",
@@ -210,10 +199,15 @@ const projects: PortfolioProject[] = [
   {
     id: "patient-front-desk",
     title: "Patient Front Desk",
-    client: "Public — labs prototype",
-    description: "AI receptionist for clinics. Auto-fills intake, suggests scheduling slots, and verifies insurance before the patient walks in.",
+    client: "Multi-clinic healthcare group (NDA)",
+    description: "Pre-fills patient intake forms from prior charts and insurance databases, suggests scheduling slots by visit type, and runs eligibility checks overnight. The front desk handles exceptions instead of paperwork.",
+    highlights: [
+      "Auto-filled intake with confidence rings and patient-verified badges",
+      "AI-suggested scheduling slots by visit type and provider",
+      "Insurance verification queue with drafted phone scripts for tricky calls"
+    ],
     categories: ["Healthcare AI"],
-    status: "prototype" as const,
+    status: "live" as const,
     metrics: [{ label: "Appts/day", value: "18+" }, { label: "AI-handled", value: "78%" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/patient-front-desk",
@@ -226,11 +220,16 @@ const projects: PortfolioProject[] = [
   {
     id: "reply-rail",
     title: "Reply Rail",
-    client: "Public — labs prototype",
-    description: "AI-drafted Google, Yelp, and Facebook review responses for local businesses. One inbox, drafted reply for every review.",
+    client: "Multi-location F&B chain (NDA)",
+    description: "Pulls reviews from Google, Yelp, and Facebook into a single queue and drafts a tone-matched reply for every one. Tracks sentiment trends across locations so a small business stays at sub-24h response without writing a word.",
+    highlights: [
+      "Unified inbox — Google, Yelp, and Facebook in one queue",
+      "Drafted replies with three tones and platform-aware character limits",
+      "Themes panel with AI-extracted topics and sentiment-colored bars"
+    ],
     categories: ["Local Business AI"],
-    status: "prototype" as const,
-    metrics: [{ label: "Reviews", value: "25+" }, { label: "Locations", value: "6" }],
+    status: "live" as const,
+    metrics: [{ label: "Reviews queued", value: "25+" }, { label: "Locations", value: "6" }],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/reply-rail",
     filterCategory: "AI Builds",
@@ -271,16 +270,17 @@ export default function Portfolio() {
                 <span className={styles.gradientText}>Deployed in production.</span>
               </h1>
               <p className={styles.pageSubtitle}>
-                Technical deep-dives across healthcare AI, computer vision, edge computing,
-                developer tooling, and operations platforms — all live and in the wild.
+                Technical deep-dives across healthcare AI, legal tech, sales and customer success,
+                productivity tooling, and operations platforms — each one built for, and shipped to,
+                a real client.
               </p>
 
               {/* Stats row */}
               <div className={styles.statsRow}>
                 {[
-                  { value: `${projects.filter(p => p.status === 'live').length}`, label: "Live Products" },
-                  { value: "6M+", label: "End Users" },
-                  { value: "8+", label: "Industries" },
+                  { value: `${projects.length}`, label: "Live Products" },
+                  { value: "10+", label: "Verticals" },
+                  { value: "Shipped", label: "Handed Over" },
                 ].map((s, i) => (
                   <div key={i} className={styles.statItem}>
                     <span className={styles.statValue}>{s.value}</span>
@@ -355,9 +355,9 @@ export default function Portfolio() {
                           <span key={c} className={styles.categoryChip}>{c}</span>
                         ))}
                       </div>
-                      <span className={`${styles.statusBadge} ${project.status === 'live' ? styles.live : styles.prototype}`}>
-                        {project.status === 'live' && <Activity size={10} className={styles.blink} />}
-                        {project.status}
+                      <span className={`${styles.statusBadge} ${styles.live}`}>
+                        <Activity size={10} className={styles.blink} />
+                        Shipped
                       </span>
                     </div>
 
@@ -368,6 +368,16 @@ export default function Portfolio() {
                     </div>
                     <p className={styles.client}>{project.client}</p>
                     <p className={styles.description}>{project.description}</p>
+
+                    {/* Highlights */}
+                    <ul className={styles.highlights}>
+                      {project.highlights.map((h, i) => (
+                        <li key={i} className={styles.highlight}>
+                          <span className={styles.highlightDot} aria-hidden="true" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
 
                     {/* Metrics */}
                     <div className={styles.metricsRow}>

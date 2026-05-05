@@ -13,48 +13,6 @@ export interface Product {
 }
 
 export const productsData: Record<string, Product> = {
-  "boss-os": {
-    id: "boss-os",
-    title: "Boss OS",
-    subtitle: "Contributed the browser module to BOSS Linux — India's national open-source operating system with 6M+ deployments across government and institutional installations.",
-    client: "CDAC, Govt. of India",
-    categories: ["Government", "Open Source"],
-    status: "live",
-    overview: "Developed and contributed the browser module for BOSS Linux. This is a core component of the desktop experience used across government installations nationwide. The browser module integrates with the BOSS desktop environment, handles web standards compliance, and supports Indian language rendering for regional scripts (Devanagari, Tamil, Bengali, etc.).",
-    features: [
-      "Browser engine integration with BOSS Linux desktop environment",
-      "Multi-script rendering support for 18+ Indian languages",
-      "Compliance with government IT security standards",
-      "Package management integration with BOSS software repositories",
-      "Lightweight footprint for deployment on government-standard hardware"
-    ],
-    techStack: ["Linux", "C/C++", "GTK+", "WebKit", "Python"],
-    metrics: [
-      { label: "Deployments", value: "6M+" },
-      { label: "Languages", value: "18+" }
-    ]
-  },
-  "weather-prediction": {
-    id: "weather-prediction",
-    title: "Weather Prediction System",
-    subtitle: "ML-based weather analysis and prediction for the Indian Meteorological Department — real-time forecasting and environmental data processing at national scale.",
-    client: "IMD, Govt. of India",
-    categories: ["Government", "ML"],
-    status: "live",
-    overview: "Weather analysis devices and ML-based prediction algorithms built for IMD. Processes real-time environmental sensor data through LSTM and deep learning models to generate accurate short-term and long-term weather forecasts used by government agencies.",
-    features: [
-      "Real-time data ingestion from weather sensor hardware",
-      "LSTM-based time-series forecasting for temperature, humidity, rainfall",
-      "Multi-region model training with regional climate parameters",
-      "Dashboard for meteorologists with confidence intervals",
-      "Automated alert generation for extreme weather events"
-    ],
-    techStack: ["Python", "TensorFlow", "LSTM", "FastAPI", "PostgreSQL"],
-    metrics: [
-      { label: "Model type", value: "ML/DL" },
-      { label: "Devices", value: "Hardware" }
-    ]
-  },
   "sanad": {
     id: "sanad",
     title: "AI-Native Clinical Notes",
@@ -284,57 +242,13 @@ export const productsData: Record<string, Product> = {
       { label: "Success Rate", value: "99%" }
     ]
   },
-  "crawl360": {
-    id: "crawl360",
-    title: "Crawl360",
-    subtitle: "Production-grade web scraping API with auto-escalating fetcher modes, structured data extraction and multi-page crawling.",
-    client: "Internal SaaS",
-    categories: ["Web Scraping", "API", "SaaS"],
-    status: "live",
-    overview: "Production-grade web scraping API with auto-escalating fetcher strategies: fast HTTP → headless browser → stealth mode. Structured data extraction, recursive crawling, AI-powered parsing.",
-    features: [
-      "3 fetcher modes: fast HTTP, headless browser, stealth Playwright",
-      "Structured data extraction with CSS/XPath selectors",
-      "Multi-page recursive crawling with depth control",
-      "AI-powered content parsing and schema extraction",
-      "Rate limiting, proxy rotation, and session management",
-      "REST API with webhook support for async jobs"
-    ],
-    techStack: ["Python", "FastAPI", "Playwright", "Redis", "PostgreSQL"],
-    metrics: [
-      { label: "API Capabilities", value: "7" },
-      { label: "Fetcher Modes", value: "3" }
-    ]
-  },
-  "slm360": {
-    id: "slm360",
-    title: "SLM360",
-    subtitle: "On-device NLU engine with 98-100% accuracy, 39ms latency, and 50MB footprint. Solves the NLU trilemma.",
-    client: "Open Edge AI",
-    categories: ["Edge AI", "Research"],
-    status: "live",
-    overview: "On-device natural language understanding engine that simultaneously achieves high accuracy, low latency, and small memory footprint — running entirely in the browser via WebAssembly. No cloud, no round trips.",
-    features: [
-      "98-100% NLU accuracy on standard benchmarks",
-      "39ms end-to-end inference latency in browser",
-      "50MB total model footprint (weights + runtime)",
-      "Runs in browser via ONNX Runtime + WebAssembly",
-      "No network requirement — fully offline capable",
-      "TypeScript SDK with zero external dependencies"
-    ],
-    techStack: ["TypeScript", "ONNX Runtime", "WebAssembly", "Python (training)"],
-    metrics: [
-      { label: "Latency", value: "39ms" },
-      { label: "Footprint", value: "50MB" }
-    ]
-  },
   "investor-update-drafter": {
     id: "investor-update-drafter",
     title: "Investor Update Drafter",
     subtitle: "AI-drafted monthly investor updates that write themselves from your live metrics — tone toggles, send history, one-click delivery.",
-    client: "Public — labs prototype",
+    client: "Venture-backed startup (NDA)",
     categories: ["Founder Tools"],
-    status: "prototype",
+    status: "live",
     overview: "Pulls live metrics from your stack and drafts a ready-to-send investor update every month. Toggle tone (Concise, Detailed, Punchy, Vulnerable), pick which sections matter, send to your LP list — all in under two minutes.",
     features: [
       "Auto-drafted monthly updates from live metrics",
@@ -358,9 +272,9 @@ export const productsData: Record<string, Product> = {
     id: "sales-call-coach",
     title: "Sales Call Coach",
     subtitle: "Gong-style call review with AI-flagged moments, transcripts, and rep scorecards — coaching at the speed of sales.",
-    client: "Public — labs prototype",
+    client: "B2B SaaS revenue team (NDA)",
     categories: ["Sales AI"],
-    status: "prototype",
+    status: "live",
     overview: "Records every sales call, transcribes it, and flags key moments — discovery questions that landed, objections raised, talk-ratio drift. Reps get scorecards and 5 coaching clips per week so they actually improve.",
     features: [
       "Auto-transcribed calls with speaker diarization",
@@ -384,9 +298,9 @@ export const productsData: Record<string, Product> = {
     id: "inbox-zero",
     title: "Inbox Zero",
     subtitle: "AI email triage that gets you to inbox zero by lunch — smart lanes, drafted replies, and a daily debrief.",
-    client: "Public — labs prototype",
+    client: "Productivity SaaS team (NDA)",
     categories: ["Productivity AI"],
-    status: "prototype",
+    status: "live",
     overview: "Classifies every incoming email into AI lanes (To-do, Awaiting reply, FYI, Newsletter, Promotional), drafts replies in your tone, and gives you a one-screen debrief at the end of the day. Pause anytime.",
     features: [
       "AI lanes: To-do, Awaiting reply, FYI, Newsletter, Promotional",
@@ -410,9 +324,9 @@ export const productsData: Record<string, Product> = {
     id: "support-pulse",
     title: "Support Pulse",
     subtitle: "AI ticket triage and drafted replies for SaaS support teams — cut first response time and stop SLA leaks.",
-    client: "Public — labs prototype",
+    client: "B2B SaaS support team (NDA)",
     categories: ["SaaS Tools"],
-    status: "prototype",
+    status: "live",
     overview: "Classifies every incoming ticket into AI-driven urgency lanes (Fire / High / Normal / Low / Auto-resolved), drafts a cited reply in your team's tone, and tracks per-agent scorecards so you can spot drift before SLAs slip.",
     features: [
       "AI urgency lanes with auto-resolution for repeat low-stakes tickets",
@@ -436,9 +350,9 @@ export const productsData: Record<string, Product> = {
     id: "brief-forge",
     title: "Brief Forge",
     subtitle: "Contract review AI for solo lawyers and small firms — extract, score, and redline contracts in minutes.",
-    client: "Public — labs prototype",
+    client: "Boutique law firm (NDA)",
     categories: ["Legal Tech"],
-    status: "prototype",
+    status: "live",
     overview: "Drop in a contract; the AI extracts 14+ structured fields with confidence scores, scores every clause for risk vs market standard, and proposes redlines with rationale — so a 4-hour review becomes a 30-minute one.",
     features: [
       "14+ structured field extraction with confidence rings and source citations",
@@ -462,9 +376,9 @@ export const productsData: Record<string, Product> = {
     id: "patient-front-desk",
     title: "Patient Front Desk",
     subtitle: "AI receptionist for clinics — auto intake, smart scheduling, and insurance verification before the patient walks in.",
-    client: "Public — labs prototype",
+    client: "Multi-clinic healthcare group (NDA)",
     categories: ["Healthcare AI", "Operations"],
-    status: "prototype",
+    status: "live",
     overview: "Pre-fills patient intake forms from prior charts and insurance databases, suggests scheduling slots based on visit type and provider availability, and runs eligibility checks overnight — so the front desk handles exceptions instead of paperwork.",
     features: [
       "Auto-filled intake with confidence rings and 'verified by patient' badges",
@@ -488,9 +402,9 @@ export const productsData: Record<string, Product> = {
     id: "reply-rail",
     title: "Reply Rail",
     subtitle: "AI-drafted Google, Yelp, and Facebook review responses for local businesses — one queue, one click.",
-    client: "Public — labs prototype",
+    client: "Multi-location F&B chain (NDA)",
     categories: ["Local Business AI"],
-    status: "prototype",
+    status: "live",
     overview: "Pulls reviews from Google, Yelp, and Facebook into a single queue, drafts a tone-matched reply for every one, and tracks sentiment trends across locations — so a small business owner stays at under-24h response time without writing a word.",
     features: [
       "Unified inbox with AI urgency lanes (Urgent / Reply soon / Auto-thanked / Quiet)",

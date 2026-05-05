@@ -16,6 +16,14 @@
   position: relative;
   overflow: hidden;
   background-color: $color-background;
+
+  @media (max-width: 1024px) {
+    padding: 8rem 0 3.5rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 6rem 0 2.5rem;
+  }
 }
 
 .heroGlow {
@@ -26,6 +34,11 @@
   height: 600px;
   background: radial-gradient(circle at 70% 30%, rgba(83, 221, 252, 0.1), transparent 60%);
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    width: 400px;
+    height: 400px;
+  }
 }
 
 .heroContent {
@@ -53,7 +66,9 @@
   color: $color-text-primary;
   margin-bottom: $spacing-xl;
 
-  @media (max-width: 768px) { font-size: 3rem; }
+  @media (max-width: 1024px) { font-size: 3.75rem; }
+  @media (max-width: 768px) { font-size: 2.5rem; }
+  @media (max-width: 480px) { font-size: 2rem; }
 }
 
 .gradientText {
@@ -69,12 +84,25 @@
   max-width: 640px;
   line-height: 1.7;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .statsRow {
   display: flex;
   gap: 3rem;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.25rem;
+  }
 }
 
 .statItem {
@@ -90,6 +118,10 @@
   color: $color-text-primary;
   letter-spacing: -0.04em;
   line-height: 1;
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+  }
 }
 
 .statLabel {
@@ -103,6 +135,10 @@
 /* ── Filters ──────────────────────────────── */
 .portfolioSection {
   padding: 4rem 0 8rem;
+
+  @media (max-width: 768px) {
+    padding: 2.5rem 0 5rem;
+  }
 }
 
 .filtersWrapper {
@@ -112,6 +148,11 @@
   margin-bottom: $spacing-xxl;
   padding-bottom: $spacing-lg;
   border-bottom: 1px solid $color-border;
+
+  @media (max-width: 480px) {
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-md;
+  }
 }
 
 .filterBtn {
@@ -157,7 +198,14 @@
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem;
 
-  @media (max-width: 768px) { grid-template-columns: 1fr; }
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 /* ── Card ─────────────────────────────────── */
@@ -173,6 +221,10 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
 
   &::before {
     content: '';
@@ -289,8 +341,37 @@
   font-size: 0.95rem;
   color: $color-text-secondary;
   line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* Highlights — 3 bullet feature list per card */
+.highlights {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
   flex-grow: 1;
-  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.85rem;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
+.highlightDot {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  margin-top: 0.55rem;
+  box-shadow: 0 0 8px var(--card-accent);
 }
 
 /* Metrics */
@@ -301,6 +382,11 @@
   border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
   margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
 }
 
 .metric {
@@ -349,6 +435,10 @@
   overflow: hidden;
   border-bottom: 1px solid $color-border;
   background: $color-surface-hover;
+
+  @media (max-width: 480px) {
+    margin: -1.5rem -1.5rem 1.25rem;
+  }
 }
 
 .cardCoverImage {
