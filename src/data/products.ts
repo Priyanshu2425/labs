@@ -405,5 +405,109 @@ export const productsData: Record<string, Product> = {
       alt: "Smart inbox three-pane layout with AI-classified lanes and suggested actions",
       caption: "Five lanes, one-click drafts, inbox zero by lunch"
     }
+  },
+  "support-pulse": {
+    id: "support-pulse",
+    title: "Support Pulse",
+    subtitle: "AI ticket triage and drafted replies for SaaS support teams — cut first response time and stop SLA leaks.",
+    client: "Public — labs prototype",
+    categories: ["SaaS Tools"],
+    status: "prototype",
+    overview: "Classifies every incoming ticket into AI-driven urgency lanes (Fire / High / Normal / Low / Auto-resolved), drafts a cited reply in your team's tone, and tracks per-agent scorecards so you can spot drift before SLAs slip.",
+    features: [
+      "AI urgency lanes with auto-resolution for repeat low-stakes tickets",
+      "Drafted replies with three tone presets and KB citations",
+      "Per-agent scorecards: first response, resolution, CSAT, escalation rate",
+      "12-week trend lines per metric with coaching moments",
+      "Customer context sidebar: plan tier, MRR, account age, recent tickets"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Tickets triaged", value: "28+" },
+      { label: "Tone presets", value: "3" }
+    ],
+    coverImage: {
+      src: "/projects/support-pulse/hero.png",
+      alt: "Support Pulse triage inbox with 28 tickets across 5 AI-classified urgency lanes",
+      caption: "Five lanes, drafted replies, scorecards — every ticket has a next step"
+    }
+  },
+  "brief-forge": {
+    id: "brief-forge",
+    title: "Brief Forge",
+    subtitle: "Contract review AI for solo lawyers and small firms — extract, score, and redline contracts in minutes.",
+    client: "Public — labs prototype",
+    categories: ["Legal Tech"],
+    status: "prototype",
+    overview: "Drop in a contract; the AI extracts 14+ structured fields with confidence scores, scores every clause for risk vs market standard, and proposes redlines with rationale — so a 4-hour review becomes a 30-minute one.",
+    features: [
+      "14+ structured field extraction with confidence rings and source citations",
+      "Clause-by-clause risk grid with market-standard comparisons",
+      "AI-suggested redlines with inline diffs, rationale, and approve/reject UI",
+      "Posture chips: Unusual / Market / Favorable to client",
+      "Pipeline view of all firm matters in one sidebar"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Extracted fields", value: "14+" },
+      { label: "Redlines suggested", value: "12+" }
+    ],
+    coverImage: {
+      src: "/projects/brief-forge/hero.png",
+      alt: "Contract extraction split-pane with 14+ confidence-scored fields and click-to-source",
+      caption: "Every field cited to its source clause — confidence rings flag what to verify"
+    }
+  },
+  "patient-front-desk": {
+    id: "patient-front-desk",
+    title: "Patient Front Desk",
+    subtitle: "AI receptionist for clinics — auto intake, smart scheduling, and insurance verification before the patient walks in.",
+    client: "Public — labs prototype",
+    categories: ["Healthcare AI", "Operations"],
+    status: "prototype",
+    overview: "Pre-fills patient intake forms from prior charts and insurance databases, suggests scheduling slots based on visit type and provider availability, and runs eligibility checks overnight — so the front desk handles exceptions instead of paperwork.",
+    features: [
+      "Auto-filled intake with confidence rings and 'verified by patient' badges",
+      "Today's waiting room dashboard with status and SLA-at-risk surfacing",
+      "Insurance verification queue with AI-drafted phone scripts for tricky calls",
+      "Calendar view across providers with AI-suggested slots",
+      "Per-patient AI summary pulling from prior history"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Appointments / day", value: "18+" },
+      { label: "AI-handled", value: "14/18" }
+    ],
+    coverImage: {
+      src: "/projects/patient-front-desk/hero.png",
+      alt: "Today's waiting room with 18 appointments, AI-handled stats, and exception queue",
+      caption: "AI handled 14 of 18 today — front desk only touches exceptions"
+    }
+  },
+  "reply-rail": {
+    id: "reply-rail",
+    title: "Reply Rail",
+    subtitle: "AI-drafted Google, Yelp, and Facebook review responses for local businesses — one queue, one click.",
+    client: "Public — labs prototype",
+    categories: ["Local Business AI"],
+    status: "prototype",
+    overview: "Pulls reviews from Google, Yelp, and Facebook into a single queue, drafts a tone-matched reply for every one, and tracks sentiment trends across locations — so a small business owner stays at under-24h response time without writing a word.",
+    features: [
+      "Unified inbox with AI urgency lanes (Urgent / Reply soon / Auto-thanked / Quiet)",
+      "Drafted replies with three tone presets and platform character limits",
+      "Themes panel: AI-extracted topics with sentiment-colored bars",
+      "12-week multi-platform rating trend chart",
+      "Per-location scorecard with top complaint and top compliment"
+    ],
+    techStack: ["Next.js", "Tailwind", "Framer Motion", "TypeScript"],
+    metrics: [
+      { label: "Reviews queued", value: "25+" },
+      { label: "Locations", value: "6" }
+    ],
+    coverImage: {
+      src: "/projects/reply-rail/hero.png",
+      alt: "Three-platform reviews inbox with 25+ reviews across four AI urgency lanes",
+      caption: "Google, Yelp, and Facebook in one inbox — drafted replies for every one"
+    }
   }
 };
