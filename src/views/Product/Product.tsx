@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users } from 'lucide-react';
+import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users, Sparkles, TrendingUp, Calendar, Clock } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from './Product.module.scss';
@@ -28,6 +28,18 @@ export default function Product({ productId }: ProductProps) {
   const stagger = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  // Dynamic section numbering — only count sections that will actually render.
+  const sectionList: { key: string; title: string }[] = [{ key: 'overview', title: 'Overview' }];
+  if (product.highlights && product.highlights.length > 0) sectionList.push({ key: 'highlights', title: 'Highlights' });
+  if (product.gallery && product.gallery.length > 0) sectionList.push({ key: 'gallery', title: 'Gallery' });
+  if (product.outcomes && product.outcomes.length > 0) sectionList.push({ key: 'outcomes', title: 'Outcomes' });
+  if (product.techStack && product.techStack.length > 0) sectionList.push({ key: 'techStack', title: 'Tech Stack' });
+  if (product.features && product.features.length > 0) sectionList.push({ key: 'features', title: 'Features' });
+  const sectionNum = (key: string) => {
+    const idx = sectionList.findIndex(s => s.key === key);
+    return idx === -1 ? '' : String(idx + 1).padStart(2, '0');
   };
 
   return (
@@ -71,7 +83,7 @@ export default function Product({ productId }: ProductProps) {
               <motion.div variants={fadeUp} className={styles.heroBadges}>
                 <span className={`${styles.statusBadge} ${product.status === 'live' ? styles.live : styles.prototype}`}>
                   {product.status === 'live' && <Activity size={11} className={styles.blink} />}
-                  {product.status}
+                  {product.status === 'live' ? 'Shipped' : product.status}
                 </span>
                 {product.categories.map(c => (
                   <span key={c} className={styles.categoryBadge}>
@@ -91,6 +103,24 @@ export default function Product({ productId }: ProductProps) {
                 <span className={styles.clientLabel}>Client:</span>
                 <span className={styles.clientName}>{product.client}</span>
               </motion.div>
+
+              {/* Engagement strip */}
+              {product.engagement && (
+                <motion.div variants={fadeUp} className={styles.engagementStrip}>
+                  <div className={styles.engagementItem}>
+                    <span className={styles.engagementLabel}><Clock size={11} /> Duration</span>
+                    <span className={styles.engagementValue}>{product.engagement.duration}</span>
+                  </div>
+                  <div className={styles.engagementItem}>
+                    <span className={styles.engagementLabel}><Calendar size={11} /> Scope</span>
+                    <span className={styles.engagementValue}>{product.engagement.scope}</span>
+                  </div>
+                  <div className={styles.engagementItem}>
+                    <span className={styles.engagementLabel}><Users size={11} /> Team</span>
+                    <span className={styles.engagementValue}>{product.engagement.team}</span>
+                  </div>
+                </motion.div>
+              )}
 
               {product.coverImage?.caption && (
                 <motion.p variants={fadeUp} className={styles.heroCaption}>
@@ -117,7 +147,7 @@ export default function Product({ productId }: ProductProps) {
           </div>
         )}
 
-        {/* ── Overview ─────────────────────────── */}
+        {/* ── 01 Overview ─────────────────────── */}
         <section className={`container ${styles.contentSection}`}>
           <motion.div
             initial="hidden"
@@ -127,7 +157,7 @@ export default function Product({ productId }: ProductProps) {
             className={styles.twoCol}
           >
             <div className={styles.stickyLabel}>
-              <span className={styles.sectionNumber}>01</span>
+              <span className={styles.sectionNumber}>{sectionNum('overview')}</span>
               <h2 className={styles.sectionTitle}>Overview</h2>
             </div>
             <div>
@@ -136,7 +166,97 @@ export default function Product({ productId }: ProductProps) {
           </motion.div>
         </section>
 
-        {/* ── Tech Stack ───────────────────────── */}
+        {/* ── Highlights ──────────────────────── */}
+        {product.highlights && product.highlights.length > 0 && (
+          <section className={`container ${styles.contentSection}`}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={stagger}
+              className={styles.twoCol}
+            >
+              <div className={styles.stickyLabel}>
+                <span className={styles.sectionNumber}>{sectionNum('highlights')}</span>
+                <h2 className={styles.sectionTitle}>Highlights</h2>
+              </div>
+              <ul className={styles.highlightsList}>
+                {product.highlights.map((h, i) => (
+                  <motion.li key={i} variants={fadeUp} className={styles.highlightItem}>
+                    <span className={styles.highlightDot} aria-hidden="true" />
+                    <span>{h}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </section>
+        )}
+
+        {/* ── Gallery ─────────────────────────── */}
+        {product.gallery && product.gallery.length > 0 && (
+          <section className={`container ${styles.contentSection}`}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={stagger}
+              className={styles.twoCol}
+            >
+              <div className={styles.stickyLabel}>
+                <span className={styles.sectionNumber}>{sectionNum('gallery')}</span>
+                <h2 className={styles.sectionTitle}>Gallery</h2>
+              </div>
+              <div className={styles.gallery}>
+                {product.gallery.map((g, i) => (
+                  <motion.figure key={i} variants={fadeUp} className={styles.galleryItem}>
+                    <div className={styles.galleryImageWrap}>
+                      <Image
+                        src={g.src}
+                        alt={g.alt}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 720px"
+                        className={styles.galleryImage}
+                      />
+                    </div>
+                    <figcaption className={styles.galleryCaption}>
+                      <span className={styles.galleryCaptionMark}>{'//'}</span> {g.caption}
+                    </figcaption>
+                  </motion.figure>
+                ))}
+              </div>
+            </motion.div>
+          </section>
+        )}
+
+        {/* ── Outcomes ────────────────────────── */}
+        {product.outcomes && product.outcomes.length > 0 && (
+          <section className={`container ${styles.contentSection}`}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={stagger}
+              className={styles.twoCol}
+            >
+              <div className={styles.stickyLabel}>
+                <span className={styles.sectionNumber}>{sectionNum('outcomes')}</span>
+                <h2 className={styles.sectionTitle}>Outcomes</h2>
+              </div>
+              <ul className={styles.outcomesList}>
+                {product.outcomes.map((o, i) => (
+                  <motion.li key={i} variants={fadeUp} className={styles.outcomeItem}>
+                    <div className={styles.outcomeIcon}>
+                      <TrendingUp size={14} />
+                    </div>
+                    <span>{o}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </section>
+        )}
+
+        {/* ── Tech Stack ──────────────────────── */}
         {product.techStack && product.techStack.length > 0 && (
           <section className={`container ${styles.contentSection}`}>
             <motion.div
@@ -147,7 +267,7 @@ export default function Product({ productId }: ProductProps) {
               className={styles.twoCol}
             >
               <div className={styles.stickyLabel}>
-                <span className={styles.sectionNumber}>02</span>
+                <span className={styles.sectionNumber}>{sectionNum('techStack')}</span>
                 <h2 className={styles.sectionTitle}>Tech Stack</h2>
               </div>
               <div className={styles.techGrid}>
@@ -159,7 +279,7 @@ export default function Product({ productId }: ProductProps) {
           </section>
         )}
 
-        {/* ── Features ─────────────────────────── */}
+        {/* ── Features ────────────────────────── */}
         <section className={`container ${styles.contentSection}`}>
           <motion.div
             initial="hidden"
@@ -169,7 +289,7 @@ export default function Product({ productId }: ProductProps) {
             className={styles.twoCol}
           >
             <div className={styles.stickyLabel}>
-              <span className={styles.sectionNumber}>03</span>
+              <span className={styles.sectionNumber}>{sectionNum('features')}</span>
               <h2 className={styles.sectionTitle}>Features</h2>
             </div>
             <ul className={styles.featuresList}>
@@ -195,10 +315,13 @@ export default function Product({ productId }: ProductProps) {
             className={styles.ctaBox}
           >
             <div className={styles.ctaGlow} />
-            <p className={styles.ctaEyebrow}>Interested?</p>
-            <h2 className={styles.ctaTitle}>Let&apos;s deploy {product.title} for you.</h2>
+            <p className={styles.ctaEyebrow}>
+              <Sparkles size={13} className={styles.ctaEyebrowIcon} />
+              Interested?
+            </p>
+            <h2 className={styles.ctaTitle}>Let&apos;s build something like {product.title} for you.</h2>
             <p className={styles.ctaSubtitle}>
-              Production-ready. We can have it live in your stack within 72 hours.
+              We typically scope an engagement in a 30-minute call and ship the first usable version inside two weeks.
             </p>
             <div className={styles.ctaActions}>
               <Link href="/contact-us" className={styles.ctaLink}>

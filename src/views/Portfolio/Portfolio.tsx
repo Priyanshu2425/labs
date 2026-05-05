@@ -14,7 +14,6 @@ interface PortfolioProject {
   title: string;
   client: string;
   description: string;
-  highlights: string[];
   categories: string[];
   status: 'live' | 'prototype';
   metrics: { label: string; value: string }[];
@@ -33,11 +32,6 @@ const projects: PortfolioProject[] = [
     title: "AI Clinical Notes",
     client: "Private Hospital (NDA)",
     description: "AI medical scribe that listens to consultations and writes structured clinical notes in seconds. Built for busy specialists across multiple languages — currently saving 80% of documentation time per encounter.",
-    highlights: [
-      "Real-time transcription with speaker identification",
-      "Specialty-aware SOAP note generation",
-      "EHR integration without breaking the doctor's workflow"
-    ],
     categories: ["Healthcare AI"],
     status: "live" as const,
     metrics: [{ label: "Doc Time", value: "-80%" }, { label: "Notes", value: "Instant" }],
@@ -54,11 +48,6 @@ const projects: PortfolioProject[] = [
     title: "Charge Pulse",
     client: "Leading EV Charging Network",
     description: "Live EV charging station finder with real-time connector availability, voice-guided turn-by-turn navigation, and offline map tiles. Cut customer support tickets by 60% by surfacing the right station before drivers arrive.",
-    highlights: [
-      "OCPP-backed live connector status across CCS, CHAdeMO, Tesla NACS",
-      "Traffic-aware routing with Google Directions API",
-      "Voice-guided turn-by-turn with offline tile caching"
-    ],
     categories: ["EV", "Logistics"],
     status: "live" as const,
     metrics: [{ label: "Availability", value: "Real-Time" }, { label: "Support Tickets", value: "-60%" }],
@@ -75,11 +64,6 @@ const projects: PortfolioProject[] = [
     title: "AI Lease Management",
     client: "GroSpace Global",
     description: "AI lease management for multi-brand retail operators with 50–500+ outlets. Extracts 60+ fields from lease PDFs (text and scanned), tracks every obligation, and answers portfolio questions in natural language.",
-    highlights: [
-      "60+ field extraction from lease PDFs via Gemini 2.5 Pro",
-      "Confirm & Activate auto-creates obligations, alerts, and payment schedules",
-      "Smart AI chat for natural language portfolio queries"
-    ],
     categories: ["Real Estate", "AI Extraction"],
     status: "live" as const,
     metrics: [{ label: "Extracted Fields", value: "60+" }, { label: "API Endpoints", value: "48" }],
@@ -96,11 +80,6 @@ const projects: PortfolioProject[] = [
     title: "Investor Update Drafter",
     client: "Venture-backed startup (NDA)",
     description: "Pulls live metrics from your stack and drafts a ready-to-send investor update every month. Toggle tone, pick sections, send to your LP list — the average update goes out in under two minutes.",
-    highlights: [
-      "Auto-drafted from live metrics in under 2 minutes",
-      "Tone presets — Concise, Detailed, Punchy, Vulnerable",
-      "Send history with open rates and reply tracking"
-    ],
     categories: ["Founder Tools"],
     status: "live" as const,
     metrics: [{ label: "Drafted in", value: "<2 min" }, { label: "LPs", value: "12+" }],
@@ -117,11 +96,6 @@ const projects: PortfolioProject[] = [
     title: "Sales Call Coach",
     client: "B2B SaaS revenue team (NDA)",
     description: "Records every sales call, transcribes it, and flags the moments that matter — discovery questions that landed, objections raised, talk-ratio drift. Reps get scorecards and 5 coaching clips per week so improvement is measurable.",
-    highlights: [
-      "Auto-flagged moments — discovery hits, objections, talkovers",
-      "Per-rep scorecards with 12-week trend lines",
-      "Talk ratio, sentiment, and call score on every call"
-    ],
     categories: ["Sales AI"],
     status: "live" as const,
     metrics: [{ label: "Annotations / call", value: "11" }, { label: "Calls", value: "16+" }],
@@ -138,11 +112,6 @@ const projects: PortfolioProject[] = [
     title: "Inbox Zero",
     client: "Productivity SaaS team (NDA)",
     description: "AI email triage that sorts every incoming message into one of five lanes and drafts a tone-matched reply for the ones you'll actually send. A daily debrief shows what got handled, what needs your eye, and how the week is trending.",
-    highlights: [
-      "AI lanes — To-do, Awaiting reply, FYI, Newsletter, Promo",
-      "One-click drafted replies with tone presets and citations",
-      "Daily debrief with sent/received/drafted trends"
-    ],
     categories: ["Productivity AI"],
     status: "live" as const,
     metrics: [{ label: "Load", value: "~22 min" }, { label: "Auto-handled", value: "6/day" }],
@@ -159,11 +128,6 @@ const projects: PortfolioProject[] = [
     title: "Support Pulse",
     client: "B2B SaaS support team (NDA)",
     description: "Classifies every incoming ticket into AI urgency lanes and drafts a cited reply in your team's tone. Per-agent scorecards surface drift in CSAT, response time, or escalation rate before SLAs slip.",
-    highlights: [
-      "AI urgency lanes with auto-resolution for low-stakes tickets",
-      "Drafted replies with KB citations and three tone presets",
-      "Per-agent scorecards with 12-week trend lines and coaching moments"
-    ],
     categories: ["SaaS Tools"],
     status: "live" as const,
     metrics: [{ label: "Tickets triaged", value: "28+" }, { label: "Tone presets", value: "3" }],
@@ -180,11 +144,6 @@ const projects: PortfolioProject[] = [
     title: "Brief Forge",
     client: "Boutique law firm (NDA)",
     description: "Drop in a contract; the AI extracts 14+ structured fields, scores every clause for risk versus market standard, and proposes redlines with rationale. A 4-hour review becomes a 30-minute one.",
-    highlights: [
-      "14+ structured field extraction with confidence rings and source citations",
-      "Clause risk grid — Unusual / Market / Favorable to client",
-      "AI-suggested redlines with rationale and approve/reject UI"
-    ],
     categories: ["Legal Tech"],
     status: "live" as const,
     metrics: [{ label: "Fields extracted", value: "14+" }, { label: "Redlines", value: "12+" }],
@@ -201,11 +160,6 @@ const projects: PortfolioProject[] = [
     title: "Patient Front Desk",
     client: "Multi-clinic healthcare group (NDA)",
     description: "Pre-fills patient intake forms from prior charts and insurance databases, suggests scheduling slots by visit type, and runs eligibility checks overnight. The front desk handles exceptions instead of paperwork.",
-    highlights: [
-      "Auto-filled intake with confidence rings and patient-verified badges",
-      "AI-suggested scheduling slots by visit type and provider",
-      "Insurance verification queue with drafted phone scripts for tricky calls"
-    ],
     categories: ["Healthcare AI"],
     status: "live" as const,
     metrics: [{ label: "Appts/day", value: "18+" }, { label: "AI-handled", value: "78%" }],
@@ -222,11 +176,6 @@ const projects: PortfolioProject[] = [
     title: "Reply Rail",
     client: "Multi-location F&B chain (NDA)",
     description: "Pulls reviews from Google, Yelp, and Facebook into a single queue and drafts a tone-matched reply for every one. Tracks sentiment trends across locations so a small business stays at sub-24h response without writing a word.",
-    highlights: [
-      "Unified inbox — Google, Yelp, and Facebook in one queue",
-      "Drafted replies with three tones and platform-aware character limits",
-      "Themes panel with AI-extracted topics and sentiment-colored bars"
-    ],
     categories: ["Local Business AI"],
     status: "live" as const,
     metrics: [{ label: "Reviews queued", value: "25+" }, { label: "Locations", value: "6" }],
@@ -368,16 +317,6 @@ export default function Portfolio() {
                     </div>
                     <p className={styles.client}>{project.client}</p>
                     <p className={styles.description}>{project.description}</p>
-
-                    {/* Highlights */}
-                    <ul className={styles.highlights}>
-                      {project.highlights.map((h, i) => (
-                        <li key={i} className={styles.highlight}>
-                          <span className={styles.highlightDot} aria-hidden="true" />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
 
                     {/* Metrics */}
                     <div className={styles.metricsRow}>
