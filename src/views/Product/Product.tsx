@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users, Sparkles, TrendingUp, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users, TrendingUp, Calendar, Clock } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from './Product.module.scss';
@@ -314,21 +314,20 @@ export default function Product({ productId }: ProductProps) {
             variants={fadeUp}
             className={styles.ctaBox}
           >
-            <div className={styles.ctaGlow} />
-            <p className={styles.ctaEyebrow}>
-              <Sparkles size={13} className={styles.ctaEyebrowIcon} />
-              Interested?
-            </p>
-            <h2 className={styles.ctaTitle}>Let&apos;s build something like {product.title} for you.</h2>
+            <div className={styles.ctaGlow} aria-hidden="true" />
+            <p className={styles.ctaEyebrow}>{'// next'}</p>
+            <h2 className={styles.ctaTitle}>Building something in this space?</h2>
             <p className={styles.ctaSubtitle}>
-              We typically scope an engagement in a 30-minute call and ship the first usable version inside two weeks.
+              A 30-minute call is enough for us to understand your situation and tell you whether we&apos;re the right team. Usable version in the first two weeks if we are.
             </p>
             <div className={styles.ctaActions}>
               <Link href="/contact-us" className={styles.ctaLink}>
-                Get in Touch <ArrowUpRight size={16} />
+                Start the conversation
+                <ArrowUpRight size={16} />
               </Link>
               <Link href="/portfolio" className={styles.ctaSecondary}>
-                View More Projects <ArrowUpRight size={16} />
+                See more shipped work
+                <ArrowUpRight size={14} />
               </Link>
             </div>
           </motion.div>

@@ -11,6 +11,15 @@
   user-select: none;
   font-weight: 500;
   text-decoration: none;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 1.35rem;
+  }
+
+  @media (max-width: 380px) {
+    font-size: 1.1rem;
+  }
 }
 
 .bracket {

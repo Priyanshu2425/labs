@@ -6,6 +6,10 @@
   border-top: 1px solid $color-border;
   padding: $spacing-xxxl 0 $spacing-xl;
   margin-top: auto;
+
+  @media (max-width: 768px) {
+    padding: $spacing-xxl 0 $spacing-lg;
+  }
 }
 
 .footerContainer {
@@ -13,10 +17,19 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: $spacing-xxl;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
 }
 
 .brand {
   max-width: 320px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 }
 
 .logoWrapper {
@@ -31,9 +44,15 @@
 .linksBlock {
   display: flex;
   gap: $spacing-xxxl;
-  
+
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $spacing-xxl;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
     gap: $spacing-xl;
   }
 }
@@ -66,8 +85,33 @@
 .footerBottom {
   border-top: 1px solid $color-border;
   margin-top: $spacing-xxl;
-  padding-top: $spacing-xl;
-  text-align: center;
+  padding: $spacing-xl $spacing-md 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
   color: $color-text-secondary;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  word-break: break-word;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+    margin-top: $spacing-xl;
+    font-size: 0.82rem;
+  }
+}
+
+.footerEmail {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: $color-text-secondary;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: $color-text-primary;
+    border-bottom-color: $color-text-primary;
+  }
 }

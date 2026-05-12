@@ -5,6 +5,10 @@
   @include card-base;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 480px) {
+    padding: $spacing-lg;
+  }
 }
 
 .header {
@@ -23,6 +27,10 @@
   font-size: 1.25rem;
   margin-bottom: $spacing-sm;
   color: $color-text-primary;
+
+  @media (max-width: 480px) {
+    font-size: 1.05rem;
+  }
 }
 
 .description {

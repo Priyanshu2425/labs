@@ -3,225 +3,267 @@
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, MessageCircle, ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import styles from './Contact.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+
+type ServiceKey = 'custom' | 'modules' | 'fractional_cto' | 'other';
+
+const serviceOptions: { value: ServiceKey; letter: string; label: string }[] = [
+  { value: 'custom', letter: 'A', label: 'Custom build' },
+  { value: 'modules', letter: 'B', label: 'Productised modules' },
+  { value: 'fractional_cto', letter: 'C', label: 'Fractional CTO' },
+  { value: 'other', letter: '·', label: 'Not sure yet' },
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: '',
-    message: ''
+    service: '' as ServiceKey | '',
+    message: '',
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
+
     setTimeout(() => {
       setIsSubmitting(false);
       setShowSuccess(true);
       setFormData({ name: '', email: '', service: '', message: '' });
-      
-      // Auto close modal after 5s
       setTimeout(() => setShowSuccess(false), 5000);
     }, 1500);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const pickService = (svc: ServiceKey) => setFormData((prev) => ({ ...prev, service: svc }));
 
   const fadeIn = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.65 } },
   };
 
-  const staggerContainer = {
+  const stagger = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
   return (
     <div className={styles.pageWrapper}>
       <Header />
-      <div className={styles.glowBackground} />
+      <div className={styles.glowBackground} aria-hidden="true" />
 
       <main className={styles.mainContent}>
         <section className={`container ${styles.contactSection}`}>
           <div className={styles.grid}>
-            
-            {/* Left Column: Details */}
-            <motion.div 
+            {/* Left column — narrative + channel chooser */}
+            <motion.div
               className={styles.infoCol}
               initial="hidden"
               animate="visible"
-              variants={staggerContainer}
+              variants={stagger}
             >
-              <motion.div variants={fadeIn} className={styles.badge}>
-                Contact Us
-              </motion.div>
+              <motion.span variants={fadeIn} className={styles.eyebrow}>
+                {'// contact'}
+              </motion.span>
               <motion.h1 variants={fadeIn} className={styles.pageTitle}>
-                Let&apos;s <span className={styles.gradientText}>build</span>
+                Tell us what<br />
+                <span className={styles.gradientText}>you&apos;re building.</span>
               </motion.h1>
               <motion.p variants={fadeIn} className={styles.pageSubtitle}>
-                Get in touch with our engineering team directly for any questions, or fill out the form to start a project.
+                A few sentences is enough. Pick the channel you prefer below — or send the form and we&apos;ll come back within a working day.
               </motion.p>
-              
-              <motion.div variants={fadeIn} className={styles.contactDetails}>
-                <a href="mailto:pra@labs.dimssu.com" className={styles.detailCard}>
-                  <div className={styles.detailIcon}>
-                    <Mail size={24} />
+
+              <motion.div variants={fadeIn} className={styles.responsePill}>
+                <span className={styles.responseDot} aria-hidden="true" />
+                Usually answers within a working day
+              </motion.div>
+
+              <motion.div variants={fadeIn} className={styles.channelStack}>
+                <a
+                  href="mailto:pra@labs.dimssu.com"
+                  className={styles.channelCard}
+                  data-channel="email"
+                >
+                  <div className={styles.channelMeta}>
+                    <span className={styles.channelLabel}>Email</span>
+                    <ArrowUpRight size={16} className={styles.channelArrow} />
                   </div>
-                  <div>
-                    <h3 className={styles.detailTitle}>Email</h3>
-                    <p className={styles.detailText}>labs@dimssu.com</p>
-                  </div>
-                </a>
-                
-                <a href="https://wa.me/918340711366" target="_blank" rel="noopener noreferrer" className={styles.detailCard}>
-                  <div className={styles.detailIcon}>
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <h3 className={styles.detailTitle}>WhatsApp</h3>
-                    <p className={styles.detailText}>+91 834 071 1366</p>
-                  </div>
+                  <span className={styles.channelValue}>pra@labs.dimssu.com</span>
+                  <span className={styles.channelHint}>Best for project briefs and async</span>
                 </a>
 
-                <div className={styles.detailCard}>
-                  <div className={styles.detailIcon}>
-                    <MapPin size={24} />
+                <a
+                  href="https://wa.me/918340711366"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.channelCard}
+                  data-channel="whatsapp"
+                >
+                  <div className={styles.channelMeta}>
+                    <span className={styles.channelLabel}>WhatsApp</span>
+                    <ArrowUpRight size={16} className={styles.channelArrow} />
                   </div>
-                  <div>
-                    <h3 className={styles.detailTitle}>Location</h3>
-                    <p className={styles.detailText}>Global (Remote-First, India HQ)</p>
+                  <span className={styles.channelValue}>+91 834 071 1366</span>
+                  <span className={styles.channelHint}>Quick questions, fastest reply</span>
+                </a>
+
+                <a
+                  href="#contact-form"
+                  className={styles.channelCard}
+                  data-channel="form"
+                >
+                  <div className={styles.channelMeta}>
+                    <span className={styles.channelLabel}>Form</span>
+                    <ArrowRight size={16} className={styles.channelArrow} />
                   </div>
-                </div>
+                  <span className={styles.channelValue}>Send us details</span>
+                  <span className={styles.channelHint}>Picks up the right person internally</span>
+                </a>
               </motion.div>
             </motion.div>
-            
-            {/* Right Column: Form */}
-            <motion.div 
-              className={styles.formCol}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+
+            {/* Right column — conversational form */}
+            <motion.form
+              id="contact-form"
+              className={styles.form}
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
             >
-              <form className={styles.contactForm} onSubmit={handleSubmit}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="name">Full Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    placeholder="John Doe"
+              <div className={styles.formIntro}>
+                <span className={styles.formStep}>01</span>
+                <h2 className={styles.formHeading}>In a few sentences, what are you building?</h2>
+                <p className={styles.formCaption}>
+                  Plain English is fine — context, problem, deadline if there is one.
+                </p>
+              </div>
+
+              <textarea
+                id="message"
+                name="message"
+                rows={6}
+                placeholder="We&rsquo;re a Series A health-tech and we want to add an AI scribe to our existing EHR…"
+                required
+                value={formData.message}
+                onChange={handleChange}
+                className={styles.textarea}
+              />
+
+              <div className={styles.formStepGroup}>
+                <span className={styles.formStep}>02</span>
+                <h3 className={styles.formSubheading}>Which engagement is closest?</h3>
+              </div>
+
+              <div className={styles.servicePicker} role="radiogroup" aria-label="Engagement type">
+                {serviceOptions.map((opt) => {
+                  const checked = formData.service === opt.value;
+                  return (
+                    <button
+                      type="button"
+                      key={opt.value}
+                      role="radio"
+                      aria-checked={checked}
+                      className={`${styles.serviceChip} ${checked ? styles.serviceChipActive : ''}`}
+                      onClick={() => pickService(opt.value)}
+                    >
+                      <span className={styles.serviceLetter}>{opt.letter}</span>
+                      <span>{opt.label}</span>
+                      {checked && <Check size={14} className={styles.serviceCheck} aria-hidden="true" />}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className={styles.formStepGroup}>
+                <span className={styles.formStep}>03</span>
+                <h3 className={styles.formSubheading}>Where should we reply?</h3>
+              </div>
+
+              <div className={styles.identityGrid}>
+                <label className={styles.field}>
+                  <span className={styles.fieldLabel}>Name</span>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Pratik"
                     required
                     value={formData.name}
                     onChange={handleChange}
                   />
-                </div>
-                
-                <div className={styles.formGroup}>
-                  <label htmlFor="email">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    placeholder="john@example.com"
+                </label>
+                <label className={styles.field}>
+                  <span className={styles.fieldLabel}>Email</span>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@company.com"
                     required
                     value={formData.email}
                     onChange={handleChange}
                   />
-                </div>
-                
-                <div className={styles.formGroup}>
-                  <label htmlFor="service">How can we help?</label>
-                  <div className={styles.selectWrapper}>
-                    <select 
-                      id="service" 
-                      name="service"
-                      required
-                      value={formData.service}
-                      onChange={handleChange}
-                    >
-                      <option value="" disabled>Select a service...</option>
-                      <option value="custom">Custom Software Build</option>
-                      <option value="ai_products">Ready-to-Deploy AI Products</option>
-                      <option value="fractional_cto">Fractional CTO</option>
-                      <option value="consulting">AI Consulting</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div className={styles.formGroup}>
-                  <label htmlFor="message">Message</label>
-                  <textarea 
-                    id="message" 
-                    name="message" 
-                    rows={5} 
-                    placeholder="Tell us about your project or problem..."
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  className={`${styles.submitBtn} ${isSubmitting ? styles.loading : ''}`}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : (
-                    <>Send Message <ArrowRight size={18} /></>
-                  )}
-                </button>
-              </form>
-            </motion.div>
+                </label>
+              </div>
 
+              <button
+                type="submit"
+                className={`${styles.submitBtn} ${isSubmitting ? styles.loading : ''}`}
+                disabled={isSubmitting || !formData.service}
+              >
+                {isSubmitting ? 'Sending…' : (
+                  <>Send it over <ArrowRight size={16} /></>
+                )}
+              </button>
+
+              <p className={styles.formFootnote}>
+                Your details are read by the team. No CRM auto-blast, no drip sequence.
+              </p>
+            </motion.form>
           </div>
         </section>
       </main>
 
       <Footer />
 
-      {/* Success Modal */}
       <AnimatePresence>
         {showSuccess && (
-          <motion.div 
+          <motion.div
             className={styles.modalOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowSuccess(false)}
+            role="dialog"
+            aria-modal="true"
           >
-            <motion.div 
+            <motion.div
               className={styles.modalContent}
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.94, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              exit={{ scale: 0.94, opacity: 0, y: 20 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
             >
-              <CheckCircle className={styles.successIcon} size={48} />
-              <h2 className={styles.modalTitle}>Message Sent!</h2>
+              <div className={styles.modalIcon} aria-hidden="true">
+                <MessageCircle size={22} />
+              </div>
+              <h2 className={styles.modalTitle}>Got it.</h2>
               <p className={styles.modalText}>
-                Thanks for reaching out. Our team will get back to you within 24 hours to discuss your requirements.
+                We&apos;ll come back within a working day. If it&apos;s urgent, the WhatsApp number on the previous panel is fastest.
               </p>
-              <button 
-                className={styles.modalBtn}
-                onClick={() => setShowSuccess(false)}
-              >
+              <button className={styles.modalBtn} onClick={() => setShowSuccess(false)}>
                 Close
               </button>
             </motion.div>

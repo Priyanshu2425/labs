@@ -27,6 +27,10 @@
   display: flex;
   align-items: center;
   gap: $spacing-xl;
+
+  @media (max-width: 768px) {
+    gap: $spacing-sm;
+  }
 }
 
 .navDesktop {
@@ -56,6 +60,10 @@
   display: flex;
   align-items: center;
   gap: $spacing-md;
+
+  @media (max-width: 768px) {
+    gap: 0;
+  }
 }
 
 .themeToggleBtn {
@@ -111,9 +119,12 @@
   border: none;
   color: $color-text-primary;
   cursor: pointer;
-  
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+
   @media (max-width: 768px) {
-    display: block;
+    display: inline-flex;
   }
 }
 
@@ -128,6 +139,11 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 480px) {
+    padding: $spacing-md;
+  }
 }
 
 .mobileNavLink {

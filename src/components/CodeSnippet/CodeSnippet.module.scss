@@ -60,6 +60,12 @@
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.9rem;
   line-height: 1.5;
+  -webkit-overflow-scrolling: touch;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: $spacing-sm;
+  }
 }
 
 .line {
@@ -72,6 +78,12 @@
   text-align: right;
   padding-right: $spacing-md;
   user-select: none;
+  flex-shrink: 0;
+
+  @media (max-width: 480px) {
+    min-width: 2rem;
+    padding-right: $spacing-sm;
+  }
 }
 
 .lineContent {

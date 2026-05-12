@@ -17,7 +17,6 @@ export default function Footer() {
           <div className={styles.linkGroup}>
             <h4 className={styles.groupTitle}>Company</h4>
             <Link href="/portfolio" className={styles.link}>Portfolio</Link>
-            <Link href="/ai-lab" className={styles.link}>AI Lab</Link>
             <Link href="/our-services" className={styles.link}>Services</Link>
             <Link href="/contact-us" className={styles.link}>Contact</Link>
           </div>
@@ -29,7 +28,8 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.footerBottom}>
-        <p>pra@labs.dimssu.com</p>
+        <p>&copy; {new Date().getFullYear()} DIMSSU Labs. Built in India.</p>
+        <a href="mailto:pra@labs.dimssu.com" className={styles.footerEmail}>pra@labs.dimssu.com</a>
       </div>
     </footer>
   );

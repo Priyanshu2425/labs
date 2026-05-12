@@ -98,29 +98,49 @@ response = model.generate(
       
       <main className={styles.mainContent}>
         <section className={`container ${styles.heroSection}`}>
-          <motion.h1 
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeIn}
-            className={styles.heroTitle}
+            className={styles.heroBlock}
           >
-            We treat research and engineering<br />
-            as <span className={styles.gradientText}>one discipline</span>, not two.
-          </motion.h1>
+            <span className={styles.eyebrow}>{'// ai lab'}</span>
+            <h1 className={styles.heroTitle}>
+              Research and engineering<br />
+              as <span className={styles.gradientText}>one discipline.</span>
+            </h1>
+            <p className={styles.heroSub}>
+              We publish what we build. Foundation models, on-device runtimes, multi-agent systems —
+              and the technical reports that explain how they work.
+            </p>
+            <div className={styles.heroJump}>
+              <a href="#models">Models</a>
+              <span aria-hidden="true">·</span>
+              <a href="#research">Papers</a>
+              <span aria-hidden="true">·</span>
+              <a href="#writing">Engineering writing</a>
+              <span aria-hidden="true">·</span>
+              <a href="#sdk">SDK</a>
+            </div>
+          </motion.div>
         </section>
 
-        <section className={`container ${styles.modelsSection}`}>
-          <motion.div 
+        <section id="models" className={`container ${styles.modelsSection}`}>
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeIn}
             className={styles.sectionHeader}
           >
-            <h2>Foundation models and fine-tuned models we build and ship in-house.</h2>
+            <span className={styles.eyebrow}>Models</span>
+            <h2 className={styles.sectionTitle}>Built and shipped in-house.</h2>
+            <p className={styles.sectionLede}>
+              Foundation and fine-tuned models we own end-to-end — design, training, eval, deployment.
+            </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -135,7 +155,7 @@ response = model.generate(
           </motion.div>
         </section>
 
-        <section className={`container ${styles.researchSection}`}>
+        <section id="research" className={`container ${styles.researchSection}`}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -143,10 +163,14 @@ response = model.generate(
             variants={fadeIn}
             className={styles.sectionHeader}
           >
-            <h2>Read our technical papers on Med360 and SLM360 architecture, training methodology, and benchmarks.</h2>
+            <span className={styles.eyebrow}>Technical reports</span>
+            <h2 className={styles.sectionTitle}>How the work was done.</h2>
+            <p className={styles.sectionLede}>
+              Architecture, training methodology, and benchmarks for the models and systems above.
+            </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -160,8 +184,8 @@ response = model.generate(
             ))}
           </motion.div>
         </section>
-        
-        <section className={`container ${styles.blogSection}`}>
+
+        <section id="writing" className={`container ${styles.blogSection}`}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -169,19 +193,24 @@ response = model.generate(
             variants={fadeIn}
             className={styles.sectionHeader}
           >
-            <h2>Technical deep-dives and engineering insights.</h2>
+            <span className={styles.eyebrow}>Engineering writing</span>
+            <h2 className={styles.sectionTitle}>Notes from the work.</h2>
+            <p className={styles.sectionLede}>
+              Practical write-ups from things we hit while shipping. Less ceremony than a paper,
+              more useful than a thread.
+            </p>
           </motion.div>
-          
+
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeIn}
           >
-            <ResearchPaperCard 
+            <ResearchPaperCard
               type="Blog Post"
               year="February 2026"
-              title="Your LangGraph Agents Are Deadlocking. Here’s the Fix."
+              title="Your LangGraph Agents Are Deadlocking. Here&rsquo;s the Fix."
               description="How we applied a 60-year-old OS algorithm to prevent deadlocks in multi-AI-agent systems. A practical guide to using AgentGuard with LangGraph. (12 min read)"
               tags={["LangGraph", "Deadlock Prevention", "Multi-Agent Systems"]}
               link="/ai-lab/blog/agentguard-deadlock-fix"
@@ -189,7 +218,7 @@ response = model.generate(
           </motion.div>
         </section>
 
-        <section className={`container ${styles.codeSection}`}>
+        <section id="sdk" className={`container ${styles.codeSection}`}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -197,9 +226,13 @@ response = model.generate(
             variants={fadeIn}
             className={styles.sectionHeader}
           >
-            <h2>Get started with Med360 in just a few lines of code.</h2>
+            <span className={styles.eyebrow}>SDK</span>
+            <h2 className={styles.sectionTitle}>Med360, in two lines.</h2>
+            <p className={styles.sectionLede}>
+              The shipped SDK is small, opinionated, and easy to drop into an existing service.
+            </p>
           </motion.div>
-          
+
           <motion.div
             initial="hidden"
             whileInView="visible"

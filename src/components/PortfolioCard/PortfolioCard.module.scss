@@ -15,8 +15,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
   padding: $spacing-lg $spacing-xl $spacing-sm;
   font-family: monospace;
+
+  @media (max-width: 480px) {
+    padding: $spacing-md $spacing-md $spacing-xs;
+  }
 }
 
 .categoriesText {
@@ -60,6 +66,10 @@
 .content {
   padding: 0 $spacing-xl $spacing-lg;
   flex-grow: 1;
+
+  @media (max-width: 480px) {
+    padding: 0 $spacing-md $spacing-md;
+  }
 }
 
 .titleRow {
@@ -73,6 +83,10 @@
   font-size: 1.5rem;
   color: $color-text-primary;
   margin: 0;
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 }
 
 .icon {
@@ -100,6 +114,11 @@
   background: rgba($color-background, 0.5);
   border-top: 1px solid rgba($color-border, 0.5);
   border-bottom: 1px solid rgba($color-border, 0.5);
+
+  @media (max-width: 480px) {
+    padding: $spacing-md;
+    gap: $spacing-sm;
+  }
 }
 
 .metricBlock {
@@ -124,6 +143,10 @@
   gap: $spacing-sm;
   padding: $spacing-lg $spacing-xl;
   background: rgba($color-surface, 0.2);
+
+  @media (max-width: 480px) {
+    padding: $spacing-md;
+  }
 }
 
 .tag {

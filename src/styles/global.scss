@@ -46,6 +46,19 @@
   box-sizing: border-box;
 }
 
+html, body {
+  /* `clip` (instead of `hidden`) prevents horizontal scroll WITHOUT
+     turning html/body into a scroll container — required so that
+     `position: sticky` keeps working on descendant sections. */
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: $font-primary;
   background-color: $color-background;
@@ -64,19 +77,35 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3rem;
   letter-spacing: -0.02em;
-  
+
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.85rem;
   }
 }
 
 h2 {
   font-size: 1.75rem;
   margin-bottom: $spacing-md;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+  }
 }
 
 h3 {
   font-size: 1.25rem;
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 }
 
 p {
@@ -106,20 +135,52 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 $spacing-lg;
-  
+
   @media (max-width: 768px) {
+    padding: 0 $spacing-md;
+  }
+
+  @media (max-width: 480px) {
     padding: 0 $spacing-md;
   }
 }
 
 .section {
   padding: $spacing-xxxl 0;
-  
+
   @media (max-width: 768px) {
     padding: $spacing-xxl 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: $spacing-xl 0;
   }
 }
 
 .text-center {
   text-align: center;
+}
+
+/* =============================================
+   Reduced motion — respect user OS preference.
+   Disables decorative scroll-driven animations,
+   parallax drifts, and entrance transitions.
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================
+   Global focus-visible — accessible defaults
+   for any element that doesn't define its own.
+   ============================================= */
+:focus-visible {
+  outline: 2px solid #ba9eff;
+  outline-offset: 3px;
+  border-radius: 4px;
 }

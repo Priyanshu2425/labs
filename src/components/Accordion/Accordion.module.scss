@@ -26,12 +26,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: $spacing-md;
   padding: $spacing-lg $spacing-xl;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
   transition: all $transition-fast;
+
+  @media (max-width: 480px) {
+    padding: $spacing-md $spacing-md;
+    gap: $spacing-sm;
+  }
   
   &:hover {
     .question {
@@ -64,6 +70,16 @@
   padding-right: $spacing-xl;
   transition: color $transition-fast;
   line-height: 1.4;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding-right: $spacing-md;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    padding-right: 0;
+  }
 }
 
 .iconContainer {
@@ -81,6 +97,10 @@
 
 .accordionContent {
   padding: 0 $spacing-xl $spacing-lg;
+
+  @media (max-width: 480px) {
+    padding: 0 $spacing-md $spacing-md;
+  }
 }
 
 .answer {
@@ -88,4 +108,9 @@
   line-height: 1.7;
   color: $color-text-secondary;
   margin: 0;
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
 }

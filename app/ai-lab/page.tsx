@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/ai-lab`,
     type: 'website',
   },
+  robots: { index: false, follow: false },
 };
 
 export default function AILabPage() {

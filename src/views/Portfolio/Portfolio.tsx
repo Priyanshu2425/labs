@@ -205,7 +205,7 @@ export default function Portfolio() {
       <main className={styles.mainContent}>
         {/* Hero */}
         <section className={styles.heroSection}>
-          <div className={styles.heroGlow} />
+          <div className={styles.heroGlow} aria-hidden="true" />
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -213,29 +213,24 @@ export default function Portfolio() {
               transition={{ duration: 0.9 }}
               className={styles.heroContent}
             >
-              <span className={styles.monoLabel}>{'// portfolio'}</span>
+              <span className={styles.monoLabel}>{'// the work'}</span>
               <h1 className={styles.pageTitle}>
-                Built with purpose.<br />
-                <span className={styles.gradientText}>Deployed in production.</span>
+                Real products.<br />
+                <span className={styles.gradientText}>Real clients. In production.</span>
               </h1>
               <p className={styles.pageSubtitle}>
-                Technical deep-dives across healthcare AI, legal tech, sales and customer success,
-                productivity tooling, and operations platforms — each one built for, and shipped to,
-                a real client.
+                Each entry below was built for a paying customer and is in active use today. Click any card to read the deep-dive — architecture, decisions, what shipped.
               </p>
 
-              {/* Stats row */}
-              <div className={styles.statsRow}>
-                {[
-                  { value: `${projects.length}`, label: "Live Products" },
-                  { value: "10+", label: "Verticals" },
-                  { value: "Shipped", label: "Handed Over" },
-                ].map((s, i) => (
-                  <div key={i} className={styles.statItem}>
-                    <span className={styles.statValue}>{s.value}</span>
-                    <span className={styles.statLabel}>{s.label}</span>
-                  </div>
-                ))}
+              <div className={styles.heroMeta}>
+                <span className={styles.heroMetaItem}>
+                  <span className={styles.heroMetaDot} aria-hidden="true" />
+                  {projects.length} shipped
+                </span>
+                <span className={styles.heroMetaDivider} aria-hidden="true" />
+                <span className={styles.heroMetaItem}>
+                  Across healthcare, logistics, real estate, sales and ops
+                </span>
               </div>
             </motion.div>
           </div>
