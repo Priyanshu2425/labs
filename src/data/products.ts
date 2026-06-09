@@ -23,7 +23,7 @@ export interface Product {
 export const productsData: Record<string, Product> = {
   "sanad": {
     id: "sanad",
-    title: "AI-Native Clinical Notes",
+    title: "AI Clinical Notes",
     subtitle: "AI-powered medical scribe that listens to doctor-patient conversations and writes clinical notes automatically.",
     client: "Private Hospital (NDA)",
     categories: ["Healthcare AI"],
@@ -242,7 +242,7 @@ export const productsData: Record<string, Product> = {
   },
   "grospace": {
     id: "grospace",
-    title: "AI-Native Lease Management",
+    title: "AI Lease Management",
     subtitle: "AI-powered commercial real estate lease management for multi-brand operators — automates lease data extraction, obligation tracking, and portfolio intelligence.",
     client: "GroSpace Global",
     categories: ["Real Estate", "AI Extraction"],
