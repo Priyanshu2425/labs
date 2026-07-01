@@ -6,9 +6,8 @@ export const alt = 'BuildspaceLabs product';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-export async function generateStaticParams() {
-  return Object.keys(productsData).map((id) => ({ id }));
-}
+// No generateStaticParams: edge runtime (required by Cloudflare Pages) can't
+// combine with static param generation, so the image is rendered on demand.
 
 interface Props {
   params: Promise<{ id: string }>;
