@@ -45,7 +45,7 @@
 }
 
 .title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 1.15rem;
   color: $color-text-primary;
   margin-bottom: $spacing-sm;
@@ -74,7 +74,7 @@
   color: $color-badge-text;
   font-weight: 700;
   text-transform: uppercase;
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   background-color: $color-badge-bg;
   padding: 4px 10px;
   border-radius: 999px;

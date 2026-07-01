@@ -1,57 +1,12 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, type MotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import styles from './Home.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-
-const HeroBackdrop = ({ progress }: { progress: MotionValue<number> }) => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const readyRef = useRef(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const onLoaded = () => {
-      readyRef.current = true;
-      video.pause();
-      video.currentTime = 0;
-    };
-    if (video.readyState >= 1) onLoaded();
-    else video.addEventListener('loadedmetadata', onLoaded);
-    return () => video.removeEventListener('loadedmetadata', onLoaded);
-  }, []);
-
-  useMotionValueEvent(progress, 'change', (v) => {
-    const video = videoRef.current;
-    if (!video || !readyRef.current || !video.duration) return;
-    const eased = Math.min(1, Math.max(0, v));
-    const target = eased * video.duration;
-    if (Math.abs(target - video.currentTime) > 0.01) {
-      video.currentTime = target;
-    }
-  });
-
-  return (
-    <>
-      <video
-        ref={videoRef}
-        className={styles.heroBackdrop}
-        src="/hero/backdrop.mp4"
-        poster="/hero/backdrop-poster.jpg"
-        muted
-        playsInline
-        preload="auto"
-        autoPlay={false}
-        aria-hidden="true"
-      />
-      <div className={styles.heroBackdropVignette} aria-hidden="true" />
-    </>
-  );
-};
 
 const SHIPPED_PROJECTS = [
   'Sanad', 'Focuscare', 'Charge Pulse', 'DSV Fleet', 'Factory OS',
@@ -82,6 +37,39 @@ const Marquee = () => {
   );
 };
 
+/* Static, editorial hero — no video, no scroll-pin. The entrance is driven by
+   CSS keyframes (see Home.module.scss), so the copy is always visible even if
+   JS never runs, and honours prefers-reduced-motion. No rAF dependency. */
+const Hero = () => {
+  return (
+    <section className={styles.heroSection}>
+      <div className={styles.heroGrid} aria-hidden="true" />
+      <div className={styles.heroGlow} aria-hidden="true" />
+      <div className={styles.heroContent}>
+        <p className={styles.heroEyebrow}>
+          India&apos;s AI-native product studio
+        </p>
+        <h1 className={styles.heroQuote}>
+          We build AI products that <span className={styles.gradientText}>actually ship.</span>
+        </h1>
+        <p className={styles.heroSubtext}>
+          Not pilots. Not slide decks. Production systems your team uses on Monday morning — designed, engineered, and shipped end-to-end by senior AI builders.
+        </p>
+        <div className={styles.heroActions}>
+          <Link href="/contact-us" className={styles.heroPrimary}>
+            Start a project
+            <ArrowRight size={16} />
+          </Link>
+          <Link href="/portfolio" className={styles.heroSecondary}>
+            See what we&apos;ve shipped
+            <ArrowUpRight size={14} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ScrubWord = ({ word, progress, start, end }: { word: string; progress: MotionValue<number>; start: number; end: number; }) => {
   const opacity = useTransform(progress, [start, end], [0.12, 1]);
   const y = useTransform(progress, [start, end], [16, 0]);
@@ -107,12 +95,8 @@ const IntroSection = () => {
   const subtextOpacity = useTransform(scrollYProgress, [0.55, 0.75], [0, 1]);
   const subtextY = useTransform(scrollYProgress, [0.55, 0.75], [40, 0]);
 
-  const blobX = useTransform(scrollYProgress, [0, 1], [-80, 80]);
-  const blobScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1.05, 0.95]);
-
   return (
     <section ref={ref} className={styles.introSection}>
-      <motion.div className={styles.introBlob} style={{ x: blobX, scale: blobScale }} aria-hidden="true" />
       <div className={styles.introContent}>
         <h2 className={styles.introHeading}>
           {words.map((w, i) => {
@@ -165,12 +149,9 @@ const ValuePropsSection = ({ valueProps }: { valueProps: ValueProp[] }) => {
   const titleY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const eyebrowY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const subtitleY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const blobY = useTransform(scrollYProgress, [0, 1], [-150, 150]);
-  const blobScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 0.95]);
 
   return (
     <section ref={ref} className={styles.valuePropsSection}>
-      <motion.div className={styles.valuePropsBlob} style={{ y: blobY, scale: blobScale }} aria-hidden="true" />
       <div className={styles.valuePropsSplit}>
         <div className={styles.valuePropsStickyLeft}>
           <motion.span style={{ y: eyebrowY }} className={styles.valueSectionEyebrow}>Why teams pick us</motion.span>
@@ -204,11 +185,10 @@ const CTASection = () => {
   const subtextOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const buttonsY = useTransform(scrollYProgress, [0, 1], [30, 0]);
   const buttonsOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const blobY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   return (
     <section ref={ref} className={styles.ctaSection}>
-      <motion.div className={styles.ctaBlob} style={{ y: blobY }} aria-hidden="true" />
+      <div className={styles.ctaGrid} aria-hidden="true" />
       <div className={styles.ctaInner}>
         <motion.h2 className={styles.ctaHeading} style={{ y: headingY, opacity: headingOpacity }}>
           Ready when you are.
@@ -270,12 +250,12 @@ const HorizontalScrollCarousel = () => {
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const industries = [
-    { title: 'Government', accent: '#ba9eff', tag: 'Public Sector', projects: ['Boss OS', 'Weather Prediction', 'AI-Native Digital Tutor'] },
-    { title: 'Defence', accent: '#ff6b6b', tag: 'Mission Critical', projects: ['VAJRA', 'KAVACH', 'SAGAR'] },
-    { title: 'Logistics', accent: '#ffd93d', tag: 'Operations', projects: ['Fleet Management', 'Charge Pulse', 'Supply Chain Ops'] },
-    { title: 'Real Estate', accent: '#6bcb77', tag: 'PropTech', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
-    { title: 'Healthcare', accent: '#53ddfc', tag: 'MedTech', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
-    { title: 'Hardware & IoT', accent: '#ff9f43', tag: 'Embedded Systems', projects: ['PCB Design', 'Embedded Firmware', 'Sensor Networks'] },
+    { title: 'Government', tag: 'Public Sector', projects: ['Boss OS', 'Weather Prediction', 'AI-Native Digital Tutor'] },
+    { title: 'Defence', tag: 'Mission Critical', projects: ['VAJRA', 'KAVACH', 'SAGAR'] },
+    { title: 'Logistics', tag: 'Operations', projects: ['Fleet Management', 'Charge Pulse', 'Supply Chain Ops'] },
+    { title: 'Real Estate', tag: 'PropTech', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
+    { title: 'Healthcare', tag: 'MedTech', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
+    { title: 'Hardware & IoT', tag: 'Embedded Systems', projects: ['PCB Design', 'Embedded Firmware', 'Sensor Networks'] },
   ];
 
   // Section height = one viewport (for the pin) + the actual horizontal travel.
@@ -303,20 +283,16 @@ const HorizontalScrollCarousel = () => {
           {/* Leading spacer so the first card lands flush with section padding */}
           <div className={styles.carouselSpacer} aria-hidden="true" />
           {industries.map((ind) => (
-            <div
-              key={ind.title}
-              className={styles.industryCard}
-              style={{ '--card-accent': ind.accent } as React.CSSProperties}
-            >
+            <div key={ind.title} className={styles.industryCard}>
               <div className={styles.cardTop}>
                 <span className={styles.cardTag}>{ind.tag}</span>
               </div>
               <h3 className={styles.industryTitle}>{ind.title}</h3>
-              <div className={styles.cardDivider} style={{ background: ind.accent }} />
+              <div className={styles.cardDivider} />
               <ul className={styles.projectList}>
                 {ind.projects.map((proj) => (
                   <li key={proj} className={styles.projectItem}>
-                    <ArrowRight size={14} className={styles.projectArrow} style={{ color: ind.accent }} />
+                    <ArrowRight size={14} className={styles.projectArrow} />
                     {proj}
                   </li>
                 ))}
@@ -353,23 +329,6 @@ export default function Home() {
     },
   ];
 
-  // Pin the hero to the viewport for ~1.6 viewports of vertical scroll. While
-  // the user is scrolling within that range, the page does NOT visibly move —
-  // the inner section stays sticky at top:0, and the explosion video scrubs
-  // through. After the pin range ends, the section releases and normal vertical
-  // scrolling continues into the next section.
-  const heroPinRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress: heroPinProgress } = useScroll({
-    target: heroPinRef,
-    offset: ['start start', 'end end'],
-  });
-  // Video scrub finishes at 80% of the pin distance — the last 20% is reserved
-  // for fading the headline and copy out before release, so the transition into
-  // the next section feels intentional rather than abrupt.
-  const heroProgress = useTransform(heroPinProgress, [0, 0.8], [0, 1]);
-  const heroOpacity = useTransform(heroPinProgress, [0.78, 0.98], [1, 0]);
-  const heroScale = useTransform(heroPinProgress, [0.78, 0.98], [1, 0.96]);
-
   return (
     <div className={styles.pageWrapper}>
       <Header />
@@ -378,37 +337,8 @@ export default function Home() {
         {/* Marquee Ticker */}
         <Marquee />
 
-        {/* Hero — scroll-pinned scrub */}
-        <div ref={heroPinRef} className={styles.heroPinWrapper}>
-          <section className={styles.heroSection}>
-            <HeroBackdrop progress={heroProgress} />
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className={styles.heroContent}
-            >
-              <motion.div style={{ opacity: heroOpacity, scale: heroScale }}>
-                <p className={styles.heroEyebrow}>India&apos;s AI-native product studio</p>
-                <h1 className={styles.heroQuote}>
-                  We build AI products that <span className={styles.gradientText}>actually ship.</span>
-                </h1>
-                <p className={styles.heroSubtext}>
-                  Not pilots. Not slide decks. Production systems your team uses on Monday morning — designed, engineered, and shipped end-to-end by senior AI builders.
-                </p>
-                <div className={styles.heroActions}>
-                  <Link href="/contact-us" className={styles.heroPrimary}>
-                    Start a project
-                    <ArrowRight size={16} />
-                  </Link>
-                  <Link href="/portfolio" className={styles.heroSecondary}>
-                    See what we&apos;ve shipped
-                  </Link>
-                </div>
-              </motion.div>
-            </motion.div>
-          </section>
-        </div>
+        {/* Hero — static editorial */}
+        <Hero />
 
         {/* Intro — scroll-scrubbed word reveal */}
         <IntroSection />

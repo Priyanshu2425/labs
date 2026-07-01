@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import styles from './Header.module.scss';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -9,9 +10,13 @@ import Logo from '../Logo';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [theme, setTheme] = useState<'dark'|'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const pathname = usePathname();
+
+  // Reading-progress bar — driven off native scroll, spring-smoothed. Replaces
+  // the old per-scroll setState (which forced a reflow on every scroll event).
+  const { scrollYProgress } = useScroll();
+  const progressScaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 40, mass: 0.3 });
 
   const navLinks = [
     { name: 'Services', path: '/our-services' },
@@ -21,13 +26,11 @@ export default function Header() {
   ];
 
   useEffect(() => {
-    // Check local storage for theme
     const savedTheme = localStorage.getItem('app-theme') as 'dark' | 'light';
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.setAttribute('data-theme', savedTheme);
     } else {
-      // Default to dark
       document.documentElement.setAttribute('data-theme', 'dark');
     }
   }, []);
@@ -39,21 +42,13 @@ export default function Header() {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = documentHeight > 0 ? Math.round((scrollPosition / documentHeight) * 100) : 0;
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initialize on mount
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <header className={styles.header}>
+      <motion.div
+        className={styles.scrollProgressBar}
+        style={{ scaleX: progressScaleX }}
+        aria-hidden="true"
+      />
       <div className={`container ${styles.headerContainer}`}>
         <Link href="/" className={styles.logoLink} aria-label="Home">
           <Logo />
@@ -63,8 +58,8 @@ export default function Header() {
         <div className={styles.rightSection}>
           <nav className={styles.navDesktop}>
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 href={link.path}
                 className={`${styles.navLink} ${pathname === link.path ? styles.active : ''}`}
               >
@@ -73,33 +68,22 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Theme Toggle Button */}
-          <button 
-            className={styles.themeToggleBtn} 
+          <button
+            className={styles.themeToggleBtn}
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {/* Scroll Progress Indicator */}
-          <div className={styles.scrollProgressBlock}>
-            <div className={styles.scrollProgress}>
-              <span className={styles.scrollText}>{'// scroll to explore'}</span>
-              <span className={styles.progressText}>
-                progress: <span className={styles.progressValue}>{scrollProgress}%</span>
-              </span>
-            </div>
-            
-            {/* Mobile menu button inside the right block for alignment */}
-            <button 
-              className={styles.mobileMenuBtn}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          <button
+            className={styles.mobileMenuBtn}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
 
@@ -107,8 +91,8 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu}>
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
+            <Link
+              key={link.name}
               href={link.path}
               className={`${styles.mobileNavLink} ${pathname === link.path ? styles.active : ''}`}
               onClick={() => setIsMobileMenuOpen(false)}

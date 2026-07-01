@@ -24,7 +24,7 @@ type Service = {
 const services: Service[] = [
   {
     letter: 'A',
-    accent: '#ba9eff',
+    accent: '#3b82f6',
     tag: 'Custom build',
     title: 'Custom software, built end-to-end.',
     tagline: 'When you have a problem and want a senior team to architect, build, and ship the answer.',
@@ -38,7 +38,7 @@ const services: Service[] = [
   },
   {
     letter: 'B',
-    accent: '#53ddfc',
+    accent: '#3b82f6',
     tag: 'Productised modules',
     title: 'Production-ready AI modules you can deploy.',
     tagline: 'When the problem is well-known and you want a sharp solution dropped into your stack.',
@@ -53,7 +53,7 @@ const services: Service[] = [
   },
   {
     letter: 'C',
-    accent: '#6bcb77',
+    accent: '#3b82f6',
     tag: 'Partnership',
     title: 'Fractional CTO and product partner.',
     tagline: "When you're a founder who wants a senior technical co-pilot, not just a vendor.",

@@ -34,7 +34,7 @@
   left: -100px;
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle at 30% 30%, rgba(132, 85, 239, 0.12), transparent 60%);
+  background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.12), transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -56,7 +56,7 @@
 }
 
 .pageTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 5rem;
   font-weight: 800;
   line-height: 1.05;
@@ -79,7 +79,7 @@
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #ba9eff 0%, #53ddfc 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -134,7 +134,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--svc-accent, #ba9eff);
+      outline: 2px solid var(--svc-accent, #3b82f6);
       outline-offset: 3px;
     }
   }
@@ -149,13 +149,13 @@
   border-radius: 999px;
   background: var(--svc-accent, $color-text-primary);
   color: $color-background;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-weight: 700;
   font-size: 0.85rem;
 }
 
 .heroJumpTag {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.85rem;
   font-weight: 500;
   color: $color-text-primary;
@@ -208,7 +208,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      var(--svc-accent, #ba9eff) 50%,
+      var(--svc-accent, #3b82f6) 50%,
       transparent
     );
     opacity: 0.6;
@@ -237,15 +237,15 @@
   border-radius: 999px;
   background: var(--svc-accent, $color-text-primary);
   color: $color-background;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-weight: 700;
   font-size: 1.15rem;
   flex-shrink: 0;
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--svc-accent, #ba9eff) 30%, transparent);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--svc-accent, #3b82f6) 30%, transparent);
 }
 
 .cardTag {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -258,7 +258,7 @@
 
 /* ── Content ── */
 .blockTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 2.5rem;
   color: $color-text-primary;
   font-weight: 700;
@@ -276,7 +276,7 @@
 }
 
 .blockTagline {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 1.15rem;
   color: $color-text-secondary;
   margin-bottom: 2rem;
@@ -346,7 +346,7 @@
   background-color: var(--svc-accent, $color-text-primary);
   padding: 0.85rem 1.4rem;
   border-radius: 10px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: -0.01em;
@@ -355,11 +355,11 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 32px color-mix(in srgb, var(--svc-accent, #ba9eff) 35%, transparent);
+    box-shadow: 0 14px 32px color-mix(in srgb, var(--svc-accent, #3b82f6) 35%, transparent);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--svc-accent, #ba9eff);
+    outline: 2px solid var(--svc-accent, #3b82f6);
     outline-offset: 3px;
   }
 
@@ -376,7 +376,7 @@
   padding: 11px 24px;
   border-radius: $border-radius-md;
   border: 1px solid $color-border;
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -404,7 +404,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 0.85rem;
   color: $color-text-muted;
   text-transform: uppercase;

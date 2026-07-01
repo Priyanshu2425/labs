@@ -38,7 +38,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/investor-update-drafter",
     filterCategory: "AI Builds",
-    accent: "#f59e0b",
+    accent: "#3b82f6",
     coverImage: "/projects/investor-update-drafter/dashboard.png",
     coverAlt: "Drafted update with tone toggles in the right rail",
     coverCaption: "Concise, detailed, punchy, vulnerable — pick a tone"
@@ -54,7 +54,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/sales-call-coach",
     filterCategory: "AI Builds",
-    accent: "#ec4899",
+    accent: "#3b82f6",
     coverImage: "/projects/sales-call-coach/dashboard.png",
     coverAlt: "Rep scorecard with 12-week trend lines for talk ratio and discovery questions",
     coverCaption: "Scorecards with 12-week trends per rep"
@@ -70,7 +70,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/inbox-zero",
     filterCategory: "AI Builds",
-    accent: "#10b981",
+    accent: "#3b82f6",
     coverImage: "/projects/inbox-zero/dashboard.png",
     coverAlt: "Daily debrief with sent/received/drafted trends and auto-handled list",
     coverCaption: "Daily debrief — what got handled, what needs your eye"
@@ -86,7 +86,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/support-pulse",
     filterCategory: "AI Builds",
-    accent: "#6366f1",
+    accent: "#3b82f6",
     coverImage: "/projects/support-pulse/dashboard.png",
     coverAlt: "Per-agent scorecard with 12-week trend lines for response time and CSAT",
     coverCaption: "Scorecards with 12-week trends per agent"
@@ -102,7 +102,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/brief-forge",
     filterCategory: "AI Builds",
-    accent: "#d97706",
+    accent: "#3b82f6",
     coverImage: "/projects/brief-forge/dashboard.png",
     coverAlt: "Clause-by-clause risk grid with red/amber/green badges and market comparison",
     coverCaption: "Every clause scored — high risk, market, or favorable"
@@ -118,7 +118,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/patient-front-desk",
     filterCategory: "AI Builds",
-    accent: "#14b8a6",
+    accent: "#3b82f6",
     coverImage: "/projects/patient-front-desk/dashboard.png",
     coverAlt: "Calendar view with provider columns and scheduling + insurance verification queues",
     coverCaption: "Calendar + AI-suggested slots, insurance queue, and phone scripts"
@@ -134,7 +134,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "Tailwind", "Framer Motion"],
     link: "/product/reply-rail",
     filterCategory: "AI Builds",
-    accent: "#ef4444",
+    accent: "#3b82f6",
     coverImage: "/projects/reply-rail/dashboard.png",
     coverAlt: "Sentiment dashboard with platform rating cards, themes, and 12-week trends",
     coverCaption: "Sentiment trends across Google, Yelp, and Facebook"
@@ -150,7 +150,7 @@ const projects: PortfolioProject[] = [
     tags: ["Python", "Next.js", "OpenAI Whisper"],
     link: "/product/sanad",
     filterCategory: "AI Builds",
-    accent: "#6bcb77",
+    accent: "#3b82f6",
     coverImage: "/projects/sanad/dashboard.png",
     coverAlt: "Clinical Notes dashboard — Welcome back, Mara",
     coverCaption: "Today view — encounters, drafts, schedule"
@@ -166,7 +166,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "React", "Flutter"],
     link: "/product/charge-pulse",
     filterCategory: "Mobile",
-    accent: "#ffd93d",
+    accent: "#3b82f6",
     coverImage: "/projects/charge-pulse/dashboard.png",
     coverAlt: "ChargePulse trip planner with charging stops along the route",
     coverCaption: "Trip planner — charge stops, ETA, and pre-conditioning"
@@ -182,7 +182,7 @@ const projects: PortfolioProject[] = [
     tags: ["Next.js", "FastAPI", "Gemini 2.5 Pro"],
     link: "/product/grospace",
     filterCategory: "Web",
-    accent: "#ff9f43",
+    accent: "#3b82f6",
     coverImage: "/projects/grospace/dashboard.png",
     coverAlt: "Grospace deal Kanban board with 14 deals across 4 stages",
     coverCaption: "Pipeline view — $182M across 14 deals in 4 stages"

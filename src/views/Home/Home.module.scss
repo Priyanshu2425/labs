@@ -22,68 +22,50 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(90deg, #ba9eff 0%, #53ddfc 100%);
+  background-image: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
 }
 
 /* =============================================
-   Hero Section
+   Hero Section — static, editorial (no video)
    ============================================= */
-/* Tall outer wrapper — gives the scroll distance over which the inner
-   .heroSection stays pinned. ~2 viewports of vertical scroll keeps the
-   hero on screen while the explosion scrubs and the copy fades. */
-.heroPinWrapper {
-  position: relative;
-  height: 220vh;
-
-  @media (max-width: 768px) {
-    /* On touch devices, sticky scrub feels janky. Collapse the wrapper
-       so the hero behaves like a normal section. */
-    height: auto;
-  }
-}
-
 .heroSection {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: relative;
+  min-height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: $color-background;
   overflow: hidden;
   isolation: isolate;
+  border-bottom: 1px solid $color-border;
 
   @media (max-width: 768px) {
-    position: relative;
-    top: auto;
-    height: auto;
-    min-height: 80vh;
-    padding: 6rem 0 3rem;
+    min-height: 82vh;
+    padding: 5rem 0 4rem;
   }
 }
 
-.heroBackdrop {
+/* Faint dot-grid — structure without decoration. Masked to fade at the edges
+   so it reads as texture, not a pattern demo. */
+.heroGrid {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  pointer-events: none;
   z-index: 0;
-  opacity: 0.7;
-  will-change: opacity;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, $color-border 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 42%, #000 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 42%, #000 30%, transparent 78%);
 }
 
-.heroBackdropVignette {
+/* One whisper-soft brand-blue wash from the top. No blob, no drift. */
+.heroGlow {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(ellipse 55% 45% at center, rgba(10, 10, 10, 0.85) 0%, rgba(10, 10, 10, 0.4) 50%, transparent 75%),
-    radial-gradient(ellipse 130% 110% at center, transparent 45%, rgba(10, 10, 10, 0.98) 95%),
-    linear-gradient(180deg, rgba(10, 10, 10, 0.4) 0%, transparent 18%, transparent 82%, rgba(10, 10, 10, 0.7) 100%);
+  background: radial-gradient(ellipse 60% 50% at 50% -8%, rgba(59, 130, 246, 0.14), transparent 62%);
 }
 
 .heroContent {
@@ -98,9 +80,30 @@
   }
 }
 
+/* Entrance: pure CSS so the hero copy is visible with JS off / tab backgrounded,
+   and self-completes independent of requestAnimationFrame. Resting state is
+   fully visible; the rise only applies when motion is welcome. */
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroEyebrow,
+  .heroQuote,
+  .heroSubtext,
+  .heroActions {
+    animation: heroRise $dur-slow $ease-out-expo both;
+  }
+  .heroEyebrow { animation-delay: 0.05s; }
+  .heroQuote   { animation-delay: 0.13s; }
+  .heroSubtext { animation-delay: 0.22s; }
+  .heroActions { animation-delay: 0.31s; }
+}
+
 .heroEyebrow {
   display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -110,7 +113,7 @@
   padding: 0.5rem 1rem;
   border: 1px solid $color-border;
   border-radius: 999px;
-  background: rgba(186, 158, 255, 0.06);
+  background: rgba(59, 130, 246, 0.06);
 
   @media (max-width: 480px) {
     font-size: 0.7rem;
@@ -119,7 +122,7 @@
 }
 
 .heroQuote {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 5rem;
   font-weight: 700;
   line-height: 1.04;
@@ -143,7 +146,7 @@
 }
 
 .heroSubtext {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 1.2rem;
   line-height: 1.55;
   color: $color-text-secondary;
@@ -180,7 +183,7 @@
   background: $color-text-primary;
   color: $color-background;
   border-radius: 10px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.98rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -189,11 +192,11 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(186, 158, 255, 0.25);
+    box-shadow: 0 14px 36px rgba(59, 130, 246, 0.25);
   }
 
   &:focus-visible {
-    outline: 2px solid #ba9eff;
+    outline: 2px solid #3b82f6;
     outline-offset: 3px;
   }
 
@@ -207,22 +210,26 @@
 }
 
 .heroSecondary {
-  font-family: 'Space Grotesk', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: $font-heading;
   font-size: 0.98rem;
   font-weight: 500;
   color: $color-text-secondary;
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding: 0.4rem 0;
-  transition: color 0.2s, border-color 0.2s;
+  padding: 0.4rem 0.2rem;
+  transition: color $dur-fast $ease-standard;
+
+  svg { transition: transform $dur-fast $ease-standard; opacity: 0.7; }
 
   &:hover {
     color: $color-text-primary;
-    border-bottom-color: $color-text-primary;
+    svg { transform: translate(2px, -2px); opacity: 1; }
   }
 
   &:focus-visible {
-    outline: 2px solid #ba9eff;
+    outline: 2px solid #3b82f6;
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -247,7 +254,7 @@
 .marqueeLabel {
   flex-shrink: 0;
   padding-left: 2rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -272,7 +279,7 @@
   align-items: center;
   gap: 0.85rem;
   padding-right: 2.25rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 1.05rem;
   font-weight: 500;
   color: $color-text-primary;
@@ -289,7 +296,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ba9eff, #53ddfc);
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
   flex-shrink: 0;
   opacity: 0.85;
 }
@@ -319,20 +326,6 @@
   }
 }
 
-.introBlob {
-  position: absolute;
-  top: 50%;
-  left: -10vw;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(186, 158, 255, 0.10), transparent 65%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-  transform: translateY(-50%);
-}
-
 .introWord {
   display: inline-block;
   margin-right: 0.28em;
@@ -352,7 +345,7 @@
 }
 
 .introHeading {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 4rem;
   font-weight: 600;
   line-height: 1.1;
@@ -375,7 +368,7 @@
 }
 
 .introSubtext {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 1.25rem;
   color: $color-text-secondary;
   line-height: 1.8;
@@ -431,7 +424,7 @@
 
 .carouselEyebrow {
   display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -442,7 +435,7 @@
 }
 
 .carouselSectionTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 3.75rem;
   font-weight: 700;
   color: $color-text-primary;
@@ -466,7 +459,7 @@
   em {
     font-style: italic;
     font-weight: 400;
-    background: linear-gradient(90deg, #ba9eff 0%, #53ddfc 100%);
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -483,7 +476,7 @@
 
 .scrollProgressBar {
   height: 100%;
-  background: linear-gradient(90deg, #ba9eff, #53ddfc);
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
   border-radius: 2px;
 }
 
@@ -525,18 +518,17 @@
   min-width: 360px;
   height: 460px;
   max-width: 100%;
-  background: $color-background;
-  backdrop-filter: blur(24px);
-  border-radius: 20px;
+  background: $color-surface;
+  border-radius: 16px;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color $dur-base $ease-standard, transform $dur-base $ease-standard, box-shadow $dur-base $ease-standard;
   border: 1px solid $color-border;
   position: relative;
   overflow: hidden;
 
-  /* Top accent line */
+  /* Top accent line — brand blue, revealed on hover */
   &::before {
     content: '';
     position: absolute;
@@ -544,24 +536,9 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--card-accent, #ba9eff) 50%, transparent);
-    opacity: 0.4;
-    transition: opacity 0.4s ease;
-  }
-
-  /* Corner glow */
-  &::after {
-    content: '';
-    position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--card-accent, #ba9eff), transparent 70%);
-    opacity: 0.03;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+    background: linear-gradient(90deg, transparent, #3b82f6 50%, transparent);
+    opacity: 0;
+    transition: opacity $dur-base $ease-standard;
   }
 
   @media (max-width: 768px) {
@@ -579,11 +556,10 @@
 
   &:hover {
     border-color: $color-border-focus;
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 
-    &::before { opacity: 1; }
-    &::after  { opacity: 0.1; }
+    &::before { opacity: 0.6; }
   }
 }
 
@@ -597,7 +573,7 @@
 }
 
 .cardTag {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -609,7 +585,7 @@
 }
 
 .industryTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 2.1rem;
   font-weight: 700;
   color: $color-text-primary;
@@ -626,11 +602,11 @@
 }
 
 .cardDivider {
-  height: 1px;
-  width: 40px;
+  height: 2px;
+  width: 32px;
   margin-bottom: 1.5rem;
   border-radius: 2px;
-  opacity: 0.6;
+  background: #3b82f6;
   position: relative;
   z-index: 2;
 }
@@ -645,7 +621,7 @@
 }
 
 .projectItem {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -662,7 +638,8 @@
 
 .projectArrow {
   flex-shrink: 0;
-  opacity: 0.6;
+  color: #3b82f6;
+  opacity: 0.85;
 }
 
 /* =============================================
@@ -681,19 +658,6 @@
   @media (max-width: 768px) {
     padding: 4rem 0;
   }
-}
-
-.valuePropsBlob {
-  position: absolute;
-  top: 30%;
-  right: -15vw;
-  width: 55vw;
-  height: 55vw;
-  background: radial-gradient(circle, rgba(83, 221, 252, 0.08), transparent 65%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
 }
 
 .valuePropsSplit {
@@ -730,7 +694,7 @@
 
 .valueSectionEyebrow {
   display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -741,7 +705,7 @@
 }
 
 .valuePropsTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 3.5rem;
   font-weight: 700;
   color: $color-text-primary;
@@ -764,7 +728,7 @@
   em {
     font-style: italic;
     font-weight: 400;
-    background: linear-gradient(135deg, #ba9eff 0%, #53ddfc 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -772,7 +736,7 @@
 }
 
 .valueSectionSubtext {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 1.1rem;
   color: $color-text-secondary;
   line-height: 1.7;
@@ -803,7 +767,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(186, 158, 255, 0.10), transparent 55%);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.10), transparent 55%);
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -828,7 +792,7 @@
   position: absolute;
   right: 1.5rem;
   top: 1rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 5.5rem;
   font-weight: 700;
   color: $color-text-primary;
@@ -853,7 +817,7 @@
 }
 
 .valueTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 1.45rem;
   font-weight: 600;
   color: $color-text-primary;
@@ -867,7 +831,7 @@
 }
 
 .valueDesc {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   color: $color-text-secondary;
   font-size: 1.02rem;
   line-height: 1.65;
@@ -883,6 +847,7 @@
 .ctaSection {
   padding: 9rem 2rem 10rem;
   background-color: $color-background;
+  border-top: 1px solid $color-border;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -898,19 +863,17 @@
   }
 }
 
-.ctaBlob {
+/* Matching dot-grid texture, faded toward the copy so the CTA stays legible. */
+.ctaGrid {
   position: absolute;
-  inset: 50% auto auto 50%;
-  transform: translate(-50%, -50%);
-  width: 70vw;
-  height: 70vw;
-  max-width: 900px;
-  max-height: 900px;
-  background: radial-gradient(circle, rgba(186, 158, 255, 0.10), rgba(83, 221, 252, 0.05) 40%, transparent 70%);
-  filter: blur(60px);
-  pointer-events: none;
+  inset: 0;
   z-index: 0;
-  will-change: transform;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, $color-border 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 34%, #000 88%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 34%, #000 88%);
 }
 
 .ctaInner {
@@ -922,7 +885,7 @@
 }
 
 .ctaHeading {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 5.5rem;
   font-weight: 700;
   color: $color-text-primary;
@@ -945,7 +908,7 @@
 }
 
 .ctaSubtext {
-  font-family: 'Inter', sans-serif;
+  font-family: $font-primary;
   font-size: 1.2rem;
   line-height: 1.55;
   color: $color-text-secondary;
@@ -982,7 +945,7 @@
   background: $color-text-primary;
   color: $color-background;
   border-radius: 10px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -991,11 +954,11 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 44px rgba(186, 158, 255, 0.28);
+    box-shadow: 0 18px 44px rgba(59, 130, 246, 0.28);
   }
 
   &:focus-visible {
-    outline: 2px solid #ba9eff;
+    outline: 2px solid #3b82f6;
     outline-offset: 3px;
   }
 
@@ -1007,7 +970,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 1rem;
   font-weight: 500;
   color: $color-text-secondary;
@@ -1022,7 +985,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid #ba9eff;
+    outline: 2px solid #3b82f6;
     outline-offset: 3px;
     border-radius: 4px;
   }

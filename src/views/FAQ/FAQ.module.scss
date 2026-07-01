@@ -23,7 +23,7 @@
   width: 100%;
   height: 600px;
   background: radial-gradient(circle at 10% 0%, rgba($color-accent, 0.15), transparent 40%),
-              radial-gradient(circle at 90% 10%, rgba(6, 182, 212, 0.1), transparent 40%);
+              radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.1), transparent 40%);
   z-index: -1;
   pointer-events: none;
 }
@@ -126,7 +126,7 @@
 
   &:focus-within {
     border-color: $color-border-focus;
-    background: rgba(186, 158, 255, 0.04);
+    background: rgba(59, 130, 246, 0.04);
   }
 
   input {
@@ -135,7 +135,7 @@
     border: 0;
     outline: 0;
     color: $color-text-primary;
-    font-family: 'Inter', sans-serif;
+    font-family: $font-primary;
     font-size: 1rem;
     padding: 0;
     min-width: 0;
@@ -180,7 +180,7 @@
   border: 1px solid $color-border;
   background: rgba(255, 255, 255, 0.02);
   color: $color-text-secondary;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 0.88rem;
   font-weight: 500;
   letter-spacing: -0.005em;
@@ -196,8 +196,8 @@
 
 .jumpPillActive {
   color: $color-text-primary;
-  border-color: rgba(186, 158, 255, 0.6);
-  background: rgba(186, 158, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.08);
 }
 
 .jumpCount {
@@ -281,7 +281,7 @@
 }
 
 .categoryTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 2.25rem;
   color: $color-text-primary;
   font-weight: 700;
@@ -395,7 +395,7 @@
 }
 
 .contactTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: $font-heading;
   font-size: 1.5rem;
   color: $color-text-primary;
   margin-bottom: 0.4rem;
@@ -431,7 +431,7 @@
 
   &:hover {
     border-color: $color-border-focus;
-    background: rgba(186, 158, 255, 0.06);
+    background: rgba(59, 130, 246, 0.06);
     transform: translateY(-1px);
   }
 
