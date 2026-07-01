@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pages:build": "npx @cloudflare/next-on-pages@1",
+    "pages:preview": "npm run pages:build && npx wrangler pages dev .vercel/output/static"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -17,6 +19,7 @@
     "sass": "^1.98.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
