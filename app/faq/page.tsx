@@ -11,9 +11,9 @@ import {
 export const metadata: Metadata = {
   title: 'FAQ — Frequently Asked Questions',
   description:
-    'Answers to common questions about DIMSSU Labs: what we do, AI automation capabilities, pricing, timelines, and how to work with us. AI agents from $1,200. MVPs in 4-6 weeks.',
+    'Answers to common questions about BuildspaceLabs: what we do, AI automation capabilities, pricing, timelines, and how to work with us. AI agents from $1,200. MVPs in 4-6 weeks.',
   keywords: [
-    'DIMSSU Labs FAQ',
+    'BuildspaceLabs FAQ',
     'AI agent pricing',
     'AI development cost',
     'MVP timeline',
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/faq' },
   openGraph: {
-    title: 'FAQ — DIMSSU Labs',
+    title: 'FAQ — BuildspaceLabs',
     description:
-      'Answers to questions about DIMSSU Labs services, pricing, timelines, AI capabilities, and engagement models.',
+      'Answers to questions about BuildspaceLabs services, pricing, timelines, AI capabilities, and engagement models.',
     url: `${SITE_URL}/faq`,
     type: 'website',
   },

@@ -12,19 +12,19 @@ export interface FAQCategory {
 export const faqs: FAQCategory[] = [
   {
     category: 'General',
-    description: 'Everything you need to know about DIMSSU Labs and what we do.',
+    description: 'Everything you need to know about BuildspaceLabs and what we do.',
     questions: [
       {
-        q: 'What is DIMSSU Labs?',
-        a: 'DIMSSU Labs is an AI-native software development company and product studio that builds custom AI solutions, intelligent automation systems, and production-ready software for businesses worldwide. Unlike traditional IT consultancies, DIMSSU Labs ships working AI products in weeks, not months.',
+        q: 'What is BuildspaceLabs?',
+        a: 'BuildspaceLabs is an AI-native software development company and product studio that builds custom AI solutions, intelligent automation systems, and production-ready software for businesses worldwide. Unlike traditional IT consultancies, BuildspaceLabs ships working AI products in weeks, not months.',
       },
       {
         q: 'What kind of solutions do you build?',
-        a: 'DIMSSU Labs builds custom AI solutions including AI agents, intelligent chatbots, workflow automation systems, LLM-powered applications, and enterprise software to help businesses automate customer support, lead generation, document processing, and workflows.',
+        a: 'BuildspaceLabs builds custom AI solutions including AI agents, intelligent chatbots, workflow automation systems, LLM-powered applications, and enterprise software to help businesses automate customer support, lead generation, document processing, and workflows.',
       },
       {
         q: 'Where are you located?',
-        a: 'DIMSSU Labs is headquartered in India and serves clients globally including the US, UK, Europe, Middle East, and Australia. The company operates remotely with distributed teams.',
+        a: 'BuildspaceLabs is headquartered in India and serves clients globally including the US, UK, Europe, Middle East, and Australia. The company operates remotely with distributed teams.',
       },
       {
         q: 'How do you differ from traditional IT consultancies?',
@@ -32,7 +32,7 @@ export const faqs: FAQCategory[] = [
       },
       {
         q: 'What industries do you work with?',
-        a: 'DIMSSU Labs works across multiple industries including fintech, banking, e-commerce, retail, healthcare, manufacturing, logistics, education, real estate, and professional SaaS companies.',
+        a: 'BuildspaceLabs works across multiple industries including fintech, banking, e-commerce, retail, healthcare, manufacturing, logistics, education, real estate, and professional SaaS companies.',
       },
     ],
   },

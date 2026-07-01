@@ -11,17 +11,17 @@ import {
 export const metadata: Metadata = {
   title: 'Portfolio — Production AI & Software Projects',
   description:
-    'Explore DIMSSU Labs\' portfolio: AI clinical notes, fleet management, EV charging, lease management, web scraping APIs, edge AI engines and more. All live. All in production.',
+    'Explore BuildspaceLabs\' portfolio: AI clinical notes, fleet management, EV charging, lease management, web scraping APIs, edge AI engines and more. All live. All in production.',
   keywords: [
     'AI portfolio',
     'AI case studies',
     'production AI projects',
-    'DIMSSU Labs portfolio',
+    'BuildspaceLabs portfolio',
     'AI products India',
   ],
   alternates: { canonical: '/portfolio' },
   openGraph: {
-    title: 'Portfolio — DIMSSU Labs',
+    title: 'Portfolio — BuildspaceLabs',
     description:
       'Production AI and software projects across healthcare, logistics, real estate, government and more.',
     url: `${SITE_URL}/portfolio`,
@@ -38,7 +38,7 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <JsonLd data={itemListSchema(items, 'DIMSSU Labs Portfolio')} />
+      <JsonLd data={itemListSchema(items, 'BuildspaceLabs Portfolio')} />
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', url: SITE_URL },

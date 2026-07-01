@@ -122,7 +122,7 @@ const IntroSection = () => {
           })}
         </h2>
         <motion.p style={{ opacity: subtextOpacity, y: subtextY }} className={styles.introSubtext}>
-          DIMSSU Labs is redefining how complex technical products are built. We combine deep AI expertise with rapid product development, delivering production-ready, world-class software that you can be proud of. We&apos;re not just a vendor; we&apos;re your technical co-founders.
+          BuildspaceLabs is redefining how complex technical products are built. We combine deep AI expertise with rapid product development, delivering production-ready, world-class software that you can be proud of. We&apos;re not just a vendor; we&apos;re your technical co-founders.
         </motion.p>
       </div>
     </section>
@@ -178,7 +178,7 @@ const ValuePropsSection = ({ valueProps }: { valueProps: ValueProp[] }) => {
             Four reasons<br />people sign with us.
           </motion.h2>
           <motion.p style={{ y: subtitleY }} className={styles.valueSectionSubtext}>
-            Plain talk — what makes the work different when DIMSSU is the team behind it.
+            Plain talk — what makes the work different when BuildspaceLabs is the team behind it.
           </motion.p>
         </div>
 

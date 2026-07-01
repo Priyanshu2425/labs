@@ -1,8 +1,8 @@
 import type { Product } from '@/data/products';
 import type { FAQCategory } from '@/data/faq';
 
-export const SITE_URL = 'https://labs.dimssu.ai';
-export const SITE_NAME = 'DIMSSU Labs';
+export const SITE_URL = 'https://buildspacelabs.com';
+export const SITE_NAME = 'BuildspaceLabs';
 
 interface JsonLdProps {
   data: Record<string, unknown> | Record<string, unknown>[];
@@ -22,9 +22,13 @@ export function organizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_NAME,
-    legalName: 'DIMSSU Labs',
+    legalName: 'BuildspaceLabs',
     url: SITE_URL,
     logo: `${SITE_URL}/favicon.svg`,
+    parentOrganization: {
+      '@type': 'Organization',
+      name: 'Vruoom',
+    },
     description:
       "India's first AI-native product studio and engineering lab. We build custom AI solutions, intelligent automation, and production-ready software for enterprises worldwide.",
     foundingLocation: {
@@ -44,15 +48,10 @@ export function organizationSchema() {
       {
         '@type': 'ContactPoint',
         contactType: 'customer service',
-        email: 'labs@dimssu.com',
+        email: 'aryan@vruoom.com',
         telephone: '+91-834-071-1366',
         availableLanguage: ['English', 'Hindi'],
       },
-    ],
-    sameAs: [
-      'https://www.linkedin.com/company/dimssu',
-      'https://twitter.com/dimssu',
-      'https://github.com/dimssu',
     ],
   };
 }

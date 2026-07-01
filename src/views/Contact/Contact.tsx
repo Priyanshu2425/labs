@@ -27,17 +27,35 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    if (!formData.service) return;
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data: { ok: boolean; error?: string } = await res.json().catch(() => ({ ok: false }));
+
+      if (!res.ok || !data.ok) {
+        setSubmitError(data.error ?? 'Something went wrong. Please email us directly.');
+        return;
+      }
+
       setShowSuccess(true);
       setFormData({ name: '', email: '', service: '', message: '' });
       setTimeout(() => setShowSuccess(false), 5000);
-    }, 1500);
+    } catch {
+      setSubmitError('Network error. Please email us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -90,7 +108,7 @@ export default function Contact() {
 
               <motion.div variants={fadeIn} className={styles.channelStack}>
                 <a
-                  href="mailto:pra@labs.dimssu.com"
+                  href="mailto:priyanshu@vruoom.com"
                   className={styles.channelCard}
                   data-channel="email"
                 >
@@ -98,7 +116,7 @@ export default function Contact() {
                     <span className={styles.channelLabel}>Email</span>
                     <ArrowUpRight size={16} className={styles.channelArrow} />
                   </div>
-                  <span className={styles.channelValue}>pra@labs.dimssu.com</span>
+                  <span className={styles.channelValue}>priyanshu@vruoom.com</span>
                   <span className={styles.channelHint}>Best for project briefs and async</span>
                 </a>
 
@@ -226,6 +244,12 @@ export default function Contact() {
                   <>Send it over <ArrowRight size={16} /></>
                 )}
               </button>
+
+              {submitError && (
+                <div className={styles.formError} role="alert">
+                  {submitError} — <a href="mailto:priyanshu@vruoom.com">email priyanshu@vruoom.com</a> instead.
+                </div>
+              )}
 
               <p className={styles.formFootnote}>
                 Your details are read by the team. No CRM auto-blast, no drip sequence.

@@ -22,17 +22,14 @@
   }
 }
 
-.bracket {
-  color: $color-text-primary;
-  font-weight: 400;
+.brace {
+  color: $color-accent;
+  font-weight: 500;
+  margin: 0 0.12em;
 }
 
 .brand {
   font-weight: 800;
-  color: $color-text-primary;
-}
-
-.tld {
-  font-weight: 300;
+  letter-spacing: -0.04em;
   color: $color-text-primary;
 }

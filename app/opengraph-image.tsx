@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'DIMSSU Labs — India\'s First AI-Native Product Studio';
+export const alt = 'BuildspaceLabs — India\'s First AI-Native Product Studio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -23,18 +23,22 @@ export default async function OpengraphImage() {
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <div
             style={{
               display: 'flex',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              backgroundImage: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+              fontSize: 44,
+              fontWeight: 800,
+              fontFamily: 'monospace',
+              letterSpacing: -2,
             }}
-          />
+          >
+            <span style={{ color: '#3b82f6' }}>{'{'}</span>
+            <span style={{ color: '#ffffff' }}>bs</span>
+            <span style={{ color: '#3b82f6' }}>{'}'}</span>
+          </div>
           <div style={{ display: 'flex', fontSize: 32, fontWeight: 600, letterSpacing: -0.5 }}>
-            DIMSSU Labs
+            BuildspaceLabs
           </div>
         </div>
 
@@ -74,7 +78,7 @@ export default async function OpengraphImage() {
             width: '100%',
           }}
         >
-          <div style={{ display: 'flex' }}>labs.dimssu.ai</div>
+          <div style={{ display: 'flex' }}>buildspacelabs.com</div>
           <div style={{ display: 'flex' }}>AI-Native · Engineering Lab</div>
         </div>
       </div>

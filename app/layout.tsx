@@ -12,12 +12,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'DIMSSU Labs — India\'s First AI-Native Product Studio',
-    template: '%s | DIMSSU Labs',
+    default: 'BuildspaceLabs — India\'s First AI-Native Product Studio',
+    template: '%s | BuildspaceLabs',
   },
   description:
-    'DIMSSU Labs is India\'s AI-native product studio and engineering lab. We build custom AI solutions, intelligent automation, and production-ready software for enterprises worldwide.',
-  applicationName: 'DIMSSU Labs',
+    'BuildspaceLabs is India\'s AI-native product studio and engineering lab. We build custom AI solutions, intelligent automation, and production-ready software for enterprises worldwide.',
+  applicationName: 'BuildspaceLabs',
   keywords: [
     'AI product studio',
     'India AI engineering',
@@ -28,11 +28,11 @@ export const metadata: Metadata = {
     'software development',
     'fractional CTO',
     'AI automation',
-    'DIMSSU Labs',
+    'BuildspaceLabs',
   ],
-  authors: [{ name: 'DIMSSU Labs', url: SITE_URL }],
-  creator: 'DIMSSU Labs',
-  publisher: 'DIMSSU Labs',
+  authors: [{ name: 'BuildspaceLabs', url: SITE_URL }],
+  creator: 'BuildspaceLabs',
+  publisher: 'BuildspaceLabs',
   category: 'technology',
   alternates: {
     canonical: '/',
@@ -41,16 +41,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: SITE_URL,
-    siteName: 'DIMSSU Labs',
-    title: 'DIMSSU Labs — India\'s First AI-Native Product Studio',
+    siteName: 'BuildspaceLabs',
+    title: 'BuildspaceLabs — India\'s First AI-Native Product Studio',
     description:
       'We build custom AI solutions, intelligent automation, and production-ready software. Working prototypes in 24 hours.',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@dimssu',
-    creator: '@dimssu',
-    title: 'DIMSSU Labs — AI-Native Product Studio',
+    title: 'BuildspaceLabs — AI-Native Product Studio',
     description: 'India\'s AI-native engineering lab. Custom AI, production software, 24h prototypes.',
   },
   icons: {

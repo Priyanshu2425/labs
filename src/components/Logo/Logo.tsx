@@ -7,11 +7,10 @@ interface LogoProps {
 
 const Logo: FC<LogoProps> = ({ className = '' }) => {
   return (
-    <div className={`${styles.logo} ${className}`}>
-      <span className={styles.bracket}>[</span>
-      <span className={styles.brand}>labs.dimssu</span>
-      <span className={styles.tld}>.ai</span>
-      <span className={styles.bracket}>]</span>
+    <div className={`${styles.logo} ${className}`} aria-label="BuildspaceLabs">
+      <span className={styles.brace}>{'{'}</span>
+      <span className={styles.brand}>bs</span>
+      <span className={styles.brace}>{'}'}</span>
     </div>
   );
 };

@@ -147,9 +147,9 @@ export default function FAQ() {
           {filtered.length === 0 ? (
             <div className={styles.emptyState}>
               <p>Nothing matches &ldquo;{query}&rdquo;. Try a different phrase, or email us directly.</p>
-              <a href="mailto:pra@labs.dimssu.com" className={styles.emptyEmail}>
+              <a href="mailto:priyanshu@vruoom.com" className={styles.emptyEmail}>
                 <Mail size={16} />
-                pra@labs.dimssu.com
+                priyanshu@vruoom.com
               </a>
             </div>
           ) : (
@@ -212,9 +212,9 @@ export default function FAQ() {
                 The fastest path is a short email to the team. We usually answer within a working day.
               </p>
             </div>
-            <a href="mailto:pra@labs.dimssu.com" className={styles.contactBtn}>
+            <a href="mailto:priyanshu@vruoom.com" className={styles.contactBtn}>
               <Mail size={16} />
-              pra@labs.dimssu.com
+              priyanshu@vruoom.com
             </a>
           </motion.div>
         </section>

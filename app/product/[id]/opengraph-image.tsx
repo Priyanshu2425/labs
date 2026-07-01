@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { productsData } from '@/data/products';
 
-export const alt = 'DIMSSU Labs product';
+export const alt = 'BuildspaceLabs product';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -16,7 +16,7 @@ interface Props {
 export default async function ProductOgImage({ params }: Props) {
   const { id } = await params;
   const product = productsData[id];
-  const title = product?.title ?? 'DIMSSU Labs';
+  const title = product?.title ?? 'BuildspaceLabs';
   const subtitle =
     product?.subtitle ??
     'AI-native product studio building custom AI solutions and production software.';
@@ -46,13 +46,17 @@ export default async function ProductOgImage({ params }: Props) {
             <div
               style={{
                 display: 'flex',
-                width: 40,
-                height: 40,
-                borderRadius: 10,
-                backgroundImage: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+                fontSize: 38,
+                fontWeight: 800,
+                fontFamily: 'monospace',
+                letterSpacing: -2,
               }}
-            />
-            <div style={{ display: 'flex', fontSize: 26, fontWeight: 600 }}>DIMSSU Labs</div>
+            >
+              <span style={{ color: '#3b82f6' }}>{'{'}</span>
+              <span style={{ color: '#ffffff' }}>bs</span>
+              <span style={{ color: '#3b82f6' }}>{'}'}</span>
+            </div>
+            <div style={{ display: 'flex', fontSize: 26, fontWeight: 600 }}>BuildspaceLabs</div>
           </div>
           <div
             style={{
@@ -107,7 +111,7 @@ export default async function ProductOgImage({ params }: Props) {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 22, color: '#71717a', width: '100%' }}>
-          <div style={{ display: 'flex' }}>labs.dimssu.ai/product/{id}</div>
+          <div style={{ display: 'flex' }}>buildspacelabs.com/product/{id}</div>
           <div style={{ display: 'flex' }}>AI-Native Engineering</div>
         </div>
       </div>

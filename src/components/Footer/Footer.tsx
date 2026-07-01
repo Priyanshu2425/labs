@@ -28,8 +28,8 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.footerBottom}>
-        <p>&copy; {new Date().getFullYear()} DIMSSU Labs. Built in India.</p>
-        <a href="mailto:pra@labs.dimssu.com" className={styles.footerEmail}>pra@labs.dimssu.com</a>
+        <p>&copy; {new Date().getFullYear()} BuildspaceLabs. Built in India.</p>
+        <a href="mailto:priyanshu@vruoom.com" className={styles.footerEmail}>priyanshu@vruoom.com</a>
       </div>
     </footer>
   );

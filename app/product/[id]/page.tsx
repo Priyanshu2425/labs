@@ -36,19 +36,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${product.title} — ${categoriesStr}`,
-    description: `${product.subtitle} Tech stack: ${techStackStr}. Built by DIMSSU Labs for ${product.client}.`,
+    description: `${product.subtitle} Tech stack: ${techStackStr}. Built by BuildspaceLabs for ${product.client}.`,
     alternates: { canonical: `/product/${id}` },
     openGraph: {
-      title: `${product.title} | DIMSSU Labs`,
+      title: `${product.title} | BuildspaceLabs`,
       description: product.subtitle,
       url,
       type: 'article',
       locale: 'en_IN',
-      siteName: 'DIMSSU Labs',
+      siteName: 'BuildspaceLabs',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${product.title} | DIMSSU Labs`,
+      title: `${product.title} | BuildspaceLabs`,
       description: product.subtitle,
     },
     keywords: [
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ...product.categories,
       ...product.techStack,
       product.client,
-      'DIMSSU Labs',
+      'BuildspaceLabs',
       'AI product',
     ],
   };

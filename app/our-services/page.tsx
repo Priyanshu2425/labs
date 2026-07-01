@@ -10,18 +10,18 @@ import {
 export const metadata: Metadata = {
   title: 'Our Services — Custom AI Builds, Products & Fractional CTO',
   description:
-    'Three ways to work with DIMSSU Labs: custom software builds from $5k, ready-to-deploy AI products live in 72 hours, or fractional CTO partnership. AI-native engineering.',
+    'Three ways to work with BuildspaceLabs: custom software builds from $5k, ready-to-deploy AI products live in 72 hours, or fractional CTO partnership. AI-native engineering.',
   keywords: [
     'custom AI development',
     'AI products',
     'fractional CTO',
     'AI engineering services',
-    'DIMSSU Labs services',
+    'BuildspaceLabs services',
     'enterprise AI',
   ],
   alternates: { canonical: '/our-services' },
   openGraph: {
-    title: 'Our Services — DIMSSU Labs',
+    title: 'Our Services — BuildspaceLabs',
     description:
       'Custom software builds, ready-to-deploy AI products, and Fractional CTO partnerships. AI-native engineering for enterprises.',
     url: `${SITE_URL}/our-services`,
@@ -50,7 +50,7 @@ const services = [
 export default function ServicesPage() {
   return (
     <>
-      <JsonLd data={itemListSchema(services, 'DIMSSU Labs Services')} />
+      <JsonLd data={itemListSchema(services, 'BuildspaceLabs Services')} />
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', url: SITE_URL },
