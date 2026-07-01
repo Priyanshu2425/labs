@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { productsData } from '@/data/products';
 
+export const runtime = 'edge';
 export const alt = 'BuildspaceLabs product';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
