@@ -306,8 +306,6 @@ const HorizontalScrollCarousel = () => {
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const industries = [
-    { title: 'Government', tag: 'Public Sector', image: '/media/industry-government.webp', projects: ['Boss OS', 'Weather Prediction', 'AI-Native Digital Tutor'] },
-    { title: 'Defence', tag: 'Mission Critical', image: '/media/industry-defence.webp', projects: ['VAJRA', 'KAVACH', 'SAGAR'] },
     { title: 'Logistics', tag: 'Operations', image: '/media/industry-logistics.webp', projects: ['Fleet Management', 'Charge Pulse', 'Supply Chain Ops'] },
     { title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
     { title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
