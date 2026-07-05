@@ -265,9 +265,9 @@ const projects: PortfolioProject[] = [
     link: "/product/factory-os",
     filterCategory: "Web",
     accent: "#3b82f6",
-    coverImage: "/media/product-factory-os.webp",
-    coverAlt: "Abstract render — a production timeline of milestone bars and quality-gate checkpoints across a factory floor",
-    coverCaption: "Milestones, SOP gates and capacity — made visible"
+    coverImage: "/projects/factory-os/dashboard.webp",
+    coverAlt: "Factory OS production planning dashboard — milestone Gantt, SOP gates and orders",
+    coverCaption: "Milestones, SOP gates and capacity — the spreadsheet, replaced"
   },
   {
     id: "dsv-fleet-management",
@@ -281,8 +281,8 @@ const projects: PortfolioProject[] = [
     link: "/product/dsv-fleet-management",
     filterCategory: "Mobile",
     accent: "#3b82f6",
-    coverImage: "/media/product-dsv-fleet.webp",
-    coverAlt: "Abstract render — a live operations map with glowing vehicle pings, routes and geofences",
+    coverImage: "/projects/dsv-fleet-management/dashboard.webp",
+    coverAlt: "DSV Fleet live operations dashboard — live map, vehicles and routes",
     coverCaption: "Every vehicle, driver and route — live on one map"
   },
   {
@@ -297,8 +297,8 @@ const projects: PortfolioProject[] = [
     link: "/product/ai-native-real-estate-fund",
     filterCategory: "AI Builds",
     accent: "#3b82f6",
-    coverImage: "/media/product-real-estate-fund.webp",
-    coverAlt: "Abstract render — a 3D property map with distress signals and four AI agents running a deal pipeline",
+    coverImage: "/projects/ai-native-real-estate-fund/dashboard.webp",
+    coverAlt: "AI-native real estate fund deal pipeline dashboard",
     coverCaption: "Scout → underwrite → outreach → structure"
   },
   {
@@ -313,8 +313,8 @@ const projects: PortfolioProject[] = [
     link: "/product/open-vision-ppe",
     filterCategory: "AI Builds",
     accent: "#3b82f6",
-    coverImage: "/media/product-open-vision-ppe.webp",
-    coverAlt: "Abstract render — detection boxes locking onto workers and helmets at an industrial site, on-prem edge device",
+    coverImage: "/projects/open-vision-ppe/dashboard.webp",
+    coverAlt: "Open Vision PPE safety monitor — live camera feeds and violations",
     coverCaption: "PPE, zones and intrusion — detected on-prem"
   },
   {
@@ -329,8 +329,8 @@ const projects: PortfolioProject[] = [
     link: "/product/focuscare",
     filterCategory: "AI Builds",
     accent: "#3b82f6",
-    coverImage: "/media/product-focuscare.webp",
-    coverAlt: "Abstract render — a consultation's audio waveform folding into structured physiotherapy notes",
+    coverImage: "/projects/focuscare/dashboard.webp",
+    coverAlt: "Focuscare clinic dashboard — live transcription turning into a SOAP note",
     coverCaption: "One-click consult → transcript → SOAP notes"
   },
   {
@@ -345,8 +345,8 @@ const projects: PortfolioProject[] = [
     link: "/product/food-ordering-platform",
     filterCategory: "Web",
     accent: "#3b82f6",
-    coverImage: "/media/product-food-ordering.webp",
-    coverAlt: "Abstract render — vendor, order, payment and settlement nodes flowing across a grid",
+    coverImage: "/projects/food-ordering-platform/dashboard.webp",
+    coverAlt: "Events ordering operations dashboard — revenue, orders and settlements",
     coverCaption: "Vendors, orders, payments, settlements — one platform"
   },
   {
@@ -361,8 +361,8 @@ const projects: PortfolioProject[] = [
     link: "/product/ai-job-automation",
     filterCategory: "AI Builds",
     accent: "#3b82f6",
-    coverImage: "/media/product-ai-job-automation.webp",
-    coverAlt: "Abstract render — a robotic cursor auto-filling stacked application forms as a CAPTCHA shield dissolves",
+    coverImage: "/projects/ai-job-automation/dashboard.webp",
+    coverAlt: "ATS automation runs dashboard — success by CAPTCHA tier across ATS platforms",
     coverCaption: "Auto-apply across Lever, Greenhouse, Workday"
   }
 ];

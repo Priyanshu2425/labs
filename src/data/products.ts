@@ -239,10 +239,14 @@ export const productsData: Record<string, Product> = {
       { label: "Format", value: "SOAP Notes" }
     ],
     coverImage: {
-      src: "/media/product-focuscare.webp",
-      alt: "Abstract render — a consultation's audio waveform folding into structured physiotherapy notes",
-      caption: "One-click consult → real-time transcript → structured SOAP notes"
-    }
+      src: "/projects/focuscare/dashboard.webp",
+      alt: "Focuscare clinic dashboard — live transcription turning into a SOAP note",
+      caption: "Today — live transcription turning into a structured SOAP note"
+    },
+    gallery: [
+      { src: "/projects/focuscare/dashboard.webp", alt: "Focuscare clinic dashboard — live transcription turning into a SOAP note", caption: "Today — live transcription turning into a structured SOAP note" },
+      { src: "/projects/focuscare/detail.webp", alt: "Focuscare clinic dashboard — live transcription turning into a SOAP note", caption: "A consultation — transcript, SOAP note and the auto-scheduled follow-up" }
+    ]
   },
   "dsv-fleet-management": {
     id: "dsv-fleet-management",
@@ -265,10 +269,14 @@ export const productsData: Record<string, Product> = {
       { label: "Support Tickets", value: "-60%" }
     ],
     coverImage: {
-      src: "/media/product-dsv-fleet.webp",
-      alt: "Abstract render — a live operations map with glowing vehicle pings, routes and geofences",
-      caption: "Every vehicle, driver and route — live on one map"
-    }
+      src: "/projects/dsv-fleet-management/dashboard.webp",
+      alt: "DSV Fleet live operations dashboard — live map, vehicles and routes",
+      caption: "Live operations — every vehicle, driver and route on one map"
+    },
+    gallery: [
+      { src: "/projects/dsv-fleet-management/dashboard.webp", alt: "DSV Fleet live operations dashboard — live map, vehicles and routes", caption: "Live operations — every vehicle, driver and route on one map" },
+      { src: "/projects/dsv-fleet-management/detail.webp", alt: "DSV Fleet live operations dashboard — live map, vehicles and routes", caption: "Vehicle detail — live location, telemetry, route stops and geofence events" }
+    ]
   },
   "charge-pulse": {
     id: "charge-pulse",
@@ -349,10 +357,14 @@ export const productsData: Record<string, Product> = {
       { label: "Access Roles", value: "5" }
     ],
     coverImage: {
-      src: "/media/product-food-ordering.webp",
-      alt: "Abstract render — vendor, order, payment and settlement nodes flowing across a grid",
-      caption: "Vendors, orders, payments, settlements — one operations platform"
-    }
+      src: "/projects/food-ordering-platform/dashboard.webp",
+      alt: "Events ordering operations dashboard — revenue, orders and settlements",
+      caption: "Operations — revenue, orders and settlements by vendor"
+    },
+    gallery: [
+      { src: "/projects/food-ordering-platform/dashboard.webp", alt: "Events ordering operations dashboard — revenue, orders and settlements", caption: "Operations — revenue, orders and settlements by vendor" },
+      { src: "/projects/food-ordering-platform/detail.webp", alt: "Events ordering operations dashboard — revenue, orders and settlements", caption: "A vendor settlement — orders, commission, tax and the approval trail" }
+    ]
   },
   "open-vision-ppe": {
     id: "open-vision-ppe",
@@ -376,10 +388,14 @@ export const productsData: Record<string, Product> = {
       { label: "Cloud Required", value: "None" }
     ],
     coverImage: {
-      src: "/media/product-open-vision-ppe.webp",
-      alt: "Abstract render — detection boxes locking onto workers and helmets at an industrial site, on-prem edge device",
-      caption: "PPE, zones and intrusion — detected on-prem, no cloud required"
-    }
+      src: "/projects/open-vision-ppe/dashboard.webp",
+      alt: "Open Vision PPE safety monitor — live camera feeds and violations",
+      caption: "Safety monitor — live camera feeds with PPE and zone detection"
+    },
+    gallery: [
+      { src: "/projects/open-vision-ppe/dashboard.webp", alt: "Open Vision PPE safety monitor — live camera feeds and violations", caption: "Safety monitor — live camera feeds with PPE and zone detection" },
+      { src: "/projects/open-vision-ppe/detail.webp", alt: "Open Vision PPE safety monitor — live camera feeds and violations", caption: "A violation — detection boxes, track filmstrip and the auto-report trail" }
+    ]
   },
   "factory-os": {
     id: "factory-os",
@@ -403,10 +419,14 @@ export const productsData: Record<string, Product> = {
       { label: "API Endpoints", value: "31+" }
     ],
     coverImage: {
-      src: "/media/product-factory-os.webp",
-      alt: "Abstract render — a production timeline of milestone bars and quality-gate checkpoints across a factory floor",
-      caption: "Milestones, SOP gates and capacity — the spreadsheet, replaced"
-    }
+      src: "/projects/factory-os/dashboard.webp",
+      alt: "Factory OS production planning dashboard — milestone Gantt, SOP gates and orders",
+      caption: "Production planning — milestone timeline, SOP gates and live capacity"
+    },
+    gallery: [
+      { src: "/projects/factory-os/dashboard.webp", alt: "Factory OS production planning dashboard — milestone Gantt, SOP gates and orders", caption: "Production planning — milestone timeline, SOP gates and live capacity" },
+      { src: "/projects/factory-os/detail.webp", alt: "Factory OS production planning dashboard — milestone Gantt, SOP gates and orders", caption: "A production order — dual-track milestones and the nine SOP quality gates" }
+    ]
   },
   "grospace": {
     id: "grospace",
@@ -490,10 +510,14 @@ export const productsData: Record<string, Product> = {
       { label: "Distress Rules", value: "13" }
     ],
     coverImage: {
-      src: "/media/product-real-estate-fund.webp",
-      alt: "Abstract render — a 3D property map with distress signals and four AI agents running a deal pipeline",
-      caption: "Scout → underwrite → outreach → structure, run by four agents"
-    }
+      src: "/projects/ai-native-real-estate-fund/dashboard.webp",
+      alt: "AI-native real estate fund deal pipeline dashboard",
+      caption: "Deal pipeline — scout, underwrite, outreach and structure"
+    },
+    gallery: [
+      { src: "/projects/ai-native-real-estate-fund/dashboard.webp", alt: "AI-native real estate fund deal pipeline dashboard", caption: "Deal pipeline — scout, underwrite, outreach and structure" },
+      { src: "/projects/ai-native-real-estate-fund/detail.webp", alt: "AI-native real estate fund deal pipeline dashboard", caption: "A property — distress drivers, score and the underwriting brief" }
+    ]
   },
   "ai-job-automation": {
     id: "ai-job-automation",
@@ -517,10 +541,14 @@ export const productsData: Record<string, Product> = {
       { label: "Success Rate", value: "99%" }
     ],
     coverImage: {
-      src: "/media/product-ai-job-automation.webp",
-      alt: "Abstract render — a robotic cursor auto-filling stacked application forms as a CAPTCHA shield dissolves",
-      caption: "Auto-apply across Lever, Greenhouse and Workday — CAPTCHA-resilient"
-    }
+      src: "/projects/ai-job-automation/dashboard.webp",
+      alt: "ATS automation runs dashboard — success by CAPTCHA tier across ATS platforms",
+      caption: "Automation runs — success by CAPTCHA tier across Lever, Greenhouse, Workday"
+    },
+    gallery: [
+      { src: "/projects/ai-job-automation/dashboard.webp", alt: "ATS automation runs dashboard — success by CAPTCHA tier across ATS platforms", caption: "Automation runs — success by CAPTCHA tier across Lever, Greenhouse, Workday" },
+      { src: "/projects/ai-job-automation/detail.webp", alt: "ATS automation runs dashboard — success by CAPTCHA tier across ATS platforms", caption: "A run — the step timeline, form-fill and CAPTCHA-tier solve" }
+    ]
   },
   "investor-update-drafter": {
     id: "investor-update-drafter",
