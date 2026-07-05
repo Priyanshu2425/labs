@@ -495,16 +495,16 @@ export const productsData: Record<string, Product> = {
     client: "Bethun Bhowmik (ex-Oracle, ex-Amazon, ex-Ola)",
     categories: ["Real Estate"],
     status: "live",
-    overview: "4 AI agents powering a Scout → Underwrite → Outreach → Deal Structure pipeline. 13-rule distress detection engine. XGBoost ML scoring (0-100%). Claude underwriting agent generates Buy/Pass/Watch briefs. 3D Mapbox with Street View popups.",
+    overview: "4 AI agents powering a Scout → Underwrite → Outreach → Deal Structure pipeline. 13-rule distress detection engine. XGBoost ML scoring (0-100%). An LLM underwriting agent generates Buy/Pass/Watch briefs. 3D Mapbox with Street View popups.",
     features: [
       "3 parallel data providers: ATTOM (8 API endpoints), RESO MLS (OData client), Probate (signal-based detection)",
       "13-rule distress classification across 2 tiers",
       "XGBoost on Flask for distress scoring (11 features)",
-      "Claude agents for underwriting briefs and deal structuring from 9-strategy library",
+      "LLM agents for underwriting briefs and deal structuring from 9-strategy library",
       "3D Mapbox with Street View popups",
       "Subscription tier gating across SFR, multifamily, commercial, and land"
     ],
-    techStack: ["Python", "Claude", "XGBoost", "Mapbox", "Flask", "ATTOM API"],
+    techStack: ["Python", "LLM agents", "XGBoost", "Mapbox", "Flask", "ATTOM API"],
     metrics: [
       { label: "AI Agents", value: "4" },
       { label: "Distress Rules", value: "13" }
