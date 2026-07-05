@@ -41,7 +41,7 @@ const Marquee = () => {
 /* Rotating hero punchlines — typed in and out with a glowing caret. The first
    phrase is the initial state, so the headline is fully meaningful in the SSR
    HTML and with JS off; the rotation only kicks in on the client. */
-const HERO_ROTATING = ['actually ship.', 'reach production.', 'users rely on.', 'run on Monday.'];
+const HERO_ROTATING = ['actually ship.', 'reach production.', 'users rely on.'];
 
 function useRotatingType() {
   const [text, setText] = useState(HERO_ROTATING[0]);
@@ -93,19 +93,7 @@ const Hero = () => {
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroGrid} aria-hidden="true" />
-      <div className={styles.heroVisual} aria-hidden="true">
-        <Image
-          src="/media/home-hero.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className={styles.heroVisualImg}
-        />
-      </div>
       <div className={styles.heroGlow} aria-hidden="true" />
-      <div className={styles.heroScrim} aria-hidden="true" />
-      <div className={styles.heroFocus} aria-hidden="true" />
       <div className={styles.heroContent}>
         <p className={styles.heroEyebrow}>
           India&apos;s AI-native product studio

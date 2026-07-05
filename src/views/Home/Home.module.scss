@@ -98,49 +98,13 @@
   background: radial-gradient(ellipse 60% 50% at 50% -8%, rgba(59, 130, 246, 0.14), transparent 62%);
 }
 
-/* Signature hero backdrop — the isometric product-constellation render. Anchored
-   low so the glowing core sits below the headline; the top is masked to clean dark. */
-.heroVisual {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.92;
-  mask-image: linear-gradient(to bottom, transparent 3%, #000 40%, #000 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 3%, #000 40%, #000 100%);
-
-  @media (max-width: 768px) { opacity: 0.7; }
-}
-
-.heroVisualImg {
-  object-fit: cover;
-  object-position: center 74%;
-}
-
-/* Legibility scrim — sits behind the centred copy and fades to the page colour
-   at top and bottom so the render bleeds seamlessly into the section. Uses the
-   theme background var so it is dark in dark mode and white in light mode
-   (keeping the copy legible whichever way the text colour flips). */
-.heroScrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  /* Just blends the render into the section top/bottom now — the frosted
-     .heroContent panel handles legibility behind the copy. */
-  background: linear-gradient(to bottom, var(--color-background) 0%, transparent 30%, transparent 66%, var(--color-background) 100%);
-}
-
-/* Light mode: keep the render as a faint texture only — the frosted panel is the
-   focus, so a strong image just muddies the near-white hero. */
+/* Light mode: keep the intro systems-grid texture faint so it doesn't muddy the
+   near-white section. */
 [data-theme='light'] {
-  .heroVisual { opacity: 0.16; }
   .introVisual { opacity: 0.1; }
 }
 
-/* Open, editorial hero copy — no card. Legibility comes from the feathered
-   .heroFocus soft-focus field behind it (below), which has no visible edges. */
+/* Open, editorial hero copy over the clean dot-grid + glow. No background image. */
 .heroContent {
   max-width: 1040px;
   width: calc(100% - 3rem);
@@ -152,25 +116,6 @@
   @media (max-width: 480px) {
     padding: 0 1rem;
   }
-}
-
-/* Soft-focus field behind the copy — a feathered blur + gentle darken with NO
-   border, box, or hard edge. The constellation stays crisp everywhere except a
-   soft halo right behind the text, so the copy reads without a "glass box" look.
-   Theme-aware: lightens instead of darkening in light mode. */
-.heroFocus {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  backdrop-filter: blur(24px) saturate(110%);
-  -webkit-backdrop-filter: blur(24px) saturate(110%);
-  background: radial-gradient(ellipse 58% 44% at 50% 46%,
-    color-mix(in srgb, var(--color-background) 58%, transparent) 0%,
-    color-mix(in srgb, var(--color-background) 24%, transparent) 48%,
-    transparent 72%);
-  mask-image: radial-gradient(ellipse 62% 50% at 50% 46%, #000 26%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 62% 50% at 50% 46%, #000 26%, transparent 72%);
 }
 
 /* Entrance: pure CSS so the hero copy is visible with JS off / tab backgrounded,
