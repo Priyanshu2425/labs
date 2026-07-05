@@ -545,7 +545,7 @@ export default function Offer() {
                   exit="exit"
                 >
                   <span className={styles.stepKicker}>Your market-audit prompt is ready</span>
-                  <h2 className={styles.stepTitle}>Run this in ChatGPT or Claude, then paste the result back.</h2>
+                  <h2 className={styles.stepTitle}>Run this in ChatGPT or Gemini, then paste the result back.</h2>
                   <p className={styles.stepSub}>
                     Copy the prompt, paste your idea where marked, and run it in your own AI. It rates your
                     idea against 10 first-principles tests. Bring that report back here and we&apos;ll map it to
@@ -570,11 +570,11 @@ export default function Offer() {
                         </a>
                         <a
                           className={styles.ghostBtn}
-                          href="https://claude.ai/new"
+                          href="https://gemini.google.com/app"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <ExternalLink size={15} /> Claude
+                          <ExternalLink size={15} /> Gemini
                         </a>
                       </div>
                     </div>

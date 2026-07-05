@@ -1,6 +1,6 @@
 // =============================================================================
 // /offer — AI scoping funnel content, tiers, and the two prompts.
-// Frontend reveals PROMPT_1 (user runs it in their own ChatGPT/Claude).
+// Frontend reveals PROMPT_1 (user runs it in their own ChatGPT/Gemini).
 // Backend runs PROMPT_2 (via OpenRouter/DeepSeek) on the audit they paste back.
 // =============================================================================
 
@@ -139,7 +139,7 @@ export const COMPARISON_ROWS: CompareRow[] = [
 
 // -----------------------------------------------------------------------------
 // PROMPT 1 — revealed on screen after the email gate. The user copies this,
-// pastes their own idea at the bottom, and runs it in ChatGPT / Claude.
+// pastes their own idea at the bottom, and runs it in ChatGPT / Gemini.
 // -----------------------------------------------------------------------------
 export const PROMPT_1 = `Act as a veteran Silicon Valley Technical Product Manager, Systems Architect, and Startup Consultant. I am going to give you my software or business idea.
 
