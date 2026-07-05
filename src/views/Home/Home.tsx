@@ -310,6 +310,10 @@ const HorizontalScrollCarousel = () => {
     { title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
     { title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
     { title: 'Hardware & IoT', tag: 'Embedded Systems', image: '/media/industry-hardware.webp', projects: ['PCB Design', 'Embedded Firmware', 'Sensor Networks'] },
+    { title: 'Travel & Hospitality', tag: 'Studio', image: '/media/industry-travel.webp', projects: ['Atelier Travel Studio', 'Trip Planner AI', 'Booking Concierge'] },
+    { title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp', projects: ['AP Copilot', 'Fraud Signals', 'Underwriting AI'] },
+    { title: 'SaaS & Support', tag: 'Tooling', image: '/media/industry-saas.webp', projects: ['Support Pulse', 'Churn Radar', 'Inbox Zero'] },
+    { title: 'Legal Tech', tag: 'Compliance', image: '/media/industry-legal.webp', projects: ['Brief Forge', 'Contract Review', 'Clause Library'] },
   ];
 
   // Section height = one viewport (for the pin) + the actual horizontal travel.

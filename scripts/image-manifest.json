@@ -195,6 +195,30 @@
       "aspect": "4:3",
       "width": 1100,
       "prompt": "A small cluster of glowing electric-blue query nodes on a dark grid resolving neatly into calm answer nodes connected by clean lines, a sense of questions being settled. Abstract, tidy, reassuring. Deep black, generous space."
+    },
+    {
+      "slot": "industry-travel",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric dark blueprint globe wrapped in glowing electric-blue flight-path arcs connecting a few destination pins, a small frosted-glass boarding pass and a suitcase beside it, on a faint blueprint grid. Travel and hospitality, digital and premium."
+    },
+    {
+      "slot": "industry-fintech",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric dark scene of glowing electric-blue financial flows: a secure frosted-glass payment card and a small vault, a rising line-and-candlestick graph, and streams of light moving between ledger nodes on a blueprint grid. Fintech, trustworthy and precise."
+    },
+    {
+      "slot": "industry-legal",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric dark blueprint motif of balanced glowing electric-blue scales of justice standing over a frosted-glass document with faint clause lines and a highlighted seal, on a blueprint grid. Legal tech, authoritative and clean."
+    },
+    {
+      "slot": "industry-saas",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric dark blueprint motif of a glowing electric-blue SaaS dashboard panel with small chart tiles beside a stacked support inbox, thin connective lines routing tickets into lanes, on a blueprint grid. SaaS tooling and customer support, systematic and clean."
     }
   ]
 }
