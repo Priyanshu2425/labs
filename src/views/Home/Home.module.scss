@@ -25,6 +25,36 @@
   background-image: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
 }
 
+/* Rotating typewriter phrase on the hero's second line. Keeps the caret inline
+   so the line never collapses to zero height between words. */
+.rotator {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.05em;
+  height: 0.78em;
+  margin-left: 0.06em;
+  border-radius: 3px;
+  align-self: center;
+  background: linear-gradient(180deg, #3b82f6, #60a5fa);
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.65);
+  animation: caretBlink 1.05s steps(1, end) infinite;
+}
+
+@keyframes caretBlink {
+  0%, 52% { opacity: 1; }
+  52.01%, 100% { opacity: 0; }
+}
+
+/* No blink / no cursor when motion is unwelcome — the phrase is static then. */
+@media (prefers-reduced-motion: reduce) {
+  .caret { display: none; }
+}
+
 /* =============================================
    Hero Section — static, editorial (no video)
    ============================================= */

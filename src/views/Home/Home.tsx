@@ -38,10 +38,58 @@ const Marquee = () => {
   );
 };
 
+/* Rotating hero punchlines — typed in and out with a glowing caret. The first
+   phrase is the initial state, so the headline is fully meaningful in the SSR
+   HTML and with JS off; the rotation only kicks in on the client. */
+const HERO_ROTATING = ['actually ship.', 'reach production.', 'users rely on.', 'run on Monday.'];
+
+function useRotatingType() {
+  const [text, setText] = useState(HERO_ROTATING[0]);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let word = 0;
+    let i = HERO_ROTATING[0].length;
+    let deleting = false;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const step = () => {
+      const current = HERO_ROTATING[word];
+      if (deleting) {
+        i -= 1;
+        setText(current.slice(0, Math.max(0, i)));
+        if (i <= 0) {
+          deleting = false;
+          word = (word + 1) % HERO_ROTATING.length;
+          timer = setTimeout(step, 360); // beat before the next word types in
+          return;
+        }
+        timer = setTimeout(step, 34); // erase speed
+      } else {
+        i += 1;
+        setText(current.slice(0, i));
+        if (i >= current.length) {
+          deleting = true;
+          timer = setTimeout(step, 1900); // hold the finished phrase
+          return;
+        }
+        timer = setTimeout(step, 62); // type speed
+      }
+    };
+
+    // Hold the first (already-full) phrase, then start erasing into the rotation.
+    timer = setTimeout(() => { deleting = true; step(); }, 2200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return text;
+}
+
 /* Static, editorial hero — no video, no scroll-pin. The entrance is driven by
    CSS keyframes (see Home.module.scss), so the copy is always visible even if
    JS never runs, and honours prefers-reduced-motion. No rAF dependency. */
 const Hero = () => {
+  const typed = useRotatingType();
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroGrid} aria-hidden="true" />
@@ -62,8 +110,12 @@ const Hero = () => {
         <p className={styles.heroEyebrow}>
           India&apos;s AI-native product studio
         </p>
-        <h1 className={styles.heroQuote}>
-          We build AI products that <span className={styles.gradientText}>actually ship.</span>
+        <h1 className={styles.heroQuote} aria-label="We build AI products that actually ship.">
+          We build AI products that<br />
+          <span className={styles.rotator}>
+            <span className={styles.gradientText}>{typed}</span>
+            <span className={styles.caret} aria-hidden="true" />
+          </span>
         </h1>
         <p className={styles.heroSubtext}>
           Not pilots. Not slide decks. Production systems your team uses on Monday morning — designed, engineered, and shipped end-to-end by senior AI builders.
