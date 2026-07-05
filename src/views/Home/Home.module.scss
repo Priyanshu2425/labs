@@ -1189,3 +1189,12 @@
   }
 }
 
+
+/* Light theme: darken accent gradient text (hero highlight, stat numbers, emphasis
+   words) for readable contrast on the pale background. */
+[data-theme='light'] {
+  .gradientText { background-image: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%); }
+  .introStatValue { background-image: linear-gradient(160deg, #1d4ed8 10%, #2563eb 90%); }
+  .carouselSectionTitle em { background-image: linear-gradient(90deg, #1d4ed8, #2563eb); }
+  .valuePropsTitle em { background-image: linear-gradient(135deg, #1d4ed8, #2563eb); }
+}

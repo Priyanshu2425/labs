@@ -482,3 +482,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Light theme: darken the accent gradient text so it reads clearly on the pale background. */
+[data-theme='light'] .gradientText {
+  background-image: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+}
