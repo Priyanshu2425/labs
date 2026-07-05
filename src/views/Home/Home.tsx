@@ -393,14 +393,77 @@ const HorizontalScrollCarousel = () => {
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const industries = [
-    { title: 'Logistics', tag: 'Operations', image: '/media/industry-logistics.webp', projects: ['Fleet Management', 'Charge Pulse', 'Supply Chain Ops'] },
-    { title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
-    { title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
-    { title: 'Hardware & IoT', tag: 'Embedded Systems', image: '/media/industry-hardware.webp', projects: ['PCB Design', 'Embedded Firmware', 'Sensor Networks'] },
-    { title: 'Travel & Hospitality', tag: 'Studio', image: '/media/industry-travel.webp', projects: ['Atelier Travel Studio', 'Trip Planner AI', 'Booking Concierge'] },
-    { title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp', projects: ['AP Copilot', 'Fraud Signals', 'Underwriting AI'] },
-    { title: 'SaaS & Support', tag: 'Tooling', image: '/media/industry-saas.webp', projects: ['Support Pulse', 'Churn Radar', 'Inbox Zero'] },
-    { title: 'Legal Tech', tag: 'Compliance', image: '/media/industry-legal.webp', projects: ['Brief Forge', 'Contract Review', 'Clause Library'] },
+    {
+      title: 'Logistics', tag: 'Operations', image: '/media/industry-logistics.webp',
+      description: 'Live fleet tracking, traffic-aware routing, and dispatch at scale.',
+      projects: [
+        { label: 'Fleet Management', link: '/product/dsv-fleet-management' },
+        { label: 'Charge Pulse', link: '/product/charge-pulse' },
+        { label: 'Supply Chain Ops', link: '/portfolio' },
+      ],
+    },
+    {
+      title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp',
+      description: 'Lease extraction, obligation tracking, and AI-native deal sourcing.',
+      projects: [
+        { label: 'Lease Management', link: '/product/grospace' },
+        { label: 'Real Estate Fund', link: '/product/ai-native-real-estate-fund' },
+        { label: 'Marketplace Ops', link: '/product/food-ordering-platform' },
+      ],
+    },
+    {
+      title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp',
+      description: 'Ambient clinical scribes and end-to-end consultation automation.',
+      projects: [
+        { label: 'Clinical Notes', link: '/product/sanad' },
+        { label: 'Focuscare', link: '/product/focuscare' },
+        { label: 'Patient Front Desk', link: '/product/patient-front-desk' },
+      ],
+    },
+    {
+      title: 'Hardware & IoT', tag: 'Embedded Systems', image: '/media/industry-hardware.webp',
+      description: 'On-device ML, embedded firmware, and vision that ship on real hardware.',
+      projects: [
+        { label: 'Open Vision PPE', link: '/product/open-vision-ppe' },
+        { label: 'Factory OS', link: '/product/factory-os' },
+        { label: 'Charge Pulse', link: '/product/charge-pulse' },
+      ],
+    },
+    {
+      title: 'Travel & Hospitality', tag: 'Studio', image: '/media/industry-travel.webp',
+      description: 'Premium, cinematic digital destinations for travel brands.',
+      projects: [
+        { label: 'Atelier Travel Studio', link: 'https://atelier-travel-studio.buildspacelabs.com/', external: true },
+        { label: 'See the work', link: '/portfolio' },
+      ],
+    },
+    {
+      title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp',
+      description: 'Invoice automation, PO matching, and AI approval routing.',
+      projects: [
+        { label: 'AP Copilot', link: '/product/ap-copilot' },
+        { label: 'Events Payments', link: '/product/food-ordering-platform' },
+        { label: 'See the work', link: '/portfolio' },
+      ],
+    },
+    {
+      title: 'SaaS & Support', tag: 'Tooling', image: '/media/industry-saas.webp',
+      description: 'AI triage, drafted replies, and churn radar for revenue teams.',
+      projects: [
+        { label: 'Support Pulse', link: '/product/support-pulse' },
+        { label: 'Churn Radar', link: '/product/churn-radar' },
+        { label: 'Inbox Zero', link: '/product/inbox-zero' },
+      ],
+    },
+    {
+      title: 'Legal Tech', tag: 'Compliance', image: '/media/industry-legal.webp',
+      description: 'Contract extraction, clause risk scoring, and AI redlines.',
+      projects: [
+        { label: 'Brief Forge', link: '/product/brief-forge' },
+        { label: 'Sales Call Coach', link: '/product/sales-call-coach' },
+        { label: 'See the work', link: '/portfolio' },
+      ],
+    },
   ];
 
   // Section height = one viewport (for the pin) + the actual horizontal travel.
@@ -442,14 +505,33 @@ const HorizontalScrollCarousel = () => {
                 <span className={styles.cardTag}>{ind.tag}</span>
               </div>
               <h3 className={styles.industryTitle}>{ind.title}</h3>
+              <p className={styles.industryDesc}>{ind.description}</p>
               <div className={styles.cardDivider} />
               <ul className={styles.projectList}>
-                {ind.projects.map((proj) => (
-                  <li key={proj} className={styles.projectItem}>
-                    <ArrowRight size={14} className={styles.projectArrow} />
-                    {proj}
-                  </li>
-                ))}
+                {ind.projects.map((proj) => {
+                  const isExternal = (proj as { external?: boolean }).external === true;
+                  const content = (
+                    <>
+                      <span className={styles.projectLabel}>{proj.label}</span>
+                      {isExternal
+                        ? <ArrowUpRight size={15} className={styles.projectArrow} />
+                        : <ArrowRight size={15} className={styles.projectArrow} />}
+                    </>
+                  );
+                  return (
+                    <li key={proj.label}>
+                      {isExternal ? (
+                        <a href={proj.link} target="_blank" rel="noopener noreferrer" className={styles.projectItem}>
+                          {content}
+                        </a>
+                      ) : (
+                        <Link href={proj.link} className={styles.projectItem}>
+                          {content}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
