@@ -21,6 +21,149 @@ export interface Product {
 }
 
 export const productsData: Record<string, Product> = {
+  "churn-radar": {
+    id: "churn-radar",
+    title: "Churn Radar",
+    subtitle: "An AI customer-success platform that flags at-risk B2B accounts before they churn and prescribes the save-play to run.",
+    client: "B2B SaaS scale-up (NDA)",
+    categories: ["Customer Success", "Predictive Analytics", "B2B SaaS"],
+    status: "live",
+    overview: "Churn Radar gives customer-success teams an early-warning system for revenue at risk. It scores every account on a 0–100 health scale, attributes the risk to specific behavioural signals, and generates a prioritized, step-by-step save-play with a confidence estimate. BuildspaceLabs designed and built the MVP front end — an Account Health board for portfolio triage and a per-account detail view for the CSM running the save — turning a predictive model and a stream of product signals into a workflow a CSM can act on in minutes.",
+    features: [
+      "Account Health board with live net-revenue-retention, at-risk, and saves KPIs",
+      "0–100 predictive health score and churn-risk percentage per account",
+      "AI-recommended save-plays with sequenced steps, owners, and a confidence score",
+      "Risk-driver attribution across usage, support, renewal, and champion-departure signals",
+      "12-month net revenue retention trend chart and save-play coverage tracking",
+      "Account detail with usage sparklines, why-at-risk driver weights, and an activity timeline"
+    ],
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Python · XGBoost churn model", "dbt + BigQuery"],
+    metrics: [
+      { label: "Accounts monitored", value: "238" },
+      { label: "Net revenue retention", value: "112%" },
+      { label: "At-risk accounts", value: "18" },
+      { label: "Saves this quarter", value: "9" }
+    ],
+    coverImage: {
+      src: "/projects/churn-radar/dashboard.webp",
+      alt: "Churn Radar Account Health dashboard showing a net revenue retention line chart, a colour-coded at-risk accounts table, and top risk drivers",
+      caption: "The Account Health board — portfolio KPIs, a 12-month NRR trend rising from 98% to 112%, and the worst-first at-risk accounts table."
+    },
+    highlights: [
+      "Predicts at-risk B2B accounts weeks before they churn",
+      "Turns raw risk signals into concrete, prioritized save-plays for CSMs",
+      "One portfolio view of retention exposure and MRR at risk for CS leadership",
+      "Every account carries an explainable health score, not a black-box number"
+    ],
+    gallery: [
+      { src: "/projects/churn-radar/dashboard.webp", alt: "Churn Radar Account Health dashboard showing a net revenue retention line chart, a colour-coded at-risk accounts table, and top risk drivers", caption: "Account Health board: 238 monitored accounts, 112% net revenue retention, and 18 at-risk accounts each paired with a suggested save-play and CSM owner." },
+      { src: "/projects/churn-radar/detail.webp", alt: "Churn Radar Account Health dashboard showing a net revenue retention line chart, a colour-coded at-risk accounts table, and top risk drivers", caption: "Account detail for Northwind Traders — a 42/100 health ring, weighted why-at-risk drivers, usage sparklines, and an 84%-confidence AI save-play." }
+    ],
+    engagement: { duration: "8 weeks", scope: "MVP product design and front-end build of the Account Health board and single-account detail experience, backed by a churn-risk scoring model and save-play engine.", team: "1 product designer, 2 senior front-end engineers, and a fractional PM" },
+    outcomes: [
+      "Delivered a production-quality MVP of the Account Health board and account detail view in an 8-week engagement",
+      "Consolidated health scoring, risk drivers, and recommended plays into a single CSM workflow",
+      "Gave CS leadership a real-time view of NRR and MRR exposure across 238 monitored accounts",
+      "Established a reusable design system (health pills, risk bars, save-play cards) for the product's next surfaces"
+    ]
+  },
+  "shortlist": {
+    id: "shortlist",
+    title: "ShortList",
+    subtitle: "An AI recruiting screener that reads every application, scores candidates against the role, and hands recruiters a ranked shortlist with outreach already drafted.",
+    client: "High-growth startup (NDA)",
+    categories: ["HR & Recruiting", "AI Product", "SaaS Dashboard", "Applicant Tracking"],
+    status: "live",
+    overview: "ShortList turns a flood of inbound applications into a defensible, ranked shortlist in minutes. For each open role it auto-screens every applicant against a weighted rubric, produces an explainable match score, surfaces strengths and gaps, and drafts personalised outreach — so a small talent team can move from 342 applicants to 8 interviews without reading a single résumé cold. We designed and built the front-end MVP: a \"Pipeline\" board for an open role and a candidate profile that shows exactly why the AI ranked someone where it did. The demo models a real \"Senior Backend Engineer\" search end to end, from funnel stats and score distribution down to per-skill fit and a ready-to-send intro email.",
+    features: [
+      "Role pipeline with live funnel tiles: applicants, auto-screened, shortlisted, interviewing",
+      "Explainable match score (0-100) per candidate against a weighted role rubric",
+      "Match-score distribution chart with a visible shortlist cut line at 80",
+      "Screening funnel from applied to interviewing with conversion rates",
+      "Ranked candidates table with skills, experience, stage badges and one-line AI notes",
+      "Candidate profile with a match ring, AI summary, and strengths / to-probe flags",
+      "Per-skill fit bars showing candidate level vs the role requirement marker",
+      "Auto-drafted, personalised outreach email with an estimated reply rate",
+      "AI-generated screening Q&A with per-answer fit assessment"
+    ],
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Radix UI", "PostgreSQL", "OpenAI + embeddings for résumé scoring", "Vercel"],
+    metrics: [
+      { label: "Applicants auto-screened", value: "342" },
+      { label: "Avg. time to screen one candidate", value: "41s" },
+      { label: "Shortlisted from the pool", value: "24" },
+      { label: "Top candidate match score", value: "92%" }
+    ],
+    coverImage: {
+      src: "/projects/shortlist/dashboard.webp",
+      alt: "ShortList recruiting pipeline dashboard showing funnel stat tiles, a match-score distribution chart, and a ranked candidates table for a Senior Backend Engineer role",
+      caption: "The Pipeline view for an open role: funnel tiles, match-score distribution, and an AI-ranked candidate shortlist."
+    },
+    highlights: [
+      "342 applications auto-screened to a 24-person shortlist, no manual triage",
+      "Every score is explainable — skills, experience and screening answers, not a black box",
+      "Outreach is written from the candidate's own profile before the recruiter clicks send",
+      "Skill bars plot the candidate against the role bar, so gaps are obvious at a glance"
+    ],
+    gallery: [
+      { src: "/projects/shortlist/dashboard.webp", alt: "ShortList recruiting pipeline dashboard showing funnel stat tiles, a match-score distribution chart, and a ranked candidates table for a Senior Backend Engineer role", caption: "Pipeline for \"Senior Backend Engineer\" — 342 applicants auto-screened into a ranked shortlist, with a score-distribution chart and a screening funnel from applied to interviewing." },
+      { src: "/projects/shortlist/detail.webp", alt: "ShortList recruiting pipeline dashboard showing funnel stat tiles, a match-score distribution chart, and a ranked candidates table for a Senior Backend Engineer role", caption: "Candidate profile for Priya Nair: 92% match ring, AI summary, per-skill fit against the role rubric, experience timeline, a drafted outreach email, and AI screening Q&A." }
+    ],
+    engagement: { duration: "8 weeks", scope: "Front-end MVP: pipeline board, candidate profile, and AI-output UI for the core screening loop", team: "1 product designer, 2 senior engineers, fractional PM" },
+    outcomes: [
+      "Compressed a full role's screening from days of manual review to a same-day ranked shortlist",
+      "Gave recruiters an auditable reason for every ranking, defensible in hiring reviews",
+      "Cut time-to-first-outreach by shipping a personalised draft with each shortlisted candidate",
+      "Delivered a clickable, investor- and design-partner-ready MVP validating the core screen-rank-reach loop"
+    ]
+  },
+  "ap-copilot": {
+    id: "ap-copilot",
+    title: "AP Copilot",
+    subtitle: "An AI accounts-payable copilot that reads invoices, matches them to POs, and routes clean approvals",
+    client: "Mid-market finance team (NDA)",
+    categories: ["Fintech", "Finance Operations", "AI / ML", "B2B SaaS"],
+    status: "live",
+    overview: "AP Copilot is an AI accounts-payable workspace that turns a noisy invoice inbox into a controlled, largely touchless approval pipeline. Invoices arrive by email, the copilot extracts every field with a per-field confidence score, matches line items against the originating purchase order within a price tolerance, and runs duplicate, price-variance and budget checks before routing to the right approver under policy. Only genuine exceptions surface for a human, and each one carries the model's full reasoning and an auditable trail. We designed and built the MVP front end as a premium light SaaS product — an \"Invoice inbox\" triage surface and a human-in-the-loop invoice review — to a Linear/Ramp bar of polish.",
+    features: [
+      "Email-to-inbox invoice ingestion with PDF source capture",
+      "AI field extraction with a confidence ring on every field",
+      "Line-level PO matching with configurable price tolerance",
+      "Duplicate, price-variance and budget anomaly checks",
+      "Policy-based approval routing with a full audit trail",
+      "Spend analytics by category and exceptions-by-type breakdown"
+    ],
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma", "LLM + OCR extraction pipeline", "Vercel"],
+    metrics: [
+      { label: "Invoices auto-matched to PO", value: "82%" },
+      { label: "Avg field extraction confidence", value: "98%" },
+      { label: "Invoices processed / month", value: "1,284" },
+      { label: "Invoices needing human review", value: "1.7%" }
+    ],
+    coverImage: {
+      src: "/projects/ap-copilot/dashboard.webp",
+      alt: "AP Copilot invoice inbox dashboard showing KPI tiles, a spend-by-category bar chart and an exceptions queue in a light SaaS interface",
+      caption: "AP Copilot — an AI accounts-payable copilot that reads invoices, matches them to POs and routes approvals."
+    },
+    highlights: [
+      "Exceptions-first inbox that only surfaces invoices needing a human",
+      "Every extracted field shows a confidence ring so reviewers know where to look",
+      "Line-by-line invoice-vs-PO reconciliation with an in-tolerance verdict",
+      "Anomaly panel explains duplicate, price-variance and budget reasoning in plain language",
+      "Approval timeline captures ingestion, extraction, matching and routing for audit",
+      "Hand-authored inline-SVG charts, rings and sparklines — no chart libraries"
+    ],
+    gallery: [
+      { src: "/projects/ap-copilot/dashboard.webp", alt: "AP Copilot invoice inbox dashboard showing KPI tiles, a spend-by-category bar chart and an exceptions queue in a light SaaS interface", caption: "The invoice inbox: KPI tiles for volume, auto-match rate, exceptions and pending approvals, spend-by-category and exceptions-by-type analytics, and an exceptions queue with per-invoice PO match, extraction confidence and status." },
+      { src: "/projects/ap-copilot/detail.webp", alt: "AP Copilot invoice inbox dashboard showing KPI tiles, a spend-by-category bar chart and an exceptions queue in a light SaaS interface", caption: "Invoice review for INV-20418: the source document beside AI-extracted fields with confidence rings, line-level PO matching, duplicate/price/budget anomaly checks and a full approval trail." }
+    ],
+    engagement: { duration: "8 weeks", scope: "Design and build of the AP Copilot MVP front end — invoice inbox triage plus the human-in-the-loop review and approval flow", team: "3 — product designer, full-stack engineer, ML engineer" },
+    outcomes: [
+      "82% of invoices matched to a PO and cleared without manual touch",
+      "Exceptions cut to 1.7% of monthly volume, focusing reviewers on real risk",
+      "Duplicate and price-variance checks run against the full quarter of history before payment",
+      "Confidence-scored extraction gives controllers a defensible, auditable approval trail"
+    ]
+  },
   "sanad": {
     id: "sanad",
     title: "AI Clinical Notes",
