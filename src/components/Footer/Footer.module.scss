@@ -4,11 +4,11 @@
 .footer {
   background-color: $color-background;
   border-top: 1px solid $color-border;
-  padding: $spacing-xxxl 0 $spacing-xl;
+  padding: $spacing-xxl 0 $spacing-lg;
   margin-top: auto;
 
   @media (max-width: 768px) {
-    padding: $spacing-xxl 0 $spacing-lg;
+    padding: $spacing-xl 0 $spacing-lg;
   }
 }
 
@@ -82,23 +82,25 @@
   }
 }
 
+/* Copyright row — now inside the same container as the links, so it aligns and
+   reads as one footer (a subtle hairline, not a separate full-width band). */
 .footerBottom {
   border-top: 1px solid $color-border;
-  margin-top: $spacing-xxl;
-  padding: $spacing-xl $spacing-md 0;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
-  color: $color-text-secondary;
-  font-size: 0.88rem;
+  color: $color-text-muted;
+  font-size: 0.85rem;
   word-break: break-word;
 
   @media (max-width: 600px) {
     flex-direction: column;
     text-align: center;
-    margin-top: $spacing-xl;
-    font-size: 0.82rem;
+    margin-top: $spacing-lg;
+    font-size: 0.8rem;
   }
 }
 
