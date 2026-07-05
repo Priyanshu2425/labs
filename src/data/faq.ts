@@ -54,7 +54,7 @@ export const faqs: FAQCategory[] = [
       },
       {
         q: 'What LLMs do you use?',
-        a: 'We build with OpenAI (GPT-4), Anthropic Claude, Gemini, as well as open-source models like Llama and Mistral. We choose the best model based on latency, cost, and task complexity.',
+        a: 'We build with OpenAI (GPT-4), Google Gemini, and open-source models like Llama and Mistral. We choose the best model based on latency, cost, and task complexity.',
       },
     ],
   },
