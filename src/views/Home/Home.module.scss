@@ -68,15 +68,71 @@
   background: radial-gradient(ellipse 60% 50% at 50% -8%, rgba(59, 130, 246, 0.14), transparent 62%);
 }
 
+/* Signature hero backdrop — the isometric product-constellation render. Anchored
+   low so the glowing core sits below the headline; the top is masked to clean dark. */
+.heroVisual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.92;
+  mask-image: linear-gradient(to bottom, transparent 3%, #000 40%, #000 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 3%, #000 40%, #000 100%);
+
+  @media (max-width: 768px) { opacity: 0.7; }
+}
+
+.heroVisualImg {
+  object-fit: cover;
+  object-position: center 74%;
+}
+
+/* Legibility scrim — sits behind the centred copy and fades to the page colour
+   at top and bottom so the render bleeds seamlessly into the section. Uses the
+   theme background var so it is dark in dark mode and white in light mode
+   (keeping the copy legible whichever way the text colour flips). */
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Just blends the render into the section top/bottom now — the frosted
+     .heroContent panel handles legibility behind the copy. */
+  background: linear-gradient(to bottom, var(--color-background) 0%, transparent 30%, transparent 66%, var(--color-background) 100%);
+}
+
+/* Light mode: keep the render as a faint texture only — the frosted panel is the
+   focus, so a strong image just muddies the near-white hero. */
+[data-theme='light'] {
+  .heroVisual { opacity: 0.16; }
+  .introVisual { opacity: 0.1; }
+}
+
+/* Frosted-glass panel behind the hero copy — blurs the busy render so the text
+   pops, and reads identically in both themes via the theme-tinted translucent
+   fill. This is the primary legibility mechanism; the scrim only blends edges. */
 .heroContent {
-  max-width: 980px;
+  max-width: 1040px;
+  width: calc(100% - 3rem);
   text-align: center;
-  padding: 0 2rem;
+  padding: 3.25rem 3.5rem 3.5rem;
   z-index: 2;
   position: relative;
+  border-radius: 30px;
+  background: color-mix(in srgb, var(--color-background) 55%, transparent);
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 9%, transparent);
+  box-shadow: 0 30px 80px color-mix(in srgb, #000000 32%, transparent);
 
+  @media (max-width: 768px) {
+    padding: 2.5rem 1.75rem 2.75rem;
+    border-radius: 24px;
+  }
   @media (max-width: 480px) {
-    padding: 0 1rem;
+    padding: 2rem 1.1rem 2.25rem;
+    border-radius: 20px;
   }
 }
 
@@ -326,6 +382,21 @@
   }
 }
 
+/* Faint systems-grid texture behind the intro statement. */
+.introVisual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 92% 82% at 50% 50%, #000 18%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 82% at 50% 50%, #000 18%, transparent 76%);
+}
+
+.introVisualImg {
+  object-fit: cover;
+}
+
 .introWord {
   display: inline-block;
   margin-right: 0.28em;
@@ -516,7 +587,7 @@
 .industryCard {
   width: 360px;
   min-width: 360px;
-  height: 460px;
+  height: 500px;
   max-width: 100%;
   background: $color-surface;
   border-radius: 16px;
@@ -561,6 +632,36 @@
 
     &::before { opacity: 0.6; }
   }
+}
+
+/* Industry visual — full-bleed band at the top of the card. */
+.cardMedia {
+  position: relative;
+  margin: -2.5rem -2.5rem 1.5rem;
+  height: 158px;
+  overflow: hidden;
+  border-bottom: 1px solid $color-border;
+  background: #0b0b12;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    margin: -2rem -2rem 1.25rem;
+    height: 150px;
+  }
+  @media (max-width: 480px) {
+    margin: -1.5rem -1.5rem 1rem;
+    height: 140px;
+  }
+}
+
+.cardMediaImg {
+  object-fit: cover;
+  object-position: center;
+  transition: transform $dur-slow $ease-out-expo;
+}
+
+.industryCard:hover .cardMediaImg {
+  transform: scale(1.05);
 }
 
 .cardTop {

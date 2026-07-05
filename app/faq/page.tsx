@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: 'FAQ — Frequently Asked Questions',
   description:
-    'Answers to common questions about BuildspaceLabs: what we do, AI automation capabilities, pricing, timelines, and how to work with us. AI agents from $1,200. MVPs in 4-6 weeks.',
+    'Answers to common questions about BuildspaceLabs: what we do, AI automation capabilities, engagement, timelines, and how to work with us. Working prototypes in days, MVPs in 4-6 weeks.',
   keywords: [
     'BuildspaceLabs FAQ',
     'AI agent pricing',

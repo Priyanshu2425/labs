@@ -44,5 +44,6 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(90deg, #FFFFFF 0%, #A1A1AA 100%);
+  /* Theme-aware: near-white→grey on dark, near-black→slate on light. */
+  background-image: linear-gradient(90deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
 }

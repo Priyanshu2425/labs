@@ -5,10 +5,30 @@
   @include card-base;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   @media (max-width: 480px) {
     padding: $spacing-lg;
   }
+}
+
+/* Full-bleed cover band. Negative margins bleed to the card edges; the card's
+   overflow:hidden clips it to the rounded top corners. */
+.media {
+  position: relative;
+  margin: -#{$spacing-xl} -#{$spacing-xl} $spacing-lg;
+  aspect-ratio: 3 / 2;
+  border-bottom: 1px solid $color-border;
+  background: #0b0b12;
+}
+
+.mediaImg {
+  object-fit: cover;
+  transition: transform $transition-slow;
+}
+
+.card:hover .mediaImg {
+  transform: scale(1.03);
 }
 
 .header {

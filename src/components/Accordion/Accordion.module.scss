@@ -2,20 +2,20 @@
 @import '../../styles/mixins';
 
 .accordionContainer {
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Ghost border */
+  background: color-mix(in srgb, var(--color-text-primary) 1.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 5%, transparent); /* Ghost border */
   border-radius: $border-radius-lg;
   margin-bottom: $spacing-md;
   overflow: hidden;
   transition: all $transition-default;
-  
+
   &:hover {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+    border-color: color-mix(in srgb, var(--color-text-primary) 10%, transparent);
   }
 
   &.open {
-    background: rgba(20, 20, 20, 0.8);
+    background: $color-surface-hover;
     border-color: rgba($color-accent, 0.25);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
@@ -88,7 +88,7 @@
   justify-content: center;
   color: $color-text-secondary;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
   border: 1px solid transparent;
   border-radius: 50%;
   width: 32px;

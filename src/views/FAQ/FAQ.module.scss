@@ -30,7 +30,7 @@
 
 .headerSection {
   padding: 12rem 0 6rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid $color-border;
   position: relative;
 
   @media (max-width: 992px) {
@@ -121,7 +121,7 @@
   padding: 0.85rem 1rem;
   border: 1px solid $color-border;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--color-text-primary) 2%, transparent);
   transition: border-color 0.2s, background 0.2s;
 
   &:focus-within {
@@ -156,13 +156,13 @@
   width: 24px;
   height: 24px;
   border: 0;
-  background: rgba(255, 255, 255, 0.06);
+  background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
   color: $color-text-muted;
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 
-  &:hover { background: rgba(255, 255, 255, 0.12); color: $color-text-primary; }
+  &:hover { background: color-mix(in srgb, var(--color-text-primary) 12%, transparent); color: $color-text-primary; }
 }
 
 .jumpNav {
@@ -178,7 +178,7 @@
   padding: 0.45rem 0.85rem;
   border-radius: 999px;
   border: 1px solid $color-border;
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--color-text-primary) 2%, transparent);
   color: $color-text-secondary;
   font-family: $font-heading;
   font-size: 0.88rem;
@@ -206,7 +206,7 @@
   color: $color-text-muted;
   padding: 1px 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
 }
 
 .searchSummary {
@@ -358,9 +358,9 @@
 }
 
 .contactBox {
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--color-text-primary) 2%, transparent);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid $color-border;
   border-radius: 20px;
   padding: 2.5rem 2.5rem;
   max-width: 800px;
@@ -425,7 +425,7 @@
   border: 1px solid $color-border;
   padding: 0.75rem 1.1rem;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--color-text-primary) 2%, transparent);
   white-space: nowrap;
   transition: border-color 0.2s, background 0.2s, transform 0.2s ease;
 

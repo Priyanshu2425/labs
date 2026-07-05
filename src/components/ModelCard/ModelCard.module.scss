@@ -8,10 +8,30 @@
   height: 100%;
   text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
 
   @media (max-width: 480px) {
     padding: $spacing-lg;
   }
+}
+
+/* Full-bleed media band at the top of the card. Negative margins bleed to the
+   card edges; the card's overflow:hidden clips it to the rounded corners. */
+.media {
+  position: relative;
+  margin: -#{$spacing-xl} -#{$spacing-xl} $spacing-lg;
+  aspect-ratio: 4 / 3;
+  border-bottom: 1px solid $color-border;
+  background: #0b0b12;
+}
+
+.mediaImg {
+  object-fit: cover;
+  transition: transform $transition-slow;
+}
+
+.card:hover .mediaImg {
+  transform: scale(1.04);
 }
 
 .statusBadge {

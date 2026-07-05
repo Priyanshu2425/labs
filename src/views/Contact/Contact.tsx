@@ -148,6 +148,28 @@ export default function Contact() {
                   <span className={styles.channelHint}>Picks up the right person internally</span>
                 </a>
               </motion.div>
+
+              <motion.div variants={fadeIn} className={styles.leadership}>
+                <span className={styles.leadershipLabel}>Who you&apos;ll work with</span>
+                <div className={styles.leadershipRow}>
+                  <a href="mailto:aryan@vruoom.com" className={styles.person}>
+                    <span className={styles.personAvatar} aria-hidden="true">A</span>
+                    <span className={styles.personInfo}>
+                      <span className={styles.personName}>Aryan</span>
+                      <span className={styles.personRole}>Director</span>
+                      <span className={styles.personEmail}>aryan@vruoom.com</span>
+                    </span>
+                  </a>
+                  <a href="mailto:priyanshu@vruoom.com" className={styles.person}>
+                    <span className={styles.personAvatar} aria-hidden="true">P</span>
+                    <span className={styles.personInfo}>
+                      <span className={styles.personName}>Priyanshu</span>
+                      <span className={styles.personRole}>CTO</span>
+                      <span className={styles.personEmail}>priyanshu@vruoom.com</span>
+                    </span>
+                  </a>
+                </div>
+              </motion.div>
             </motion.div>
 
             {/* Right column — conversational form */}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import styles from './Services.module.scss';
 import Header from '../../components/Header';
@@ -13,6 +14,7 @@ type Service = {
   letter: string;
   accent: string;
   tag: string;
+  image: string;
   title: string;
   tagline: string;
   bullets: string[];
@@ -26,6 +28,7 @@ const services: Service[] = [
     letter: 'A',
     accent: '#3b82f6',
     tag: 'Custom build',
+    image: '/media/service-custom-build.webp',
     title: 'Custom software, built end-to-end.',
     tagline: 'When you have a problem and want a senior team to architect, build, and ship the answer.',
     bullets: [
@@ -40,6 +43,7 @@ const services: Service[] = [
     letter: 'B',
     accent: '#3b82f6',
     tag: 'Productised modules',
+    image: '/media/service-modules.webp',
     title: 'Production-ready AI modules you can deploy.',
     tagline: 'When the problem is well-known and you want a sharp solution dropped into your stack.',
     bullets: [
@@ -55,6 +59,7 @@ const services: Service[] = [
     letter: 'C',
     accent: '#3b82f6',
     tag: 'Partnership',
+    image: '/media/service-fractional-cto.webp',
     title: 'Fractional CTO and product partner.',
     tagline: "When you're a founder who wants a senior technical co-pilot, not just a vendor.",
     bullets: [
@@ -101,6 +106,9 @@ export default function Services() {
         {/* ── Hero ───────────────────────────────── */}
         <section className={styles.heroSection}>
           <div className={styles.heroGlow} aria-hidden="true" />
+          <div className={styles.heroVisual} aria-hidden="true">
+            <Image src="/media/services-hero.webp" alt="" fill sizes="100vw" className={styles.heroVisualImg} />
+          </div>
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -148,6 +156,15 @@ export default function Services() {
                 className={styles.cardContainer}
                 style={{ '--svc-accent': svc.accent } as React.CSSProperties}
               >
+                <div className={styles.cardMedia} aria-hidden="true">
+                  <Image
+                    src={svc.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 900px) 100vw, 1000px"
+                    className={styles.cardMediaImg}
+                  />
+                </div>
                 <div className={styles.cardHead}>
                   <span className={styles.cardLetter}>{svc.letter}</span>
                   <span className={styles.cardTag}>{svc.tag}</span>

@@ -1,0 +1,200 @@
+{
+  "_comment": "Art-directed imagery for the BuildspaceLabs site. slot -> gen-<slot>.png in assets/media-work (raw), then build-media.py crops to `aspect` at `width` and writes public/media/<slot>.webp. One locked STYLE (dark, near-black, single electric-blue accent, blueprint grid, no text) is appended to every prompt by gen-images.py so the whole site reads like one system. Conceptual/abstract only — real product screenshots live in public/projects/.",
+  "images": [
+    {
+      "slot": "home-hero",
+      "aspect": "16:9",
+      "width": 1920,
+      "prompt": "A wide cinematic hero: an isometric constellation of a dozen dark glass software modules and rounded panels floating in deep space, connected by thin glowing electric-blue circuit lines, orbiting one large luminous central node that radiates soft blue light and a gentle lens bloom. Beneath them a vast faint blueprint grid recedes into fog. The feeling is many products assembling into one shipped system. Enormous negative space on the right for a headline."
+    },
+    {
+      "slot": "home-systems",
+      "aspect": "16:9",
+      "width": 1600,
+      "prompt": "A very subtle, mostly empty full-bleed background texture: a vast dark blueprint grid stretching to a foggy horizon, with a few sparse glowing blue nodes and faint connective lines drifting across it. Quiet, atmospheric, restrained — designed to sit behind text. Deep blacks, whisper of blue, huge open space."
+    },
+    {
+      "slot": "industry-government",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric render of a stylised civic government building — a calm domed hall with clean columns — rendered as a dark frosted-glass and glowing-wireframe model sitting on a blueprint plinth. Thin streams of electric-blue data flow into it from below. Digital public sector, trustworthy and modern."
+    },
+    {
+      "slot": "industry-defence",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "A dark hexagonal shield lattice hovering above a faint radar sweep, a single small drone silhouette caught in a soft electric-blue scan cone, concentric blue detection rings pulsing outward. Mission-critical, secure, on-device. Tense but elegant, lots of black."
+    },
+    {
+      "slot": "industry-logistics",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric dark map with a few stylised matte-black delivery trucks and shipping containers travelling along glowing electric-blue route lines, small GPS location pings pulsing at nodes, a faint geofence polygon outlined in blue. Real-time operations at scale, clean and precise."
+    },
+    {
+      "slot": "industry-realestate",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An isometric cluster of dark glass building blocks and slender towers wired together with thin glowing electric-blue lines that thread between floors like tracked lease obligations, one tower lifted and highlighted. PropTech portfolio intelligence, architectural and cool."
+    },
+    {
+      "slot": "industry-healthcare",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "An abstract dark medical-AI motif: a glowing electric-blue ECG heartbeat line that dissolves into a fine neural mesh, wrapped around a subtle floating cross of frosted glass. Clinical, calm, intelligent. No people, deep black background."
+    },
+    {
+      "slot": "industry-hardware",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "A close three-quarter macro of a dark printed circuit board with a single glowing electric-blue microchip at its centre, fine solder traces lit faintly blue radiating outward, soft depth of field. Embedded systems and IoT, tactile and engineered."
+    },
+    {
+      "slot": "services-hero",
+      "aspect": "16:9",
+      "width": 1600,
+      "prompt": "Three distinct glowing electric-blue pathways diverging elegantly from one bright origin point across a dark blueprint grid, each path leading to a different dark geometric destination form. Choice of engagement, one senior team. Minimal, lots of black, generous space."
+    },
+    {
+      "slot": "service-custom-build",
+      "aspect": "3:2",
+      "width": 1300,
+      "style": "Clean, modern, friendly 3D illustration with soft studio lighting on a very light cool-grey to white gradient background. Polished rounded shapes, gentle soft shadows, professional tech look with clear royal-blue (#3b82f6) accents. The visual metaphor must read INSTANTLY and literally. No text, no words, no letters, no numbers, no logos, no watermark, no UI labels.",
+      "prompt": "Custom software built from scratch, end to end, shown as a clear left-to-right progression: on the left a simple blue pencil wireframe / blueprint sketch of an app screen, transforming through the middle into a finished, polished web application displayed on a modern laptop, with a small gear and a green checkmark beside it signalling it is fully engineered and shipped. An idea becoming a finished, working product — obvious at a glance."
+    },
+    {
+      "slot": "service-modules",
+      "aspect": "3:2",
+      "width": 1300,
+      "style": "Clean, modern, friendly 3D illustration with soft studio lighting on a very light cool-grey to white gradient background. Polished rounded shapes, gentle soft shadows, professional tech look with clear royal-blue (#3b82f6) accents. The visual metaphor must read INSTANTLY and literally. No text, no words, no letters, no numbers, no logos, no watermark, no UI labels.",
+      "prompt": "Ready-made, plug-and-play software components: three or four glossy blue modular blocks shaped like plug-in cartridges, with one block being clearly slotted into a matching empty socket on a larger device, clicking into place and lighting up to show a perfect fit. Instantly communicates dropping a pre-built module into your existing system."
+    },
+    {
+      "slot": "service-fractional-cto",
+      "aspect": "3:2",
+      "width": 1300,
+      "style": "Clean, modern, friendly 3D illustration with soft studio lighting on a very light cool-grey to white gradient background. Polished rounded shapes, gentle soft shadows, professional tech look with clear royal-blue (#3b82f6) accents. The visual metaphor must read INSTANTLY and literally. No text, no words, no letters, no numbers, no logos, no watermark, no UI labels.",
+      "prompt": "A senior technical leader partnering with a startup founder: two friendly stylised professional characters standing together at a large screen that shows a simple software architecture diagram of connected boxes, the more experienced one gesturing to explain and guide while the other listens, a clear sense of working side by side as partners. Communicates a hands-on CTO who builds with you, not a distant vendor."
+    },
+    {
+      "slot": "ailab-hero",
+      "aspect": "16:9",
+      "width": 1600,
+      "prompt": "Research and engineering as one discipline: a glowing electric-blue double-helix lattice where one strand is a schematic diagram of dashed blueprint lines and the other is a solid built 3D form, braided together over a dark grid. Papers becoming products. Elegant, scientific, deep black."
+    },
+    {
+      "slot": "model-slm360",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "A tiny self-contained glowing electric-blue neural core embedded on a small dark silicon chip held in mid-air, sealed inside a subtle frosted-glass shell with a small blue offline padlock glyph, no wires leaving it — fully on-device, minuscule, fast. Precision and restraint, deep black."
+    },
+    {
+      "slot": "model-med360",
+      "aspect": "4:3",
+      "width": 1000,
+      "prompt": "A glowing electric-blue caduceus-like medical symbol abstracted into a stream of neural tokens and language glyphs (no readable text), flowing through a dark frosted-glass prism that splits it into several soft blue language beams. A multilingual medical foundation model, intelligent and warm-cool."
+    },
+    {
+      "slot": "paper-med360",
+      "aspect": "3:2",
+      "width": 1300,
+      "prompt": "Technical-report cover art: layered translucent electric-blue medical data planes stacked over a dark fine neural mesh, with a subtle geometric blue lotus mandala embedded as a nod to Indian healthcare. Abstract, editorial, precise. Deep black, no text."
+    },
+    {
+      "slot": "paper-slm360",
+      "aspect": "3:2",
+      "width": 1300,
+      "prompt": "Technical-report cover art: a single glowing electric-blue node at the centre of three perfectly balanced arcs on a dark blueprint grid, representing a trilemma of accuracy, latency and efficiency held in equilibrium. Minimal, scientific, elegant balance."
+    },
+    {
+      "slot": "paper-agentguard",
+      "aspect": "3:2",
+      "width": 1300,
+      "prompt": "Technical-report cover art: a ring of glowing electric-blue agent nodes connected in a directed graph, one closed deadlock cycle highlighted brighter, and a calm guardian ring of blue light gently breaking the cycle open. Multi-agent deadlock prevention, abstract graph theory, dark and orderly."
+    },
+    {
+      "slot": "paper-vajra",
+      "aspect": "3:2",
+      "width": 1300,
+      "prompt": "Technical-report cover art: a dark night sky where a small distant drone silhouette is caught at the intersection of three converging electric-blue sensor cones — one visual, one acoustic waveform, one RF ring — all emanating from a single rugged handheld device below. Counter-UAS, on-device, tense and precise."
+    },
+    {
+      "slot": "paper-kavach",
+      "aspect": "3:2",
+      "width": 1300,
+      "prompt": "Technical-report cover art: a dark tactical terrain map seen at an angle with glowing electric-blue ISR overlays, dashed patrol routes, detection boxes and a central shielded command-and-control core, all rendered on a rugged handheld field device. On-device tactical intelligence, disciplined and cool."
+    },
+    {
+      "slot": "blog-agentguard",
+      "aspect": "3:2",
+      "width": 1300,
+      "prompt": "Editorial blog cover: on the left, faint vintage engineering blueprint gears and an old operating-system flow drawn in dim blue; on the right they mesh into a modern glowing electric-blue graph of AI agent nodes, a tangled deadlock knot in the middle visibly loosening. Sixty-year-old algorithm meets modern agents. Dark, clever."
+    },
+    {
+      "slot": "product-focuscare",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "A calm dark clinical scene rendered abstractly: a glowing electric-blue voice waveform rising from a consultation and folding itself into neat stacked structured note-blocks and a schedule ribbon, no readable text. Physiotherapy consultation automation, from spoken words to organised notes. Serene, medical, deep black."
+    },
+    {
+      "slot": "product-dsv-fleet",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "A dark isometric live-operations map with glowing electric-blue vehicle location pings moving along optimised route lines, translucent blue geofence polygons, and small pulsing dispatch nodes. Real-time fleet tracking and routing command centre, precise and busy but elegant."
+    },
+    {
+      "slot": "product-food-ordering",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "An abstract dark marketplace operations diagram: interconnected glowing electric-blue nodes for vendors, orders, payments and settlements flowing into one another across a blueprint grid, small coins of blue light settling into balanced ledgers. Unified events commerce platform, systematic."
+    },
+    {
+      "slot": "product-open-vision-ppe",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "A dark industrial site rendered abstractly with glowing electric-blue detection bounding boxes locking onto stylised worker figures and helmets, a highlighted restricted-zone boundary line, and a small edge compute box lit blue with no cloud connection. On-premise vision safety monitoring, watchful and self-contained."
+    },
+    {
+      "slot": "product-factory-os",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "A dark isometric factory floor abstracted into a glowing electric-blue production timeline: a Gantt-like ribbon of milestone bars threading between workstations, quality-gate checkpoints glowing as blue rings, capacity meters filling. Production planning that replaced the spreadsheet, orderly and industrial."
+    },
+    {
+      "slot": "product-real-estate-fund",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "A dark 3D city and land map with glowing electric-blue property pins, a few flagged with distress signals, and four small orbiting agent orbs running a pipeline — scout, underwrite, outreach, structure — connected by blue light. An AI-native real estate fund at work, analytical and cinematic."
+    },
+    {
+      "slot": "product-ai-job-automation",
+      "aspect": "16:9",
+      "width": 1400,
+      "prompt": "A dark browser-automation motif: a glowing electric-blue robotic cursor gliding through a deep stack of translucent application forms, auto-filling fields with blue light, while a shattered CAPTCHA shield dissolves into particles. Job application autopilot across hiring platforms, stealthy and relentless."
+    },
+    {
+      "slot": "texture-neural",
+      "aspect": "16:9",
+      "width": 1600,
+      "prompt": "A wide, very subtle reusable section background: a sparse dark neural network of faint blue synapses and nodes fading into black at the edges, most of the frame empty and quiet. Atmospheric, restrained, made to sit behind text."
+    },
+    {
+      "slot": "texture-blueprint",
+      "aspect": "16:9",
+      "width": 1600,
+      "prompt": "A wide, calm reusable background: a dark technical blueprint schematic with faint electric-blue construction lines, a few callout circles and dimension marks (no text or numbers), drifting into fog. Mostly empty, engineered, quiet."
+    },
+    {
+      "slot": "contact-visual",
+      "aspect": "4:3",
+      "width": 1100,
+      "prompt": "A single bright glowing electric-blue node on a dark blueprint grid with an inviting open pathway drawing itself outward toward the viewer, the first lines of a fresh schematic just beginning to appear. Start of a project, an open door. Warm-cool, hopeful, lots of black."
+    },
+    {
+      "slot": "faq-visual",
+      "aspect": "4:3",
+      "width": 1100,
+      "prompt": "A small cluster of glowing electric-blue query nodes on a dark grid resolving neatly into calm answer nodes connected by clean lines, a sense of questions being settled. Abstract, tidy, reassuring. Deep black, generous space."
+    }
+  ]
+}

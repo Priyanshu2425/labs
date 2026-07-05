@@ -14,13 +14,15 @@ export default function AILab() {
       status: "Released",
       name: "SLM360",
       description: "On-device AI that thinks, learns, and remembers. 50MB, 39ms latency, 100% offline.",
-      link: "/models/slm360"
+      link: "/models/slm360",
+      image: "/media/model-slm360.webp"
     },
     {
       status: "Released",
       name: "Med360",
       description: "Medical AI models for clinical transcription, diagnosis, and multilingual healthcare. Med360 Lite + Sanad-1.0.",
-      link: "/models/med360"
+      link: "/models/med360",
+      image: "/media/model-med360.webp"
     }
   ];
 
@@ -31,7 +33,8 @@ export default function AILab() {
       title: "Med360: A Family of Fine-tuned Multilingual Medical AI Assistants for Indian Healthcare",
       description: "We present Med360, a family of fine-tuned large language models designed specifically for Indian healthcare contexts with native Hinglish support, Indian pharmaceutical nomenclature, and AIIMS/NEET-PG level medical knowledge.",
       tags: ["Medical AI", "Hinglish", "Indian Healthcare"],
-      link: "/research/med360-paper"
+      link: "/research/med360-paper",
+      image: "/media/paper-med360.webp"
     },
     {
       type: "Technical Report",
@@ -39,7 +42,8 @@ export default function AILab() {
       title: "SLM360: Breaking the NLU Trilemma - Accuracy, Latency, and Efficiency On-Device",
       description: "A lightweight NLU engine achieving 98-100% accuracy at 39ms latency in 50MB -4x faster than Rasa, 10x less memory. Hybrid classification with reasoning, memory, and prediction, all on-device.",
       tags: ["Edge AI", "On-Device NLU", "Hybrid Classification"],
-      link: "/research/slm360-paper"
+      link: "/research/slm360-paper",
+      image: "/media/paper-slm360.webp"
     },
     {
       type: "Technical Report",
@@ -47,7 +51,8 @@ export default function AILab() {
       title: "AgentGuard: Deadlock Prevention for Multi-AI-Agent Systems via Extended Banker’s Algorithm",
       description: "A C++17 library that extends Dijkstra’s Banker’s Algorithm for LLM agent orchestration — with progress monitoring, authority cycle detection, and adaptive demand estimation. 285 tests, LangGraph integration.",
       tags: ["Deadlock Prevention", "Multi-Agent Systems", "LangGraph"],
-      link: "/research/agentguard-paper"
+      link: "/research/agentguard-paper",
+      image: "/media/paper-agentguard.webp"
     },
     {
       type: "Technical Report",
@@ -55,7 +60,8 @@ export default function AILab() {
       title: "VAJRA: A Multi-Sensor On-Device Counter-UAS System with Custom-Trained Visual and Acoustic Deep Learning Models",
       description: "A fully on-device, multi-sensor drone detection and neutralization system running on a commercial Android smartphone. Integrates visual (YOLOv8n), acoustic (FFT + CNN), and RF analysis -fused into a unified threat display with countermeasure control. 38MB APK, zero network dependency.",
       tags: ["Counter-UAS", "On-Device ML", "Edge AI"],
-      link: "/research/vajra-paper"
+      link: "/research/vajra-paper",
+      image: "/media/paper-vajra.webp"
     },
     {
       type: "Technical Report",
@@ -63,7 +69,8 @@ export default function AILab() {
       title: "KAVACH: An On-Device Tactical Intelligence Platform with SLM360-Powered Natural Language C2, Real-Time ISR, and Automated Reporting",
       description: "A tactical intelligence platform running entirely on Android with zero network dependency. Integrates Tactical C2, ISR Processing (YOLOv8n, ~19 FPS), Auto SITREP (SALUTE reports in ~8s), and Patrol Optimization -all powered by SLM360 (577K params, 848KB).",
       tags: ["Tactical AI", "On-Device ML", "SLM360"],
-      link: "/research/kavach-paper"
+      link: "/research/kavach-paper",
+      image: "/media/paper-kavach.webp"
     }
   ];
 
@@ -214,6 +221,7 @@ response = model.generate(
               description="How we applied a 60-year-old OS algorithm to prevent deadlocks in multi-AI-agent systems. A practical guide to using AgentGuard with LangGraph. (12 min read)"
               tags={["LangGraph", "Deadlock Prevention", "Multi-Agent Systems"]}
               link="/ai-lab/blog/agentguard-deadlock-fix"
+              image="/media/blog-agentguard.webp"
             />
           </motion.div>
         </section>

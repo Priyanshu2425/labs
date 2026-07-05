@@ -94,7 +94,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Consultation Start", value: "1-click" },
       { label: "Format", value: "SOAP Notes" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-focuscare.webp",
+      alt: "Abstract render — a consultation's audio waveform folding into structured physiotherapy notes",
+      caption: "One-click consult → real-time transcript → structured SOAP notes"
+    }
   },
   "dsv-fleet-management": {
     id: "dsv-fleet-management",
@@ -115,7 +120,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "GPS Update", value: "15s" },
       { label: "Support Tickets", value: "-60%" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-dsv-fleet.webp",
+      alt: "Abstract render — a live operations map with glowing vehicle pings, routes and geofences",
+      caption: "Every vehicle, driver and route — live on one map"
+    }
   },
   "charge-pulse": {
     id: "charge-pulse",
@@ -194,7 +204,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Modules", value: "8" },
       { label: "Access Roles", value: "5" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-food-ordering.webp",
+      alt: "Abstract render — vendor, order, payment and settlement nodes flowing across a grid",
+      caption: "Vendors, orders, payments, settlements — one operations platform"
+    }
   },
   "open-vision-ppe": {
     id: "open-vision-ppe",
@@ -216,7 +231,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Confidence", value: "50%+" },
       { label: "Cloud Required", value: "None" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-open-vision-ppe.webp",
+      alt: "Abstract render — detection boxes locking onto workers and helmets at an industrial site, on-prem edge device",
+      caption: "PPE, zones and intrusion — detected on-prem, no cloud required"
+    }
   },
   "factory-os": {
     id: "factory-os",
@@ -238,7 +258,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "Live Orders", value: "295+" },
       { label: "API Endpoints", value: "31+" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-factory-os.webp",
+      alt: "Abstract render — a production timeline of milestone bars and quality-gate checkpoints across a factory floor",
+      caption: "Milestones, SOP gates and capacity — the spreadsheet, replaced"
+    }
   },
   "grospace": {
     id: "grospace",
@@ -320,7 +345,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "AI Agents", value: "4" },
       { label: "Distress Rules", value: "13" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-real-estate-fund.webp",
+      alt: "Abstract render — a 3D property map with distress signals and four AI agents running a deal pipeline",
+      caption: "Scout → underwrite → outreach → structure, run by four agents"
+    }
   },
   "ai-job-automation": {
     id: "ai-job-automation",
@@ -342,7 +372,12 @@ export const productsData: Record<string, Product> = {
     metrics: [
       { label: "ATS Platforms", value: "3+" },
       { label: "Success Rate", value: "99%" }
-    ]
+    ],
+    coverImage: {
+      src: "/media/product-ai-job-automation.webp",
+      alt: "Abstract render — a robotic cursor auto-filling stacked application forms as a CAPTCHA shield dissolves",
+      caption: "Auto-apply across Lever, Greenhouse and Workday — CAPTCHA-resilient"
+    }
   },
   "investor-update-drafter": {
     id: "investor-update-drafter",

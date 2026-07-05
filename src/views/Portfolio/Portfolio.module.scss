@@ -17,6 +17,20 @@
   overflow: hidden;
   background-color: $color-background;
 
+  .heroVisual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.34;
+    mask-image: linear-gradient(to bottom, transparent 2%, #000 44%, transparent 96%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 2%, #000 44%, transparent 96%);
+
+    img { object-fit: cover; object-position: center; }
+
+    [data-theme='light'] & { opacity: 0.1; }
+  }
+
   @media (max-width: 1024px) {
     padding: 8rem 0 3.5rem;
   }

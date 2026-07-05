@@ -64,7 +64,7 @@ export const faqs: FAQCategory[] = [
     questions: [
       {
         q: 'How much do your services cost?',
-        a: 'AI agents and automations typically start at $1,200 USD. Web and mobile applications range from $3,600-$12,000 USD. Enterprise AI systems start at $10,000+ USD. We provide transparent pricing upfront based on scope.',
+        a: 'Every engagement is scoped to the work — it depends on complexity, timeline, and how much we build from scratch versus integrate. Tell us what you are building and we come back with a clear, fixed scope and a transparent quote, agreed before we start. No hourly surprises.',
       },
       {
         q: 'How fast can you deliver?',

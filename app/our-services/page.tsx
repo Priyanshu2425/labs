@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: 'Our Services — Custom AI Builds, Products & Fractional CTO',
   description:
-    'Three ways to work with BuildspaceLabs: custom software builds from $5k, ready-to-deploy AI products live in 72 hours, or fractional CTO partnership. AI-native engineering.',
+    'Three ways to work with BuildspaceLabs: custom software builds, ready-to-deploy AI products live in a week, or a fractional CTO partnership. AI-native engineering.',
   keywords: [
     'custom AI development',
     'AI products',
@@ -33,7 +33,7 @@ const services = [
   {
     name: 'Custom AI Builds',
     url: `${SITE_URL}/our-services#custom`,
-    description: 'Bespoke AI systems and enterprise software, built from scratch. Starts at $5k.',
+    description: 'Bespoke AI systems and enterprise software, built from scratch, end-to-end.',
   },
   {
     name: 'Ready-to-Deploy AI Products',

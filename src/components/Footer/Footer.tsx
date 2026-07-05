@@ -21,6 +21,11 @@ export default function Footer() {
             <Link href="/contact-us" className={styles.link}>Contact</Link>
           </div>
           <div className={styles.linkGroup}>
+            <h4 className={styles.groupTitle}>Team</h4>
+            <a href="mailto:aryan@vruoom.com" className={styles.link}>Aryan · Director</a>
+            <a href="mailto:priyanshu@vruoom.com" className={styles.link}>Priyanshu · CTO</a>
+          </div>
+          <div className={styles.linkGroup}>
             <h4 className={styles.groupTitle}>Legal</h4>
             <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
             <Link href="/terms" className={styles.link}>Terms & Conditions</Link>

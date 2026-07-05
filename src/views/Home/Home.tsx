@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import styles from './Home.module.scss';
 import Header from '../../components/Header';
@@ -44,7 +45,18 @@ const Hero = () => {
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroGrid} aria-hidden="true" />
+      <div className={styles.heroVisual} aria-hidden="true">
+        <Image
+          src="/media/home-hero.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={styles.heroVisualImg}
+        />
+      </div>
       <div className={styles.heroGlow} aria-hidden="true" />
+      <div className={styles.heroScrim} aria-hidden="true" />
       <div className={styles.heroContent}>
         <p className={styles.heroEyebrow}>
           India&apos;s AI-native product studio
@@ -97,6 +109,9 @@ const IntroSection = () => {
 
   return (
     <section ref={ref} className={styles.introSection}>
+      <div className={styles.introVisual} aria-hidden="true">
+        <Image src="/media/home-systems.webp" alt="" fill sizes="100vw" className={styles.introVisualImg} />
+      </div>
       <div className={styles.introContent}>
         <h2 className={styles.introHeading}>
           {words.map((w, i) => {
@@ -250,12 +265,12 @@ const HorizontalScrollCarousel = () => {
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const industries = [
-    { title: 'Government', tag: 'Public Sector', projects: ['Boss OS', 'Weather Prediction', 'AI-Native Digital Tutor'] },
-    { title: 'Defence', tag: 'Mission Critical', projects: ['VAJRA', 'KAVACH', 'SAGAR'] },
-    { title: 'Logistics', tag: 'Operations', projects: ['Fleet Management', 'Charge Pulse', 'Supply Chain Ops'] },
-    { title: 'Real Estate', tag: 'PropTech', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
-    { title: 'Healthcare', tag: 'MedTech', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
-    { title: 'Hardware & IoT', tag: 'Embedded Systems', projects: ['PCB Design', 'Embedded Firmware', 'Sensor Networks'] },
+    { title: 'Government', tag: 'Public Sector', image: '/media/industry-government.webp', projects: ['Boss OS', 'Weather Prediction', 'AI-Native Digital Tutor'] },
+    { title: 'Defence', tag: 'Mission Critical', image: '/media/industry-defence.webp', projects: ['VAJRA', 'KAVACH', 'SAGAR'] },
+    { title: 'Logistics', tag: 'Operations', image: '/media/industry-logistics.webp', projects: ['Fleet Management', 'Charge Pulse', 'Supply Chain Ops'] },
+    { title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp', projects: ['Lease Management', 'Real Estate Fund', 'Real Estate MIS'] },
+    { title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp', projects: ['Clinical Notes', 'Focuscare', 'Patient Analytics'] },
+    { title: 'Hardware & IoT', tag: 'Embedded Systems', image: '/media/industry-hardware.webp', projects: ['PCB Design', 'Embedded Firmware', 'Sensor Networks'] },
   ];
 
   // Section height = one viewport (for the pin) + the actual horizontal travel.
@@ -284,6 +299,15 @@ const HorizontalScrollCarousel = () => {
           <div className={styles.carouselSpacer} aria-hidden="true" />
           {industries.map((ind) => (
             <div key={ind.title} className={styles.industryCard}>
+              <div className={styles.cardMedia} aria-hidden="true">
+                <Image
+                  src={ind.image}
+                  alt=""
+                  fill
+                  sizes="360px"
+                  className={styles.cardMediaImg}
+                />
+              </div>
               <div className={styles.cardTop}>
                 <span className={styles.cardTag}>{ind.tag}</span>
               </div>

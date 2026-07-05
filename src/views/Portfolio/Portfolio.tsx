@@ -186,6 +186,118 @@ const projects: PortfolioProject[] = [
     coverImage: "/projects/grospace/dashboard.png",
     coverAlt: "Grospace deal Kanban board with 14 deals across 4 stages",
     coverCaption: "Pipeline view — $182M across 14 deals in 4 stages"
+  },
+  {
+    id: "factory-os",
+    title: "Factory OS",
+    client: "Apparel Manufacturing (Adidas, Nike, Reebok)",
+    description: "Production planning that replaced Excel — a dual-track milestone engine, 9 mandatory SOP quality gates, capacity simulation, and Gantt visibility, seeded with 295 real production orders across 9 departments.",
+    categories: ["Manufacturing"],
+    status: "live" as const,
+    metrics: [{ label: "Live Orders", value: "295+" }, { label: "API Endpoints", value: "31+" }],
+    tags: ["Next.js", "PostgreSQL", "Prisma"],
+    link: "/product/factory-os",
+    filterCategory: "Web",
+    accent: "#3b82f6",
+    coverImage: "/media/product-factory-os.webp",
+    coverAlt: "Abstract render — a production timeline of milestone bars and quality-gate checkpoints across a factory floor",
+    coverCaption: "Milestones, SOP gates and capacity — made visible"
+  },
+  {
+    id: "dsv-fleet-management",
+    title: "DSV Fleet Management",
+    client: "Leading Logistics Operator",
+    description: "Real-time fleet tracking and dispatching — a live map with GPS at 15s intervals, geofencing, traffic-aware routing, and a Flutter driver app, plus fleet analytics and maintenance scheduling.",
+    categories: ["Logistics"],
+    status: "live" as const,
+    metrics: [{ label: "GPS Update", value: "15s" }, { label: "Support Tickets", value: "-60%" }],
+    tags: ["Next.js", "Flutter", "Firebase"],
+    link: "/product/dsv-fleet-management",
+    filterCategory: "Mobile",
+    accent: "#3b82f6",
+    coverImage: "/media/product-dsv-fleet.webp",
+    coverAlt: "Abstract render — a live operations map with glowing vehicle pings, routes and geofences",
+    coverCaption: "Every vehicle, driver and route — live on one map"
+  },
+  {
+    id: "ai-native-real-estate-fund",
+    title: "AI-Native Real Estate Fund",
+    client: "Bethun Bhowmik (ex-Oracle, ex-Amazon, ex-Ola)",
+    description: "Four AI agents run a Scout → Underwrite → Outreach → Structure pipeline across distressed properties — a 13-rule distress engine, XGBoost scoring, and Claude-written Buy/Pass/Watch briefs on a 3D map.",
+    categories: ["Real Estate"],
+    status: "live" as const,
+    metrics: [{ label: "AI Agents", value: "4" }, { label: "Distress Rules", value: "13" }],
+    tags: ["Python", "Claude", "XGBoost"],
+    link: "/product/ai-native-real-estate-fund",
+    filterCategory: "AI Builds",
+    accent: "#3b82f6",
+    coverImage: "/media/product-real-estate-fund.webp",
+    coverAlt: "Abstract render — a 3D property map with distress signals and four AI agents running a deal pipeline",
+    coverCaption: "Scout → underwrite → outreach → structure"
+  },
+  {
+    id: "open-vision-ppe",
+    title: "Open Vision PPE Monitoring",
+    client: "Industrial Safety Client",
+    description: "Boundary surveillance, PPE compliance and intrusion detection via real-time video analytics — YOLOv8 + ByteTrack running fully on-premise, with SQLite storage and auto-emailed daily reports. No cloud.",
+    categories: ["Safety & Compliance"],
+    status: "live" as const,
+    metrics: [{ label: "Confidence", value: "50%+" }, { label: "Cloud", value: "None" }],
+    tags: ["Python", "YOLOv8", "ByteTrack"],
+    link: "/product/open-vision-ppe",
+    filterCategory: "AI Builds",
+    accent: "#3b82f6",
+    coverImage: "/media/product-open-vision-ppe.webp",
+    coverAlt: "Abstract render — detection boxes locking onto workers and helmets at an industrial site, on-prem edge device",
+    coverCaption: "PPE, zones and intrusion — detected on-prem"
+  },
+  {
+    id: "focuscare",
+    title: "Focuscare",
+    client: "Physiotherapy Clinic",
+    description: "End-to-end physiotherapy consultation automation — one-click consult start, real-time Whisper transcription, GPT-4 SOAP notes, and automated follow-up scheduling driven from the treatment plan.",
+    categories: ["Healthcare AI"],
+    status: "live" as const,
+    metrics: [{ label: "Consult start", value: "1-click" }, { label: "Format", value: "SOAP" }],
+    tags: ["Python", "OpenAI Whisper", "FastAPI"],
+    link: "/product/focuscare",
+    filterCategory: "AI Builds",
+    accent: "#3b82f6",
+    coverImage: "/media/product-focuscare.webp",
+    coverAlt: "Abstract render — a consultation's audio waveform folding into structured physiotherapy notes",
+    coverCaption: "One-click consult → transcript → SOAP notes"
+  },
+  {
+    id: "food-ordering-platform",
+    title: "Events Ordering Platform",
+    client: "Event Hospitality Client",
+    description: "Unified events operations — vendor management, order tracking, payments and automated settlements across 8 modules, with a real-time Firebase dashboard and a full role-based audit trail.",
+    categories: ["Marketplace"],
+    status: "live" as const,
+    metrics: [{ label: "Modules", value: "8" }, { label: "Access Roles", value: "5" }],
+    tags: ["React", "Firebase", "Stripe"],
+    link: "/product/food-ordering-platform",
+    filterCategory: "Web",
+    accent: "#3b82f6",
+    coverImage: "/media/product-food-ordering.webp",
+    coverAlt: "Abstract render — vendor, order, payment and settlement nodes flowing across a grid",
+    coverCaption: "Vendors, orders, payments, settlements — one platform"
+  },
+  {
+    id: "ai-job-automation",
+    title: "Captcha-Resilient ATS Agent",
+    client: "Internal SaaS Product",
+    description: "Auto-applies across Lever, Greenhouse and Workday with a 5-tier CAPTCHA-bypass stack — stealth Chromium, fingerprint masking, and human-behaviour simulation, reaching a 99% effective pass rate.",
+    categories: ["HR & Recruiting"],
+    status: "live" as const,
+    metrics: [{ label: "ATS Platforms", value: "3+" }, { label: "Success Rate", value: "99%" }],
+    tags: ["Python", "Playwright", "Chromium"],
+    link: "/product/ai-job-automation",
+    filterCategory: "AI Builds",
+    accent: "#3b82f6",
+    coverImage: "/media/product-ai-job-automation.webp",
+    coverAlt: "Abstract render — a robotic cursor auto-filling stacked application forms as a CAPTCHA shield dissolves",
+    coverCaption: "Auto-apply across Lever, Greenhouse, Workday"
   }
 ];
 
@@ -206,6 +318,9 @@ export default function Portfolio() {
         {/* Hero */}
         <section className={styles.heroSection}>
           <div className={styles.heroGlow} aria-hidden="true" />
+          <div className={styles.heroVisual} aria-hidden="true">
+            <Image src="/media/texture-blueprint.webp" alt="" fill sizes="100vw" className={styles.heroVisualImg} />
+          </div>
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
