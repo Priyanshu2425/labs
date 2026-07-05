@@ -13,6 +13,25 @@ interface ProductProps {
   productId: string;
 }
 
+// Group a flat tech list into layers so the breadth of the stack reads at a glance.
+const TECH_GROUPS: { label: string; test: RegExp }[] = [
+  { label: 'AI & ML', test: /gpt|whisper|yolo|xgboost|\bllm\b|gemini|embedding|ocr|bytetrack|insightface|vision|\bml\b|model/i },
+  { label: 'Frontend & Mobile', test: /next\.?js|react|flutter|tailwind|framer|typescript|radix|recharts|mobile/i },
+  { label: 'Data & Infrastructure', test: /postgre|firebase|sqlite|supabase|stripe|mapbox|bigquery|vercel|prisma|redis|dbt|\bs3\b/i },
+  { label: 'Backend & APIs', test: /.*/ },
+];
+
+function groupTech(stack: string[]): { label: string; items: string[] }[] {
+  const buckets = TECH_GROUPS.map((g) => ({ label: g.label, items: [] as string[] }));
+  stack.forEach((tech) => {
+    const gi = TECH_GROUPS.findIndex((g) => g.test.test(tech));
+    buckets[gi === -1 ? buckets.length - 1 : gi].items.push(tech);
+  });
+  return buckets.filter((b) => b.items.length > 0);
+}
+
+const INDUSTRY_COUNT = 8; // matches the "Industries we've transformed" set on the home page
+
 export default function Product({ productId }: ProductProps) {
   const product = productsData[productId];
 
@@ -41,6 +60,17 @@ export default function Product({ productId }: ProductProps) {
     const idx = sectionList.findIndex(s => s.key === key);
     return idx === -1 ? '' : String(idx + 1).padStart(2, '0');
   };
+
+  // Studio breadth + related work — conveys range across products/industries and links onward.
+  const allProducts = Object.values(productsData);
+  const productCount = allProducts.length;
+  const techCount = new Set(allProducts.flatMap(p => p.techStack ?? [])).size;
+  const related = allProducts
+    .filter(p => p.id !== product.id)
+    .map(p => ({ p, shared: p.categories.some(c => product.categories.includes(c)) ? 1 : 0 }))
+    .sort((a, b) => b.shared - a.shared)
+    .slice(0, 3)
+    .map(x => x.p);
 
   return (
     <div className={styles.pageWrapper}>
@@ -270,10 +300,20 @@ export default function Product({ productId }: ProductProps) {
                 <span className={styles.sectionNumber}>{sectionNum('techStack')}</span>
                 <h2 className={styles.sectionTitle}>Tech Stack</h2>
               </div>
-              <div className={styles.techGrid}>
-                {product.techStack.map((tech, i) => (
-                  <span key={i} className={styles.techChip}>{tech}</span>
-                ))}
+              <div>
+                <p className={styles.techIntro}>Chosen per constraint, not per habit — the stack shifts with the problem.</p>
+                <div className={styles.techGroups}>
+                  {groupTech(product.techStack).map((g) => (
+                    <div key={g.label} className={styles.techGroup}>
+                      <span className={styles.techGroupLabel}>{g.label}</span>
+                      <div className={styles.techGrid}>
+                        {g.items.map((tech, i) => (
+                          <span key={i} className={styles.techChip}>{tech}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </section>
@@ -302,6 +342,55 @@ export default function Product({ productId }: ProductProps) {
                 </motion.li>
               ))}
             </ul>
+          </motion.div>
+        </section>
+
+        {/* ── More from the lab (breadth + related) ─── */}
+        <section className={`container ${styles.relatedSection}`}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+            className={styles.relatedHeader}
+          >
+            <span className={styles.monoLabel}>{'// more from the lab'}</span>
+            <h2 className={styles.relatedTitle}>A team that ships across the board.</h2>
+            <div className={styles.breadthStats}>
+              <div className={styles.breadthStat}>
+                <span className={styles.breadthValue}>{productCount}</span>
+                <span className={styles.breadthLabel}>products in production</span>
+              </div>
+              <div className={styles.breadthStat}>
+                <span className={styles.breadthValue}>{INDUSTRY_COUNT}</span>
+                <span className={styles.breadthLabel}>industries served</span>
+              </div>
+              <div className={styles.breadthStat}>
+                <span className={styles.breadthValue}>{techCount}+</span>
+                <span className={styles.breadthLabel}>technologies in play</span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+            className={styles.relatedGrid}
+          >
+            {related.map((p) => (
+              <motion.div key={p.id} variants={fadeUp}>
+                <Link href={`/product/${p.id}`} className={styles.relatedCard}>
+                  <span className={styles.relatedCat}>{p.categories[0]}</span>
+                  <h3 className={styles.relatedCardTitle}>{p.title}</h3>
+                  <p className={styles.relatedCardSub}>{p.subtitle}</p>
+                  <span className={styles.relatedArrow}>
+                    View project <ArrowUpRight size={14} />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </section>
 

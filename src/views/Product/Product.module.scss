@@ -752,3 +752,173 @@
   color: $color-accent;
   margin-right: 0.4rem;
 }
+
+/* ── Grouped tech stack ─────────────────────── */
+.techIntro {
+  font-family: $font-primary;
+  font-size: 1rem;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+  max-width: 560px;
+}
+
+.techGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.techGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.techGroupLabel {
+  font-family: $font-heading;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* ── More from the lab (breadth + related) ──── */
+.relatedSection {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid $color-border;
+
+  @media (max-width: 768px) { padding: 3rem 0 1.5rem; }
+}
+
+.relatedHeader {
+  max-width: 720px;
+  margin-bottom: 2.5rem;
+}
+
+.relatedTitle {
+  font-family: $font-heading;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: $color-text-primary;
+  margin: 0.75rem 0 1.75rem;
+
+  @media (max-width: 768px) { font-size: 1.7rem; }
+}
+
+.breadthStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.75rem;
+}
+
+.breadthStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.breadthValue {
+  font-family: $font-heading;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(160deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media (max-width: 480px) { font-size: 2rem; }
+}
+
+.breadthLabel {
+  font-family: $font-primary;
+  font-size: 0.9rem;
+  color: $color-text-secondary;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+
+  @media (max-width: 900px) { grid-template-columns: 1fr; }
+}
+
+.relatedCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.6rem;
+  border: 1px solid $color-border;
+  border-radius: 16px;
+  background: $color-surface;
+  text-decoration: none;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    border-color: $color-border-focus;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
+
+    .relatedArrow {
+      color: $color-text-primary;
+      svg { transform: translate(2px, -2px); }
+    }
+  }
+}
+
+.relatedCat {
+  font-family: $font-heading;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.relatedCardTitle {
+  font-family: $font-heading;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $color-text-primary;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.relatedCardSub {
+  font-family: $font-primary;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: $color-text-secondary;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.relatedArrow {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: $font-heading;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+  svg { transition: transform 0.2s ease; }
+}
+
+/* Light theme: darken the stat gradient for contrast. */
+[data-theme='light'] .breadthValue {
+  background-image: linear-gradient(160deg, #1d4ed8, #2563eb);
+}
