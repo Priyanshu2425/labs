@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useInView, type MotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -123,15 +123,51 @@ const Hero = () => {
   );
 };
 
-const ScrubWord = ({ word, progress, start, end }: { word: string; progress: MotionValue<number>; start: number; end: number; }) => {
+const ScrubWord = ({ word, progress, start, end, accent }: { word: string; progress: MotionValue<number>; start: number; end: number; accent?: boolean; }) => {
   const opacity = useTransform(progress, [start, end], [0.12, 1]);
   const y = useTransform(progress, [start, end], [16, 0]);
   return (
-    <motion.span className={styles.introWord} style={{ opacity, y }}>
+    <motion.span className={`${styles.introWord} ${accent ? styles.gradientText : ''}`} style={{ opacity, y }}>
       {word}
     </motion.span>
   );
 };
+
+/* Count-up that fires once when scrolled into view; honours reduced motion. */
+const CountUp = ({ to, suffix = '' }: { to: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setVal(to); return; }
+    let raf = 0;
+    let startTime = 0;
+    const dur = 1300;
+    const tick = (now: number) => {
+      if (!startTime) startTime = now;
+      const t = Math.min(1, (now - startTime) / dur);
+      setVal(Math.round((1 - Math.pow(1 - t, 3)) * to));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to]);
+  return <span ref={ref}>{val}{suffix}</span>;
+};
+
+const INTRO_STATS = [
+  { to: 21, suffix: '', label: 'Products in production' },
+  { to: 8, suffix: '', label: 'Industries transformed' },
+  { to: 3, suffix: '', label: 'Ways to work with us' },
+  { to: 100, suffix: '%', label: 'Senior team, no juniors' },
+];
+
+const INTRO_DOTS = [
+  { left: '9%', top: '24%', d: 5 }, { left: '84%', top: '20%', d: 6.5 },
+  { left: '72%', top: '58%', d: 5.5 }, { left: '23%', top: '80%', d: 7 },
+  { left: '93%', top: '46%', d: 6 }, { left: '46%', top: '13%', d: 5.8 },
+];
 
 const IntroSection = () => {
   const ref = useRef<HTMLElement | null>(null);
@@ -156,17 +192,65 @@ const IntroSection = () => {
       <div className={styles.introVisual} aria-hidden="true">
         <Image src="/media/home-systems.webp" alt="" fill sizes="100vw" className={styles.introVisualImg} />
       </div>
+      <div className={styles.introDots} aria-hidden="true">
+        {INTRO_DOTS.map((dot, i) => (
+          <motion.span
+            key={i}
+            className={styles.introDot}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ y: [0, -16, 0], opacity: [0.2, 0.75, 0.2] }}
+            transition={{ duration: dot.d, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
+          />
+        ))}
+      </div>
       <div className={styles.introContent}>
+        <motion.span
+          className={styles.introEyebrow}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className={styles.introEyebrowDot} aria-hidden="true" />
+          The studio
+        </motion.span>
         <h2 className={styles.introHeading}>
           {words.map((w, i) => {
             const t0 = wordsStart + (i / words.length) * (wordsEnd - wordsStart);
             const t1 = wordsStart + ((i + 1) / words.length) * (wordsEnd - wordsStart);
-            return <ScrubWord key={i} word={w} progress={scrollYProgress} start={t0} end={t1} />;
+            return <ScrubWord key={i} word={w} progress={scrollYProgress} start={t0} end={t1} accent={w === 'AI-native'} />;
           })}
         </h2>
         <motion.p style={{ opacity: subtextOpacity, y: subtextY }} className={styles.introSubtext}>
           BuildspaceLabs is redefining how complex technical products are built. We combine deep AI expertise with rapid product development, delivering production-ready, world-class software that you can be proud of. We&apos;re not just a vendor; we&apos;re your technical co-founders.
         </motion.p>
+
+        <motion.div
+          className={styles.introDivider}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        />
+
+        <motion.div
+          className={styles.introStats}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+        >
+          {INTRO_STATS.map((s) => (
+            <motion.div
+              key={s.label}
+              className={styles.introStat}
+              variants={{ hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } }}
+            >
+              <span className={styles.introStatValue}><CountUp to={s.to} suffix={s.suffix} /></span>
+              <span className={styles.introStatLabel}>{s.label}</span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
