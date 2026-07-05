@@ -109,31 +109,38 @@
   .introVisual { opacity: 0.1; }
 }
 
-/* Frosted-glass panel behind the hero copy — blurs the busy render so the text
-   pops, and reads identically in both themes via the theme-tinted translucent
-   fill. This is the primary legibility mechanism; the scrim only blends edges. */
+/* Open, editorial hero copy — no card. Legibility comes from the feathered
+   .heroFocus soft-focus field behind it (below), which has no visible edges. */
 .heroContent {
   max-width: 1040px;
   width: calc(100% - 3rem);
   text-align: center;
-  padding: 3.25rem 3.5rem 3.5rem;
+  padding: 0 2rem;
   z-index: 2;
   position: relative;
-  border-radius: 30px;
-  background: color-mix(in srgb, var(--color-background) 55%, transparent);
-  backdrop-filter: blur(18px) saturate(118%);
-  -webkit-backdrop-filter: blur(18px) saturate(118%);
-  border: 1px solid color-mix(in srgb, var(--color-text-primary) 9%, transparent);
-  box-shadow: 0 30px 80px color-mix(in srgb, #000000 32%, transparent);
 
-  @media (max-width: 768px) {
-    padding: 2.5rem 1.75rem 2.75rem;
-    border-radius: 24px;
-  }
   @media (max-width: 480px) {
-    padding: 2rem 1.1rem 2.25rem;
-    border-radius: 20px;
+    padding: 0 1rem;
   }
+}
+
+/* Soft-focus field behind the copy — a feathered blur + gentle darken with NO
+   border, box, or hard edge. The constellation stays crisp everywhere except a
+   soft halo right behind the text, so the copy reads without a "glass box" look.
+   Theme-aware: lightens instead of darkening in light mode. */
+.heroFocus {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  backdrop-filter: blur(24px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(110%);
+  background: radial-gradient(ellipse 58% 44% at 50% 46%,
+    color-mix(in srgb, var(--color-background) 58%, transparent) 0%,
+    color-mix(in srgb, var(--color-background) 24%, transparent) 48%,
+    transparent 72%);
+  mask-image: radial-gradient(ellipse 62% 50% at 50% 46%, #000 26%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 62% 50% at 50% 46%, #000 26%, transparent 72%);
 }
 
 /* Entrance: pure CSS so the hero copy is visible with JS off / tab backgrounded,

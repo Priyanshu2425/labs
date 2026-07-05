@@ -57,6 +57,7 @@ const Hero = () => {
       </div>
       <div className={styles.heroGlow} aria-hidden="true" />
       <div className={styles.heroScrim} aria-hidden="true" />
+      <div className={styles.heroFocus} aria-hidden="true" />
       <div className={styles.heroContent}>
         <p className={styles.heroEyebrow}>
           India&apos;s AI-native product studio
