@@ -19,6 +19,7 @@ interface PortfolioProject {
   metrics: { label: string; value: string }[];
   tags: string[];
   link: string;
+  external?: boolean;
   filterCategory: string;
   accent: string;
   coverImage?: string;
@@ -27,6 +28,23 @@ interface PortfolioProject {
 }
 
 const projects: PortfolioProject[] = [
+  {
+    id: "atelier-travel",
+    title: "Atelier — Travel Studio",
+    client: "A BuildspaceLabs Studio",
+    description: "Our in-house travel studio. We rebuild travel agencies into premium, cinematic digital destinations — fast, bespoke, and unmistakably their own. 29 brands transformed and counting. Visit the live site.",
+    categories: ["Web", "Studio"],
+    status: "live" as const,
+    metrics: [{ label: "Brands transformed", value: "29+" }, { label: "Live", value: "Visit ↗" }],
+    tags: ["Next.js", "Editorial", "Motion"],
+    link: "https://atelier-travel-studio.buildspacelabs.com/",
+    external: true,
+    filterCategory: "Web",
+    accent: "#3b82f6",
+    coverImage: "/projects/atelier-travel/cover.webp",
+    coverAlt: "Atelier Travel Studio — 'We build the digital gateways to the world'",
+    coverCaption: "Live site — a BuildspaceLabs travel studio"
+  },
   {
     id: "investor-update-drafter",
     title: "Investor Update Drafter",
@@ -388,6 +406,8 @@ export default function Portfolio() {
                 >
                   <Link
                     href={project.link}
+                    target={project.external ? '_blank' : undefined}
+                    rel={project.external ? 'noopener noreferrer' : undefined}
                     className={styles.card}
                     style={{ '--card-accent': project.accent } as React.CSSProperties}
                   >

@@ -20,6 +20,15 @@
   aspect-ratio: 3 / 2;
   border-bottom: 1px solid $color-border;
   background: #0b0b12;
+  overflow: hidden;
+}
+
+/* Light theme: frame the dark render as an inset preview rather than a hard black
+   band bleeding to the card edges. */
+[data-theme='light'] .media {
+  margin: -#{$spacing-md} -#{$spacing-md} $spacing-lg;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
 }
 
 .mediaImg {
