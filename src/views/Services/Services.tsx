@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Check, Zap } from 'lucide-react';
 import styles from './Services.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -12,61 +11,61 @@ import ProductCard from '../../components/ProductCard';
 
 type Service = {
   letter: string;
-  accent: string;
   tag: string;
   image: string;
-  title: string;
-  tagline: string;
-  bullets: string[];
+  name: string;
+  bestFor: string;
+  benefits: string[];
+  timeline: string;
   ctaLabel: string;
   cta: string;
-  hasGrid?: boolean;
+  featured?: boolean;
 };
 
 const services: Service[] = [
   {
     letter: 'A',
-    accent: '#3b82f6',
     tag: 'Custom build',
     image: '/media/service-custom-build.webp',
-    title: 'Custom software, built end-to-end.',
-    tagline: 'When you have a problem and want a senior team to architect, build, and ship the answer.',
-    bullets: [
-      'Tightly scoped engagements that produce a working prototype inside the first sprint.',
-      'A small senior team — engineering, product, design — owning the build through to production.',
-      'Architecture, infra, and deployment handled. We hand over what we ship; nothing under the hood is a black box.',
+    name: 'Custom software, built end-to-end',
+    bestFor: 'You have a problem and want a senior team to design, build, and ship the whole answer.',
+    benefits: [
+      'A working prototype in the first sprint — not a slide deck',
+      'One senior team — engineering, product, design — through to production',
+      'Full source and architecture handed over. No black boxes',
     ],
+    timeline: 'Prototype in days · production in weeks',
     ctaLabel: 'Tell us about your project',
     cta: '/contact-us',
   },
   {
     letter: 'B',
-    accent: '#3b82f6',
-    tag: 'Productised modules',
+    tag: 'Ready to deploy',
     image: '/media/service-modules.webp',
-    title: 'Production-ready AI modules you can deploy.',
-    tagline: 'When the problem is well-known and you want a sharp solution dropped into your stack.',
-    bullets: [
-      'A library of modular AI products we have already shipped and hardened across clients.',
-      'Configurable, integrated, and brand-able — typically up and running inside a week, not a quarter.',
-      'You get the working system, the source, and a senior engineer alongside you for the rollout.',
+    name: 'Production-ready AI modules',
+    bestFor: 'The problem is well-known and you want a proven AI product dropped into your stack, fast.',
+    benefits: [
+      'A library of AI products already shipped and hardened',
+      'Configurable and brandable — live in about a week, not a quarter',
+      'You get the working system, the source, and an engineer for rollout',
     ],
+    timeline: 'Live in about a week',
     ctaLabel: 'Browse the modules',
     cta: '#modules',
-    hasGrid: true,
+    featured: true,
   },
   {
     letter: 'C',
-    accent: '#3b82f6',
     tag: 'Partnership',
     image: '/media/service-fractional-cto.webp',
-    title: 'Fractional CTO and product partner.',
-    tagline: "When you're a founder who wants a senior technical co-pilot, not just a vendor.",
-    bullets: [
-      'Hands-on technical leadership across architecture, hiring, and ship cadence.',
-      'Engagements structured around build cost plus equity or revenue share — incentives aligned.',
-      'A small senior team behind the lead, so the strategy ships and the team grows with the work.',
+    name: 'Fractional CTO & product partner',
+    bestFor: "You're a founder who needs a senior technical co-pilot — not just a vendor.",
+    benefits: [
+      'Hands-on leadership across architecture, hiring, and ship cadence',
+      'Build cost plus equity or revenue share — incentives aligned',
+      'A senior team behind the lead, so the strategy actually ships',
     ],
+    timeline: 'Ongoing partnership',
     ctaLabel: 'Start the conversation',
     cta: '/contact-us',
   },
@@ -85,19 +84,17 @@ const products = [
   { title: "Job Application Autopilot", description: "Apply to hundreds of jobs automatically across Lever, Greenhouse, Workday.", category: "HR & Recruiting", link: "/product/ai-job-automation" },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' as const } },
+};
+
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
 export default function Services() {
-  const [showSolutions, setShowSolutions] = useState(false);
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
-
   return (
     <div className={styles.pageWrapper}>
       <Header />
@@ -111,131 +108,141 @@ export default function Services() {
           </div>
           <div className="container">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9 }}
+              transition={{ duration: 0.7 }}
               className={styles.heroContent}
             >
               <span className={styles.monoLabel}>{'// services'}</span>
               <h1 className={styles.pageTitle}>
-                Three ways<br />
-                <span className={styles.gradientText}>we work with you.</span>
+                Three ways to<br />
+                <span className={styles.gradientText}>work with us.</span>
               </h1>
               <p className={styles.pageSubtitle}>
-                Pick the engagement that matches the moment. Same senior team behind all three.
+                Pick the one that matches where you are — the same senior team is behind all three.
+                Each card tells you exactly who it&apos;s for.
               </p>
-              <ul className={styles.heroJump} aria-label="Service options">
-                {services.map((svc, i) => (
-                  <li key={svc.letter}>
-                    <a href={`#service-${svc.letter}`} style={{ '--svc-accent': svc.accent } as React.CSSProperties}>
-                      <span className={styles.heroJumpLetter}>{svc.letter}</span>
-                      <span className={styles.heroJumpTag}>{svc.tag}</span>
-                    </a>
-                    {i < services.length - 1 && <span className={styles.heroJumpDivider} aria-hidden="true" />}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           </div>
         </section>
 
-        {/* ── Service Cards (sticky stack) ────── */}
-        <div className={styles.cardsStack}>
-          {services.map((svc, idx) => (
-            <section
-              key={svc.letter}
-              id={`service-${svc.letter}`}
-              className={`container ${styles.serviceBlock}`}
-              style={{ top: 80 + idx * 24, position: 'sticky', zIndex: idx + 10 }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                className={styles.cardContainer}
-                style={{ '--svc-accent': svc.accent } as React.CSSProperties}
+        {/* ── Three-way comparison ─────────────── */}
+        <section className={`container ${styles.servicesSection}`}>
+          <motion.div
+            className={styles.servicesGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={stagger}
+          >
+            {services.map((svc) => (
+              <motion.article
+                key={svc.letter}
+                variants={fadeUp}
+                className={`${styles.serviceCard} ${svc.featured ? styles.featured : ''}`}
               >
-                <div className={styles.cardMedia} aria-hidden="true">
-                  <Image
-                    src={svc.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 900px) 100vw, 1000px"
-                    className={styles.cardMediaImg}
-                  />
-                </div>
-                <div className={styles.cardHead}>
-                  <span className={styles.cardLetter}>{svc.letter}</span>
-                  <span className={styles.cardTag}>{svc.tag}</span>
-                </div>
-
-                <h2 className={styles.blockTitle}>{svc.title}</h2>
-                <p className={styles.blockTagline}>{svc.tagline}</p>
-
-                <ul className={styles.bulletList}>
-                  {svc.bullets.map((text, i) => (
-                    <li key={i}>
-                      <span className={styles.bulletMarker} style={{ background: svc.accent }} aria-hidden="true" />
-                      <span>{text}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className={styles.buttonGroup}>
-                  {svc.hasGrid ? (
-                    <button
-                      className={styles.toggleBtn}
-                      onClick={() => setShowSolutions(!showSolutions)}
-                      aria-expanded={showSolutions}
-                    >
-                      {showSolutions ? 'Hide modules' : svc.ctaLabel}
-                      {showSolutions ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                    </button>
-                  ) : (
-                    <Link href={svc.cta} className={styles.ctaLink}>
-                      {svc.ctaLabel}
-                      <ArrowUpRight size={16} />
-                    </Link>
-                  )}
-                </div>
-
-                {svc.hasGrid && (
-                  <AnimatePresence>
-                    {showSolutions && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                        animate={{ opacity: 1, height: 'auto', marginTop: '3rem' }}
-                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        transition={{ duration: 0.4 }}
-                        className={styles.productsGridWrapper}
-                      >
-                        <div className={styles.productsGridHeader}>
-                          <ArrowRight size={14} className={styles.productsGridArrow} />
-                          <span>{products.length} modules ready to deploy</span>
-                        </div>
-                        <motion.div
-                          initial="hidden"
-                          animate="visible"
-                          variants={staggerContainer}
-                          className={styles.productsGrid}
-                        >
-                          {products.map((product, i) => (
-                            <motion.div key={i} variants={fadeUp}>
-                              <ProductCard {...product} />
-                            </motion.div>
-                          ))}
-                        </motion.div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                {svc.featured && (
+                  <span className={styles.featuredBadge}>
+                    <Zap size={12} /> Fastest to live
+                  </span>
                 )}
-              </motion.div>
-            </section>
-          ))}
-        </div>
 
-        <div style={{ height: '60vh' }} aria-hidden="true" />
+                <div className={styles.cardMedia} aria-hidden="true">
+                  <Image src={svc.image} alt="" fill sizes="(max-width: 900px) 100vw, 420px" className={styles.cardMediaImg} />
+                </div>
+
+                <div className={styles.cardBody}>
+                  <div className={styles.cardHead}>
+                    <span className={styles.cardLetter}>{svc.letter}</span>
+                    <span className={styles.cardTag}>{svc.tag}</span>
+                  </div>
+
+                  <h2 className={styles.serviceName}>{svc.name}</h2>
+
+                  <div className={styles.bestFor}>
+                    <span className={styles.bestForLabel}>Best for you if</span>
+                    <p className={styles.bestForText}>{svc.bestFor}</p>
+                  </div>
+
+                  <ul className={styles.benefits}>
+                    {svc.benefits.map((b, i) => (
+                      <li key={i} className={styles.benefitItem}>
+                        <span className={styles.benefitIcon} aria-hidden="true"><Check size={13} /></span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className={styles.cardFooter}>
+                    <span className={styles.timelineChip}>{svc.timeline}</span>
+                    {svc.cta.startsWith('#') ? (
+                      <a href={svc.cta} className={styles.cardCta}>
+                        {svc.ctaLabel}
+                        <ArrowUpRight size={16} />
+                      </a>
+                    ) : (
+                      <Link href={svc.cta} className={styles.cardCta}>
+                        {svc.ctaLabel}
+                        <ArrowUpRight size={16} />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* ── Modules (for option B) ───────────── */}
+        <section id="modules" className={`container ${styles.modulesSection}`}>
+          <motion.div
+            className={styles.modulesHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={fadeUp}
+          >
+            <span className={styles.monoLabel}>{'// ready to deploy'}</span>
+            <h2 className={styles.modulesTitle}>{products.length} modules you can ship this month.</h2>
+            <p className={styles.modulesSub}>
+              Proven AI products we&apos;ve already built and hardened. Configure it to your brand and stack, and it&apos;s live in about a week.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className={styles.productsGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+          >
+            {products.map((product, i) => (
+              <motion.div key={i} variants={fadeUp}>
+                <ProductCard {...product} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* ── CTA ──────────────────────────────── */}
+        <section className={`container ${styles.ctaSection}`}>
+          <motion.div
+            className={styles.ctaInner}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+          >
+            <h2 className={styles.ctaTitle}>Not sure which one fits?</h2>
+            <p className={styles.ctaText}>
+              Tell us where you are in a sentence or two. We&apos;ll point you to the right engagement — and if we&apos;re not the right team, we&apos;ll say so.
+            </p>
+            <Link href="/contact-us" className={styles.ctaBtn}>
+              Start the conversation
+              <ArrowUpRight size={16} />
+            </Link>
+          </motion.div>
+        </section>
       </main>
 
       <Footer />
