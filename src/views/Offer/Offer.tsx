@@ -293,10 +293,9 @@ export default function Offer() {
       setError('Paste the full audit your AI generated — this looks too short.');
       return;
     }
-    if (TURNSTILE_SITE_KEY && !turnstileToken) {
-      setError('Please complete the verification below first.');
-      return;
-    }
+    // Soft gate: submit whether or not a token exists. If the widget rendered,
+    // turnstileToken is sent and verified server-side; if a blocker ate the
+    // widget, we still proceed (rate limit + honeypot + cache cover the endpoint).
     setBusy(true);
     try {
       const res = await fetch('/api/offer', {
