@@ -135,18 +135,21 @@ const ScrubWord = ({ word, progress, start, end }: { word: string; progress: Mot
 
 const IntroSection = () => {
   const ref = useRef<HTMLElement | null>(null);
+  // Map progress to the section ENTERING view (0 = just entering from the bottom,
+  // 1 = the copy is centred in the viewport) so the reveal completes as you reach
+  // it — not after it has scrolled up toward the top.
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end start'],
+    offset: ['start end', 'center center'],
   });
 
   const heading = "India's first AI-native Product Studio & Engineering Lab.";
   const words = heading.split(' ');
-  const wordsStart = 0.18;
-  const wordsEnd = 0.58;
+  const wordsStart = 0.22;
+  const wordsEnd = 0.62;
 
-  const subtextOpacity = useTransform(scrollYProgress, [0.55, 0.75], [0, 1]);
-  const subtextY = useTransform(scrollYProgress, [0.55, 0.75], [40, 0]);
+  const subtextOpacity = useTransform(scrollYProgress, [0.6, 0.9], [0, 1]);
+  const subtextY = useTransform(scrollYProgress, [0.6, 0.9], [40, 0]);
 
   return (
     <section ref={ref} className={styles.introSection}>
