@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# buildspace labs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing and portfolio website for buildspace labs, built as a modern Next.js 15 App Router application.
 
-Currently, two official plugins are available:
+## What it does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+buildspace labs is a content-driven marketing and portfolio site. It renders landing, services, portfolio, product, AI-lab, and FAQ sections using reusable card components, ships a full SEO/social-preview setup, and exposes a single contact-form API route that delivers submissions over multiple channels at once. It is designed to deploy to Cloudflare Pages (a Vercel configuration is also present).
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Next.js 15 App Router with React 19 and TypeScript
+- Sass styling and Framer Motion animations, with `lucide-react` icons
+- Reusable card components: `ModelCard`, `ResearchPaperCard`, `ProductCard`, `PortfolioCard`, and `Accordion`
+- Full SEO setup: `sitemap.ts`, `robots.ts`, `manifest.ts`, generated OpenGraph and Twitter images, and helpers under `src/lib/seo`
+- Contact API route (`app/api/contact/route.ts`) that fans out to Slack, Discord, and Resend email in parallel and succeeds if any single channel delivers
+- Ready for Cloudflare Pages via `@cloudflare/next-on-pages` and Wrangler
 
-## Expanding the ESLint configuration
+## Requirements
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 18+ (20+ recommended for Next.js 15)
+- npm
+- For deployment: a Cloudflare account with Wrangler configured (or Vercel)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Run the development server:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Then open `http://localhost:3000`.
+
+Available scripts:
+
+```bash
+npm run dev            # start the Next.js dev server
+npm run build          # production build
+npm run start          # serve the production build
+npm run lint           # run ESLint (eslint-config-next)
+npm run pages:build    # build for Cloudflare Pages via @cloudflare/next-on-pages
+npm run pages:preview  # build and preview locally with Wrangler
+```
+
+## Configuration / environment variables
+
+All environment variables are optional and are only used by the contact-form API route. If none are set, the rest of the site still builds and runs; the contact form simply has no delivery channel configured. Set these in your host's environment (never commit real values):
+
+- `SLACK_WEBHOOK_URL`
+- `DISCORD_WEBHOOK_URL`
+- `RESEND_API_KEY`
+- `CONTACT_EMAIL_TO`
+- `CONTACT_EMAIL_FROM`
+
+## Project status / limitations
+
+- This is a **web application, not a CLI.** There is no command-line entry point beyond the standard npm scripts.
+- The contact route considers a submission successful if at least one channel (Slack, Discord, or email) delivers; with no env vars set, submissions are not delivered anywhere.
+- Content is specific to buildspace labs. To reuse it, expect to replace copy, assets, and branding.
+- Both a Cloudflare Pages and a Vercel configuration are present; pick one for your deployment target.
+
+## Claude Code integration
+
+This project was developed with Claude Code assistance. The standard npm scripts above are the entry points an agent would use to build, lint, and preview the site.
+
+## License
+
+No license file is currently present. MIT recommended — add a `LICENSE` file if you intend to release this as open source.
