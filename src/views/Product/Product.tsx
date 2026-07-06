@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -31,6 +32,52 @@ function groupTech(stack: string[]): { label: string; items: string[] }[] {
 }
 
 const INDUSTRY_COUNT = 8; // matches the "Industries we've transformed" set on the home page
+
+// Live landing-page preview. The cross-origin iframe is mounted only while the
+// section is in view (deferring its load) and unmounted once scrolled well past,
+// so the landing page's looping animations don't keep burning resources
+// off-screen. A skeleton fills the frame until the iframe finishes loading.
+function LandingPreview({ url, title }: { url: string; title: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setInView(true); // no IO support — just load it
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (!entry.isIntersecting) setLoaded(false); // reset skeleton for the next mount
+      },
+      { rootMargin: '300px 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={styles.siteViewport}>
+      {inView && (
+        <iframe
+          src={url}
+          title={title}
+          loading="lazy"
+          className={styles.siteIframe}
+          onLoad={() => setLoaded(true)}
+        />
+      )}
+      {!loaded && (
+        <div className={styles.siteSkeleton} aria-hidden="true">
+          <span className={styles.siteSkeletonLabel}>Loading live preview&hellip;</span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Product({ productId }: ProductProps) {
   const product = productsData[productId];
@@ -372,14 +419,10 @@ export default function Product({ productId }: ProductProps) {
                   <ArrowUpRight size={12} />
                 </a>
               </div>
-              <div className={styles.siteViewport}>
-                <iframe
-                  src={landingUrl}
-                  title={`${product.title} — live landing page preview`}
-                  loading="lazy"
-                  className={styles.siteIframe}
-                />
-              </div>
+              <LandingPreview
+                url={landingUrl}
+                title={`${product.title} — live landing page preview`}
+              />
             </div>
 
             <div className={styles.siteActions}>

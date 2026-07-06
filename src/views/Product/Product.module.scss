@@ -1047,3 +1047,39 @@
   &:hover { transform: translateY(-2px); filter: brightness(1.06); color: #fff; }
   &:focus-visible { outline: 2px solid $color-accent; outline-offset: 3px; }
 }
+
+/* Skeleton shown while the live-preview iframe defers/loads */
+.siteSkeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-surface;
+  overflow: hidden;
+}
+
+.siteSkeleton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(128, 128, 128, 0.08), transparent);
+  transform: translateX(-100%);
+  animation: siteShimmer 1.5s ease-in-out infinite;
+}
+
+.siteSkeletonLabel {
+  position: relative;
+  font-family: $font-primary;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: $color-text-secondary;
+}
+
+@keyframes siteShimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siteSkeleton::before { animation: none; }
+}
