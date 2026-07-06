@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Activity, ExternalLink } from 'lucide-react';
+import { Activity, ExternalLink, ArrowUpRight } from 'lucide-react';
 import styles from './Portfolio.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { landingUrlFor } from '../../data/products';
 
 interface PortfolioProject {
   id: string;
@@ -452,13 +453,29 @@ export default function Portfolio() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Link
-                    href={project.link}
-                    target={project.external ? '_blank' : undefined}
-                    rel={project.external ? 'noopener noreferrer' : undefined}
+                  <div
                     className={styles.card}
                     style={{ '--card-accent': project.accent } as React.CSSProperties}
                   >
+                    {/* Stretched link — the whole card opens the case study (or the external live site) */}
+                    <Link
+                      href={project.link}
+                      target={project.external ? '_blank' : undefined}
+                      rel={project.external ? 'noopener noreferrer' : undefined}
+                      className={styles.cardOverlay}
+                      aria-label={project.external ? `${project.title} — visit the live site` : `${project.title} — read the case study`}
+                    />
+                    {/* Independent link to the product's live landing page */}
+                    {!project.external && (
+                      <a
+                        className={styles.liveBadge}
+                        href={landingUrlFor(project.id)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Live site <ArrowUpRight size={13} />
+                      </a>
+                    )}
                     {project.coverImage && (
                       <div className={styles.cardCover}>
                         <Image
@@ -512,7 +529,7 @@ export default function Portfolio() {
                         <span key={t} className={styles.tag}>{t}</span>
                       ))}
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>

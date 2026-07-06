@@ -964,3 +964,10 @@ export const productsData: Record<string, Product> = {
     ]
   }
 };
+
+// Base URL for the standalone marketing landing pages — one per product, each
+// its own design, built by BuildspaceLabs and hosted on GitHub Pages.
+export const LANDING_BASE = 'https://buildpacelabs.github.io/buildspace-landings';
+
+/** The live landing-page URL for a given product id. */
+export const landingUrlFor = (id: string): string => `${LANDING_BASE}/${id}/`;

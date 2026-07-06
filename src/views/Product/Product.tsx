@@ -7,7 +7,7 @@ import { ArrowLeft, Check, ArrowUpRight, Activity, Tag, Users, TrendingUp, Calen
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from './Product.module.scss';
-import { productsData } from '../../data/products';
+import { productsData, landingUrlFor } from '../../data/products';
 
 interface ProductProps {
   productId: string;
@@ -38,6 +38,9 @@ export default function Product({ productId }: ProductProps) {
   if (!product) {
     return null;
   }
+
+  // The standalone marketing landing page we built for this product.
+  const landingUrl = landingUrlFor(product.id);
 
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -342,6 +345,49 @@ export default function Product({ productId }: ProductProps) {
                 </motion.li>
               ))}
             </ul>
+          </motion.div>
+        </section>
+
+        {/* ── Live landing page (embedded preview) ─── */}
+        <section className={`container ${styles.siteSection}`}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+          >
+            <div className={styles.siteHeader}>
+              <span className={styles.monoLabel}>{'// live landing page'}</span>
+              <h2 className={styles.siteTitle}>See {product.title} as its own site.</h2>
+              <p className={styles.siteLede}>
+                Beyond the build, we designed and shipped {product.title} a standalone landing page &mdash; its own look, copy and motion. Here&apos;s a live preview; scroll inside it, or open it full-screen.
+              </p>
+            </div>
+
+            <div className={styles.siteFrame}>
+              <div className={styles.siteBar}>
+                <span className={styles.siteDots} aria-hidden="true"><i /><i /><i /></span>
+                <a href={landingUrl} target="_blank" rel="noopener noreferrer" className={styles.siteUrl}>
+                  {landingUrl.replace('https://', '')}
+                  <ArrowUpRight size={12} />
+                </a>
+              </div>
+              <div className={styles.siteViewport}>
+                <iframe
+                  src={landingUrl}
+                  title={`${product.title} — live landing page preview`}
+                  loading="lazy"
+                  className={styles.siteIframe}
+                />
+              </div>
+            </div>
+
+            <div className={styles.siteActions}>
+              <a href={landingUrl} target="_blank" rel="noopener noreferrer" className={styles.siteCta}>
+                Open the landing page
+                <ArrowUpRight size={16} />
+              </a>
+            </div>
           </motion.div>
         </section>
 
