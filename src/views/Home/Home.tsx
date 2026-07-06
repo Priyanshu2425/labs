@@ -433,7 +433,6 @@ const HorizontalScrollCarousel = () => {
       title: 'Travel & Hospitality', tag: 'Studio', image: '/media/industry-travel.webp',
       description: 'Premium, cinematic digital destinations for travel brands.',
       projects: [
-        { label: 'Atelier Travel Studio', link: 'https://atelier-travel-studio.buildspacelabs.com/', external: true },
         { label: 'See the work', link: '/portfolio' },
       ],
     },
