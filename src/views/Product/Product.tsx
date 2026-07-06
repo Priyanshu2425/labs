@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -77,6 +77,38 @@ function LandingPreview({ url, title }: { url: string; title: string }) {
       )}
     </div>
   );
+}
+
+// Emphasise the quantitative facts (numbers, %, durations, counts, ranges) in
+// body copy so they're scannable. No regex lookbehind (unsupported on older
+// Safari); instead we skip matches attached to a name/version (GPT-4, YOLOv8).
+const KEYWORD_RE = /(\$\d[\d,]*(?:\.\d+)?[KMB]?|\d[\d,]*(?:\.\d+)?\s?[–-]\s?\d[\d,]*\+?|\d+[–-](?:weeks?|months?|hours?|minutes?|days?|years?)|\d[\d,]*(?:\.\d+)?%\+?|\d[\d,]*(?:\.\d+)?\s?(?:min(?:ute)?s?|hrs?|hours?|sec(?:ond)?s?|weeks?|days?|months?|years?)\b|\d[\d,]*\/\d+|\d[\d,]*\/(?:day|week|month|hr|hour)|\d[\d,]*s\b|\d[\d,]*\+|\d[\d,]{2,}|\d+)/gi;
+
+function highlight(text: string): ReactNode[] {
+  const re = new RegExp(KEYWORD_RE.source, KEYWORD_RE.flags);
+  const out: ReactNode[] = [];
+  let last = 0;
+  let key = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (re.lastIndex === m.index) { re.lastIndex++; continue; }
+    const prev = m.index > 0 ? text[m.index - 1] : ' ';
+    const prev2 = m.index > 1 ? text[m.index - 2] : ' ';
+    const after = text.slice(m.index + m[0].length, m.index + m[0].length + 2);
+    // leave digits that belong to a name / version / resolution untouched
+    // (GPT-4, YOLOv8, Gemini 2.5, 320x320)
+    if (
+      /[A-Za-z]/.test(prev) ||
+      (prev === '-' && /[A-Za-z]/.test(prev2)) ||
+      prev === '.' ||
+      /^[.x]\d/i.test(after)
+    ) continue;
+    if (m.index > last) out.push(text.slice(last, m.index));
+    out.push(<strong key={key++} className={styles.kw}>{m[0]}</strong>);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
 }
 
 export default function Product({ productId }: ProductProps) {
@@ -175,7 +207,7 @@ export default function Product({ productId }: ProductProps) {
 
               <motion.span variants={fadeUp} className={styles.monoLabel}>{'// product'}</motion.span>
               <motion.h1 variants={fadeUp} className={styles.pageTitle}>{product.title}</motion.h1>
-              <motion.p variants={fadeUp} className={styles.pageSubtitle}>{product.subtitle}</motion.p>
+              <motion.p variants={fadeUp} className={styles.pageSubtitle}>{highlight(product.subtitle)}</motion.p>
 
               {/* Client */}
               <motion.div variants={fadeUp} className={styles.clientRow}>
@@ -241,7 +273,7 @@ export default function Product({ productId }: ProductProps) {
               <h2 className={styles.sectionTitle}>Overview</h2>
             </div>
             <div>
-              <p className={styles.bodyText}>{product.overview}</p>
+              <p className={styles.bodyText}>{highlight(product.overview)}</p>
             </div>
           </motion.div>
         </section>
@@ -264,7 +296,7 @@ export default function Product({ productId }: ProductProps) {
                 {product.highlights.map((h, i) => (
                   <motion.li key={i} variants={fadeUp} className={styles.highlightItem}>
                     <span className={styles.highlightDot} aria-hidden="true" />
-                    <span>{h}</span>
+                    <span>{highlight(h)}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -328,7 +360,7 @@ export default function Product({ productId }: ProductProps) {
                     <div className={styles.outcomeIcon}>
                       <TrendingUp size={14} />
                     </div>
-                    <span>{o}</span>
+                    <span>{highlight(o)}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -388,7 +420,7 @@ export default function Product({ productId }: ProductProps) {
                   <div className={styles.checkIcon}>
                     <Check size={14} />
                   </div>
-                  <span>{f}</span>
+                  <span>{highlight(f)}</span>
                 </motion.li>
               ))}
             </ul>
