@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useId, useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import styles from './Accordion.module.scss';
 
@@ -10,13 +9,15 @@ interface AccordionProps {
 
 export default function Accordion({ question, answer }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
 
   return (
     <div className={`${styles.accordionContainer} ${isOpen ? styles.open : ''}`}>
-      <button 
+      <button
         className={`${styles.accordionHeader} ${isOpen ? styles.open : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         <h3 className={styles.question}>{question}</h3>
         <span className={styles.iconContainer}>
@@ -24,25 +25,16 @@ export default function Accordion({ question, answer }: AccordionProps) {
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial="collapsed"
-            animate="open"
-            exit="collapsed"
-            variants={{
-              open: { opacity: 1, height: "auto" },
-              collapsed: { opacity: 0, height: 0 }
-            }}
-            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
-          >
-            <div className={styles.accordionContent}>
-              <div className={styles.answer}>{answer}</div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* The answer is ALWAYS rendered, so it is present in the server HTML for
+          featured-snippet / People-Also-Ask crawlers. It collapses purely with
+          CSS (grid-template-rows) and never leaves the DOM. */}
+      <div id={panelId} className={styles.answerWrap}>
+        <div className={styles.answerInner}>
+          <div className={styles.accordionContent}>
+            <p className={styles.answer}>{answer}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -21,6 +21,7 @@ export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${SITE_URL}/#organization`,
     name: SITE_NAME,
     legalName: 'BuildspaceLabs',
     url: SITE_URL,
@@ -57,49 +58,41 @@ export function organizationSchema() {
 }
 
 export function websiteSchema() {
+  // No `potentialAction`/SearchAction: the site has no `?q=` search endpoint, so a
+  // sitelinks-searchbox action would be invalid per Google's guidelines. Re-add it
+  // only if real on-site search is implemented.
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
     name: SITE_NAME,
     url: SITE_URL,
     inLanguage: 'en',
-    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/portfolio?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
+    publisher: { '@id': `${SITE_URL}/#organization` },
   };
 }
 
 export function productSchema(product: Product) {
+  // Suppress the client name in structured data for any anonymized (NDA) client.
+  const isNda = /\(?\bNDA\b\)?/i.test(product.client);
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: product.title,
     description: product.overview,
-    applicationCategory: product.categories.join(', '),
+    applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web, Cross-platform',
     url: `${SITE_URL}/product/${product.id}`,
     featureList: product.features,
     keywords: [...product.categories, ...product.techStack].join(', '),
-    creator: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    ...(product.client && product.client !== 'Private Hospital (NDA)'
+    creator: { '@id': `${SITE_URL}/#organization` },
+    author: { '@id': `${SITE_URL}/#organization` },
+    ...(product.client && !isNda
       ? { audience: { '@type': 'Audience', name: product.client } }
       : {}),
-    offers: {
-      '@type': 'Offer',
-      availability:
-        product.status === 'live'
-          ? 'https://schema.org/InStock'
-          : 'https://schema.org/PreOrder',
-      priceCurrency: 'USD',
-      price: '0',
-    },
+    // No `offers`: these are bespoke client builds, not purchasable software. A
+    // fabricated price (previously '0') would read as "free" to search + AI engines
+    // and conflict with the no-pricing rule, so it is intentionally omitted.
   };
 }
 
@@ -151,4 +144,20 @@ export function itemListSchema(
       ...(item.description ? { description: item.description } : {}),
     })),
   };
+}
+
+/** Emit each offering as a Service tied to the provider Organization (@id). */
+export function servicesSchema(
+  items: { name: string; url: string; description: string }[],
+) {
+  return items.map((s) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: s.name,
+    serviceType: s.name,
+    description: s.description,
+    url: s.url,
+    provider: { '@id': `${SITE_URL}/#organization` },
+    areaServed: ['IN', 'US', 'GB', 'AE', 'AU', 'EU'],
+  }));
 }

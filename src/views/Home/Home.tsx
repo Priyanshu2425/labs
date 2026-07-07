@@ -223,7 +223,7 @@ const IntroSection = () => {
           })}
         </h2>
         <motion.p style={{ opacity: subtextOpacity, y: subtextY }} className={styles.introSubtext}>
-          BuildspaceLabs is redefining how complex technical products are built. We combine deep AI expertise with rapid product development, delivering production-ready, world-class software that you can be proud of. We&apos;re not just a vendor; we&apos;re your technical co-founders.
+          BuildspaceLabs is an AI-native product studio and engineering lab. We design and ship production AI products end-to-end — from the interface to the model orchestration to the engineering — pairing deep AI expertise with rapid product development. We&apos;re not just a vendor; we&apos;re your technical co-founders.
         </motion.p>
 
         <motion.div

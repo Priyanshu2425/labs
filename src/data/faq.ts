@@ -19,6 +19,10 @@ export const faqs: FAQCategory[] = [
         a: 'BuildspaceLabs is an AI-native software development company and product studio that builds custom AI solutions, intelligent automation systems, and production-ready software for businesses worldwide. Unlike traditional IT consultancies, BuildspaceLabs ships working AI products in weeks, not months.',
       },
       {
+        q: 'What is an AI-native product studio?',
+        a: 'An AI-native product studio is a team that designs and builds software with generative AI at the core of the product, not bolted on afterward. As one, BuildspaceLabs takes a product from idea to production as a single team — the interface, the model orchestration, and the engineering — instead of splitting the work across a design shop, an ML vendor, and a separate dev agency.',
+      },
+      {
         q: 'What kind of solutions do you build?',
         a: 'BuildspaceLabs builds custom AI solutions including AI agents, intelligent chatbots, workflow automation systems, LLM-powered applications, and enterprise software to help businesses automate customer support, lead generation, document processing, and workflows.',
       },
@@ -28,11 +32,11 @@ export const faqs: FAQCategory[] = [
       },
       {
         q: 'How do you differ from traditional IT consultancies?',
-        a: 'We are AI-native (built from the ground up around AI, not retrofitting it), we ship fast (working prototypes in days, not months), we provide direct access to senior talent (no layers of project managers), and we offer transparent pricing.',
+        a: 'We are AI-native (built from the ground up around AI, not retrofitting it), we ship fast (working prototypes in days, not months), we provide direct access to senior talent (no layers of project managers), and we quote clear, fixed scopes agreed before we start.',
       },
       {
         q: 'What industries do you work with?',
-        a: 'BuildspaceLabs works across multiple industries including fintech, banking, e-commerce, retail, healthcare, manufacturing, logistics, education, real estate, and professional SaaS companies.',
+        a: 'BuildspaceLabs works across logistics, real estate and proptech, healthcare and medtech, hardware and IoT, fintech, SaaS and customer support, and legal tech — plus adjacent B2B software teams. Most of our work is enterprise and B2B rather than consumer.',
       },
     ],
   },
@@ -46,7 +50,7 @@ export const faqs: FAQCategory[] = [
       },
       {
         q: 'How good are your AI agents?',
-        a: 'We build some of the best AI agents in the market. They use advanced LLM orchestration with tools like LangChain and LlamaIndex to handle complex multi-turn conversations, integrate with enterprise systems, and operate reliably in production.',
+        a: 'Our AI agents use LLM orchestration — with tools like LangChain and LlamaIndex — to handle complex multi-turn conversations, integrate with enterprise systems, and run reliably in production. We build each agent around a specific job, with guardrails and evaluations so it behaves predictably on real data, not just in a demo.',
       },
       {
         q: 'Can you build AI Chatbots?',
@@ -54,7 +58,7 @@ export const faqs: FAQCategory[] = [
       },
       {
         q: 'What LLMs do you use?',
-        a: 'We build with OpenAI (GPT-4), Google Gemini, and open-source models like Llama and Mistral. We choose the best model based on latency, cost, and task complexity.',
+        a: 'We build with frontier models from OpenAI and Google, alongside open-source models like Llama and Mistral. We choose the best model for each task based on latency, cost, and complexity — and swap models as the frontier moves, so you are never locked to one provider.',
       },
     ],
   },
@@ -64,7 +68,7 @@ export const faqs: FAQCategory[] = [
     questions: [
       {
         q: 'How much do your services cost?',
-        a: 'Every engagement is scoped to the work — it depends on complexity, timeline, and how much we build from scratch versus integrate. Tell us what you are building and we come back with a clear, fixed scope and a transparent quote, agreed before we start. No hourly surprises.',
+        a: 'We price every project as a fixed scope agreed before work starts — no hourly billing and no surprises. The exact figure depends on complexity, timeline, and how much we build from scratch versus integrate. Tell us what you are building and we come back with a clear scope and a transparent quote.',
       },
       {
         q: 'How fast can you deliver?',

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ServicesClient from '@/views/Services/Services';
 import {
   JsonLd,
-  itemListSchema,
+  servicesSchema,
   breadcrumbSchema,
   SITE_URL,
 } from '@/lib/seo/jsonLd';
@@ -50,7 +50,7 @@ const services = [
 export default function ServicesPage() {
   return (
     <>
-      <JsonLd data={itemListSchema(services, 'BuildspaceLabs Services')} />
+      <JsonLd data={servicesSchema(services)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', url: SITE_URL },

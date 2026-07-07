@@ -119,8 +119,9 @@ export default function Services() {
                 <span className={styles.gradientText}>work with us.</span>
               </h1>
               <p className={styles.pageSubtitle}>
-                Pick the one that matches where you are — the same senior team is behind all three.
-                Each card tells you exactly who it&apos;s for.
+                BuildspaceLabs builds custom AI software, ships ready-to-deploy AI products, and
+                embeds as your fractional CTO. Pick the one that matches where you are — the same
+                senior team is behind all three.
               </p>
             </motion.div>
           </div>

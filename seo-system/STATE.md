@@ -12,8 +12,8 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 |---|-------|--------|
 | 1 | Audit (read-only) | ✅ done 2026-07-07 — 6 specialists, findings below |
 | 2 | Technical SEO fixes | ✅ shipped 2026-07-07 — see "Phase 2 shipped" below |
-| 3 | Schema + AEO | ⏳ pending (some items need decisions B/C) |
-| 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ⏳ pending (needs decisions B/C) |
+| 3 | Schema + AEO | ✅ shipped 2026-07-07 — see "Phase 3 shipped" below |
+| 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ⏳ next — robots already done in P2; llms.txt + entity/"first" sweep remain |
 | 5 | Content (case studies, copy, bios, industry pages) | ⏳ pending (needs real outcomes/bios) |
 | 6 | Reporting (REPORT.md + re-check list) | ⏳ pending |
 
@@ -30,6 +30,26 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **T9 (partial) ✅** Home "21 Products" → **20** with sync comment. (sitemap `lastModified` freshness improvement still open — low.)
 - **[A] ✅** `/privacy` + `/terms` routes + views + breadcrumb schema + sitemap entries (priority 0.3). Footer links now resolve 200.
 - Verified: clean `next build` (35/35), 404 status, robots.txt, sitemap.xml, on-brand screenshots.
+
+## Phase 3 shipped (2026-07-07) — Schema + AEO
+- **S1 ✅** Removed `offers { price:'0' }` from `productSchema`; `applicationCategory` → `BusinessApplication`. Verified: no `price:0`/`offers` in any product HTML.
+- **S2 ✅** Removed the invalid `SearchAction` from `websiteSchema`. Verified: no `SearchAction` anywhere.
+- **S5 ✅** Added `@id` to Organization (`/#organization`) + WebSite (`/#website`); product `creator/author` and website `publisher` now reference the org `@id` (one consolidated entity). Verified.
+- **S6 ✅** `/our-services` now emits `Service` entities (provider → org `@id`) instead of a generic ItemList. Verified.
+- **S7 ✅** NDA `audience` guard generalized (regex on `NDA`) — no more one-off exact-string match; no `(NDA)`-named audiences.
+- **A1 ✅** FAQ `Accordion` reworked: answer is **always in the server HTML** (verified), collapsed via CSS grid-rows (measured: closed 0px → open 138px). Dropped framer-motion from the component (/faq bundle −1.5 kB).
+- **A2 ✅** New answer-first FAQ: "What is an AI-native product studio?" (General now 6).
+- **A3 ✅** Home intro definition reworded to a crisp "BuildspaceLabs is an AI-native product studio and engineering lab…" entity sentence.
+- **A4 ✅** "How good are your AI agents?" now leads with the factual capability (dropped the "best in the market" boast).
+- **A5 ✅** Services hero gains an extractable offering summary line.
+- **A8 ✅** FAQ de-staled: "GPT-4" → model-agnostic; industry list → the demonstrable verticals; "transparent pricing" → "clear, fixed scopes agreed before we start".
+- **A10 ✅** Pricing FAQ reordered to lead with the direct (no-figure) answer.
+- Verified: clean `next build` (35/35); schema + FAQ-SSR checks pass; accordion + Services hero screenshots.
+
+**Deferred with reason:**
+- **A7 (question-style product H2s) → needs your call.** Those headings sit in a narrow sticky-label column; full-question H2s would wrap and break the editorial rhythm. Flagged per the "AEO-vs-design clash → ask" rule.
+- **A6 (vertical PAA Q&A) + O6 (Home carousel recategorization: Sales Call Coach mis-filed, "embedded firmware" claim, dead links) → Phase 5**, where product-data mapping + real outcomes are in hand (avoids miscategorizing).
+- **A9 ("India's first") + footer tagline + all entity-description wording → Phase 4** (done as one cohesive entity-consistency sweep using the locked canonical line).
 
 ## Corrections to the original brief (verified against the repo)
 - `/privacy` and `/terms` **do NOT exist** as routes — but the Footer links to them on every page (broken/soft-404).

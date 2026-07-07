@@ -95,6 +95,29 @@
   height: 32px;
 }
 
+/* Always-in-DOM answer that collapses with a pure-CSS grid-rows transition, so
+   the text stays server-rendered for snippet/PAA crawlers even when closed. */
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.04, 0.62, 0.23, 0.98);
+
+  .accordionContainer.open & {
+    grid-template-rows: 1fr;
+  }
+}
+
+.answerInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answerWrap {
+    transition: none;
+  }
+}
+
 .accordionContent {
   padding: 0 $spacing-xl $spacing-lg;
 
