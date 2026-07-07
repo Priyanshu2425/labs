@@ -36,8 +36,9 @@ pnpm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# claude code local config
-.claude/
+# claude code local config (but keep the versioned SEO agent team)
+.claude/*
+!.claude/agents/
 
 # Raw AI-generated image sources (optimised output committed to public/media)
 assets/media-work/
