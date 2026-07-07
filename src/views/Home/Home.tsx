@@ -157,7 +157,8 @@ const CountUp = ({ to, suffix = '' }: { to: number; suffix?: string }) => {
 };
 
 const INTRO_STATS = [
-  { to: 21, suffix: '', label: 'Products in production' },
+  // Keep in sync with productsData (currently 20 shipped products).
+  { to: 20, suffix: '', label: 'Products in production' },
   { to: 8, suffix: '', label: 'Industries transformed' },
   { to: 3, suffix: '', label: 'Ways to work with us' },
   { to: 100, suffix: '%', label: 'Senior team, no juniors' },

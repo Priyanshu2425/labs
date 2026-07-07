@@ -369,7 +369,7 @@ export default function Portfolio() {
         <section className={styles.heroSection}>
           <div className={styles.heroGlow} aria-hidden="true" />
           <div className={styles.heroVisual} aria-hidden="true">
-            <Image src="/media/texture-blueprint.webp" alt="" fill sizes="100vw" className={styles.heroVisualImg} />
+            <Image src="/media/texture-blueprint.webp" alt="" fill priority sizes="100vw" className={styles.heroVisualImg} />
           </div>
           <div className="container">
             <motion.div

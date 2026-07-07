@@ -104,7 +104,7 @@ export default function Services() {
         <section className={styles.heroSection}>
           <div className={styles.heroGlow} aria-hidden="true" />
           <div className={styles.heroVisual} aria-hidden="true">
-            <Image src="/media/services-hero.webp" alt="" fill sizes="100vw" className={styles.heroVisualImg} />
+            <Image src="/media/services-hero.webp" alt="" fill priority sizes="100vw" className={styles.heroVisualImg} />
           </div>
           <div className="container">
             <motion.div

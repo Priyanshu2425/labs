@@ -1,0 +1,114 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+.main {
+  flex: 1;
+  padding: 9rem 0 6rem;
+}
+
+.doc {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.docHeader {
+  padding-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.monoLabel {
+  display: inline-block;
+  font-family: var(--font-space-grotesk), monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-badge-text);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 1.6rem + 2vw, 3rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.updated {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0 0 1.25rem;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.body {
+  h2 {
+    font-family: var(--font-space-grotesk), sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin: 2.75rem 0 1rem;
+  }
+
+  h3 {
+    font-family: var(--font-space-grotesk), sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-text-primary);
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  p {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0 0 1.1rem;
+  }
+
+  ul {
+    margin: 0 0 1.3rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  li {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.55rem;
+  }
+
+  a {
+    color: var(--color-badge-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+
+  strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 7rem 0 4rem;
+  }
+}
