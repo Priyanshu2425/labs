@@ -14,8 +14,8 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 | 2 | Technical SEO fixes | ✅ shipped 2026-07-07 — see "Phase 2 shipped" below |
 | 3 | Schema + AEO | ✅ shipped 2026-07-07 — see "Phase 3 shipped" below |
 | 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ✅ shipped 2026-07-08 — see "Phase 4 shipped" below |
-| 5 | Content (case studies, copy, bios, industry pages) | ⏳ pending (needs real outcomes/bios) |
-| 6 | Reporting (REPORT.md + re-check list) | ⏳ pending |
+| 5 | Content (case studies, copy, bios, industry pages) | 🔶 partial — O6 carousel accuracy shipped 2026-07-08; case studies/About/`/solutions` blocked on real data (§NEEDS-DECISION G/F/E) |
+| 6 | Reporting (REPORT.md + re-check list) | 🔶 partial — `REPORT.md` + `.env.example` analytics/GSC placeholders shipped 2026-07-08; runtime analytics/GSC tag wiring blocked on tool choice + token |
 
 ## Decisions locked (2026-07-07)
 - **[B]** Canonical positioning = *"India's AI-native product studio & engineering lab for enterprises worldwide."* **Drop "first."** ✅ shipped in Phase 4.
@@ -57,6 +57,19 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **Entity consistency ✅** Canonical line is now used across schema, metadata, Home copy, Footer, and `llms.txt`: "India's AI-native product studio and engineering lab for enterprises worldwide."
 - Not added: `sameAs`, founder `Person` schema, substantiated founder bios, or canonical inbound email. Those still require real URLs/details from the user.
 
+## Phase 5 (partial) shipped (2026-07-08) — carousel accuracy
+- **O6 ✅** Home "Industries" carousel corrected against real `products.ts` data, no fabrication:
+  - Removed **Sales Call Coach** from the **Legal Tech** card (it's Sales AI, not legal) → Brief Forge + "See the work".
+  - Retitled **Hardware & IoT → "Manufacturing & Vision"** (tag "Industrial AI"); dropped the unsupported "on-device ML / embedded firmware / ship on real hardware" claim (none of the linked products are embedded/firmware). Now: Open Vision PPE (on-prem vision) + Factory OS (production planning) + "See the work"; removed Charge Pulse (consumer EV app, already under Logistics). **⚠ If the team actually does embedded/hardware work elsewhere, tell me and I'll restore/expand the card.**
+  - Fixed phantom/miscategorized links: Logistics "Supply Chain Ops" → "See the work"; Real Estate "Marketplace Ops"→food-ordering-platform (an events-ops product, not real estate) → "See the work". Fintech "Events Payments"→food-ordering-platform kept (payments/settlements is defensible; only defensible appearance retained).
+  - "21"→20 count already fixed in Phase 2 (T9); verified no residual "21" in Home.
+- **Still Phase 5 (blocked on real data):** case-study copy + Outcomes/engagement for the 7 thin products [G], About page + `Person` schema/bios [F], `/solutions/[vertical]` pages (O2), vertical PAA (A6), A7 product H2s (needs your call), Travel/"government" claim resolution [E].
+
+## Phase 6 (partial) shipped (2026-07-08) — reporting
+- **M3 ✅** `seo-system/REPORT.md` created: infra inventory, canonical entity facts (single source of truth), monitoring status, owner-only inputs, off-repo action list, and a monthly re-check checklist (excludes live rankings/indexing/traffic per the Do-NOT rule).
+- **M4 ✅** `.env.example` gains a dormant, commented **Analytics & Search Console** block (`NEXT_PUBLIC_GA_MEASUREMENT_ID`, `NEXT_PUBLIC_GSC_VERIFICATION`) — placeholders only; nothing renders until set.
+- **Still Phase 6 (blocked):** wiring the actual GA/GSC runtime tag once the analytics tool [J] + IDs/token [J/K] are provided.
+
 ## Corrections to the original brief (verified against the repo)
 - `/privacy` and `/terms` were missing in the original audit; Phase 2 added real routes, legal views, footer-resolving links, breadcrumb schema, and sitemap entries.
 - `/ai-lab` missing from the sitemap is **correct** — the page is `noindex`; a noindex page should not be in the sitemap. Not a bug.
@@ -82,7 +95,7 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 ### On-page
 - **O1 [HIGH]** Title brand duplication: Offer renders `… | BuildspaceLabs | BuildspaceLabs`; Home & Contact double the brand (template at `layout.tsx:23`). → Drop manual brand suffixes; use `title.absolute` where needed; target ≤60 chars.
 - **O4 [MED]** `product/[id]/page.tsx:38-39` — auto title (`title — all categories`) + description (subtitle + full techStack + "for {client}") overflow SERP + keyword-stuff. → Title = name + `categories[0]`; description = trimmed subtitle only (≤150), techStack stays in `keywords`, drop "for {NDA client}".
-- **O6 [MED]** `Home.tsx:395-466` — carousel content bugs: **Sales Call Coach filed under Legal Tech**; "Hardware & IoT / embedded firmware" claim unsupported by the 3 linked products; dead-end "Supply Chain Ops"/"Marketplace Ops" links; the "21" count. → Recategorize, soften/relabel, fix links, derive count.
+- **O6 [MED] ✅** `Home.tsx:395-466` — carousel content bugs fixed (see "Phase 5 (partial) shipped"): Sales Call Coach removed from Legal Tech; Hardware & IoT retitled "Manufacturing & Vision" with the embedded-firmware claim dropped; "Supply Chain Ops"/"Marketplace Ops" phantom/miscategorized links relabeled to "See the work"; "21" already 20.
 - **O8 [MED]** Inner meta descriptions exceed ~155-160 chars (Home 214, FAQ 184, Portfolio 176, Offer 175, Services 163). → Trim, front-load keyword.
 
 ### AEO
@@ -100,8 +113,8 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **G1 [HIGH] ✅** `/public/llms.txt` created from existing `products.ts`/`faq.ts` data: H1, one-line canonical blockquote, parent/industries paragraph, Core pages + 20 Products (one-liner each) + Contact. Absolute links, no invented facts.
 
 ### Monitoring
-- **M3 [MED]** No `REPORT.md`, no re-check checklist. → Create `REPORT.md` (infra inventory, canonical entity facts, monitoring status, re-check checklist). *Re-check list must exclude live rankings/indexing/traffic.*
-- **M4 [LOW]** `.env.example` has no analytics/GSC section. → Append commented `NEXT_PUBLIC_GA_MEASUREMENT_ID` + `NEXT_PUBLIC_GSC_VERIFICATION` block (placeholders only).
+- **M3 [MED] ✅** `seo-system/REPORT.md` created — infra inventory, canonical entity facts, monitoring status, owner-only inputs, off-repo actions, and a monthly re-check checklist that excludes live rankings/indexing/traffic.
+- **M4 [LOW] ✅** `.env.example` now has a dormant commented `NEXT_PUBLIC_GA_MEASUREMENT_ID` + `NEXT_PUBLIC_GSC_VERIFICATION` block (placeholders only).
 
 ### Larger, no-input-needed (Phase 5)
 - **O2 [HIGH]** No industry/solution landing pages — 8 verticals live only as carousel one-liners, so vertical long-tail queries have no ranking target. → Build `/solutions/[vertical]` pages linking the real products in each vertical; add to sitemap. (Content drafted from existing product data; no invented clients/stats.)

@@ -1,0 +1,106 @@
+# SEO / AEO / GEO — REPORT
+
+Running report for **buildspacelabs.com**. Companion to `STATE.md` (phase tracker + findings) and `README.md` (system overview). Last updated **2026-07-08** after Phase 4.
+
+This report is the durable inventory + re-check checklist. It deliberately contains **no live rankings, indexing counts, or traffic numbers** — those are checked in Google Search Console / Bing / analytics, not here, and never mid-run.
+
+---
+
+## 1. What shipped (Phases 1–4)
+
+| Phase | What | Commit |
+|-------|------|--------|
+| 1 | Read-only audit — 6 specialists, findings recorded in `STATE.md` | — |
+| 2 | Technical SEO — real 404 (true HTTP 404), AI-crawler robots policy, `/privacy` + `/terms` | `5bfea1b` |
+| 3 | Schema + AEO — honest product schema (no `price:0`), entity `@id`s, server-rendered FAQ answers | `b57e697` |
+| 4 | GEO + entity consistency — `llms.txt`, dropped "first" superlative, one canonical one-liner | `43f9557` |
+| — | System scaffolding — subagent team, coordination state, README | `53ad6a1` |
+
+Phases 5 (content) and 6 (this report) are in progress; the remaining content work is gated on real data from the owner (see §5).
+
+---
+
+## 2. Crawler-facing infrastructure inventory
+
+All present and verified via `next build` (35/35 routes) and route output.
+
+- **Sitemap** — `app/sitemap.ts` → `/sitemap.xml`. 8 static routes (home 1.0; services/offer/portfolio 0.9; faq/contact 0.7; privacy/terms 0.3) + 20 product routes (0.8). Product URLs derived from `productsData` (no drift when a product is added/removed). *Known-low:* `lastModified` is build-time for every URL (weak freshness signal) — acceptable, tracked as T9.
+- **Robots** — `app/robots.ts` → `/robots.txt`. Baseline allows all, disallows only `/api/`. AI **training** crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended) and **retrieval** crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User) explicitly allowed by decision. `/_next/static` intentionally left crawlable for render/CWV. Declares `sitemap` + `host`.
+- **llms.txt** — `public/llms.txt` → `/llms.txt`. Canonical entity sentence, parent-org + verticals paragraph, core pages, all 20 products (one-liner each), contact. Built only from existing site data.
+- **Manifest** — `app/manifest.ts` → `/manifest.webmanifest`.
+- **Structured data** — `src/lib/seo/jsonLd.tsx`: Organization (`@id` `/#organization`, `parentOrganization` Vruoom), WebSite (`@id` `/#website`, publisher → org), Product (per product page; no `offers`/price), Service (on `/our-services`, provider → org), FAQPage, BreadcrumbList. One consolidated entity graph.
+- **Per-route metadata** — title template `%s | BuildspaceLabs`, canonical `alternates`, OpenGraph + Twitter card, keywords. Dynamic OG/Twitter images via `app/opengraph-image.tsx` + `app/twitter-image.tsx` and per-product OG.
+- **404** — `app/not-found.tsx` renders a real branded view → true HTTP 404 (no soft-404 redirect).
+- **noindex** — `/ai-lab` is intentionally `noindex` and absent from the sitemap (correct — see STATE.md).
+
+---
+
+## 3. Canonical entity facts (single source of truth — use verbatim everywhere)
+
+- **Name:** BuildspaceLabs
+- **One-liner (canonical):** *"India's AI-native product studio and engineering lab for enterprises worldwide."* — used in root + home metadata, Organization schema, manifest, OG/Twitter images, Home hero, Footer, and `llms.txt`. **No "first" superlative** (unsubstantiated; removed in Phase 4).
+- **Parent org:** Vruoom (`parentOrganization` in Organization schema).
+- **Team:** Aryan — Director · Priyanshu — CTO.
+- **Verticals (demonstrable, from real portfolio):** logistics, real estate & proptech, healthcare & medtech, manufacturing & industrial vision, fintech, SaaS & customer support, legal tech.
+- **Positioning rule:** never publish price figures we charge; scope-based quote language only. Never invent stats/clients/testimonials/results.
+
+When any of these change, update **all** the surfaces listed above **plus** this line — they are intentionally kept in lockstep.
+
+---
+
+## 4. Monitoring status
+
+| Tool | Status | Owner action |
+|------|--------|--------------|
+| Google Search Console | Not verified | Add property, verify (DNS TXT or the meta tag we can wire), submit `sitemap.xml` |
+| Bing Webmaster Tools | Not set up | Add site (can import from GSC); feeds Copilot answers |
+| Analytics (GA4 / Cloudflare / Plausible) | **Not chosen** | Pick one; if GA4, hand back `G-XXXXXXXXXX` for the env placeholder |
+| Rich Results / schema validation | Manual, pre-deploy | After deploy, run Rich Results Test on home, one `/product/*`, `/faq`, `/our-services`, `/portfolio` |
+
+Env placeholders for GA4 + GSC are staged (dormant, commented) in `.env.example` — wiring the runtime tag is a small follow-up once the tool + IDs are chosen.
+
+---
+
+## 5. Owner-only inputs still blocking in-repo work
+
+These are the *only* things standing between us and finishing Phases 5–6. Nothing here can be fabricated.
+
+1. **Canonical inbound email** — schema/metadata use `aryan@vruoom.com`; Contact page leads with `priyanshu@vruoom.com`. Pick ONE. *(Fixes the aryan/priyanshu inconsistency across schema + copy.)*
+2. **`sameAs` + founder data** — real URLs (LinkedIn company, Crunchbase, GitHub org, X, Vruoom) for Organization `sameAs`; for Aryan & Priyanshu: full legal names, 2–4 sentence bios, headshots, profile links — for `Person` schema + an About page (E-E-A-T).
+3. **Real outcomes for 7 thin products** — focuscare, dsv-fleet-management, food-ordering-platform, open-vision-ppe, factory-os, ai-native-real-estate-fund, ai-job-automation lack Outcomes + engagement (duration/scope/team). Provide real numbers or say which are unavailable so we frame without fabrication.
+4. **Legal specifics** — registered legal entity name, registered office address, governing city/state, and confirm a lawyer will review `/privacy` + `/terms` (currently "India" + `buildspacelabs@vruoom.com` placeholders).
+5. **Travel & "government" claims** — the Home carousel "Travel & Hospitality" card and the "government" claim in Home OG / Portfolio hero have no matching indexed work (Travel = the separate Atelier subdomain). Provide real refs or approve removal.
+6. **`/ai-lab`** — keep `noindex` or make indexable? Are SLM360 / Med360 / AgentGuard / VAJRA / KAVACH real & substantiable? *(Recommend: keep noindex until substantiated.)*
+7. **A7 product H2s** — keep short section headings (recommended) or switch to question-style H2s?
+8. **Analytics choice** — GA4 (`G-XXXX`), Cloudflare Web Analytics (no code), or Plausible?
+9. **GSC verification** — the `google-site-verification` token, or you'll verify via DNS TXT.
+10. **Host config** — confirm www→apex (308) + http→https enforced at Vercel/Cloudflare, and that the Atelier subdomain self-canonicalizes and shares no `/portfolio` content.
+
+---
+
+## 6. Off-repo actions — only the owner can do these (biggest ranking + GEO levers)
+
+1. **Google Search Console** — add & verify buildspacelabs.com, submit `sitemap.xml`.
+2. **Bing Webmaster Tools** — same (import from GSC); feeds Copilot / AI answers.
+3. **Analytics** — create the property, hand back the ID for the env placeholder.
+4. **Rich Results Test** (once live) — validate JSON-LD on home, one `/product/*`, `/faq`, `/our-services`, `/portfolio`.
+5. **Google Business Profile** (optional) — helps local queries ("AI development studio Gurugram").
+6. **LinkedIn company page + founder profiles** — make them exist, use the exact canonical one-liner, feed URLs back (unblocks §5-2).
+7. **Directory listings** — Clutch, GoodFirms, DesignRush and similar B2B/agency directories with the same one-liner. Doubles as the third-party corroboration GEO needs.
+8. **Digital PR / backlinks** — the single biggest lever for both SEO and GEO and the one thing impossible in-repo. Reuse the "build first, talk after" outreach model, aimed at industry blogs/newsletters in the verticals, using case studies as source material.
+
+---
+
+## 7. Re-check checklist (run monthly — read `STATE.md` first)
+
+Point Claude back at `seo-system/STATE.md`, then verify:
+
+- [ ] **New products** — every product in `productsData` has: a product page, Product JSON-LD (no `offers`/price), a sitemap entry (automatic), and a line in `llms.txt`.
+- [ ] **New routes** — any new page has metadata (title/description/canonical), an OG image, and a sitemap entry; `noindex` pages stay out of the sitemap.
+- [ ] **Entity consistency** — the canonical one-liner (§3) still matches across metadata, Organization schema, manifest, Home, Footer, and `llms.txt`; no "first"/superlative crept back; no price figures.
+- [ ] **Link rot** — carousel/product/portfolio links resolve (no phantom labels pointing at `/portfolio`); external landing-site links (`landingUrlFor`) still 200.
+- [ ] **Schema drift** — Rich Results Test passes on the 5 sample routes; `@id` graph still consolidated; no invalid `SearchAction`/`price:0` reintroduced.
+- [ ] **Honesty** — no invented stats/clients/testimonials; claims map to real portfolio work; blocked items in §5 either resolved with real data or still flagged.
+- [ ] **Build** — clean `next build` (route count matches expected), true 404 on unknown URLs, `/robots.txt` + `/sitemap.xml` + `/llms.txt` serve correctly.
+
+**Never** re-check live rankings, indexing counts, or traffic as part of this run — that belongs in GSC/analytics, not this repo.
