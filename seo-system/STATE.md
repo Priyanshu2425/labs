@@ -71,7 +71,8 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
   - "21"→20 count already fixed in Phase 2 (T9); verified no residual "21" in Home.
 - **O2 ✅ (2026-07-08)** Built `/solutions` hub + `/solutions/[vertical]` (7 SSG pages: logistics, real-estate, healthcare, manufacturing, fintech, saas-support, legal-tech). Content drafted entirely from `products.ts` — real capabilities + the actual products per vertical, no invented stats. New files: `src/data/solutions.ts`, `src/views/Solutions/*`, `app/solutions/*`. Each page emits Breadcrumb + Service + ItemList JSON-LD, canonical, per-page metadata; added to sitemap; Header nav + Footer link. Build 43/43; SSR + schema + screenshots verified.
 - **Decision-driven edits ✅ (2026-07-08):** email canonicalized [I]; Travel card → live Atelier site + government/defence removed [E]. See "Decisions locked (2026-07-08)".
-- **Still Phase 5 (blocked on real data):** case-study copy + Outcomes/engagement for the 7 thin products [G], About page + `Person` schema/bios [F]; vertical PAA (A6) and A7 product H2s (needs your call) remain optional.
+- **A6 ✅ + /solutions differentiation (2026-07-09):** each vertical page now carries a "problems we solve" block + a per-industry FAQ (SSR + FAQPage schema); the Home carousel titles link into `/solutions/[vertical]` (teaser → destination). Answered the "isn't /solutions redundant?" concern by making the pages carry content the carousel/portfolio lack.
+- **Still Phase 5 (blocked on real data):** case-study copy + Outcomes/engagement for the 7 thin products [G], About page + `Person` schema/bios [F]; A7 product H2s (needs your call) remains optional.
 
 ## Phase 6 (partial) shipped (2026-07-08) — reporting
 - **M3 ✅** `seo-system/REPORT.md` created: infra inventory, canonical entity facts (single source of truth), monitoring status, owner-only inputs, off-repo action list, and a monthly re-check checklist (excludes live rankings/indexing/traffic per the Do-NOT rule).
@@ -112,7 +113,7 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **A3 [HIGH]** No static, quotable "BuildspaceLabs is…" sentence; the only definition is trapped in a scroll-opacity reveal (`Home.tsx:217-226`). → Add one always-visible "BuildspaceLabs is an AI-native product studio that builds X for Y" line near top of Home.
 - **A4 [MED]** `faq.ts:48` — "We build some of the best AI agents in the market" buries the lede behind an unverifiable boast. → Lead with the factual capability sentence.
 - **A5 [MED]** `Services.tsx:117` — hero gives no extractable "what BuildspaceLabs does" line. → Add one lead sentence before the three cards.
-- **A6 [MED]** No vertical PAA Q&A though each vertical maps to a real product. → Add industry FAQ block (Healthcare, SaaS/Support, Fintech first), each answered from a real product, no invented stats.
+- **A6 [MED] ✅ (2026-07-09)** Per-vertical FAQ (2–3 Q&A) added to every `/solutions/[vertical]` page — answer-first, SSR-visible, grounded in real products, emitted as FAQPage schema. Also added a "problems we solve" buyer-intent block per vertical. This differentiates `/solutions` from the Home carousel (which is now a teaser linking into these pages).
 - **A7 [MED]** Product section labels are bare nouns. → Reframe H2s as questions where honest ("What does {product} do?", "What were the results?"). Keep editorial styling.
 - **A8 [MED]** `faq.ts` stale/inconsistent: names "GPT-4" (dated), lists 10 industries contradicting the canonical 8, ends on "transparent pricing". → Model-agnostic phrasing; align to 8 verticals; "clear fixed-scope quotes".
 - **A10 [LOW]** `faq.ts:66` pricing answer hedges before the answer. → Lead with the no-figure answer, then the caveat.
