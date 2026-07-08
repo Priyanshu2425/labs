@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'BuildspaceLabs — AI-Native Product Studio',
     description:
-      'AI-native engineering lab. Custom AI, production software, 24h prototypes. Serving healthcare, government, logistics, real estate & more.',
+      'AI-native engineering lab. Custom AI, production software, 24h prototypes. Serving healthcare, logistics, real estate & more.',
     url: SITE_URL,
     type: 'website',
   },

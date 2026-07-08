@@ -53,24 +53,6 @@ export default function AILab() {
       tags: ["Deadlock Prevention", "Multi-Agent Systems", "LangGraph"],
       link: "/research/agentguard-paper",
       image: "/media/paper-agentguard.webp"
-    },
-    {
-      type: "Technical Report",
-      year: "2026",
-      title: "VAJRA: A Multi-Sensor On-Device Counter-UAS System with Custom-Trained Visual and Acoustic Deep Learning Models",
-      description: "A fully on-device, multi-sensor drone detection and neutralization system running on a commercial Android smartphone. Integrates visual (YOLOv8n), acoustic (FFT + CNN), and RF analysis -fused into a unified threat display with countermeasure control. 38MB APK, zero network dependency.",
-      tags: ["Counter-UAS", "On-Device ML", "Edge AI"],
-      link: "/research/vajra-paper",
-      image: "/media/paper-vajra.webp"
-    },
-    {
-      type: "Technical Report",
-      year: "2026",
-      title: "KAVACH: An On-Device Tactical Intelligence Platform with SLM360-Powered Natural Language C2, Real-Time ISR, and Automated Reporting",
-      description: "A tactical intelligence platform running entirely on Android with zero network dependency. Integrates Tactical C2, ISR Processing (YOLOv8n, ~19 FPS), Auto SITREP (SALUTE reports in ~8s), and Patrol Optimization -all powered by SLM360 (577K params, 848KB).",
-      tags: ["Tactical AI", "On-Device ML", "SLM360"],
-      link: "/research/kavach-paper",
-      image: "/media/paper-kavach.webp"
     }
   ];
 

@@ -5,7 +5,7 @@ import { JsonLd, breadcrumbSchema, SITE_URL } from '@/lib/seo/jsonLd';
 export const metadata: Metadata = {
   title: 'AI Lab — Research, Models & Technical Papers',
   description:
-    'BuildspaceLabs AI Lab: SLM360 (39ms on-device NLU), Med360 (multilingual medical AI for Indian healthcare), AgentGuard (deadlock prevention for multi-agent systems), VAJRA and KAVACH defence AI. Research meets engineering.',
+    'BuildspaceLabs AI Lab: SLM360 (39ms on-device NLU), Med360 (multilingual medical AI for Indian healthcare), and AgentGuard (deadlock prevention for multi-agent systems). Research meets engineering.',
   keywords: [
     'AI research India',
     'small language models',
@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     'AgentGuard',
     'multi-agent systems',
     'on-device NLU',
-    'defence AI',
   ],
   alternates: { canonical: '/ai-lab' },
   openGraph: {

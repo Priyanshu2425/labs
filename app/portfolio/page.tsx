@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Portfolio — BuildspaceLabs',
     description:
-      'Production AI and software projects across healthcare, logistics, real estate, government and more.',
+      'Production AI and software projects across healthcare, logistics, real estate and more.',
     url: `${SITE_URL}/portfolio`,
     type: 'website',
   },
