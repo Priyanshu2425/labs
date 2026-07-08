@@ -49,7 +49,7 @@ export function organizationSchema() {
       {
         '@type': 'ContactPoint',
         contactType: 'customer service',
-        email: 'aryan@vruoom.com',
+        email: 'buildspacelabs@vruoom.com',
         telephone: '+91-834-071-1366',
         availableLanguage: ['English', 'Hindi'],
       },

@@ -5,7 +5,7 @@ import { JsonLd, breadcrumbSchema, SITE_URL, SITE_NAME } from '@/lib/seo/jsonLd'
 export const metadata: Metadata = {
   title: 'Contact Us — Start a Project with BuildspaceLabs',
   description:
-    'Get in touch with BuildspaceLabs to start a project. Email aryan@vruoom.com, WhatsApp +91 834 071 1366, or fill out the form. We respond within 24 hours.',
+    'Get in touch with BuildspaceLabs to start a project. Email buildspacelabs@vruoom.com, WhatsApp +91 834 071 1366, or fill out the form. We respond within 24 hours.',
   keywords: [
     'contact BuildspaceLabs',
     'start AI project',
@@ -32,7 +32,7 @@ const contactPageSchema = {
   mainEntity: {
     '@type': 'Organization',
     name: SITE_NAME,
-    email: 'aryan@vruoom.com',
+    email: 'buildspacelabs@vruoom.com',
     telephone: '+91-834-071-1366',
     url: SITE_URL,
   },

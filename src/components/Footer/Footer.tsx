@@ -36,7 +36,7 @@ export default function Footer() {
 
         <div className={styles.footerBottom}>
           <p>&copy; {new Date().getFullYear()} BuildspaceLabs. Built in India.</p>
-          <a href="mailto:priyanshu@vruoom.com" className={styles.footerEmail}>priyanshu@vruoom.com</a>
+          <a href="mailto:buildspacelabs@vruoom.com" className={styles.footerEmail}>buildspacelabs@vruoom.com</a>
         </div>
       </div>
     </footer>

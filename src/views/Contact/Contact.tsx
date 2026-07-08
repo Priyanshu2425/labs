@@ -108,7 +108,7 @@ export default function Contact() {
 
               <motion.div variants={fadeIn} className={styles.channelStack}>
                 <a
-                  href="mailto:priyanshu@vruoom.com"
+                  href="mailto:buildspacelabs@vruoom.com"
                   className={styles.channelCard}
                   data-channel="email"
                 >
@@ -116,7 +116,7 @@ export default function Contact() {
                     <span className={styles.channelLabel}>Email</span>
                     <ArrowUpRight size={16} className={styles.channelArrow} />
                   </div>
-                  <span className={styles.channelValue}>priyanshu@vruoom.com</span>
+                  <span className={styles.channelValue}>buildspacelabs@vruoom.com</span>
                   <span className={styles.channelHint}>Best for project briefs and async</span>
                 </a>
 
@@ -269,7 +269,7 @@ export default function Contact() {
 
               {submitError && (
                 <div className={styles.formError} role="alert">
-                  {submitError} — <a href="mailto:priyanshu@vruoom.com">email priyanshu@vruoom.com</a> instead.
+                  {submitError} — <a href="mailto:buildspacelabs@vruoom.com">email buildspacelabs@vruoom.com</a> instead.
                 </div>
               )}
 
