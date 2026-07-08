@@ -13,12 +13,12 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 | 1 | Audit (read-only) | ✅ done 2026-07-07 — 6 specialists, findings below |
 | 2 | Technical SEO fixes | ✅ shipped 2026-07-07 — see "Phase 2 shipped" below |
 | 3 | Schema + AEO | ✅ shipped 2026-07-07 — see "Phase 3 shipped" below |
-| 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ⏳ next — robots already done in P2; llms.txt + entity/"first" sweep remain |
+| 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ✅ shipped 2026-07-08 — see "Phase 4 shipped" below |
 | 5 | Content (case studies, copy, bios, industry pages) | ⏳ pending (needs real outcomes/bios) |
 | 6 | Reporting (REPORT.md + re-check list) | ⏳ pending |
 
 ## Decisions locked (2026-07-07)
-- **[B]** Canonical positioning = *"India's AI-native product studio & engineering lab for enterprises worldwide."* **Drop "first."** (applies in Phase 4 entity pass)
+- **[B]** Canonical positioning = *"India's AI-native product studio & engineering lab for enterprises worldwide."* **Drop "first."** ✅ shipped in Phase 4.
 - **[D]** **Keep** `/offer` ₹ figures + `offerServiceSchema` Offers. (Still remove fake `price:'0'` from the 20 portfolio products — S1.)
 - **[C]** **Allow** AI training crawlers (explicit, intentional). ✅ shipped in robots.ts.
 - **[A]** **Build real** `/privacy` + `/terms`. ✅ shipped (grounded copy, India law, contact buildspacelabs@vruoom.com; entity name/address + lawyer review still to confirm).
@@ -51,8 +51,14 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **A6 (vertical PAA Q&A) + O6 (Home carousel recategorization: Sales Call Coach mis-filed, "embedded firmware" claim, dead links) → Phase 5**, where product-data mapping + real outcomes are in hand (avoids miscategorizing).
 - **A9 ("India's first") + footer tagline + all entity-description wording → Phase 4** (done as one cohesive entity-consistency sweep using the locked canonical line).
 
+## Phase 4 shipped (2026-07-08) — GEO + entity consistency
+- **G1 ✅** Added `public/llms.txt` with the canonical entity sentence, parent org context, core pages, services, all 20 product URLs, and contact page. Built only from existing site/product/FAQ facts.
+- **A9 ✅** Removed the unsupported "first" superlative from home metadata, root metadata, manifest, OG/Twitter generated image alt/text, Organization JSON-LD, Home hero copy, and Footer tagline.
+- **Entity consistency ✅** Canonical line is now used across schema, metadata, Home copy, Footer, and `llms.txt`: "India's AI-native product studio and engineering lab for enterprises worldwide."
+- Not added: `sameAs`, founder `Person` schema, substantiated founder bios, or canonical inbound email. Those still require real URLs/details from the user.
+
 ## Corrections to the original brief (verified against the repo)
-- `/privacy` and `/terms` **do NOT exist** as routes — but the Footer links to them on every page (broken/soft-404).
+- `/privacy` and `/terms` were missing in the original audit; Phase 2 added real routes, legal views, footer-resolving links, breadcrumb schema, and sitemap entries.
 - `/ai-lab` missing from the sitemap is **correct** — the page is `noindex`; a noindex page should not be in the sitemap. Not a bug.
 - Metadata/canonicals/OG/alt/headings are already in good shape. The real damage is behavioral + content, not missing tags.
 
@@ -91,7 +97,7 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **A10 [LOW]** `faq.ts:66` pricing answer hedges before the answer. → Lead with the no-figure answer, then the caveat.
 
 ### GEO
-- **G1 [HIGH]** No `/public/llms.txt`. → Create it from existing `products.ts`/`faq.ts` data: H1, one-line canonical blockquote, parent/industries paragraph, Core pages + 20 Products (one-liner each) + Contact. Absolute links, no invented facts.
+- **G1 [HIGH] ✅** `/public/llms.txt` created from existing `products.ts`/`faq.ts` data: H1, one-line canonical blockquote, parent/industries paragraph, Core pages + 20 Products (one-liner each) + Contact. Absolute links, no invented facts.
 
 ### Monitoring
 - **M3 [MED]** No `REPORT.md`, no re-check checklist. → Create `REPORT.md` (infra inventory, canonical entity facts, monitoring status, re-check checklist). *Re-check list must exclude live rankings/indexing/traffic.*

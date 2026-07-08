@@ -180,7 +180,7 @@ const IntroSection = () => {
     offset: ['start end', 'center center'],
   });
 
-  const heading = "India's first AI-native Product Studio & Engineering Lab.";
+  const heading = "India's AI-native Product Studio & Engineering Lab.";
   const words = heading.split(' ');
   const wordsStart = 0.22;
   const wordsEnd = 0.62;
@@ -223,7 +223,7 @@ const IntroSection = () => {
           })}
         </h2>
         <motion.p style={{ opacity: subtextOpacity, y: subtextY }} className={styles.introSubtext}>
-          BuildspaceLabs is an AI-native product studio and engineering lab. We design and ship production AI products end-to-end — from the interface to the model orchestration to the engineering — pairing deep AI expertise with rapid product development. We&apos;re not just a vendor; we&apos;re your technical co-founders.
+          BuildspaceLabs is India&apos;s AI-native product studio and engineering lab for enterprises worldwide. We design and ship production AI products end-to-end — from the interface to the model orchestration to the engineering — pairing deep AI expertise with rapid product development.
         </motion.p>
 
         <motion.div

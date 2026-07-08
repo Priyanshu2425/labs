@@ -19,11 +19,11 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'BuildspaceLabs — India\'s First AI-Native Product Studio',
+    default: 'BuildspaceLabs — AI-Native Product Studio',
     template: '%s | BuildspaceLabs',
   },
   description:
-    'BuildspaceLabs is India\'s AI-native product studio and engineering lab. We build custom AI solutions, intelligent automation, and production-ready software for enterprises worldwide.',
+    'BuildspaceLabs is India\'s AI-native product studio and engineering lab for enterprises worldwide. We build custom AI solutions, intelligent automation, and production-ready software.',
   applicationName: 'BuildspaceLabs',
   keywords: [
     'AI product studio',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: SITE_URL,
     siteName: 'BuildspaceLabs',
-    title: 'BuildspaceLabs — India\'s First AI-Native Product Studio',
+    title: 'BuildspaceLabs — AI-Native Product Studio',
     description:
       'We build custom AI solutions, intelligent automation, and production-ready software. Working prototypes in 24 hours.',
   },

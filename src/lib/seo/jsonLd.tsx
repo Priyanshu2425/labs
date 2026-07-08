@@ -31,7 +31,7 @@ export function organizationSchema() {
       name: 'Vruoom',
     },
     description:
-      "India's first AI-native product studio and engineering lab. We build custom AI solutions, intelligent automation, and production-ready software for enterprises worldwide.",
+      "India's AI-native product studio and engineering lab for enterprises worldwide. We build custom AI solutions, intelligent automation, and production-ready software.",
     foundingLocation: {
       '@type': 'Place',
       address: { '@type': 'PostalAddress', addressCountry: 'IN' },

@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'BuildspaceLabs — India\'s First AI-Native Product Studio';
+export const alt = 'BuildspaceLabs — AI-Native Product Studio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -53,7 +53,7 @@ export default async function OpengraphImage() {
               maxWidth: 1000,
             }}
           >
-            India&apos;s First AI-Native Product Studio
+            India&apos;s AI-Native Product Studio
           </div>
           <div
             style={{

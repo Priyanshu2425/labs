@@ -11,7 +11,7 @@ export default function Footer() {
             <div className={styles.logoWrapper}>
               <Logo />
             </div>
-            <p className={styles.tagline}>AI Engineering Lab – Building AI products and applied research for Indic languages and Indian healthcare.</p>
+            <p className={styles.tagline}>India&apos;s AI-native product studio and engineering lab for enterprises worldwide.</p>
           </div>
 
           <div className={styles.linksBlock}>
