@@ -24,7 +24,8 @@ Phases 5 (content) and 6 (this report) are in progress; the remaining content wo
 
 All present and verified via `next build` (35/35 routes) and route output.
 
-- **Sitemap** — `app/sitemap.ts` → `/sitemap.xml`. 8 static routes (home 1.0; services/offer/portfolio 0.9; faq/contact 0.7; privacy/terms 0.3) + 20 product routes (0.8). Product URLs derived from `productsData` (no drift when a product is added/removed). *Known-low:* `lastModified` is build-time for every URL (weak freshness signal) — acceptable, tracked as T9.
+- **Sitemap** — `app/sitemap.ts` → `/sitemap.xml`. 9 static routes (home 1.0; services/offer/portfolio 0.9; solutions 0.8; faq/contact 0.7; privacy/terms 0.3) + 7 `/solutions/[vertical]` routes (0.8) + 20 product routes (0.8). Solution + product URLs derived from `solutionsData`/`productsData` (no drift when one is added/removed). *Known-low:* `lastModified` is build-time for every URL (weak freshness signal) — acceptable, tracked as T9.
+- **Solutions pages** — `/solutions` hub + `/solutions/[vertical]` (7 verticals, SSG). Per-page canonical + metadata + Breadcrumb/Service/ItemList JSON-LD; linked from Header nav + Footer.
 - **Robots** — `app/robots.ts` → `/robots.txt`. Baseline allows all, disallows only `/api/`. AI **training** crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended) and **retrieval** crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User) explicitly allowed by decision. `/_next/static` intentionally left crawlable for render/CWV. Declares `sitemap` + `host`.
 - **llms.txt** — `public/llms.txt` → `/llms.txt`. Canonical entity sentence, parent-org + verticals paragraph, core pages, all 20 products (one-liner each), contact. Built only from existing site data.
 - **Manifest** — `app/manifest.ts` → `/manifest.webmanifest`.
@@ -40,6 +41,7 @@ All present and verified via `next build` (35/35 routes) and route output.
 - **Name:** BuildspaceLabs
 - **One-liner (canonical):** *"India's AI-native product studio and engineering lab for enterprises worldwide."* — used in root + home metadata, Organization schema, manifest, OG/Twitter images, Home hero, Footer, and `llms.txt`. **No "first" superlative** (unsubstantiated; removed in Phase 4).
 - **Parent org:** Vruoom (`parentOrganization` in Organization schema).
+- **Canonical inbound email:** `buildspacelabs@vruoom.com` (role-based) — used in schema, metadata, and all generic contact CTAs. Named-founder links keep their own addresses.
 - **Team:** Aryan — Director · Priyanshu — CTO.
 - **Verticals (demonstrable, from real portfolio):** logistics, real estate & proptech, healthcare & medtech, manufacturing & industrial vision, fintech, SaaS & customer support, legal tech.
 - **Positioning rule:** never publish price figures we charge; scope-based quote language only. Never invent stats/clients/testimonials/results.
@@ -54,7 +56,7 @@ When any of these change, update **all** the surfaces listed above **plus** this
 |------|--------|--------------|
 | Google Search Console | Not verified | Add property, verify (DNS TXT or the meta tag we can wire), submit `sitemap.xml` |
 | Bing Webmaster Tools | Not set up | Add site (can import from GSC); feeds Copilot answers |
-| Analytics (GA4 / Cloudflare / Plausible) | **Not chosen** | Pick one; if GA4, hand back `G-XXXXXXXXXX` for the env placeholder |
+| Analytics | GA4 placeholder staged (free); Cloudflare Web Analytics is the free no-code alt | Create the property; hand back `G-XXXXXXXXXX` for the env placeholder (or toggle Cloudflare) |
 | Rich Results / schema validation | Manual, pre-deploy | After deploy, run Rich Results Test on home, one `/product/*`, `/faq`, `/our-services`, `/portfolio` |
 
 Env placeholders for GA4 + GSC are staged (dormant, commented) in `.env.example` — wiring the runtime tag is a small follow-up once the tool + IDs are chosen.
@@ -65,14 +67,14 @@ Env placeholders for GA4 + GSC are staged (dormant, commented) in `.env.example`
 
 These are the *only* things standing between us and finishing Phases 5–6. Nothing here can be fabricated.
 
-1. **Canonical inbound email** — schema/metadata use `aryan@vruoom.com`; Contact page leads with `priyanshu@vruoom.com`. Pick ONE. *(Fixes the aryan/priyanshu inconsistency across schema + copy.)*
+1. ~~**Canonical inbound email**~~ ✅ RESOLVED (2026-07-08) → `buildspacelabs@vruoom.com`.
 2. **`sameAs` + founder data** — real URLs (LinkedIn company, Crunchbase, GitHub org, X, Vruoom) for Organization `sameAs`; for Aryan & Priyanshu: full legal names, 2–4 sentence bios, headshots, profile links — for `Person` schema + an About page (E-E-A-T).
 3. **Real outcomes for 7 thin products** — focuscare, dsv-fleet-management, food-ordering-platform, open-vision-ppe, factory-os, ai-native-real-estate-fund, ai-job-automation lack Outcomes + engagement (duration/scope/team). Provide real numbers or say which are unavailable so we frame without fabrication.
 4. **Legal specifics** — registered legal entity name, registered office address, governing city/state, and confirm a lawyer will review `/privacy` + `/terms` (currently "India" + `buildspacelabs@vruoom.com` placeholders).
-5. **Travel & "government" claims** — the Home carousel "Travel & Hospitality" card and the "government" claim in Home OG / Portfolio hero have no matching indexed work (Travel = the separate Atelier subdomain). Provide real refs or approve removal.
-6. **`/ai-lab`** — keep `noindex` or make indexable? Are SLM360 / Med360 / AgentGuard / VAJRA / KAVACH real & substantiable? *(Recommend: keep noindex until substantiated.)*
+5. ~~**Travel & "government" claims**~~ ✅ RESOLVED (2026-07-08) → Travel card links the live Atelier site; government + defence removed sitewide.
+6. **`/ai-lab`** — keep `noindex` or make indexable? Are SLM360 / Med360 / AgentGuard real & substantiable? *(Recommend: keep noindex until substantiated. Defence models VAJRA/KAVACH already removed.)*
 7. **A7 product H2s** — keep short section headings (recommended) or switch to question-style H2s?
-8. **Analytics choice** — GA4 (`G-XXXX`), Cloudflare Web Analytics (no code), or Plausible?
+8. **Analytics** ~ decided → GA4 (free) staged, or free no-code Cloudflare Web Analytics. Only the `G-XXXX` ID / runtime tag remains.
 9. **GSC verification** — the `google-site-verification` token, or you'll verify via DNS TXT.
 10. **Host config** — confirm www→apex (308) + http→https enforced at Vercel/Cloudflare, and that the Atelier subdomain self-canonicalizes and shares no `/portfolio` content.
 

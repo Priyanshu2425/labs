@@ -14,8 +14,14 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 | 2 | Technical SEO fixes | ✅ shipped 2026-07-07 — see "Phase 2 shipped" below |
 | 3 | Schema + AEO | ✅ shipped 2026-07-07 — see "Phase 3 shipped" below |
 | 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ✅ shipped 2026-07-08 — see "Phase 4 shipped" below |
-| 5 | Content (case studies, copy, bios, industry pages) | 🔶 partial — O6 carousel accuracy shipped 2026-07-08; case studies/About/`/solutions` blocked on real data (§NEEDS-DECISION G/F/E) |
+| 5 | Content (case studies, copy, bios, industry pages) | 🔶 partial — O2 `/solutions` pages + O6 carousel accuracy shipped 2026-07-08; case studies/About/bios still blocked on real data (§NEEDS-DECISION G/F) |
 | 6 | Reporting (REPORT.md + re-check list) | 🔶 partial — `REPORT.md` + `.env.example` analytics/GSC placeholders shipped 2026-07-08; runtime analytics/GSC tag wiring blocked on tool choice + token |
+
+## Decisions locked (2026-07-08, this session)
+- **[I] Canonical inbound email = `buildspacelabs@vruoom.com`** (role-based). ✅ shipped: schema, contact metadata, and all generic CTAs (Footer email, Contact primary channel + error fallback, FAQ buttons). Named-founder links (Footer team, Contact "who you'll work with") intentionally keep aryan@/priyanshu@.
+- **[E] Travel = REAL** → carousel "Travel & Hospitality" card now links the live Atelier site (`atelier-travel-studio.buildspacelabs.com`). **Government + defence = REMOVED** (per user): dropped VAJRA/KAVACH from AI Lab + its metadata, removed "government" from Home OG + Portfolio desc, deleted orphaned defence media. (Open Vision PPE kept — it's industrial PPE/safety, not defence.)
+- **[J] Analytics** — GA4 is free (dormant placeholder staged); Cloudflare Web Analytics is the free no-code alt (site has `wrangler.toml`). Left GA4 placeholder as default; runtime tag still needs the ID.
+- **[O2] `/solutions`** ✅ built (see Phase 5 update) — was a no-input content build from existing product data; user approved.
 
 ## Decisions locked (2026-07-07)
 - **[B]** Canonical positioning = *"India's AI-native product studio & engineering lab for enterprises worldwide."* **Drop "first."** ✅ shipped in Phase 4.
@@ -63,7 +69,9 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
   - Retitled **Hardware & IoT → "Manufacturing & Vision"** (tag "Industrial AI"); dropped the unsupported "on-device ML / embedded firmware / ship on real hardware" claim (none of the linked products are embedded/firmware). Now: Open Vision PPE (on-prem vision) + Factory OS (production planning) + "See the work"; removed Charge Pulse (consumer EV app, already under Logistics). **⚠ If the team actually does embedded/hardware work elsewhere, tell me and I'll restore/expand the card.**
   - Fixed phantom/miscategorized links: Logistics "Supply Chain Ops" → "See the work"; Real Estate "Marketplace Ops"→food-ordering-platform (an events-ops product, not real estate) → "See the work". Fintech "Events Payments"→food-ordering-platform kept (payments/settlements is defensible; only defensible appearance retained).
   - "21"→20 count already fixed in Phase 2 (T9); verified no residual "21" in Home.
-- **Still Phase 5 (blocked on real data):** case-study copy + Outcomes/engagement for the 7 thin products [G], About page + `Person` schema/bios [F], `/solutions/[vertical]` pages (O2), vertical PAA (A6), A7 product H2s (needs your call), Travel/"government" claim resolution [E].
+- **O2 ✅ (2026-07-08)** Built `/solutions` hub + `/solutions/[vertical]` (7 SSG pages: logistics, real-estate, healthcare, manufacturing, fintech, saas-support, legal-tech). Content drafted entirely from `products.ts` — real capabilities + the actual products per vertical, no invented stats. New files: `src/data/solutions.ts`, `src/views/Solutions/*`, `app/solutions/*`. Each page emits Breadcrumb + Service + ItemList JSON-LD, canonical, per-page metadata; added to sitemap; Header nav + Footer link. Build 43/43; SSR + schema + screenshots verified.
+- **Decision-driven edits ✅ (2026-07-08):** email canonicalized [I]; Travel card → live Atelier site + government/defence removed [E]. See "Decisions locked (2026-07-08)".
+- **Still Phase 5 (blocked on real data):** case-study copy + Outcomes/engagement for the 7 thin products [G], About page + `Person` schema/bios [F]; vertical PAA (A6) and A7 product H2s (needs your call) remain optional.
 
 ## Phase 6 (partial) shipped (2026-07-08) — reporting
 - **M3 ✅** `seo-system/REPORT.md` created: infra inventory, canonical entity facts (single source of truth), monitoring status, owner-only inputs, off-repo action list, and a monthly re-check checklist (excludes live rankings/indexing/traffic per the Do-NOT rule).
@@ -128,12 +136,12 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **[B] Canonical positioning + footer + "first"** — Footer (`Footer.tsx:14`) says *"AI products and applied research for Indic languages and Indian healthcare"*, contradicting the site-wide *"India's (first) AI-native product studio & engineering lab for enterprises worldwide."* Pick ONE canonical one-liner (used in layout desc, org schema, manifest, home, footer, llms.txt). Keep the superlative **"first"** or drop it (must be defensible)?
 - **[C] AI training-crawler policy** — robots currently allows all. ALLOW or BLOCK training bots (GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended)? Retrieval/search bots (OAI-SearchBot, PerplexityBot, Googlebot) stay allowed either way.
 - **[D] Pricing on `/offer`** — `/offer` + `offerServiceSchema` publish explicit ₹ figures (₹50k / ₹1.5–2.5L), conflicting with the standing **no-pricing** rule and the FAQ's scope-based answer. Keep the figures or switch to scope-based language sitewide?
-- **[E] Unsupported vertical claims** — Travel & Hospitality carousel card + "government" claims (Home OG, Portfolio hero) have **no matching work** in the indexed portfolio (Travel = the separate atelier subdomain; defence AI only on noindex /ai-lab). Provide real refs or remove those claims?
+- **[E] ✅ RESOLVED (2026-07-08)** — Travel is real → carousel card links the live Atelier site. Government + defence removed sitewide (VAJRA/KAVACH + "government" mentions + orphaned media). Open Vision PPE kept (industrial safety, not defence).
 - **[F] `sameAs` + founder Person data** — org has no `sameAs`; no Person schema. Need real URLs (LinkedIn company/Crunchbase/GitHub/X + Vruoom) and, for Aryan & Priyanshu: full legal names, 2-4 sentence bios, headshots, profile links. (Ship everything else; wire these when provided.)
 - **[G] 7 thin product pages** — focuscare, dsv-fleet-management, food-ordering-platform, open-vision-ppe, factory-os, ai-native-real-estate-fund, ai-job-automation lack Outcomes + engagement strip. Need real outcome numbers + engagement facts (duration/scope/team) per product, or confirm which are unavailable so we frame without fabrication.
 - **[H] `/ai-lab`** — deliberately hidden (noindex, no nav) or should it be indexable? And are SLM360 (39ms) / Med360 / AgentGuard / VAJRA / KAVACH real & substantiable? (Recommend: keep noindex until substantiated.)
-- **[I] Contact email** — schema/metadata use `aryan@vruoom.com`; visible Contact page leads with `priyanshu@vruoom.com`. Which is the single canonical inbound?
-- **[J] Analytics tool** — GA4 (needs `G-XXXX` ID), Cloudflare Web Analytics (dashboard toggle, no code), or Plausible? (Default: ship dormant env-gated GA4 placeholder.)
+- **[I] ✅ RESOLVED (2026-07-08)** — canonical inbound = `buildspacelabs@vruoom.com` (role-based). Shipped across schema/metadata/generic CTAs; named-founder links keep their own addresses.
+- **[J] ~RESOLVED (2026-07-08)** — GA4 (free) placeholder staged as default; Cloudflare Web Analytics is the free no-code alt. Only the runtime tag + ID remain (off-repo).
 - **[K] GSC verification** — provide the `google-site-verification` token, or verify via DNS TXT (no meta tag). (Ship empty env-gated placeholder either way.)
 - **[L] Host config / atelier** — confirm www→apex 308 + http→https at the platform, and that `atelier-travel-studio.buildspacelabs.com` self-canonicalizes and shares no `/portfolio` content. (Verification; not blocking.)
 
