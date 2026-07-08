@@ -8,6 +8,7 @@ import {
   breadcrumbSchema,
   servicesSchema,
   itemListSchema,
+  faqSchema,
   SITE_URL,
 } from '@/lib/seo/jsonLd';
 
@@ -89,6 +90,13 @@ export default async function SolutionPage({ params }: Props) {
             })),
             `${solution.name} products by BuildspaceLabs`,
           )}
+        />
+      )}
+      {solution.faqs.length > 0 && (
+        <JsonLd
+          data={faqSchema([
+            { category: solution.name, description: solution.lead, questions: solution.faqs },
+          ])}
         />
       )}
       <SolutionsClient slug={solution.slug} />

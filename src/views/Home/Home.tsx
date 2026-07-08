@@ -395,7 +395,7 @@ const HorizontalScrollCarousel = () => {
 
   const industries = [
     {
-      title: 'Logistics', tag: 'Operations', image: '/media/industry-logistics.webp',
+      title: 'Logistics', tag: 'Operations', image: '/media/industry-logistics.webp', solution: 'logistics',
       description: 'Live fleet tracking, traffic-aware routing, and dispatch at scale.',
       projects: [
         { label: 'Fleet Management', link: '/product/dsv-fleet-management' },
@@ -404,7 +404,7 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp',
+      title: 'Real Estate', tag: 'PropTech', image: '/media/industry-realestate.webp', solution: 'real-estate',
       description: 'Lease extraction, obligation tracking, and AI-native deal sourcing.',
       projects: [
         { label: 'Lease Management', link: '/product/grospace' },
@@ -413,7 +413,7 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp',
+      title: 'Healthcare', tag: 'MedTech', image: '/media/industry-healthcare.webp', solution: 'healthcare',
       description: 'Ambient clinical scribes and end-to-end consultation automation.',
       projects: [
         { label: 'Clinical Notes', link: '/product/sanad' },
@@ -422,7 +422,7 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Manufacturing & Vision', tag: 'Industrial AI', image: '/media/industry-hardware.webp',
+      title: 'Manufacturing & Vision', tag: 'Industrial AI', image: '/media/industry-hardware.webp', solution: 'manufacturing',
       description: 'On-premise video analytics — PPE, surveillance, intrusion detection — and production planning for the factory floor.',
       projects: [
         { label: 'Open Vision PPE', link: '/product/open-vision-ppe' },
@@ -438,7 +438,7 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp',
+      title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp', solution: 'fintech',
       description: 'Invoice automation, PO matching, and AI approval routing.',
       projects: [
         { label: 'AP Copilot', link: '/product/ap-copilot' },
@@ -447,7 +447,7 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'SaaS & Support', tag: 'Tooling', image: '/media/industry-saas.webp',
+      title: 'SaaS & Support', tag: 'Tooling', image: '/media/industry-saas.webp', solution: 'saas-support',
       description: 'AI triage, drafted replies, and churn radar for revenue teams.',
       projects: [
         { label: 'Support Pulse', link: '/product/support-pulse' },
@@ -456,7 +456,7 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Legal Tech', tag: 'Compliance', image: '/media/industry-legal.webp',
+      title: 'Legal Tech', tag: 'Compliance', image: '/media/industry-legal.webp', solution: 'legal-tech',
       description: 'Contract extraction, clause risk scoring, and AI redlines.',
       projects: [
         { label: 'Brief Forge', link: '/product/brief-forge' },
@@ -503,7 +503,17 @@ const HorizontalScrollCarousel = () => {
               <div className={styles.cardTop}>
                 <span className={styles.cardTag}>{ind.tag}</span>
               </div>
-              <h3 className={styles.industryTitle}>{ind.title}</h3>
+              {(ind as { solution?: string }).solution ? (
+                <Link
+                  href={`/solutions/${(ind as { solution?: string }).solution}`}
+                  className={styles.industryTitleLink}
+                >
+                  <h3 className={styles.industryTitle}>{ind.title}</h3>
+                  <ArrowUpRight size={15} className={styles.industryTitleArrow} aria-hidden="true" />
+                </Link>
+              ) : (
+                <h3 className={styles.industryTitle}>{ind.title}</h3>
+              )}
               <p className={styles.industryDesc}>{ind.description}</p>
               <div className={styles.cardDivider} />
               <ul className={styles.projectList}>

@@ -799,6 +799,32 @@
   }
 }
 
+.industryTitleLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+  color: inherit;
+  position: relative;
+  z-index: 2;
+
+  .industryTitle {
+    margin-bottom: 0;
+    transition: color $dur-fast $ease-standard;
+  }
+  .industryTitleArrow {
+    color: $color-text-muted;
+    transition: color $dur-fast $ease-standard, transform $dur-fast $ease-standard;
+  }
+
+  &:hover {
+    .industryTitle { color: $color-accent; }
+    .industryTitleArrow { color: $color-accent; transform: translate(2px, -2px); }
+  }
+
+  @media (max-width: 480px) { margin-bottom: 0.4rem; }
+}
+
 .industryDesc {
   font-family: $font-primary;
   font-size: 0.95rem;

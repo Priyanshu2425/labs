@@ -61,6 +61,35 @@ export default function Solutions({ slug }: { slug: string }) {
           </div>
         </section>
 
+        {/* ── Problems we solve (buyer intent) ── */}
+        <section className={`container ${styles.problemSection}`}>
+          <motion.div
+            className={styles.sectionHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={fadeUp}
+          >
+            <span className={styles.monoLabel}>{'// where teams get stuck'}</span>
+            <h2 className={styles.sectionTitle}>The problems we solve</h2>
+          </motion.div>
+
+          <motion.ul
+            className={styles.problemGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+          >
+            {solution.problems.map((prob, i) => (
+              <motion.li key={i} variants={fadeUp} className={styles.problemItem}>
+                <span className={styles.problemDot} aria-hidden="true" />
+                <span>{prob}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </section>
+
         {/* ── Capabilities ─────────────────────── */}
         <section className={`container ${styles.capSection}`}>
           <motion.div
@@ -143,6 +172,37 @@ export default function Solutions({ slug }: { slug: string }) {
                   </motion.div>
                 );
               })}
+            </motion.div>
+          </section>
+        )}
+
+        {/* ── Vertical FAQ (answer-first, SSR) ── */}
+        {solution.faqs.length > 0 && (
+          <section className={`container ${styles.faqSection}`}>
+            <motion.div
+              className={styles.sectionHeader}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={fadeUp}
+            >
+              <span className={styles.monoLabel}>{'// questions'}</span>
+              <h2 className={styles.sectionTitle}>{solution.name} AI — common questions</h2>
+            </motion.div>
+
+            <motion.div
+              className={styles.faqList}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={stagger}
+            >
+              {solution.faqs.map((f, i) => (
+                <motion.div key={i} variants={fadeUp} className={styles.faqItem}>
+                  <h3 className={styles.faqQ}>{f.q}</h3>
+                  <p className={styles.faqA}>{f.a}</p>
+                </motion.div>
+              ))}
             </motion.div>
           </section>
         )}
