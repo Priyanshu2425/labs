@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { productsData } from '@/data/products';
+import { solutionsData } from '@/data/solutions';
 import { SITE_URL } from '@/lib/seo/jsonLd';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,11 +11,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/our-services`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/offer`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/portfolio`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE_URL}/solutions`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/contact-us`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ];
+
+  const solutionRoutes: MetadataRoute.Sitemap = solutionsData.map((s) => ({
+    url: `${SITE_URL}/solutions/${s.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
 
   const productRoutes: MetadataRoute.Sitemap = Object.keys(productsData).map((id) => ({
     url: `${SITE_URL}/product/${id}`,
@@ -23,5 +32,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  return [...staticRoutes, ...solutionRoutes, ...productRoutes];
 }
