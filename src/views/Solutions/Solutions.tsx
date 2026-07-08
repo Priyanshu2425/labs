@@ -2,11 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, Check } from 'lucide-react';
 import styles from './Solutions.module.scss';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import ProductCard from '../../components/ProductCard';
 import { productsData } from '../../data/products';
 import { solutionsData, getSolution } from '../../data/solutions';
 
@@ -114,16 +114,35 @@ export default function Solutions({ slug }: { slug: string }) {
               viewport={{ once: true, margin: '-60px' }}
               variants={stagger}
             >
-              {products.map((p) => (
-                <motion.div key={p.id} variants={fadeUp}>
-                  <ProductCard
-                    title={p.title}
-                    description={p.subtitle}
-                    category={p.categories[0]}
-                    link={`/product/${p.id}`}
-                  />
-                </motion.div>
-              ))}
+              {products.map((p) => {
+                const cover = p.coverImage?.src ?? p.gallery?.[0]?.src;
+                const coverAlt = p.coverImage?.alt ?? p.gallery?.[0]?.alt ?? p.title;
+                return (
+                  <motion.div key={p.id} variants={fadeUp}>
+                    <Link href={`/product/${p.id}`} className={styles.workCard}>
+                      {cover && (
+                        <div className={styles.workCardMedia}>
+                          <Image
+                            src={cover}
+                            alt={coverAlt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 380px"
+                            className={styles.workCardImg}
+                          />
+                        </div>
+                      )}
+                      <div className={styles.workCardBody}>
+                        <h3 className={styles.workCardTitle}>{p.title}</h3>
+                        <p className={styles.workCardText}>{p.subtitle}</p>
+                        <div className={styles.workCardFooter}>
+                          <span className={styles.workCardCat}>{p.categories[0]}</span>
+                          <ArrowUpRight size={16} className={styles.workCardArrow} />
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </section>
         )}
@@ -203,12 +222,23 @@ export function SolutionsIndex() {
             {solutionsData.map((s) => (
               <motion.div key={s.slug} variants={fadeUp}>
                 <Link href={`/solutions/${s.slug}`} className={styles.indexCard}>
-                  <span className={styles.monoLabel}>{`// ${s.slug}`}</span>
-                  <h2 className={styles.indexCardTitle}>{s.name}</h2>
-                  <p className={styles.indexCardText}>{s.lead}</p>
-                  <span className={styles.indexCardCta}>
-                    Explore <ArrowUpRight size={15} />
-                  </span>
+                  <div className={styles.indexCardMedia}>
+                    <Image
+                      src={s.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 400px"
+                      className={styles.indexCardImg}
+                    />
+                  </div>
+                  <div className={styles.indexCardBody}>
+                    <span className={styles.monoLabel}>{`// ${s.slug}`}</span>
+                    <h2 className={styles.indexCardTitle}>{s.name}</h2>
+                    <p className={styles.indexCardText}>{s.lead}</p>
+                    <span className={styles.indexCardCta}>
+                      Explore <ArrowUpRight size={15} />
+                    </span>
+                  </div>
                 </Link>
               </motion.div>
             ))}

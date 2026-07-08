@@ -6,6 +6,8 @@
 export interface Solution {
   /** URL slug — /solutions/{slug} */
   slug: string;
+  /** Industry cover image (real asset in public/media/industry-*.webp) */
+  image: string;
   /** Short industry name, e.g. "Logistics & Mobility" */
   name: string;
   /** Page H1, e.g. "AI for Logistics & Mobility" */
@@ -27,6 +29,7 @@ export interface Solution {
 export const solutionsData: Solution[] = [
   {
     slug: 'logistics',
+    image: '/media/industry-logistics.webp',
     name: 'Logistics & Mobility',
     h1: 'AI for Logistics & Mobility',
     lead: 'Real-time fleet visibility, traffic-aware routing, and mobility discovery — built to run in the field.',
@@ -45,6 +48,7 @@ export const solutionsData: Solution[] = [
   },
   {
     slug: 'real-estate',
+    image: '/media/industry-realestate.webp',
     name: 'Real Estate & PropTech',
     h1: 'AI for Real Estate & PropTech',
     lead: 'Lease intelligence and AI-native deal sourcing for operators and funds.',
@@ -63,6 +67,7 @@ export const solutionsData: Solution[] = [
   },
   {
     slug: 'healthcare',
+    image: '/media/industry-healthcare.webp',
     name: 'Healthcare & MedTech',
     h1: 'AI for Healthcare & MedTech',
     lead: 'Ambient clinical scribes and end-to-end consultation automation.',
@@ -81,6 +86,7 @@ export const solutionsData: Solution[] = [
   },
   {
     slug: 'manufacturing',
+    image: '/media/industry-hardware.webp',
     name: 'Manufacturing & Industrial Vision',
     h1: 'AI for Manufacturing & Industrial Vision',
     lead: 'On-premise computer vision and production planning for the factory floor.',
@@ -99,6 +105,7 @@ export const solutionsData: Solution[] = [
   },
   {
     slug: 'fintech',
+    image: '/media/industry-fintech.webp',
     name: 'Fintech & Finance Operations',
     h1: 'AI for Fintech & Finance Operations',
     lead: 'Invoice automation, approval routing, and reporting that writes itself.',
@@ -117,6 +124,7 @@ export const solutionsData: Solution[] = [
   },
   {
     slug: 'saas-support',
+    image: '/media/industry-saas.webp',
     name: 'SaaS & Customer Support',
     h1: 'AI for SaaS & Customer Support',
     lead: 'Ticket triage, churn prevention, and revenue-team copilots.',
@@ -135,6 +143,7 @@ export const solutionsData: Solution[] = [
   },
   {
     slug: 'legal-tech',
+    image: '/media/industry-legal.webp',
     name: 'Legal Teams',
     h1: 'AI for Legal Teams',
     lead: 'Contract review that extracts, scores, and redlines in minutes.',

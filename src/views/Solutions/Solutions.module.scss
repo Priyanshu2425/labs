@@ -158,6 +158,67 @@
   gap: $spacing-lg;
 }
 
+.workCard {
+  @include card-base;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.workCardMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 1px solid $color-border;
+  background: $color-surface;
+}
+
+.workCardImg {
+  object-fit: cover;
+  object-position: top;
+  transition: transform $dur-slow $ease-out-expo;
+
+  .workCard:hover & { transform: scale(1.04); }
+}
+
+.workCardBody {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $spacing-lg;
+}
+
+.workCardTitle {
+  font-family: $font-heading;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.workCardText {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-lg;
+  flex-grow: 1;
+}
+
+.workCardFooter {
+  @include flex-between;
+  margin-top: auto;
+}
+
+.workCardCat { @include badge; }
+
+.workCardArrow {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
 /* ── Other verticals ──────────────────── */
 .moreSection {
   padding: $spacing-xxl 0;
@@ -251,9 +312,34 @@
 
 .indexCard {
   @include card-base;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.indexCardMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid $color-border;
+  background: $color-surface;
+}
+
+.indexCardImg {
+  object-fit: cover;
+  transition: transform $dur-slow $ease-out-expo;
+
+  .indexCard:hover & { transform: scale(1.04); }
+}
+
+.indexCardBody {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $spacing-xl;
 
   .monoLabel { margin-bottom: $spacing-sm; }
 }
