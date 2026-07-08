@@ -400,7 +400,7 @@ const HorizontalScrollCarousel = () => {
       projects: [
         { label: 'Fleet Management', link: '/product/dsv-fleet-management' },
         { label: 'Charge Pulse', link: '/product/charge-pulse' },
-        { label: 'Supply Chain Ops', link: '/portfolio' },
+        { label: 'See the work', link: '/portfolio' },
       ],
     },
     {
@@ -409,7 +409,7 @@ const HorizontalScrollCarousel = () => {
       projects: [
         { label: 'Lease Management', link: '/product/grospace' },
         { label: 'Real Estate Fund', link: '/product/ai-native-real-estate-fund' },
-        { label: 'Marketplace Ops', link: '/product/food-ordering-platform' },
+        { label: 'See the work', link: '/portfolio' },
       ],
     },
     {
@@ -422,12 +422,12 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Hardware & IoT', tag: 'Embedded Systems', image: '/media/industry-hardware.webp',
-      description: 'On-device ML, embedded firmware, and vision that ship on real hardware.',
+      title: 'Manufacturing & Vision', tag: 'Industrial AI', image: '/media/industry-hardware.webp',
+      description: 'On-premise video analytics — PPE, surveillance, intrusion detection — and production planning for the factory floor.',
       projects: [
         { label: 'Open Vision PPE', link: '/product/open-vision-ppe' },
         { label: 'Factory OS', link: '/product/factory-os' },
-        { label: 'Charge Pulse', link: '/product/charge-pulse' },
+        { label: 'See the work', link: '/portfolio' },
       ],
     },
     {
@@ -460,7 +460,6 @@ const HorizontalScrollCarousel = () => {
       description: 'Contract extraction, clause risk scoring, and AI redlines.',
       projects: [
         { label: 'Brief Forge', link: '/product/brief-forge' },
-        { label: 'Sales Call Coach', link: '/product/sales-call-coach' },
         { label: 'See the work', link: '/portfolio' },
       ],
     },
