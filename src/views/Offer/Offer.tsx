@@ -46,9 +46,24 @@ interface PersistState {
   name: string;
   result: AnalyzeResult | null;
   tier: Tier | null;
+  sessionId: string;
 }
 
 const STORAGE_KEY = 'bsl-offer-v1';
+
+// A unique id minted the moment a visitor lands and reused across every step,
+// so pre-email answers can be joined to the contact HubSpot creates later.
+const mintSessionId = (): string => {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `sid-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+};
+
+// HubSpot's anonymous visitor token, set on landing by its tracking script.
+const readHubspotUtk = (): string =>
+  document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/)?.[1] ?? '';
 
 // Booking hand-off target (Priyanshu's WhatsApp, digits only for wa.me).
 const WHATSAPP_NUMBER = '919315776817';
@@ -104,6 +119,8 @@ export default function Offer() {
   const [booked, setBooked] = useState(false);
   const [bookError, setBookError] = useState<string | null>(null);
 
+  const [sessionId, setSessionId] = useState('');
+
   const hydrated = useRef(false);
   const turnstileRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<string | null>(null);
@@ -121,23 +138,26 @@ export default function Offer() {
         if (s.result) setResult(s.result);
         if (s.tier) setTier(s.tier);
         if (s.step) setStep(s.step);
+        if (s.sessionId) setSessionId(s.sessionId);
       }
     } catch {
       /* ignore corrupt storage */
     }
+    // Ensure a stable landing id exists whether or not one was restored.
+    setSessionId((prev) => prev || mintSessionId());
     hydrated.current = true;
   }, []);
 
   // Persist after every meaningful change (only once hydrated, to avoid clobber).
   useEffect(() => {
     if (!hydrated.current) return;
-    const payload: PersistState = { step, persona, budget, email, name, result, tier };
+    const payload: PersistState = { step, persona, budget, email, name, result, tier, sessionId };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch {
       /* storage full / disabled — non-fatal */
     }
-  }, [step, persona, budget, email, name, result, tier]);
+  }, [step, persona, budget, email, name, result, tier, sessionId]);
 
   // Render the Turnstile widget while the paste step is visible; tear it down
   // when we leave so returning to the step re-renders a fresh challenge.
@@ -198,6 +218,21 @@ export default function Offer() {
   const personaLabel = PERSONA_OPTIONS.find((p) => p.key === persona)?.label ?? '';
   const budgetLabel = BUDGET_OPTIONS.find((b) => b.key === budget)?.label ?? '';
 
+  // Attribution context sent with every /api/offer call: HubSpot stitches the
+  // hutk to the contact; sessionId joins pre-email steps to that same lead.
+  const attribution = () => ({
+    sessionId,
+    hutk: readHubspotUtk(),
+    pageUri: window.location.href,
+    pageName: document.title,
+  });
+
+  // Fire a Meta Pixel standard event if the pixel has loaded (no-op otherwise).
+  const trackPixel = (event: string, params?: Record<string, unknown>) => {
+    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
+    if (typeof fbq === 'function') fbq('track', event, params);
+  };
+
   const restart = () => {
     try {
       localStorage.removeItem(STORAGE_KEY);
@@ -238,13 +273,23 @@ export default function Offer() {
       return;
     }
     setBusy(true);
+    // Meta Pixel: email captured — a qualified lead.
+    trackPixel('Lead', { content_name: 'offer_email_gate', content_category: 'offer_funnel' });
     // Reveal the prompt immediately; mailing-list write is best-effort.
     setStep('prompt');
     try {
       await fetch('/api/offer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'subscribe', email, name, persona: personaLabel, budget: budgetLabel }),
+        body: JSON.stringify({
+          action: 'subscribe',
+          email,
+          name,
+          persona: personaLabel,
+          budget: budgetLabel,
+          website: honeypot, // honeypot — real users leave this empty
+          ...attribution(),
+        }),
       });
     } catch {
       /* non-blocking */
@@ -309,6 +354,7 @@ export default function Offer() {
           audit,
           turnstileToken,
           website: honeypot, // honeypot — real users leave this empty
+          ...attribution(),
         }),
       });
       const data: { ok: boolean; error?: string; result?: AnalyzeResult; tier?: Tier } = await res
@@ -352,6 +398,8 @@ export default function Offer() {
     // Open WhatsApp synchronously (same user-gesture tick) so it isn't popup-blocked.
     window.open(buildWaLink(), '_blank', 'noopener,noreferrer');
     setBooked(true);
+    // Meta Pixel: call-slot requested.
+    trackPixel('Schedule', { content_name: 'offer_book_call', content_category: 'offer_funnel' });
     // Best-effort server log / Slack-Discord-email ping — never blocks or errors the UI.
     fetch('/api/offer', {
       method: 'POST',
@@ -366,6 +414,7 @@ export default function Offer() {
         tier: tier?.name,
         verdict: result?.verdict,
         audit,
+        ...attribution(),
       }),
     }).catch(() => {
       /* logging is best-effort; the WhatsApp hand-off already happened */
@@ -525,6 +574,16 @@ export default function Offer() {
                       onChange={(e) => setEmail(e.target.value)}
                       autoComplete="email"
                       required
+                    />
+                    {/* Honeypot — hidden from users, catches bots */}
+                    <input
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      className={styles.honeypot}
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      aria-hidden="true"
                     />
                     {error && <span className={styles.error}>{error}</span>}
                     <button type="submit" className={styles.primaryBtn} disabled={busy}>
