@@ -159,7 +159,9 @@
 }
 
 .stepKicker {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.78rem;
   color: $color-accent;
@@ -683,4 +685,27 @@
   transition: color $transition-fast;
 
   &:hover { color: $color-text-primary; }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: default;
+    text-decoration: none;
+    &:hover { color: $color-text-muted; }
+  }
+}
+
+// One-time-code entry — wide letter-spacing so the 6 digits read as a code.
+.otpInput {
+  @extend .input;
+  text-align: center;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1.6rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em; // offset the trailing letter-spacing so glyphs sit centered
+  font-weight: 600;
+
+  &::placeholder {
+    letter-spacing: 0.4em;
+    font-size: 1.4rem;
+  }
 }

@@ -27,7 +27,7 @@ import {
   type Tier,
 } from '../../data/offer';
 
-type Step = 'persona' | 'budget' | 'email' | 'prompt' | 'result';
+type Step = 'persona' | 'budget' | 'email' | 'otp' | 'prompt' | 'result';
 
 interface AnalyzeResult {
   tier: 'validation' | 'custom';
@@ -47,6 +47,7 @@ interface PersistState {
   result: AnalyzeResult | null;
   tier: Tier | null;
   sessionId: string;
+  verified: boolean;
 }
 
 const STORAGE_KEY = 'bsl-offer-v1';
@@ -104,6 +105,9 @@ export default function Offer() {
   const [budget, setBudget] = useState<BudgetKey | ''>('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [otp, setOtp] = useState('');
+  const [verified, setVerified] = useState(false);
+  const [resendIn, setResendIn] = useState(0);
   const [audit, setAudit] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [turnstileToken, setTurnstileToken] = useState('');
@@ -137,8 +141,16 @@ export default function Offer() {
         if (s.name) setName(s.name);
         if (s.result) setResult(s.result);
         if (s.tier) setTier(s.tier);
-        if (s.step) setStep(s.step);
+        if (s.verified) setVerified(true);
         if (s.sessionId) setSessionId(s.sessionId);
+        if (s.step) {
+          // The prompt/result steps sit behind the email-verification gate. A
+          // restored session that never verified is bounced back to re-verify
+          // (or to the email step if we don't even have an address yet).
+          const gated = s.step === 'prompt' || s.step === 'result';
+          if (gated && !s.verified) setStep(s.email ? 'otp' : 'email');
+          else setStep(s.step);
+        }
       }
     } catch {
       /* ignore corrupt storage */
@@ -151,13 +163,20 @@ export default function Offer() {
   // Persist after every meaningful change (only once hydrated, to avoid clobber).
   useEffect(() => {
     if (!hydrated.current) return;
-    const payload: PersistState = { step, persona, budget, email, name, result, tier, sessionId };
+    const payload: PersistState = { step, persona, budget, email, name, result, tier, sessionId, verified };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch {
       /* storage full / disabled — non-fatal */
     }
-  }, [step, persona, budget, email, name, result, tier, sessionId]);
+  }, [step, persona, budget, email, name, result, tier, sessionId, verified]);
+
+  // Tick the resend cooldown down to zero, one second at a time.
+  useEffect(() => {
+    if (resendIn <= 0) return;
+    const t = setTimeout(() => setResendIn((n) => n - 1), 1000);
+    return () => clearTimeout(t);
+  }, [resendIn]);
 
   // Render the Turnstile widget while the paste step is visible; tear it down
   // when we leave so returning to the step re-renders a fresh challenge.
@@ -244,6 +263,9 @@ export default function Offer() {
     setBudget('');
     setEmail('');
     setName('');
+    setOtp('');
+    setVerified(false);
+    setResendIn(0);
     setAudit('');
     setResult(null);
     setTier(null);
@@ -269,20 +291,20 @@ export default function Offer() {
     e.preventDefault();
     setError(null);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError('Enter a valid email so we can send your market-audit prompt.');
+      setError('Enter a valid email so we can send your verification code.');
       return;
     }
     setBusy(true);
     // Meta Pixel: email captured — a qualified lead.
     trackPixel('Lead', { content_name: 'offer_email_gate', content_category: 'offer_funnel' });
-    // Reveal the prompt immediately; mailing-list write is best-effort.
-    setStep('prompt');
+    // Mint + email a verification code, then gate the prompt behind it. Also runs
+    // the mailing-list/CRM side-effects server-side (best-effort within send-otp).
     try {
-      await fetch('/api/offer', {
+      const res = await fetch('/api/offer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'subscribe',
+          action: 'send-otp',
           email,
           name,
           persona: personaLabel,
@@ -291,10 +313,81 @@ export default function Offer() {
           ...attribution(),
         }),
       });
+      const data: { ok: boolean; error?: string } = await res.json().catch(() => ({ ok: false }));
+      if (!res.ok || !data.ok) {
+        setError(data.error ?? "We couldn't send your code. Please try again.");
+        return;
+      }
+      setOtp('');
+      setStep('otp');
+      setResendIn(30);
     } catch {
-      /* non-blocking */
+      setError('Network error. Please try again.');
     } finally {
       setBusy(false);
+    }
+  };
+
+  const submitOtp = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    setError(null);
+    const code = otp.replace(/\D/g, '');
+    if (code.length !== 6) {
+      setError('Enter the 6-digit code we emailed you.');
+      return;
+    }
+    setBusy(true);
+    try {
+      const res = await fetch('/api/offer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'verify-otp',
+          email,
+          code,
+          name,
+          persona: personaLabel,
+          budget: budgetLabel,
+          ...attribution(),
+        }),
+      });
+      const data: { ok: boolean; error?: string } = await res.json().catch(() => ({ ok: false }));
+      if (!res.ok || !data.ok) {
+        setError(data.error ?? 'Verification failed. Please try again.');
+        return;
+      }
+      // Email confirmed — unlock the prompt.
+      setVerified(true);
+      trackPixel('Lead', { content_name: 'offer_email_verified', content_category: 'offer_funnel' });
+      setStep('prompt');
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const resendOtp = async () => {
+    if (resendIn > 0 || busy) return;
+    setError(null);
+    setOtp('');
+    setResendIn(30); // start the cooldown immediately (server enforces it too)
+    try {
+      await fetch('/api/offer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'send-otp',
+          email,
+          name,
+          persona: personaLabel,
+          budget: budgetLabel,
+          website: honeypot,
+          ...attribution(),
+        }),
+      });
+    } catch {
+      /* best-effort — the user can retry after the cooldown */
     }
   };
 
@@ -422,8 +515,10 @@ export default function Offer() {
   };
 
   // ---- Progress indicator -------------------------------------------------
-  const stepOrder: Step[] = ['persona', 'budget', 'email', 'prompt', 'result'];
-  const currentIndex = stepOrder.indexOf(step);
+  // The four rendered dots. The OTP step is a sub-step of the email gate, so it
+  // shares the email dot rather than adding a fifth.
+  const progressSteps: Step[] = ['persona', 'budget', 'email', 'prompt'];
+  const progressIndex = step === 'otp' ? progressSteps.indexOf('email') : progressSteps.indexOf(step);
 
   return (
     <div className={styles.pageWrapper}>
@@ -467,10 +562,10 @@ export default function Offer() {
           {/* Progress bar (hidden on the final result view) */}
           {step !== 'result' && (
             <div className={styles.progress} aria-hidden="true">
-              {stepOrder.slice(0, 4).map((s, i) => (
+              {progressSteps.map((s, i) => (
                 <span
                   key={s}
-                  className={`${styles.progressDot} ${i <= currentIndex ? styles.progressDotActive : ''}`}
+                  className={`${styles.progressDot} ${i <= progressIndex ? styles.progressDotActive : ''}`}
                 />
               ))}
             </div>
@@ -590,6 +685,55 @@ export default function Offer() {
                       {busy ? 'Revealing…' : 'Reveal my prompt'} <ArrowRight size={18} />
                     </button>
                   </form>
+                </motion.div>
+              )}
+
+              {/* STEP 3.5 — EMAIL OTP VERIFICATION GATE */}
+              {step === 'otp' && (
+                <motion.div
+                  key="otp"
+                  className={styles.card}
+                  variants={fadeIn}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  <button type="button" className={styles.backLink} onClick={() => setStep('email')}>
+                    <ArrowLeft size={15} /> Back
+                  </button>
+                  <span className={styles.stepKicker}>
+                    <ShieldCheck size={13} /> Verify your email
+                  </span>
+                  <h2 className={styles.stepTitle}>Enter the 6-digit code we just emailed you.</h2>
+                  <p className={styles.stepSub}>
+                    We sent a code to <strong>{email}</strong>. Check your inbox (and spam) and drop it
+                    below to unlock your market-audit prompt. It expires in 10 minutes.
+                  </p>
+                  <form onSubmit={submitOtp} className={styles.form}>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      className={styles.otpInput}
+                      placeholder="••••••"
+                      maxLength={6}
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      autoFocus
+                    />
+                    {error && <span className={styles.error}>{error}</span>}
+                    <button type="submit" className={styles.primaryBtn} disabled={busy}>
+                      {busy ? 'Verifying…' : 'Verify & reveal prompt'} <ArrowRight size={18} />
+                    </button>
+                  </form>
+                  <button
+                    type="button"
+                    className={styles.restartLink}
+                    onClick={resendOtp}
+                    disabled={resendIn > 0 || busy}
+                  >
+                    {resendIn > 0 ? `Resend code in ${resendIn}s` : 'Resend code'}
+                  </button>
                 </motion.div>
               )}
 
