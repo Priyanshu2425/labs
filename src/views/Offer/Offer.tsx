@@ -15,6 +15,7 @@ import {
   Phone,
 } from 'lucide-react';
 import styles from './Offer.module.scss';
+import BuildLoader from './BuildLoader';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import {
@@ -747,6 +748,10 @@ export default function Offer() {
                   animate="visible"
                   exit="exit"
                 >
+                  {busy ? (
+                    <BuildLoader />
+                  ) : (
+                  <>
                   <span className={styles.stepKicker}>Your market-audit prompt is ready</span>
                   <h2 className={styles.stepTitle}>Run this in ChatGPT or Gemini, then paste the result back.</h2>
                   <p className={styles.stepSub}>
@@ -807,9 +812,11 @@ export default function Offer() {
                     {TURNSTILE_SITE_KEY && <div ref={turnstileRef} className={styles.turnstile} />}
                     {error && <span className={styles.error}>{error}</span>}
                     <button type="submit" className={styles.primaryBtn} disabled={busy}>
-                      {busy ? 'Building your offer…' : 'Generate my build offer'} <ArrowRight size={18} />
+                      Generate my build offer <ArrowRight size={18} />
                     </button>
                   </form>
+                  </>
+                  )}
                 </motion.div>
               )}
 
@@ -926,13 +933,19 @@ export default function Offer() {
                     )}
                   </motion.div>
 
-                  <motion.button variants={fadeIn} type="button" className={styles.restartLink} onClick={restart}>
-                    Start over with a different idea
-                  </motion.button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
+
+          {/* Persistent escape hatch — restart the funnel from any step. */}
+          {step !== 'persona' && (
+            <div className={styles.globalRestart}>
+              <button type="button" className={styles.restartLink} onClick={restart} disabled={busy}>
+                {step === 'result' ? 'Start over with a different idea' : 'Start over'}
+              </button>
+            </div>
+          )}
         </section>
       </main>
 

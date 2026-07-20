@@ -1,0 +1,161 @@
+@import '../../styles/variables';
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.9rem;
+  min-height: 420px;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+/* ── Image grid — the "build", assembled from real product dashboards ── */
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  width: 100%;
+  max-width: 430px;
+  padding: 7px;
+  border-radius: 16px;
+  background: rgba(9, 9, 11, 0.6);
+  border: 1px solid $color-border;
+  overflow: hidden;
+}
+
+.tile {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #0b0b0e;
+
+  img {
+    object-fit: cover;
+    // Dim + desaturate the base image so the compile-flash reads as "lighting up".
+    filter: grayscale(0.5) brightness(0.55) contrast(1.05);
+  }
+}
+
+// Constant dark veil to keep the log legible over busy screenshots.
+.tileVeil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(9, 9, 11, 0.25), rgba(9, 9, 11, 0.55));
+}
+
+// The pulsing "module compiled" flash on each tile.
+.tileFlash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.45), rgba(59, 130, 246, 0.15));
+  box-shadow: inset 0 0 0 1.5px rgba(96, 165, 250, 0.9);
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+// Vertical scan sweep across the whole grid.
+.scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(96, 165, 250, 0.22) 45%,
+    rgba(147, 197, 253, 0.32) 50%,
+    rgba(96, 165, 250, 0.22) 55%,
+    transparent
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+// Inset frame + inner glow so the grid reads as a "device / compiler window".
+.gridFrame {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0 0 1px rgba(96, 165, 250, 0.14),
+    inset 0 0 60px rgba(59, 130, 246, 0.1);
+  pointer-events: none;
+}
+
+/* ── Build-log panel ── */
+.panel {
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.kicker {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: $color-accent;
+  letter-spacing: 0.04em;
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.logLine {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  transition: color $transition-default, opacity $transition-default;
+}
+
+.mark {
+  width: 0.9em;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.logText { position: relative; }
+
+.logDone {
+  color: $color-text-secondary;
+  .mark { color: #22c55e; }
+}
+
+.logActive {
+  color: $color-text-primary;
+  .mark { color: $color-accent; }
+}
+
+.logPending {
+  color: $color-text-muted;
+  opacity: 0.5;
+}
+
+// Blinking caret trailing the active line.
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  margin-left: 3px;
+  transform: translateY(1px);
+  background: $color-accent;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  .log { font-size: 0.78rem; }
+  .wrap { min-height: 360px; gap: 1.4rem; }
+}
