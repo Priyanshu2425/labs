@@ -45,6 +45,7 @@ interface PersistState {
   budget: BudgetKey | '';
   email: string;
   name: string;
+  phone: string;
   result: AnalyzeResult | null;
   tier: Tier | null;
   sessionId: string;
@@ -140,6 +141,7 @@ export default function Offer() {
         if (s.budget) setBudget(s.budget);
         if (s.email) setEmail(s.email);
         if (s.name) setName(s.name);
+        if (s.phone) setPhone(s.phone);
         if (s.result) setResult(s.result);
         if (s.tier) setTier(s.tier);
         if (s.verified) setVerified(true);
@@ -164,13 +166,13 @@ export default function Offer() {
   // Persist after every meaningful change (only once hydrated, to avoid clobber).
   useEffect(() => {
     if (!hydrated.current) return;
-    const payload: PersistState = { step, persona, budget, email, name, result, tier, sessionId, verified };
+    const payload: PersistState = { step, persona, budget, email, name, phone, result, tier, sessionId, verified };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch {
       /* storage full / disabled — non-fatal */
     }
-  }, [step, persona, budget, email, name, result, tier, sessionId, verified]);
+  }, [step, persona, budget, email, name, phone, result, tier, sessionId, verified]);
 
   // Tick the resend cooldown down to zero, one second at a time.
   useEffect(() => {
@@ -308,6 +310,7 @@ export default function Offer() {
           action: 'send-otp',
           email,
           name,
+          phone,
           persona: personaLabel,
           budget: budgetLabel,
           website: honeypot, // honeypot — real users leave this empty
@@ -347,6 +350,7 @@ export default function Offer() {
           email,
           code,
           name,
+          phone,
           persona: personaLabel,
           budget: budgetLabel,
           ...attribution(),
@@ -381,6 +385,7 @@ export default function Offer() {
           action: 'send-otp',
           email,
           name,
+          phone,
           persona: personaLabel,
           budget: budgetLabel,
           website: honeypot,
@@ -670,6 +675,14 @@ export default function Offer() {
                       onChange={(e) => setEmail(e.target.value)}
                       autoComplete="email"
                       required
+                    />
+                    <input
+                      type="tel"
+                      className={styles.input}
+                      placeholder="Phone (optional) — e.g. +91 98765 43210"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      autoComplete="tel"
                     />
                     {/* Honeypot — hidden from users, catches bots */}
                     <input
