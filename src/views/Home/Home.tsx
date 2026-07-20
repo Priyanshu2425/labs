@@ -438,6 +438,27 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
+      title: 'Cafe & F&B', tag: 'Studio', image: '/media/studio-cafe.jpg',
+      description: 'Fast, appetite-driving websites for cafés, restaurants, bars and food brands.',
+      projects: [
+        { label: 'The Pass Studio', link: 'https://buildpacelabs.github.io/the-pass-studio/', external: true },
+      ],
+    },
+    {
+      title: 'Gym & Fitness', tag: 'Studio', image: '/media/studio-fitness.jpg',
+      description: 'High-energy websites for gyms, studios, boxes and wellness brands.',
+      projects: [
+        { label: 'The Rep Studio', link: 'https://buildpacelabs.github.io/the-rep-studio/', external: true },
+      ],
+    },
+    {
+      title: 'Real Estate Brands', tag: 'Studio', image: '/media/studio-realestate.jpg',
+      description: 'Trust-building websites for brokerages, developers and property brands.',
+      projects: [
+        { label: 'The Close Studio', link: 'https://buildpacelabs.github.io/the-close-studio/', external: true },
+      ],
+    },
+    {
       title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp', solution: 'fintech',
       description: 'Invoice automation, PO matching, and AI approval routing.',
       projects: [
