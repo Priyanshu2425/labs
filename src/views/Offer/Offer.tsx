@@ -276,9 +276,13 @@ export default function Offer() {
   });
 
   // Fire a Meta Pixel standard event if the pixel has loaded (no-op otherwise).
-  const trackPixel = (event: string, params?: Record<string, unknown>) => {
+  // An eventId maps to Meta's `eventID` so the browser event dedupes against the
+  // server-side Conversions API event carrying the same id.
+  const trackPixel = (event: string, params?: Record<string, unknown>, eventId?: string) => {
     const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
-    if (typeof fbq === 'function') fbq('track', event, params);
+    if (typeof fbq !== 'function') return;
+    if (eventId) fbq('track', event, params, { eventID: eventId });
+    else fbq('track', event, params);
   };
 
   const restart = () => {
@@ -324,10 +328,12 @@ export default function Offer() {
       return;
     }
     setBusy(true);
-    // Meta Pixel: email captured — a qualified lead.
-    trackPixel('Lead', { content_name: 'offer_email_gate', content_category: 'offer_funnel' });
+    // Shared dedup id: the browser Pixel Lead (fired on success below) and the
+    // server-side CAPI Lead (fired inside send-otp) both carry this event_id, so
+    // Meta counts them as one event.
+    const eventId = mintSessionId();
     // Mint + email a verification code, then gate the prompt behind it. Also runs
-    // the mailing-list/CRM side-effects server-side (best-effort within send-otp).
+    // the mailing-list/CRM/Meta side-effects server-side (best-effort within send-otp).
     try {
       const res = await fetch('/api/offer', {
         method: 'POST',
@@ -337,6 +343,7 @@ export default function Offer() {
           email,
           name,
           phone,
+          eventId,
           persona: personaLabel,
           budget: budgetLabel,
           website: honeypot, // honeypot — real users leave this empty
@@ -348,6 +355,9 @@ export default function Offer() {
         setError(data.error ?? "We couldn't send your code. Please try again.");
         return;
       }
+      // Success — email/name/phone captured. Fire the browser Lead (deduped with
+      // the server CAPI Lead via eventId).
+      trackPixel('Lead', { content_name: 'offer_email_gate', content_category: 'offer_funnel' }, eventId);
       setOtp('');
       setStep('otp');
       setResendIn(30);
@@ -389,7 +399,6 @@ export default function Offer() {
       }
       // Email confirmed — unlock the prompt.
       setVerified(true);
-      trackPixel('Lead', { content_name: 'offer_email_verified', content_category: 'offer_funnel' });
       setStep('prompt');
     } catch {
       setError('Network error. Please try again.');
@@ -523,9 +532,11 @@ export default function Offer() {
     // Open WhatsApp synchronously (same user-gesture tick) so it isn't popup-blocked.
     window.open(buildWaLink(), '_blank', 'noopener,noreferrer');
     setBooked(true);
-    // Meta Pixel: call-slot requested.
-    trackPixel('Schedule', { content_name: 'offer_book_call', content_category: 'offer_funnel' });
-    // Best-effort server log / Slack-Discord-email ping — never blocks or errors the UI.
+    // Shared dedup id for the Meta Schedule event (browser Pixel + server CAPI).
+    const eventId = mintSessionId();
+    trackPixel('Schedule', { content_name: 'offer_book_call', content_category: 'offer_funnel' }, eventId);
+    // Best-effort server log / Slack-Discord-email ping + server-side Meta
+    // Schedule — never blocks or errors the UI.
     fetch('/api/offer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -534,6 +545,7 @@ export default function Offer() {
         phone,
         email,
         name,
+        eventId,
         persona: personaLabel,
         budget: budgetLabel,
         tier: tier?.name,

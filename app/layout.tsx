@@ -117,8 +117,9 @@ export default function RootLayout({
         {/* Contentsquare (Hotjar) — session replay & heatmaps. */}
         <Script id="contentsquare-uxa" strategy="afterInteractive" src={CONTENTSQUARE_SRC} />
 
-        {/* Meta Pixel — base code + PageView. Conversion events (Lead, Schedule)
-            are fired from the /offer funnel. */}
+        {/* Meta Pixel — base code only (init, no PageView). The only events we
+            track are the conversions Lead + Schedule, fired from the /offer
+            funnel (browser Pixel + server-side Conversions API, deduped). */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -128,19 +129,8 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '${META_PIXEL_ID}');
-fbq('track', 'PageView');`}
+fbq('init', '${META_PIXEL_ID}');`}
         </Script>
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            alt=""
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-          />
-        </noscript>
       </body>
     </html>
   );
