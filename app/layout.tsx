@@ -8,6 +8,9 @@ import { JsonLd, organizationSchema, SITE_URL } from '@/lib/seo/jsonLd';
 // env for other environments; the literals are the production BuildspaceLabs IDs.
 const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID ?? '246744054';
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? '2741855546169931';
+// Contentsquare (Hotjar) session-analytics tag — heatmaps & session replay.
+const CONTENTSQUARE_SRC =
+  process.env.NEXT_PUBLIC_CONTENTSQUARE_SRC ?? 'https://t.contentsquare.net/uxa/418ed7dd99917.js';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -110,6 +113,9 @@ export default function RootLayout({
           strategy="afterInteractive"
           src={`https://js.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js`}
         />
+
+        {/* Contentsquare (Hotjar) — session replay & heatmaps. */}
+        <Script id="contentsquare-uxa" strategy="afterInteractive" src={CONTENTSQUARE_SRC} />
 
         {/* Meta Pixel — base code + PageView. Conversion events (Lead, Schedule)
             are fired from the /offer funnel. */}
