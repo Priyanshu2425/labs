@@ -588,6 +588,16 @@ const STUDIOS = [
     image: '/media/studio-realestate.jpg',
     host: 'the-close-studio',
   },
+  {
+    key: 'docket',
+    name: 'The Docket Studio',
+    niche: 'Legal & Law Firms',
+    line: 'Credible, trust-building websites for law firms, advocates and legal-services brands.',
+    count: '20',
+    href: 'https://buildpacelabs.github.io/the-docket-studio/',
+    image: '/media/studio-legal.jpg',
+    host: 'the-docket-studio',
+  },
 ];
 
 const StudiosSection = () => {
