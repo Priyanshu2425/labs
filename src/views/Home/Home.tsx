@@ -431,34 +431,6 @@ const HorizontalScrollCarousel = () => {
       ],
     },
     {
-      title: 'Travel & Hospitality', tag: 'Studio', image: '/media/industry-travel.webp',
-      description: 'Premium, cinematic digital destinations for travel brands.',
-      projects: [
-        { label: 'Atelier Travel Studio', link: 'https://atelier-travel-studio.buildspacelabs.com/', external: true },
-      ],
-    },
-    {
-      title: 'Cafe & F&B', tag: 'Studio', image: '/media/studio-cafe.jpg',
-      description: 'Fast, appetite-driving websites for cafés, restaurants, bars and food brands.',
-      projects: [
-        { label: 'The Pass Studio', link: 'https://buildpacelabs.github.io/the-pass-studio/', external: true },
-      ],
-    },
-    {
-      title: 'Gym & Fitness', tag: 'Studio', image: '/media/studio-fitness.jpg',
-      description: 'High-energy websites for gyms, studios, boxes and wellness brands.',
-      projects: [
-        { label: 'The Rep Studio', link: 'https://buildpacelabs.github.io/the-rep-studio/', external: true },
-      ],
-    },
-    {
-      title: 'Real Estate Brands', tag: 'Studio', image: '/media/studio-realestate.jpg',
-      description: 'Trust-building websites for brokerages, developers and property brands.',
-      projects: [
-        { label: 'The Close Studio', link: 'https://buildpacelabs.github.io/the-close-studio/', external: true },
-      ],
-    },
-    {
       title: 'Fintech', tag: 'Finance', image: '/media/industry-fintech.webp', solution: 'fintech',
       description: 'Invoice automation, PO matching, and AI approval routing.',
       projects: [
@@ -571,6 +543,128 @@ const HorizontalScrollCarousel = () => {
   )
 }
 
+/* =============================================
+   Studios — specialist, hand-built websites per industry.
+   Each card frames the studio's live site like a browser window.
+   ============================================= */
+const STUDIOS = [
+  {
+    key: 'travel',
+    name: 'Atelier Travel Studio',
+    niche: 'Travel & Tourism',
+    line: 'Cinematic websites for travel and tourism brands — cliffside stays to desert safaris.',
+    count: '28',
+    href: 'https://atelier-travel-studio.buildspacelabs.com/',
+    image: '/media/studio-travel.jpg',
+    host: 'atelier-travel-studio.buildspacelabs.com',
+  },
+  {
+    key: 'pass',
+    name: 'The Pass Studio',
+    niche: 'Cafés & F&B',
+    line: 'Appetite-driving websites for cafés, restaurants, bars and food brands.',
+    count: '20',
+    href: 'https://buildpacelabs.github.io/the-pass-studio/',
+    image: '/media/studio-cafe.jpg',
+    host: 'the-pass-studio',
+  },
+  {
+    key: 'rep',
+    name: 'The Rep Studio',
+    niche: 'Gyms & Fitness',
+    line: 'High-energy websites for gyms, studios, boxes and wellness brands.',
+    count: '20',
+    href: 'https://buildpacelabs.github.io/the-rep-studio/',
+    image: '/media/studio-fitness.jpg',
+    host: 'the-rep-studio',
+  },
+  {
+    key: 'close',
+    name: 'The Close Studio',
+    niche: 'Real Estate',
+    line: 'Trust-building websites for brokerages, developers and property brands.',
+    count: '20',
+    href: 'https://buildpacelabs.github.io/the-close-studio/',
+    image: '/media/studio-realestate.jpg',
+    host: 'the-close-studio',
+  },
+];
+
+const StudiosSection = () => {
+  return (
+    <section className={styles.studiosSection} aria-labelledby="studios-title">
+      <div className={styles.studiosBg} aria-hidden="true" />
+      <div className={styles.studiosInner}>
+        <div className={styles.studiosHeader}>
+          <motion.span
+            className={styles.studiosEyebrow}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className={styles.introEyebrowDot} aria-hidden="true" />
+            Studios
+          </motion.span>
+          <h2 id="studios-title" className={styles.studiosTitle}>
+            A studio for every industry.<br />
+            Every site <em>built by hand</em>.
+          </h2>
+          <p className={styles.studiosSubtext}>
+            Alongside our product work, we run specialist studios that give brands in a single
+            industry a website designed and built entirely from scratch — no templates, no two alike.
+            Open one and browse the work.
+          </p>
+        </div>
+
+        <div className={styles.studiosGrid}>
+          {STUDIOS.map((s, i) => (
+            <motion.a
+              key={s.key}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.studioCard}
+              initial={{ opacity: 0, y: 34 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-90px' }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: (i % 2) * 0.08 }}
+            >
+              <div className={styles.studioFrame}>
+                <div className={styles.studioChrome} aria-hidden="true">
+                  <span className={styles.studioDots}><i /><i /><i /></span>
+                  <span className={styles.studioUrl}>{s.host}</span>
+                </div>
+                <div className={styles.studioShot}>
+                  <Image
+                    src={s.image}
+                    alt={`${s.name} — a collection of ${s.niche.toLowerCase()} brand websites`}
+                    fill
+                    sizes="(max-width: 900px) 92vw, 560px"
+                    className={styles.studioShotImg}
+                  />
+                </div>
+              </div>
+              <div className={styles.studioBody}>
+                <div className={styles.studioMeta}>
+                  <span className={styles.studioTag}>{s.niche}</span>
+                  <span className={styles.studioCount}>{s.count} brands built</span>
+                </div>
+                <h3 className={styles.studioName}>{s.name}</h3>
+                <p className={styles.studioLine}>{s.line}</p>
+                <span className={styles.studioLink}>
+                  Visit the studio
+                  <ArrowUpRight size={15} className={styles.studioLinkArrow} />
+                </span>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function Home() {
   const valueProps = [
     {
@@ -611,6 +705,9 @@ export default function Home() {
 
         {/* Horizontal Scrolling Industries Array */}
         <HorizontalScrollCarousel />
+
+        {/* Studios — specialist hand-built websites, one studio per industry */}
+        <StudiosSection />
 
         {/* Value Props — Why Us */}
         <ValuePropsSection valueProps={valueProps} />
