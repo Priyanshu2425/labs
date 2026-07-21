@@ -22,6 +22,7 @@ import {
   PERSONA_OPTIONS,
   BUDGET_OPTIONS,
   COMPARISON_ROWS,
+  ROTATING_OFFERS,
   PROMPT_1,
   type PersonaKey,
   type BudgetKey,
@@ -173,6 +174,16 @@ export default function Offer() {
       /* storage full / disabled — non-fatal */
     }
   }, [step, persona, budget, email, name, phone, result, tier, sessionId, verified]);
+
+  // Rotating hero offer — cycles every few seconds (paused for reduced motion).
+  const [offerIdx, setOfferIdx] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t = setInterval(() => {
+      setOfferIdx((i) => (i + 1) % ROTATING_OFFERS.length);
+    }, 2600);
+    return () => clearInterval(t);
+  }, []);
 
   // Mobile only: enable the scroll-snap-to-form behavior by flagging <html>
   // while this page is mounted (the CSS lives in global.scss + .stage).
@@ -559,13 +570,30 @@ export default function Offer() {
               {'// get your offer'}
             </motion.span>
             <motion.h1 variants={fadeIn} className={styles.pageTitle}>
-              Investor-ready software,<br />
-              <span className={styles.gradientText}>shipped in 48 hours.</span>
+              Let&apos;s
+              <span className={styles.rotatingWrap}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={offerIdx}
+                    className={styles.gradientText}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {ROTATING_OFFERS[offerIdx]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </motion.h1>
+            <motion.p variants={fadeIn} className={styles.priceAnchor}>
+              Fixed price <strong>from ₹50,000</strong> · your core product live in{' '}
+              <strong>48 hours</strong>.
+            </motion.p>
             <motion.p variants={fadeIn} className={styles.pageSubtitle}>
               Traditional agencies bill human hours for 3–6 months. Our AI-native engine runs
-              24×7 under elite human governance — so your core MVP ships on a fixed price, in a
-              48-hour horizon. Answer two questions and get a personalized build offer.
+              24×7 under elite human governance — so you ship a real product on a fixed price,
+              in a 48-hour horizon. Answer two questions and get a personalized build offer.
             </motion.p>
             <motion.div variants={fadeIn} className={styles.trustRow}>
               <span className={styles.trustPill}>

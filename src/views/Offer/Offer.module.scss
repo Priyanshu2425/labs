@@ -78,6 +78,34 @@
   color: transparent;
 }
 
+// Rotating offer phrase — its own line under "Let's", height reserved so the
+// swap doesn't shift the page. transform needs a block-level target, hence the
+// inline-block on the animated span.
+.rotatingWrap {
+  display: block;
+  min-height: 1.15em;
+  margin-top: 0.08em;
+
+  .gradientText { display: inline-block; }
+
+  @media (max-width: 768px) { min-height: 2.3em; }
+}
+
+.priceAnchor {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1rem;
+  color: $color-text-secondary;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+
+  strong {
+    color: $color-accent;
+    font-weight: 700;
+  }
+
+  @media (max-width: 480px) { font-size: 0.88rem; }
+}
+
 .pageSubtitle {
   font-size: 1.1rem;
   line-height: 1.65;

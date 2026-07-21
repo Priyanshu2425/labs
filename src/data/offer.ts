@@ -37,6 +37,20 @@ export const PERSONA_OPTIONS: PersonaOption[] = [
   },
 ];
 
+// Rotating hero offers — verb-first phrases shown after a fixed "Let's" in the
+// /offer headline, cycling every few seconds. Edit / reorder freely; the first
+// entry is what renders for reduced-motion users (no rotation).
+export const ROTATING_OFFERS: string[] = [
+  'automate your business',
+  'build your app',
+  'launch your e-commerce store',
+  'ship your MVP',
+  'put an AI agent to work',
+  'turn spreadsheets into software',
+  'build your SaaS',
+  'launch your marketplace',
+];
+
 export const BUDGET_OPTIONS: BudgetOption[] = [
   {
     key: 'A',
