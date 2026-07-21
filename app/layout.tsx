@@ -7,6 +7,9 @@ import { JsonLd, organizationSchema, SITE_URL } from '@/lib/seo/jsonLd';
 // Public analytics identifiers (safe to ship to the browser). Overridable via
 // env for other environments; the literals are the production BuildspaceLabs IDs.
 const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID ?? '246744054';
+// Meta Pixel dataset — browser-side Pixel + server-side Conversions API BOTH
+// target this id so Lead/Schedule events deduplicate via a shared event_id.
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? '1018911687509773';
 // Contentsquare (Hotjar) session-analytics tag — heatmaps & session replay.
 const CONTENTSQUARE_SRC =
   process.env.NEXT_PUBLIC_CONTENTSQUARE_SRC ?? 'https://t.contentsquare.net/uxa/418ed7dd99917.js';
@@ -116,8 +119,31 @@ export default function RootLayout({
         {/* Contentsquare (Hotjar) — session replay & heatmaps. */}
         <Script id="contentsquare-uxa" strategy="afterInteractive" src={CONTENTSQUARE_SRC} />
 
-        {/* No Meta Pixel: all Meta tracking is server-side via the Conversions
-            API (Contact + Schedule), fired from the /offer API route. */}
+        {/* Meta Pixel — base code + PageView. Lead (email gate) and Schedule
+            (booking) are fired from the /offer funnel and deduplicated against
+            the server-side Conversions API via a shared event_id. */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '${META_PIXEL_ID}');
+fbq('track', 'PageView');`}
+        </Script>
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            alt=""
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          />
+        </noscript>
       </body>
     </html>
   );

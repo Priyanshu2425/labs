@@ -280,6 +280,16 @@ export default function Offer() {
     pageName: document.title,
   });
 
+  // Fire a Meta Pixel event (browser). The eventId maps to Meta's `eventID` so
+  // the browser event deduplicates against the server-side Conversions API event
+  // carrying the same id + event name. No-op if the pixel hasn't loaded.
+  const trackPixel = (event: string, params?: Record<string, unknown>, eventId?: string) => {
+    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
+    if (typeof fbq !== 'function') return;
+    if (eventId) fbq('track', event, params, { eventID: eventId });
+    else fbq('track', event, params);
+  };
+
   const restart = () => {
     try {
       localStorage.removeItem(STORAGE_KEY);
@@ -349,8 +359,9 @@ export default function Offer() {
         setError(data.error ?? "We couldn't send your code. Please try again.");
         return;
       }
-      // Success — email/name/phone captured; the server already fired the Meta
-      // Contact event (Conversions API) during this request.
+      // Success — email/name/phone captured. Fire the browser Lead (deduped with
+      // the server-side CAPI Lead fired during this request via the shared eventId).
+      trackPixel('Lead', { content_name: 'offer_email_gate', content_category: 'offer_funnel' }, eventId);
       setOtp('');
       setStep('otp');
       setResendIn(30);
@@ -506,6 +517,9 @@ export default function Offer() {
   // Best-effort: tell the server a lead chose to talk (Cal.com or WhatsApp) so it
   // fires the Meta Schedule event + pings us + enriches HubSpot. Never blocks UI.
   const fireMeeting = (channel: 'cal' | 'whatsapp') => {
+    const eventId = mintSessionId();
+    // Browser Schedule (deduped with the server CAPI Schedule via eventId).
+    trackPixel('Schedule', { content_name: `offer_${channel}`, content_category: 'offer_funnel' }, eventId);
     fetch('/api/offer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -519,7 +533,7 @@ export default function Offer() {
         budget: budgetLabel,
         tier: tier?.name,
         verdict: result?.verdict,
-        eventId: mintSessionId(),
+        eventId,
         ...attribution(),
       }),
     }).catch(() => {});
@@ -565,8 +579,9 @@ export default function Offer() {
     // Open WhatsApp synchronously (same user-gesture tick) so it isn't popup-blocked.
     window.open(buildWaLink(), '_blank', 'noopener,noreferrer');
     setBooked(true);
-    // Unique event_id for the server-side Meta Schedule event (Conversions API).
+    // Shared event_id: browser Pixel Schedule (below) + server CAPI Schedule.
     const eventId = mintSessionId();
+    trackPixel('Schedule', { content_name: 'offer_book_call', content_category: 'offer_funnel' }, eventId);
     // Best-effort server log / Slack-Discord-email ping + server-side Meta
     // Schedule — never blocks or errors the UI.
     fetch('/api/offer', {
