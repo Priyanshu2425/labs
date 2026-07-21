@@ -131,6 +131,15 @@
 .stage {
   max-width: 780px;
   margin: 0 auto;
+
+  // Mobile: this card is the single scroll-snap target. `stop: always` makes
+  // even a fast flick halt here on the first scroll-down; `scroll-margin-top`
+  // clears the sticky header so the card isn't tucked underneath it.
+  @media (max-width: 768px) {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-top: 4.75rem;
+  }
 }
 
 .card {

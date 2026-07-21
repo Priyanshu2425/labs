@@ -174,6 +174,21 @@ export default function Offer() {
     }
   }, [step, persona, budget, email, name, phone, result, tier, sessionId, verified]);
 
+  // Mobile only: enable the scroll-snap-to-form behavior by flagging <html>
+  // while this page is mounted (the CSS lives in global.scss + .stage).
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const apply = () => {
+      document.documentElement.classList.toggle('offer-snap', mq.matches);
+    };
+    apply();
+    mq.addEventListener('change', apply);
+    return () => {
+      mq.removeEventListener('change', apply);
+      document.documentElement.classList.remove('offer-snap');
+    };
+  }, []);
+
   // Tick the resend cooldown down to zero, one second at a time.
   useEffect(() => {
     if (resendIn <= 0) return;

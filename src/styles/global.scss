@@ -59,6 +59,16 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* /offer (mobile): the first scroll-down gently snaps to the form card and
+   hard-stops there (see `.stage` scroll-snap in Offer.module.scss); scrolling
+   again releases and continues down. `proximity` keeps it from fighting the
+   user elsewhere. Toggled by the Offer view adding `.offer-snap` to <html>. */
+@media (max-width: 768px) {
+  html.offer-snap {
+    scroll-snap-type: y proximity;
+  }
+}
+
 body {
   font-family: $font-primary;
   background-color: $color-background;
