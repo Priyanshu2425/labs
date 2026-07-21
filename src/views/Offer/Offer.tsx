@@ -275,16 +275,6 @@ export default function Offer() {
     pageName: document.title,
   });
 
-  // Fire a Meta Pixel standard event if the pixel has loaded (no-op otherwise).
-  // An eventId maps to Meta's `eventID` so the browser event dedupes against the
-  // server-side Conversions API event carrying the same id.
-  const trackPixel = (event: string, params?: Record<string, unknown>, eventId?: string) => {
-    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
-    if (typeof fbq !== 'function') return;
-    if (eventId) fbq('track', event, params, { eventID: eventId });
-    else fbq('track', event, params);
-  };
-
   const restart = () => {
     try {
       localStorage.removeItem(STORAGE_KEY);
@@ -328,9 +318,8 @@ export default function Offer() {
       return;
     }
     setBusy(true);
-    // Shared dedup id: the browser Pixel Lead (fired on success below) and the
-    // server-side CAPI Lead (fired inside send-otp) both carry this event_id, so
-    // Meta counts them as one event.
+    // Unique event_id for the server-side Meta Contact event (fired inside
+    // send-otp via the Conversions API).
     const eventId = mintSessionId();
     // Mint + email a verification code, then gate the prompt behind it. Also runs
     // the mailing-list/CRM/Meta side-effects server-side (best-effort within send-otp).
@@ -355,9 +344,8 @@ export default function Offer() {
         setError(data.error ?? "We couldn't send your code. Please try again.");
         return;
       }
-      // Success — email/name/phone captured. Fire the browser Lead (deduped with
-      // the server CAPI Lead via eventId).
-      trackPixel('Lead', { content_name: 'offer_email_gate', content_category: 'offer_funnel' }, eventId);
+      // Success — email/name/phone captured; the server already fired the Meta
+      // Contact event (Conversions API) during this request.
       setOtp('');
       setStep('otp');
       setResendIn(30);
@@ -532,9 +520,8 @@ export default function Offer() {
     // Open WhatsApp synchronously (same user-gesture tick) so it isn't popup-blocked.
     window.open(buildWaLink(), '_blank', 'noopener,noreferrer');
     setBooked(true);
-    // Shared dedup id for the Meta Schedule event (browser Pixel + server CAPI).
+    // Unique event_id for the server-side Meta Schedule event (Conversions API).
     const eventId = mintSessionId();
-    trackPixel('Schedule', { content_name: 'offer_book_call', content_category: 'offer_funnel' }, eventId);
     // Best-effort server log / Slack-Discord-email ping + server-side Meta
     // Schedule — never blocks or errors the UI.
     fetch('/api/offer', {

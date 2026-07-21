@@ -7,7 +7,6 @@ import { JsonLd, organizationSchema, SITE_URL } from '@/lib/seo/jsonLd';
 // Public analytics identifiers (safe to ship to the browser). Overridable via
 // env for other environments; the literals are the production BuildspaceLabs IDs.
 const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID ?? '246744054';
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? '2741855546169931';
 // Contentsquare (Hotjar) session-analytics tag — heatmaps & session replay.
 const CONTENTSQUARE_SRC =
   process.env.NEXT_PUBLIC_CONTENTSQUARE_SRC ?? 'https://t.contentsquare.net/uxa/418ed7dd99917.js';
@@ -117,20 +116,8 @@ export default function RootLayout({
         {/* Contentsquare (Hotjar) — session replay & heatmaps. */}
         <Script id="contentsquare-uxa" strategy="afterInteractive" src={CONTENTSQUARE_SRC} />
 
-        {/* Meta Pixel — base code only (init, no PageView). The only events we
-            track are the conversions Lead + Schedule, fired from the /offer
-            funnel (browser Pixel + server-side Conversions API, deduped). */}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '${META_PIXEL_ID}');`}
-        </Script>
+        {/* No Meta Pixel: all Meta tracking is server-side via the Conversions
+            API (Contact + Schedule), fired from the /offer API route. */}
       </body>
     </html>
   );
