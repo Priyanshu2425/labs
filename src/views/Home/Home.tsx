@@ -598,6 +598,16 @@ const STUDIOS = [
     image: '/media/studio-legal.jpg',
     host: 'the-docket-studio',
   },
+  {
+    key: 'rounds',
+    name: 'The Rounds Studio',
+    niche: 'Clinics & Healthcare',
+    line: 'Calm, credible websites for clinics, hospitals and healthcare brands.',
+    count: '20',
+    href: 'https://buildpacelabs.github.io/the-rounds-studio/',
+    image: '/media/studio-healthcare.jpg',
+    host: 'the-rounds-studio',
+  },
 ];
 
 const StudiosSection = () => {
