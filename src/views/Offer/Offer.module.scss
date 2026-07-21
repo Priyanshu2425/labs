@@ -718,6 +718,121 @@
   margin-top: 2rem;
 }
 
+/* ── Choose-your-path step ─────────────────────────────── */
+.chooseGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.75rem;
+
+  @media (max-width: 620px) { grid-template-columns: 1fr; }
+}
+
+.chooseCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  text-align: left;
+  padding: 1.5rem 1.4rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  transition: border-color $transition-fast, background $transition-fast, transform $transition-fast;
+
+  &:hover {
+    border-color: $color-accent;
+    background: rgba(59, 130, 246, 0.06);
+    transform: translateY(-2px);
+  }
+}
+
+.chooseIcon { color: $color-accent; }
+
+.chooseCardTitle {
+  font-family: $font-heading;
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.chooseCardSub {
+  color: $color-text-secondary;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.chooseArrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+  color: $color-accent;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.waLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  align-self: center;
+  width: 100%;
+  margin-top: 1.5rem;
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color $transition-fast;
+
+  &:hover { color: #25d366; } // WhatsApp green
+}
+
+/* Shared "or" divider + secondary (outlined) button */
+.orDivider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.4rem 0 1.1rem;
+  color: $color-text-muted;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border-radius: $border-radius-md;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: $color-text-primary;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color $transition-fast, background $transition-fast;
+
+  &:hover {
+    border-color: $color-accent;
+    background: rgba(59, 130, 246, 0.08);
+  }
+}
+
 .restartLink {
   align-self: center;
   background: none;

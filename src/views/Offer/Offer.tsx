@@ -13,6 +13,8 @@ import {
   Clock,
   ShieldCheck,
   Phone,
+  CalendarClock,
+  MessageCircle,
 } from 'lucide-react';
 import styles from './Offer.module.scss';
 import BuildLoader from './BuildLoader';
@@ -29,7 +31,7 @@ import {
   type Tier,
 } from '../../data/offer';
 
-type Step = 'persona' | 'budget' | 'email' | 'otp' | 'prompt' | 'result';
+type Step = 'persona' | 'budget' | 'email' | 'otp' | 'choose' | 'prompt' | 'result';
 
 interface AnalyzeResult {
   tier: 'validation' | 'custom';
@@ -71,6 +73,9 @@ const readHubspotUtk = (): string =>
 
 // Booking hand-off target (Priyanshu's WhatsApp, digits only for wa.me).
 const WHATSAPP_NUMBER = '919315776817';
+
+// Cal.com scheduling link for the "book a call" path.
+const CAL_LINK = 'https://cal.com/priyanshu-semwal-8qcxab/buildspacelabs-requirements-dicussions';
 
 // Cloudflare Turnstile site key (public). When unset, the widget + server
 // verification are both skipped so local dev works without keys.
@@ -151,7 +156,7 @@ export default function Offer() {
           // The prompt/result steps sit behind the email-verification gate. A
           // restored session that never verified is bounced back to re-verify
           // (or to the email step if we don't even have an address yet).
-          const gated = s.step === 'prompt' || s.step === 'result';
+          const gated = s.step === 'choose' || s.step === 'prompt' || s.step === 'result';
           if (gated && !s.verified) setStep(s.email ? 'otp' : 'email');
           else setStep(s.step);
         }
@@ -385,9 +390,9 @@ export default function Offer() {
         setError(data.error ?? 'Verification failed. Please try again.');
         return;
       }
-      // Email confirmed — unlock the prompt.
+      // Email confirmed — unlock the funnel; let the lead choose their path.
       setVerified(true);
-      setStep('prompt');
+      setStep('choose');
     } catch {
       setError('Network error. Please try again.');
     } finally {
@@ -498,6 +503,46 @@ export default function Offer() {
     }
   };
 
+  // Best-effort: tell the server a lead chose to talk (Cal.com or WhatsApp) so it
+  // fires the Meta Schedule event + pings us + enriches HubSpot. Never blocks UI.
+  const fireMeeting = (channel: 'cal' | 'whatsapp') => {
+    fetch('/api/offer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'meeting',
+        channel,
+        email,
+        name,
+        phone,
+        persona: personaLabel,
+        budget: budgetLabel,
+        tier: tier?.name,
+        verdict: result?.verdict,
+        eventId: mintSessionId(),
+        ...attribution(),
+      }),
+    }).catch(() => {});
+  };
+
+  // Open Cal.com (same gesture tick, so it isn't popup-blocked) + fire Schedule.
+  const bookCall = () => {
+    window.open(CAL_LINK, '_blank', 'noopener,noreferrer');
+    fireMeeting('cal');
+  };
+
+  // WhatsApp with a context-rich, pre-filled message. Works before or after the
+  // AI flow (tier/verdict are only appended once they exist).
+  const openWhatsapp = () => {
+    const msg =
+      `Hi Priyanshu, I'd like to discuss building my project.\n\n` +
+      `Budget: ${budgetLabel || '—'}` +
+      (tier ? `\nOffer: ${tier.name} (${tier.priceBracket})` : '') +
+      (result?.verdict ? `\nVerdict: ${result.verdict}` : '');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    fireMeeting('whatsapp');
+  };
+
   // WhatsApp is the primary booking path — clicking Confirm opens the lead's
   // WhatsApp addressed to us with a pre-filled, context-rich message.
   const buildWaLink = () => {
@@ -549,7 +594,10 @@ export default function Offer() {
   // The four rendered dots. The OTP step is a sub-step of the email gate, so it
   // shares the email dot rather than adding a fifth.
   const progressSteps: Step[] = ['persona', 'budget', 'email', 'prompt'];
-  const progressIndex = step === 'otp' ? progressSteps.indexOf('email') : progressSteps.indexOf(step);
+  const progressIndex =
+    step === 'otp' || step === 'choose'
+      ? progressSteps.indexOf('email')
+      : progressSteps.indexOf(step);
 
   return (
     <div className={styles.pageWrapper}>
@@ -793,6 +841,52 @@ export default function Offer() {
                 </motion.div>
               )}
 
+              {/* STEP 3.7 — CHOOSE YOUR PATH (after verification) */}
+              {step === 'choose' && (
+                <motion.div
+                  key="choose"
+                  className={styles.card}
+                  variants={fadeIn}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  <span className={styles.stepKicker}>
+                    <ShieldCheck size={13} /> Email verified
+                  </span>
+                  <h2 className={styles.stepTitle}>How would you like to proceed?</h2>
+                  <p className={styles.stepSub}>
+                    Get an instant, AI-generated build offer for your idea — or skip straight to a
+                    call with our technical director.
+                  </p>
+                  <div className={styles.chooseGrid}>
+                    <button type="button" className={styles.chooseCard} onClick={() => setStep('prompt')}>
+                      <Sparkles size={22} className={styles.chooseIcon} />
+                      <span className={styles.chooseCardTitle}>Get your instant AI build offer</span>
+                      <span className={styles.chooseCardSub}>
+                        Run a 2-minute AI market-audit and get a fixed-price offer mapped to your idea.
+                      </span>
+                      <span className={styles.chooseArrow}>
+                        Start <ArrowRight size={16} />
+                      </span>
+                    </button>
+                    <button type="button" className={styles.chooseCard} onClick={bookCall}>
+                      <CalendarClock size={22} className={styles.chooseIcon} />
+                      <span className={styles.chooseCardTitle}>Book a strategy call</span>
+                      <span className={styles.chooseCardSub}>
+                        Talk it through with Priyanshu (Technical Director) — pick a slot on the calendar.
+                      </span>
+                      <span className={styles.chooseArrow}>
+                        Book <ArrowRight size={16} />
+                      </span>
+                    </button>
+                  </div>
+                  <button type="button" className={styles.waLink} onClick={openWhatsapp}>
+                    <MessageCircle size={16} /> or message us on WhatsApp
+                  </button>
+                </motion.div>
+              )}
+
               {/* STEP 4 — PROMPT REVEAL + PASTE BOX */}
               {step === 'prompt' && (
                 <motion.div
@@ -807,6 +901,9 @@ export default function Offer() {
                     <BuildLoader />
                   ) : (
                   <>
+                  <button type="button" className={styles.backLink} onClick={() => setStep('choose')}>
+                    <ArrowLeft size={15} /> Back
+                  </button>
                   <span className={styles.stepKicker}>Your market-audit prompt is ready</span>
                   <h2 className={styles.stepTitle}>Run this in ChatGPT or Gemini, then paste the result back.</h2>
                   <p className={styles.stepSub}>
@@ -984,6 +1081,13 @@ export default function Offer() {
                             Confirm & message us on WhatsApp <ArrowRight size={18} />
                           </button>
                         </form>
+
+                        <div className={styles.orDivider}>
+                          <span>or</span>
+                        </div>
+                        <button type="button" className={styles.secondaryBtn} onClick={bookCall}>
+                          <CalendarClock size={18} /> Book a call on the calendar
+                        </button>
                       </>
                     )}
                   </motion.div>
