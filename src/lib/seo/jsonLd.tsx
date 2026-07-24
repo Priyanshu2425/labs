@@ -110,6 +110,73 @@ export function faqSchema(faqs: FAQCategory[]) {
   };
 }
 
+/**
+ * BlogPosting for a single article.
+ *
+ * Note we deliberately do NOT emit FAQPage for the per-article Q&A block, even
+ * though the questions are real and rendered in the server HTML. Google retired
+ * FAQ rich results for all sites on 7 May 2026, so the markup buys no SERP
+ * feature; the visible answer-first text is what remains extractable for People
+ * Also Ask and AI engines. `/faq` and `/solutions/*` keep their existing
+ * FAQPage nodes — removing working markup has no upside either.
+ */
+export function articleSchema(article: {
+  slug: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  updatedAt: string;
+  category: string;
+  keywords: string[];
+  wordCount: number;
+}) {
+  const url = `${SITE_URL}/blog/${article.slug}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}/#article`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    url,
+    // Google truncates headlines past ~110 chars; keep the schema value in range.
+    headline: article.title.slice(0, 110),
+    description: article.description,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    articleSection: article.category,
+    keywords: article.keywords.join(', '),
+    wordCount: article.wordCount,
+    inLanguage: 'en',
+    isAccessibleForFree: true,
+    image: `${SITE_URL}/opengraph-image`,
+    author: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+  };
+}
+
+/** Blog hub node, tying the individual posts to the site's publisher entity. */
+export function blogSchema(posts: { slug: string; title: string; description: string; publishedAt: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${SITE_URL}/blog/#blog`,
+    url: `${SITE_URL}/blog`,
+    name: `${SITE_NAME} — Notes from the build`,
+    description:
+      'Practical writing on building AI products that survive production: scoping, evaluation, agent reliability, deployment constraints, and industry-specific use cases.',
+    inLanguage: 'en',
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    blogPost: posts.map((p) => ({
+      '@type': 'BlogPosting',
+      '@id': `${SITE_URL}/blog/${p.slug}/#article`,
+      url: `${SITE_URL}/blog/${p.slug}`,
+      headline: p.title.slice(0, 110),
+      description: p.description,
+      datePublished: p.publishedAt,
+      author: { '@id': `${SITE_URL}/#organization` },
+    })),
+  };
+}
+
 interface Crumb {
   name: string;
   url: string;

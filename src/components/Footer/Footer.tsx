@@ -20,6 +20,7 @@ export default function Footer() {
               <Link href="/portfolio" className={styles.link}>Portfolio</Link>
               <Link href="/our-services" className={styles.link}>Services</Link>
               <Link href="/solutions" className={styles.link}>Solutions</Link>
+              <Link href="/blog" className={styles.link}>Blog</Link>
               <Link href="/contact-us" className={styles.link}>Contact</Link>
             </div>
             <div className={styles.linkGroup}>

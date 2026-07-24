@@ -72,6 +72,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
+  // Google Search Console ownership for the https://buildspacelabs.com/ URL-prefix
+  // property. Public token — safe to commit. Mirrored by the HTML-file method at
+  // /googled4b98758f8525102.html; keep both, removing either can un-verify us.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION ?? 'L10V2b1Rcj-xtP3yGSNSP6x3yOAy7lvqWA73kp_2QXs',
+  },
   robots: {
     index: true,
     follow: true,

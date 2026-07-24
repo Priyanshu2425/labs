@@ -16,6 +16,93 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 | 4 | GEO (llms.txt, AI-crawler robots, entity consistency) | ✅ shipped 2026-07-08 — see "Phase 4 shipped" below |
 | 5 | Content (case studies, copy, bios, industry pages) | 🔶 partial — O2 `/solutions` pages + O6 carousel accuracy shipped 2026-07-08; case studies/About/bios still blocked on real data (§NEEDS-DECISION G/F) |
 | 6 | Reporting (REPORT.md + re-check list) | 🔶 partial — `REPORT.md` + `.env.example` analytics/GSC placeholders shipped 2026-07-08; runtime analytics/GSC tag wiring blocked on tool choice + token |
+| 7 | Blog + GSC onboarding (claude-seo pass) | 🔶 built 2026-07-25 — 13 articles + `/blog` shipped in-repo; **GSC verify + sitemap submit blocked on deploy** |
+
+## Phase 7 (2026-07-25) — claude-seo pass, blog build, Search Console onboarding
+
+Ran with the `claude-seo` plugin (AgricIDaniel/claude-seo v2.2.4) installed to
+`~/.claude/skills/seo` + `~/.claude/agents`. Note its agent filenames collide with
+this repo's `.claude/agents/seo-*.md`; project scope wins, so our agents still take
+precedence — the plugin's live under the same names in the user directory.
+
+### 🔴 Discovered: the site was never in Google Search Console
+The only property on the account was `organikaly.com`. **buildspacelabs.com had no
+GSC property at all**, which is why there has never been indexing, coverage, or query
+data for it. Created a **URL-prefix property** for `https://buildspacelabs.com/`
+(user chose the HTML-tag route over Cloudflare DNS OAuth — see [K] below).
+
+- Verification token wired two ways, both need a deploy before they resolve:
+  - `app/layout.tsx` → `metadata.verification.google` (env-overridable via `NEXT_PUBLIC_GSC_VERIFICATION`)
+  - `public/googled4b98758f8525102.html` (Google's "recommended" file method)
+- **Still to do after deploy:** click Verify in GSC, submit `/sitemap.xml`, then
+  URL-inspect + request indexing for `/`, `/blog`, and the pillar article.
+- Property covers `https://buildspacelabs.com/*` only — **not** www, http, or the
+  studio subdomains (`atelier-travel-studio.*`, `the-pass-studio.*`). A Domain
+  property via DNS would cover all of those if that becomes worth doing.
+
+### 🔴 Cloudflare is overriding our robots policy — NEEDS ACTION (off-repo)
+Live `/robots.txt` serves a **Cloudflare "Managed robots.txt" block above our own**,
+which flatly contradicts locked decision **[C] (allow AI crawlers)**:
+
+```
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+User-agent: GPTBot        Disallow: /
+User-agent: ClaudeBot     Disallow: /
+User-agent: CCBot         Disallow: /
+User-agent: Google-Extended     Disallow: /
+User-agent: Applebot-Extended   Disallow: /
+User-agent: Bytespider / Amazonbot / meta-externalagent  Disallow: /
+```
+
+Our `app/robots.ts` output is appended *after* it, producing duplicate, conflicting
+groups for the same user-agents. **No code change can fix this** — it is toggled in
+the Cloudflare dashboard (Security → Bots → "Manage AI crawlers" / Managed robots.txt).
+Either turn it off to honour [C], or reverse [C] and delete the AI-crawler groups from
+`robots.ts` so the file stops contradicting itself. Right now it does both at once.
+
+### Shipped this phase
+- **`/blog` + `/blog/[slug]`** — 13 long-form articles, all prerendered static HTML.
+  Content model is typed TS (`src/data/blog/`), not MDX, so prose is in the server
+  HTML with no markdown runtime and TS strict catches a malformed article at build.
+  `BlogPostView` is a **server component with no scroll-reveal on the body** —
+  article prose ships at full opacity, unlike the motion-wrapped marketing pages.
+- **Clusters:** Buying AI (3) · Playbooks (2) · Engineering (4) · Industry (4).
+  Every article is grounded in real `products.ts` capabilities — no invented
+  clients, stats, outcomes, or pricing. Author is the **Organization**, not a named
+  founder, because attributing authorship to Aryan/Priyanshu would be fabrication
+  (see §NEEDS-DECISION [F] — real bylines would strengthen E-E-A-T).
+- **Internal linking** — articles link into `/solutions/*`, `/product/*`,
+  `/our-services`, `/contact-us` and each other from inside body prose via a
+  minimal `[label](/path)` renderer. This is the main new authority path to the
+  money pages.
+- **Schema** — new `articleSchema()` (BlogPosting) + `blogSchema()` in `jsonLd.tsx`,
+  both pointing `author`/`publisher` at the org `@id`. Breadcrumbs on every article.
+  **Deliberately no FAQPage on articles**: Google retired FAQ rich results for all
+  sites on 2026-05-07, so the markup buys no SERP feature; the answer-first Q&A is
+  rendered in visible HTML instead, which is what PAA/AI engines extract. Existing
+  FAQPage on `/faq` + `/solutions/*` left alone (no upside to removing it).
+- **`llms.txt` converted from a static file to a generated route**
+  (`app/llms.txt/route.ts`, deleted `public/llms.txt`). The hand-maintained version
+  had gone stale: it listed **20 products when the catalogue holds 36**, and predated
+  `/solutions` and `/blog` entirely. Now derived from `products.ts` / `solutions.ts` /
+  `blog/` / `faq.ts`, so it cannot drift again.
+- **RSS** — `app/blog/rss.xml/route.ts`, force-static, linked from `/blog` metadata.
+- **Sitemap** — 48 → **66 URLs**. Articles carry a real `updatedAt` lastmod rather
+  than the build timestamp the other routes fall back to (partially addresses T9).
+- **FAQ expanded 15 → 21 questions**, incl. a new **"Data, Security & Deployment"**
+  category (on-prem/tenancy options, permission-aware retrieval, what we need to
+  scope data handling). Written to make no unverifiable compliance claim — see the
+  new decision item [M].
+- **Nav** — Blog added to Header nav and Footer "Company" column.
+
+### Audit findings from the claude-seo pass
+- Home content quality **94/100** (filler 0, AI-pattern 0; flagged only "repetitive").
+- Titles all ≤60 chars; three blog meta descriptions ran 162-163 chars and were trimmed.
+- `parse_html.py` reports "Internal Links: 0" on the homepage — **that is a bug in the
+  script's counter**, not a site issue; the raw HTML carries 53 anchors. Don't chase it.
+- Live site confirmed to be serving this repo's `main` (checked a recent commit's
+  content against production).
 
 ## Decisions locked (2026-07-08, this session)
 - **[I] Canonical inbound email = `buildspacelabs@vruoom.com`** (role-based). ✅ shipped: schema, contact metadata, and all generic CTAs (Footer email, Contact primary channel + error fallback, FAQ buttons). Named-founder links (Footer team, Contact "who you'll work with") intentionally keep aryan@/priyanshu@.
@@ -143,7 +230,9 @@ Cross-session source of truth for the buildspacelabs.com visibility system. Deta
 - **[H] `/ai-lab`** — deliberately hidden (noindex, no nav) or should it be indexable? And are SLM360 (39ms) / Med360 / AgentGuard / VAJRA / KAVACH real & substantiable? (Recommend: keep noindex until substantiated.)
 - **[I] ✅ RESOLVED (2026-07-08)** — canonical inbound = `buildspacelabs@vruoom.com` (role-based). Shipped across schema/metadata/generic CTAs; named-founder links keep their own addresses.
 - **[J] ~RESOLVED (2026-07-08)** — GA4 (free) placeholder staged as default; Cloudflare Web Analytics is the free no-code alt. Only the runtime tag + ID remain (off-repo).
-- **[K] GSC verification** — provide the `google-site-verification` token, or verify via DNS TXT (no meta tag). (Ship empty env-gated placeholder either way.)
+- **[K] ✅ RESOLVED (2026-07-25)** — URL-prefix property created for `https://buildspacelabs.com/`; token `L10V2b1Rcj-xtP3yGSNSP6x3yOAy7lvqWA73kp_2QXs` committed in `layout.tsx` + `public/googled4b98758f8525102.html`. User declined the Cloudflare-DNS OAuth route (would have granted Google write access to DNS) in favour of the in-code meta tag. **Verification click + sitemap submission still pending a production deploy.**
+- **[M] NEW — compliance claims in the FAQ.** The new "Data, Security & Deployment" answers describe only technical architecture (deployment models, permission-aware retrieval, what we need in order to scope). They deliberately assert **no** policy or certification claim, because none is substantiated: there is still no stated position on whether client data may train third-party models, no SOC 2 / ISO / HIPAA claim, and no BAA story. Enterprise buyers ask all three in the first call. Confirm the real answers and we can write them.
+- **[N] NEW — Cloudflare Managed robots.txt contradicts [C].** See Phase 7. Off-repo dashboard toggle; currently the live robots.txt both blocks and allows GPTBot/ClaudeBot/CCBot/Google-Extended/Applebot-Extended, and sets `Content-Signal: ai-train=no`. Decide which way [C] actually goes and make the file say one thing.
 - **[L] Host config / atelier** — confirm www→apex 308 + http→https at the platform, and that `atelier-travel-studio.buildspacelabs.com` self-canonicalizes and shares no `/portfolio` content. (Verification; not blocking.)
 
 ---

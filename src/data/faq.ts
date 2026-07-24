@@ -60,6 +60,32 @@ export const faqs: FAQCategory[] = [
         q: 'What LLMs do you use?',
         a: 'We build with frontier models from OpenAI and Google, alongside open-source models like Llama and Mistral. We choose the best model for each task based on latency, cost, and complexity — and swap models as the frontier moves, so you are never locked to one provider.',
       },
+      {
+        q: 'What happens when the AI gets something wrong?',
+        a: 'Every system we build has a designed path for output it is not confident about. Low-confidence results route to a human review queue rather than being acted on, the reviewer can override anything, and the correction is recorded so the system improves. We agree the confidence threshold and who owns the review queue with you before launch — a model-backed feature without that design is a demo, not a product.',
+      },
+      {
+        q: 'How do you make sure an AI agent behaves reliably in production?',
+        a: 'We build an evaluation set from real cases alongside the first prototype and run it on every change to a prompt, model version, or retrieval step, so a regression fails a build instead of reaching a user. On top of that we keep agent step-chains short, enforce hard caps on steps and spend, make every write action idempotent, and log the full trace of each run so any behaviour can be reproduced and debugged.',
+      },
+    ],
+  },
+  {
+    category: 'Data, Security & Deployment',
+    description: 'How your data is handled, and where the system can run.',
+    questions: [
+      {
+        q: 'Can the system run on our own infrastructure?',
+        a: 'Yes. We build against four deployment models: a vendor API with contractual and regional controls, a managed model running inside your own cloud tenancy, an open-weights model self-hosted on infrastructure you control, and fully air-gapped. Our Open Vision PPE system, for example, runs entirely on-premise with no cloud dependency. We pick the least complex option that satisfies your actual obligation, because each step up costs materially more.',
+      },
+      {
+        q: 'How do you stop an AI system surfacing documents a user should not see?',
+        a: 'With permission-aware retrieval. The retrieval layer filters candidate documents by what the requesting user is entitled to see before anything reaches the model, and the calling user\'s identity is propagated through every tool call so the underlying systems enforce their own permissions. An index built without access-control filtering will happily answer from a restricted document, which is a data breach regardless of where the model runs.',
+      },
+      {
+        q: 'What do you need from us to scope data handling?',
+        a: 'Four answers, ideally in week one: whether the constraint is regulatory, contractual, or internal policy; whether it governs where data is processed, where it is stored, or both; whether it applies to all your data or one classification of it; and which regimes you are audited under. These change the architecture rather than just the paperwork, so we resolve them before the build rather than after the prototype.',
+      },
     ],
   },
   {

@@ -54,7 +54,7 @@ When any of these change, update **all** the surfaces listed above **plus** this
 
 | Tool | Status | Owner action |
 |------|--------|--------------|
-| Google Search Console | Not verified | Add property, verify (DNS TXT or the meta tag we can wire), submit `sitemap.xml` |
+| Google Search Console | **Property created 2026-07-25, awaiting verification** — URL-prefix `https://buildspacelabs.com/`. Token is committed (meta tag + HTML file) but only resolves once deployed. Root cause of zero historical data: **the site had never been added to GSC at all** | Deploy, then click Verify, submit `sitemap.xml`, and request indexing for `/`, `/blog`, `/blog/what-is-an-ai-native-product-studio` |
 | Bing Webmaster Tools | Not set up | Add site (can import from GSC); feeds Copilot answers |
 | Analytics | GA4 placeholder staged (free); Cloudflare Web Analytics is the free no-code alt | Create the property; hand back `G-XXXXXXXXXX` for the env placeholder (or toggle Cloudflare) |
 | Rich Results / schema validation | Manual, pre-deploy | After deploy, run Rich Results Test on home, one `/product/*`, `/faq`, `/our-services`, `/portfolio` |
@@ -82,7 +82,8 @@ These are the *only* things standing between us and finishing Phases 5–6. Noth
 
 ## 6. Off-repo actions — only the owner can do these (biggest ranking + GEO levers)
 
-1. **Google Search Console** — add & verify buildspacelabs.com, submit `sitemap.xml`.
+0. **Cloudflare Managed robots.txt — turn it off (or reverse decision [C]).** Cloudflare injects a managed block above our `robots.ts` output that `Disallow: /` for GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended, Bytespider, Amazonbot and meta-externalagent, and sets `Content-Signal: ai-train=no`. Our own groups then allow the same bots, so the live file contradicts itself. This is the single biggest GEO blocker and it is a dashboard toggle, not a code change.
+1. **Google Search Console** — property now exists; deploy, verify, submit `sitemap.xml` (66 URLs).
 2. **Bing Webmaster Tools** — same (import from GSC); feeds Copilot / AI answers.
 3. **Analytics** — create the property, hand back the ID for the env placeholder.
 4. **Rich Results Test** (once live) — validate JSON-LD on home, one `/product/*`, `/faq`, `/our-services`, `/portfolio`.
